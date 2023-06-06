@@ -1,0 +1,16 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "off",
+        "strings": "off"
+    },
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.occurrencesHighlight": false,
+    "editor.selectionHighlight": false,
+    "prettier.tabWidth": 4
+}
