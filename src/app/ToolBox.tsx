@@ -132,38 +132,38 @@ export default function ToolBox() {
 	return (
 		<div className="mx-5 overflow-hidden rounded-2xl bg-cyan-100 px-4 pb-8 pt-6 dark:bg-gray-800 md:mx-10 md:px-8">
 			<h3 className="text-center text-2xl md:text-3xl">My Toolbox</h3>
-			<div className="mt-6 flex">
-				<div className="mr-8 flex flex-col justify-between rounded-xl bg-cyan-200 px-2 py-5 dark:bg-gray-700 md:px-5">
+			<div className="mt-6 flex flex-col sm:flex-row">
+				<div className="mb-5 flex flex-row justify-between overflow-auto rounded-xl bg-cyan-300 px-2 py-5 dark:bg-gray-700 sm:mb-0 sm:mr-8 sm:flex-col sm:overflow-visible md:px-5">
 					<h4
-						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-400 dark:hover:bg-gray-600"
+						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
 						onClick={() => {
 							setTools([...languageTools]);
 						}}>
 						Languages
 					</h4>
 					<h4
-						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-400 dark:hover:bg-gray-600"
+						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
 						onClick={() => {
 							setTools([...frameworkTools]);
 						}}>
 						Frameworks
 					</h4>
 					<h4
-						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-400 dark:hover:bg-gray-600"
+						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
 						onClick={() => {
 							setTools([...databaseTools]);
 						}}>
 						Databases
 					</h4>
 					<h4
-						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-400 dark:hover:bg-gray-600"
+						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
 						onClick={() => {
 							setTools([...otherTools]);
 						}}>
 						Other Tools
 					</h4>
 				</div>
-				<div className="grid w-full rounded-xl bg-cyan-200 p-5 dark:bg-gray-700 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8  xl:grid-cols-10">
+				<div className="grid w-full grid-cols-2 rounded-xl bg-cyan-200 p-5 dark:bg-gray-700 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8  xl:grid-cols-10">
 					{tools.map((tool) => {
 						return (
 							<div key={tool.index} className="m-auto">

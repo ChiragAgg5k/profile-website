@@ -22,7 +22,7 @@ export default function NavBar() {
 				</li>
 				<li>
 					<a
-						className="ml-10 rounded bg-cyan-500 px-5 py-2 text-white"
+						className="ml-5 rounded bg-cyan-600 px-5 py-2 text-white"
 						href="#">
 						Resume
 					</a>
