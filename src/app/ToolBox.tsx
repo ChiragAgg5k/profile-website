@@ -156,7 +156,7 @@ export default function ToolBox() {
 						Databases
 					</h4>
 					<h4
-						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
+						className="mb-2 cursor-pointer whitespace-nowrap rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
 						onClick={() => {
 							setTools([...otherTools]);
 						}}>
