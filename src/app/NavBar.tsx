@@ -3,8 +3,7 @@ import { BsFillMoonStarsFill } from "react-icons/bs";
 import { useTheme } from "next-themes";
 
 export default function NavBar() {
-	const { systemTheme, theme, setTheme } = useTheme();
-	const currentTheme = theme === "system" ? systemTheme : theme;
+	const { theme, setTheme } = useTheme();
 
 	return (
 		<nav className="mb-10 flex w-full items-center justify-between bg-cyan-100 p-8 dark:bg-gray-800 md:absolute">

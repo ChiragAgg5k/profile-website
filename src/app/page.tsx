@@ -6,7 +6,7 @@ import ToolBox from "./ToolBox";
 
 export default function Home() {
 	return (
-		<ThemeProvider attribute="class">
+		<ThemeProvider attribute="class" defaultTheme="dark">
 			<main className="bg-white font-geologica text-gray-800 dark:bg-gray-900 dark:text-white">
 				{/* Main Section, covers entire screen */}
 				<section>
