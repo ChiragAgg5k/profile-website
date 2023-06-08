@@ -15,6 +15,11 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
+			<head>
+				<title>{metadata.title}</title>
+				<meta name="description" content={metadata.description} />
+				<link rel="icon" href="icon.png" />
+			</head>
 			<body className={inter.className}>{children}</body>
 		</html>
 	);

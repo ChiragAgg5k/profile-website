@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TbBrandCpp, TbBrandNextjs } from "react-icons/tb";
+import { TbBrandCpp, TbBrandNextjs, TbBrandTypescript } from "react-icons/tb";
 import {
 	DiJava,
 	DiPython,
@@ -8,12 +8,25 @@ import {
 	DiMongodb,
 	DiPostgresql
 } from "react-icons/di";
-import { SiDjango, SiExpress } from "react-icons/si";
+import {
+	SiDjango,
+	SiExpress,
+	SiMysql,
+	SiFirebase,
+	SiFlutter
+} from "react-icons/si";
 import { BsGit } from "react-icons/bs";
 import { FcLinux } from "react-icons/fc";
+import { FaDocker } from "react-icons/fa";
+
+interface Tool {
+	index: number;
+	name: string;
+	icon: JSX.Element;
+}
 
 export default function ToolBox() {
-	const languageTools = [
+	const languageTools: Tool[] = [
 		{
 			index: 0,
 			name: "Python",
@@ -43,10 +56,17 @@ export default function ToolBox() {
 			icon: (
 				<DiJavascript1 className="m-4 text-6xl text-yellow-600 hover:scale-105" />
 			)
+		},
+		{
+			index: 4,
+			name: "TypeScript",
+			icon: (
+				<TbBrandTypescript className="m-4 text-6xl text-blue-600 hover:scale-105" />
+			)
 		}
 	];
 
-	const frameworkTools = [
+	const frameworkTools: Tool[] = [
 		{
 			index: 0,
 			name: "React",
@@ -82,10 +102,19 @@ export default function ToolBox() {
 					className={"m-4 text-6xl text-white hover:scale-105"}
 				/>
 			)
+		},
+		{
+			index: 4,
+			name: "Flutter",
+			icon: (
+				<SiFlutter
+					className={"m-4 text-6xl text-cyan-500 hover:scale-105"}
+				/>
+			)
 		}
 	];
 
-	const databaseTools = [
+	const databaseTools: Tool[] = [
 		{
 			index: 0,
 			name: "MongoDB",
@@ -101,6 +130,15 @@ export default function ToolBox() {
 			icon: (
 				<DiPostgresql
 					className={"m-4 text-6xl text-blue-600 hover:scale-105"}
+				/>
+			)
+		},
+		{
+			index: 2,
+			name: "MySQL",
+			icon: (
+				<SiMysql
+					className={"m-4 text-6xl text-orange-600 hover:scale-105"}
 				/>
 			)
 		}
@@ -124,6 +162,24 @@ export default function ToolBox() {
 					className={"m-4 text-6xl text-white hover:scale-105"}
 				/>
 			)
+		},
+		{
+			index: 2,
+			name: "Docker",
+			icon: (
+				<FaDocker
+					className={"m-4 text-6xl text-blue-600 hover:scale-105"}
+				/>
+			)
+		},
+		{
+			index: 3,
+			name: "Firebase",
+			icon: (
+				<SiFirebase
+					className={"m-4 text-6xl text-yellow-600 hover:scale-105"}
+				/>
+			)
 		}
 	];
 
@@ -132,38 +188,38 @@ export default function ToolBox() {
 	return (
 		<div className="mx-5 overflow-hidden rounded-2xl bg-cyan-100 px-4 pb-8 pt-6 dark:bg-gray-800 md:mx-10 md:px-8">
 			<h3 className="text-center text-2xl md:text-3xl">My Toolbox</h3>
-			<div className="mt-6 flex">
-				<div className="mr-8 flex flex-col justify-between rounded-xl bg-cyan-200 px-2 py-5 dark:bg-gray-700 md:px-5">
+			<div className="mt-6 flex flex-col sm:flex-row">
+				<div className="mb-5 flex flex-row justify-between overflow-auto rounded-xl bg-cyan-200 px-2 py-5 dark:bg-gray-700 sm:mb-0 sm:mr-8 sm:flex-col sm:overflow-visible md:px-5">
 					<h4
-						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-400 dark:hover:bg-gray-600"
+						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
 						onClick={() => {
 							setTools([...languageTools]);
 						}}>
 						Languages
 					</h4>
 					<h4
-						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-400 dark:hover:bg-gray-600"
+						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
 						onClick={() => {
 							setTools([...frameworkTools]);
 						}}>
 						Frameworks
 					</h4>
 					<h4
-						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-400 dark:hover:bg-gray-600"
+						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
 						onClick={() => {
 							setTools([...databaseTools]);
 						}}>
 						Databases
 					</h4>
 					<h4
-						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-400 dark:hover:bg-gray-600"
+						className="mb-2 cursor-pointer whitespace-nowrap rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
 						onClick={() => {
 							setTools([...otherTools]);
 						}}>
 						Other Tools
 					</h4>
 				</div>
-				<div className="grid w-full rounded-xl bg-cyan-200 p-5 dark:bg-gray-700 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8  xl:grid-cols-10">
+				<div className="grid w-full grid-cols-2 rounded-xl bg-cyan-200 p-5 dark:bg-gray-700 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8  xl:grid-cols-10">
 					{tools.map((tool) => {
 						return (
 							<div key={tool.index} className="m-auto">
