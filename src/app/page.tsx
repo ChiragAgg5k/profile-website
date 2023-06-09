@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 import NavBar from "./NavBar";
 import LandingPage from "./LandingPage";
 import ToolBox from "./ToolBox";
+import Projects from "./Projects";
 
 export default function Home() {
 	return (
@@ -15,11 +16,9 @@ export default function Home() {
 				</section>
 
 				{/* Skills Section */}
-				<section className="min-h-screen">
+				<section className="min	-h-screen pb-20">
 					<ToolBox />
-					<h5 className="my-20 text-center">
-						Rest is work in progres...
-					</h5>
+					<Projects />
 				</section>
 			</main>
 		</ThemeProvider>

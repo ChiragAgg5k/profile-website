@@ -1,10 +1,13 @@
 import Image from "next/image";
 import { AiFillLinkedin, AiFillGithub } from "react-icons/ai";
 import { SiLeetcode } from "react-icons/si";
+import { Element } from "react-scroll";
 
 export default function LandingPage() {
 	return (
-		<div className="min-h-screen w-full md:flex md:items-center md:justify-center">
+		<Element
+			className="min-h-screen w-full md:flex md:items-center md:justify-center"
+			name="langing-page">
 			<div className="px-10 pt-10 text-center">
 				<h1 className="cursor-default py-2 text-4xl font-medium text-cyan-700 dark:text-cyan-600 md:text-5xl">
 					Chirag Aggarwal
@@ -62,6 +65,6 @@ export default function LandingPage() {
 					className="w-100 mx-auto rounded-full border-4 border-cyan-500"
 				/>
 			</div>
-		</div>
+		</Element>
 	);
 }

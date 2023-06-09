@@ -18,6 +18,7 @@ import {
 import { BsGit } from "react-icons/bs";
 import { FcLinux } from "react-icons/fc";
 import { FaDocker } from "react-icons/fa";
+import { Element } from "react-scroll";
 
 interface Tool {
 	index: number;
@@ -186,10 +187,12 @@ export default function ToolBox() {
 	const [tools, setTools] = useState(languageTools);
 
 	return (
-		<div className="mx-5 overflow-hidden rounded-2xl bg-cyan-100 px-4 pb-8 pt-6 dark:bg-gray-800 md:mx-10 md:px-8">
-			<h3 className="text-center text-2xl md:text-3xl">My Toolbox</h3>
+		<div className="mx-5  overflow-hidden rounded-2xl border-2 border-cyan-300 bg-cyan-100 px-4 pb-8 pt-6 dark:border-0 dark:bg-gray-800 md:mx-10 md:px-8">
+			<h3 className="text-center text-2xl font-medium md:text-3xl">
+				My Toolbox
+			</h3>
 			<div className="mt-6 flex flex-col sm:flex-row">
-				<div className="mb-5 flex flex-row justify-between overflow-auto rounded-xl bg-cyan-200 px-2 py-5 dark:bg-gray-700 sm:mb-0 sm:mr-8 sm:flex-col sm:overflow-visible md:px-5">
+				<div className="mb-5 flex flex-row justify-between overflow-scroll rounded-xl bg-cyan-200 px-2 py-5 dark:bg-gray-700 sm:mb-0 sm:mr-8 sm:flex-col sm:overflow-visible md:px-5">
 					<h4
 						className="mb-2 cursor-pointer rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
 						onClick={() => {

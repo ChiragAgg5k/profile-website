@@ -22,7 +22,8 @@ export default function NavBar() {
 				<li>
 					<a
 						className="ml-5 rounded bg-cyan-700 px-5 py-2  text-sm text-white sm:text-base"
-						href="#">
+						href="https://chirag-aggarwal-resume.tiiny.site/"
+						target="_blank">
 						Resume
 					</a>
 				</li>
