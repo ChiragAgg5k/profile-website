@@ -20,12 +20,15 @@ export default function NavBar() {
 					/>
 				</li>
 				<li>
-					<a
-						className="ml-5 rounded bg-cyan-700 px-5 py-2  text-sm text-white sm:text-base"
-						href="https://chirag-aggarwal-resume.tiiny.site/"
-						target="_blank">
-						Resume
-					</a>
+					<div className="ml-5 rounded bg-cyan-700 px-5 py-2  text-sm text-white sm:text-base">
+						<a
+							href="https://chirag-aggarwal-resume.tiiny.site/"
+							className="group text-white transition duration-300"
+							target="_blank">
+							Resume
+							<span className="block h-0.5 max-w-0 bg-white transition-all duration-500 group-hover:max-w-full"></span>
+						</a>
+					</div>
 				</li>
 			</ul>
 		</nav>
