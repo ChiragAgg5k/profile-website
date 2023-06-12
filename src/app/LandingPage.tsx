@@ -1,18 +1,21 @@
 import Image from "next/image";
 import { AiFillLinkedin, AiFillGithub } from "react-icons/ai";
 import { SiLeetcode } from "react-icons/si";
+import { Element } from "react-scroll";
 
 export default function LandingPage() {
 	return (
-		<div className="min-h-screen w-full md:flex md:items-center md:justify-center">
+		<Element
+			className="min-h-screen w-full md:flex md:items-center md:justify-center"
+			name="langing-page">
 			<div className="px-10 pt-10 text-center">
-				<h1 className="cursor-default py-2 text-4xl font-medium text-cyan-700 dark:text-cyan-600 md:text-5xl">
+				<h1 className="cursor-default py-2 text-3xl font-medium text-cyan-700 dark:text-cyan-600 sm:text-4xl md:text-5xl">
 					Chirag Aggarwal
 				</h1>
-				<h2 className="cursor-default py-2 text-2xl">
+				<h2 className="cursor-default py-2 text-xl sm:text-2xl">
 					A Computer Science Nerd.
 				</h2>
-				<p className="text-md cursor-default py-5 leading-8 text-gray-600 dark:text-gray-400">
+				<p className="cursor-default py-5 text-base leading-8 text-gray-600 dark:text-gray-400 md:text-lg">
 					Hi, I am a passionate computer science student from India🇮🇳
 					🇮🇳 <br />I like to learn new things and build stuff.
 				</p>
@@ -62,6 +65,6 @@ export default function LandingPage() {
 					className="w-100 mx-auto rounded-full border-4 border-cyan-500"
 				/>
 			</div>
-		</div>
+		</Element>
 	);
 }
