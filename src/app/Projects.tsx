@@ -49,13 +49,13 @@ export default function Projects() {
 						return (
 							<div
 								key={project.index}
-								className="m-5 rounded-xl border-2 border-cyan-200 p-5  hover:border-cyan-400 dark:border-gray-800 dark:hover:border-cyan-700">
+								className="group m-5 rounded-xl border-2 border-cyan-200 p-5  hover:border-cyan-400 dark:border-gray-800 dark:hover:border-cyan-700">
 								<Image
 									src={project.image}
 									alt={project.name}
 									width={300}
 									height={300}
-									className="mb-4 h-auto max-h-52 w-full transform rounded-lg object-cover transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-110"
+									className="mb-4 h-auto max-h-52 w-full transform rounded-lg object-cover transition duration-500 ease-in-out group-hover:-translate-y-1 group-hover:scale-110"
 								/>
 								<div>
 									<p className="mb-2 cursor-default text-base text-cyan-500">

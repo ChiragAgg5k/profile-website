@@ -18,8 +18,6 @@ import {
 import { BsGit } from "react-icons/bs";
 import { FcLinux } from "react-icons/fc";
 import { FaDocker } from "react-icons/fa";
-import { Element } from "react-scroll";
-import { bool } from "sharp";
 
 interface Tool {
 	index: number;

@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import LandingPage from "./LandingPage";
 import ToolBox from "./ToolBox";
 import Projects from "./Projects";
+import ContactMe from "./ContactMe";
 
 export default function Home() {
 	return (
@@ -16,10 +17,13 @@ export default function Home() {
 				</section>
 
 				{/* Skills Section */}
-				<section className="min	-h-screen pb-20">
+				<section className="pb-20">
 					<ToolBox />
 					<Projects />
 				</section>
+
+				{/* Footer/Contact Me Section */}
+				<ContactMe />
 			</main>
 		</ThemeProvider>
 	);
