@@ -1,11 +1,8 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
 	title: "Chirag Aggarwal",
-	description: "Chirag Aggarwal's portfolio website"
+	description: "Chirag Aggarwal's portfolio website built with Next.js"
 };
 
 export default function RootLayout({
@@ -20,7 +17,7 @@ export default function RootLayout({
 				<meta name="description" content={metadata.description} />
 				<link rel="icon" href="icon.png" />
 			</head>
-			<body className={inter.className}>{children}</body>
+			<body>{children}</body>
 		</html>
 	);
 }

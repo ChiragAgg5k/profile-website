@@ -49,7 +49,7 @@ export default function Projects() {
 						return (
 							<div
 								key={project.index}
-								className="group m-5 rounded-xl border-2 border-cyan-200 p-5  hover:border-cyan-400 dark:border-gray-800 dark:hover:border-cyan-700">
+								className="group m-5 rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700">
 								<Image
 									src={project.image}
 									alt={project.name}
@@ -58,7 +58,7 @@ export default function Projects() {
 									className="mb-4 h-auto max-h-52 w-full transform rounded-lg object-cover transition duration-500 ease-in-out group-hover:-translate-y-1 group-hover:scale-110"
 								/>
 								<div>
-									<p className="mb-2 cursor-default text-base text-cyan-500">
+									<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
 										{project.description}
 									</p>
 									<p className="font-mediumc my-1 text-xl">
@@ -88,7 +88,7 @@ export default function Projects() {
 										<a
 											href={project.github_link}
 											target="_blank">
-											<AiFillGithub className="inline-block text-3xl hover:scale-110	" />
+											<AiFillGithub className="inline-block text-4xl text-black transition delay-75 ease-in-out hover:scale-110 dark:text-white" />
 										</a>
 									</div>
 								</div>

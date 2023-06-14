@@ -4,7 +4,6 @@ import {
 	DiJava,
 	DiPython,
 	DiJavascript1,
-	DiReact,
 	DiMongodb,
 	DiPostgresql
 } from "react-icons/di";
@@ -12,10 +11,12 @@ import {
 	SiDjango,
 	SiExpress,
 	SiMysql,
+	SiKotlin,
 	SiFirebase,
-	SiFlutter
+	SiFlutter,
+	SiSqlite
 } from "react-icons/si";
-import { BsGit } from "react-icons/bs";
+import { BsGit, BsAndroid2 } from "react-icons/bs";
 import { FcLinux } from "react-icons/fc";
 import { FaDocker } from "react-icons/fa";
 
@@ -37,7 +38,7 @@ const languageTools: Tool[] = [
 		index: 1,
 		name: "C++",
 		icon: (
-			<TbBrandCpp className="m-4 text-6xl text-purple-600 hover:scale-105" />
+			<TbBrandCpp className="m-4 text-6xl text-blue-600 hover:scale-105" />
 		)
 	},
 	{
@@ -51,9 +52,11 @@ const languageTools: Tool[] = [
 	},
 	{
 		index: 3,
-		name: "JavaScript",
+		name: "Kotlin",
 		icon: (
-			<DiJavascript1 className="m-4 text-6xl text-yellow-600 hover:scale-105" />
+			<SiKotlin
+				className={"m-4 text-6xl text-purple-700 hover:scale-105"}
+			/>
 		)
 	},
 	{
@@ -68,13 +71,6 @@ const languageTools: Tool[] = [
 const frameworkTools: Tool[] = [
 	{
 		index: 0,
-		name: "React",
-		icon: (
-			<DiReact className={"m-4 text-6xl text-cyan-700 hover:scale-105"} />
-		)
-	},
-	{
-		index: 1,
 		name: "Next.js",
 		icon: (
 			<TbBrandNextjs
@@ -83,7 +79,7 @@ const frameworkTools: Tool[] = [
 		)
 	},
 	{
-		index: 2,
+		index: 1,
 		name: "Django",
 		icon: (
 			<SiDjango
@@ -92,18 +88,27 @@ const frameworkTools: Tool[] = [
 		)
 	},
 	{
-		index: 3,
+		index: 2,
 		name: "Express.js",
 		icon: (
 			<SiExpress className={"m-4 text-6xl text-white hover:scale-105"} />
 		)
 	},
 	{
-		index: 4,
+		index: 3,
 		name: "Flutter",
 		icon: (
 			<SiFlutter
 				className={"m-4 text-6xl text-cyan-500 hover:scale-105"}
+			/>
+		)
+	},
+	{
+		index: 4,
+		name: "Android",
+		icon: (
+			<BsAndroid2
+				className={"m-4 text-6xl text-green-600 hover:scale-105"}
 			/>
 		)
 	}
@@ -134,6 +139,15 @@ const databaseTools: Tool[] = [
 		icon: (
 			<SiMysql
 				className={"m-4 text-6xl text-orange-600 hover:scale-105"}
+			/>
+		)
+	},
+	{
+		index: 3,
+		name: "SQLite",
+		icon: (
+			<SiSqlite
+				className={"m-4 text-6xl text-blue-600 hover:scale-105"}
 			/>
 		)
 	}
@@ -193,7 +207,7 @@ export default function ToolBox() {
 	const [tools, setTools] = useState(languageTools);
 
 	return (
-		<div className="mx-5  overflow-hidden rounded-2xl border-2 border-cyan-300 bg-cyan-100 px-4 pb-8 pt-6 dark:border-0 dark:bg-gray-800 md:mx-10 md:px-8">
+		<div className="mx-5 overflow-hidden rounded-2xl  border-2 border-cyan-300 bg-cyan-100 px-4 pb-8 pt-6 text-gray-700 dark:border-0 dark:bg-gray-800 dark:text-white md:mx-10 md:px-8">
 			<h3 className="cursor-default text-center text-2xl font-medium md:text-3xl">
 				My Toolbox
 			</h3>
