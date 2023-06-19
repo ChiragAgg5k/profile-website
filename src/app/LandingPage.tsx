@@ -57,13 +57,12 @@ export default function LandingPage() {
 			</div>
 
 			<div className="px-10 py-20 md:px-0">
-				<Image
-					src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif"
-					width={500}
-					height={500}
-					alt="Coding GIF"
-					className="w-100 mx-auto rounded-full border-4 border-cyan-500"
-				/>
+				<video
+					autoPlay
+					loop
+					className="w-100 mx-auto rounded-full border-4 border-cyan-500">
+					<source src="/coding_anim.mp4" type="video/mp4" />
+				</video>
 			</div>
 		</Element>
 	);
