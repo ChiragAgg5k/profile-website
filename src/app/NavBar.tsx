@@ -43,6 +43,7 @@ export default function NavBar() {
 						<a
 							href="https://chirag-aggarwal-resume.tiiny.site/"
 							className="group text-white transition duration-300"
+							rel="noreferrer"
 							target="_blank">
 							Resume
 							<span className="block h-0.5 max-w-0 bg-white transition-all duration-500 group-hover:max-w-full"></span>

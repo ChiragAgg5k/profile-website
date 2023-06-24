@@ -1,3 +1,4 @@
+import Head from "next/head";
 import "./globals.css";
 
 export const metadata = {
@@ -12,11 +13,11 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" suppressHydrationWarning={true}>
-			<head>
+			<Head>
 				<title>{metadata.title}</title>
 				<meta name="description" content={metadata.description} />
 				<link rel="icon" href="icon.png" />
-			</head>
+			</Head>
 			<body suppressHydrationWarning={true}>{children}</body>
 		</html>
 	);

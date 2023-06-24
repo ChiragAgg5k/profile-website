@@ -12,6 +12,7 @@ export default function ContactMe() {
 					<a
 						href="mailto: chiragaggarwal5k@gmail.com"
 						className="group transition duration-300"
+						rel="noreferrer"
 						target="_blank">
 						chiragaggarwal5k@gmail.com
 						<span className="block h-0.5 max-w-0 bg-black transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
@@ -21,6 +22,7 @@ export default function ContactMe() {
 					<AiOutlineWhatsApp className="mr-2" />
 					<a
 						href="https://wa.me/919667658415"
+						rel="noreferrer"
 						className="group transition duration-300"
 						target="_blank">
 						+91 96676 58415

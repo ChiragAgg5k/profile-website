@@ -87,6 +87,7 @@ export default function Projects() {
 										</a>
 										<a
 											href={project.github_link}
+											rel="noreferrer"
 											target="_blank">
 											<AiFillGithub className="inline-block text-4xl text-black transition delay-75 ease-in-out hover:scale-110 dark:text-white" />
 										</a>
