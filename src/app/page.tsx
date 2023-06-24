@@ -5,6 +5,7 @@ import LandingPage from "./LandingPage";
 import ToolBox from "./ToolBox";
 import Projects from "./Projects";
 import ContactMe from "./ContactMe";
+import Education from "./Education";
 
 export default function Home() {
 	return (
@@ -18,6 +19,7 @@ export default function Home() {
 
 				{/* Skills Section */}
 				<section className="pb-20">
+					<Education />
 					<ToolBox />
 					<Projects />
 				</section>
