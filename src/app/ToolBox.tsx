@@ -207,7 +207,7 @@ export default function ToolBox() {
 	const [tools, setTools] = useState(languageTools);
 
 	return (
-		<div className="mx-5 overflow-hidden rounded-2xl  border-2 border-cyan-300 bg-cyan-100 px-4 pb-8 pt-6 text-gray-700 dark:border-0 dark:bg-gray-800 dark:text-white md:mx-10 md:px-8">
+		<div className="mx-5 overflow-hidden rounded-2xl  border-2 border-cyan-300 bg-cyan-100 px-4 pb-5 pt-6 text-gray-700 dark:border-0 dark:bg-gray-800 dark:text-white md:mx-10 md:px-8 md:pb-8">
 			<h3 className="cursor-default text-center text-2xl font-medium md:text-3xl">
 				My Toolbox
 			</h3>

@@ -27,6 +27,7 @@ export default function LandingPage() {
 						href="https://github.com/ChiragAgg5k"
 						target="_blank"
 						aria-label="Github"
+						rel="noreferrer"
 						className="group hover:cursor-pointer hover:text-black dark:hover:text-white">
 						<AiFillGithub />
 						<p className="invisible text-xs group-hover:visible">
@@ -36,6 +37,7 @@ export default function LandingPage() {
 					<a
 						href="https://www.linkedin.com/in/chiragagg5k/"
 						target="_blank"
+						rel="noreferrer"
 						aria-label="LinkedIn"
 						className="group hover:cursor-pointer hover:text-cyan-800 dark:hover:text-cyan-500">
 						<AiFillLinkedin />
@@ -46,6 +48,7 @@ export default function LandingPage() {
 					<a
 						href="https://leetcode.com/ChiragAgg5k/"
 						target="_blank"
+						rel="noreferrer"
 						aria-label="Leetcode"
 						className="group hover:cursor-pointer hover:text-yellow-600">
 						<SiLeetcode />
