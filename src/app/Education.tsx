@@ -10,9 +10,10 @@ export default function Education() {
 				<div className="group m-4 flex justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700">
 					<div>
 						<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
-							2018-2020
+							2020
 						</p>
 						<p className="my-1 text-xl font-medium">Class X</p>
+						<p className="my-1 text-sm font-medium">CBSE</p>
 						<p className="text-sm">Grade: 91.2% </p>
 					</div>
 					<Image
@@ -32,6 +33,7 @@ export default function Education() {
 							2020-2022
 						</p>
 						<p className="my-1 text-xl font-medium">Class XII</p>
+						<p className="my-1 text-sm font-medium">Science</p>
 						<p className="text-sm">Grade: 89.5% </p>
 					</div>
 					<Image
@@ -52,6 +54,9 @@ export default function Education() {
 						</p>
 						<p className="my-1 font-medium sm:text-xl">
 							B.Tech in Computer Science
+						</p>
+						<p className="my-1 text-sm font-medium">
+							Bennett University
 						</p>
 						<p className="text-sm">CGPA: 9.66</p>
 					</div>
