@@ -12,5 +12,4 @@
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.occurrencesHighlight": false,
     "editor.selectionHighlight": false,
-    "prettier.tabWidth": 4
 }
