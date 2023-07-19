@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Education() {
   return (
-    <div className="mb-40 mt-20 sm:mt-0">
+    <div className="mb-32 mt-20 sm:mt-0">
       <h3 className="mb-16 cursor-default text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
         Education
       </h3>

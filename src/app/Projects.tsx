@@ -71,7 +71,7 @@ export default function Projects() {
 
   return (
     <>
-      <div className="mt-24 lg:mt-32 xl:mt-40">
+      <div className="mb-32">
         <h1 className="mb-16 cursor-default text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
           Projects
         </h1>
