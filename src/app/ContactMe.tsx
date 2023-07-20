@@ -2,7 +2,7 @@ import { AiOutlineMail, AiOutlineWhatsApp } from "react-icons/ai";
 
 export default function ContactMe() {
   return (
-    <div className="mt-20 flex flex-col items-center justify-center bg-cyan-100 py-5 text-gray-700 dark:bg-gray-800 dark:text-white sm:flex-row">
+    <div className="flex flex-col items-center justify-center border-t-2 border-cyan-400 bg-cyan-100 py-5 text-gray-700 dark:border-0 dark:bg-gray-800 dark:text-white sm:flex-row">
       <div className="min-w-1/2 flex flex-col justify-center sm:mr-10">
         <h2 className="cursor-default pb-8 pt-8 text-5xl sm:pt-0">Get in touch</h2>
         <span className="flex items-center pb-5">

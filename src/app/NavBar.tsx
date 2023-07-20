@@ -11,7 +11,7 @@ export default function NavBar() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <nav className="mb-10 flex w-full items-center justify-between bg-cyan-100 p-8 dark:bg-gray-800 md:absolute">
+    <nav className="mb-10 flex w-full items-center justify-between border-b-2 border-cyan-400 bg-cyan-100 p-8 dark:border-0 dark:bg-gray-800 md:absolute">
       <a
         href="https://chiragagg5k.vercel.app/"
         className="group text-lg text-gray-700 transition duration-300 dark:text-white sm:text-xl"

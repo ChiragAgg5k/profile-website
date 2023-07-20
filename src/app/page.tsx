@@ -6,19 +6,21 @@ import ToolBox from "./ToolBox";
 import Projects from "./Projects";
 import ContactMe from "./ContactMe";
 import Education from "./Education";
+import AboutMe from "./AboutMe";
 
 export default function Home() {
   return (
     <ThemeProvider attribute="class" defaultTheme="dark">
       <main className="bg-white font-geologica text-gray-800 dark:bg-gray-900 dark:text-white">
-        {/* Main Section, covers entire screen */}
+        {/* Front Section, covers entire screen */}
         <section>
           <NavBar />
           <LandingPage />
         </section>
 
-        {/* Skills Section */}
-        <section className="pb-20">
+        {/* Main Section */}
+        <section>
+          <AboutMe />
           <Education />
           <ToolBox />
           <Projects />
