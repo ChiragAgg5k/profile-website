@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiFillGithub, AiFillCloseCircle } from "react-icons/ai";
+import Fade from "react-reveal/Fade";
 
 interface Project {
   index: number;
@@ -76,54 +77,56 @@ export default function Projects() {
           Projects
         </h1>
         <div className="mx-0 grid grid-cols-1 sm:grid-cols-2 md:mx-10 lg:grid-cols-3">
-          {projects.map((project) => {
-            return (
-              <div
-                key={project.index}
-                className="group m-5 rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700"
-              >
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  width={300}
-                  height={300}
-                  title="Click to enlarge"
-                  onClick={() => {
-                    setModalImg(project.image);
-                  }}
-                  className="mb-4 h-auto max-h-52 w-full transform rounded-lg object-cover transition duration-500 ease-in-out hover:cursor-pointer group-hover:-translate-y-1 group-hover:scale-110"
-                />
-                <div>
-                  <p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
-                    {project.description}
-                  </p>
-                  <p className="my-1 text-xl font-medium">{project.name}</p>
-                  <div className="flex justify-between">
-                    <a
-                      className="text-sm  hover:underline"
-                      href={project.demo_link}
-                      aria-label="Visit Demo"
-                      onClick={
-                        project.demo_link === "#"
-                          ? (e) => {
-                              e.preventDefault();
-                            }
-                          : (e) => {
-                              e.preventDefault();
-                              window.open(project.demo_link, "_blank");
-                            }
-                      }
-                    >
-                      {project.demo_link === "#" ? "" : "Visit"}
-                    </a>
-                    <Link href={project.github_link} rel="noreferrer" title="Github Link" target="_blank">
-                      <AiFillGithub className="inline-block text-4xl text-black transition delay-75 ease-in-out hover:scale-110 dark:text-white" />
-                    </Link>
+          <Fade bottom cascade>
+            {projects.map((project, index) => {
+              return (
+                <div
+                  key={project.index}
+                  className="group m-5 rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700"
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    width={300}
+                    height={300}
+                    title="Click to enlarge"
+                    onClick={() => {
+                      setModalImg(project.image);
+                    }}
+                    className="mb-4 h-auto max-h-52 w-full transform rounded-lg object-cover transition duration-500 ease-in-out hover:cursor-pointer group-hover:-translate-y-1 group-hover:scale-110"
+                  />
+                  <div>
+                    <p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
+                      {project.description}
+                    </p>
+                    <p className="my-1 text-xl font-medium">{project.name}</p>
+                    <div className="flex justify-between">
+                      <a
+                        className="text-sm  hover:underline"
+                        href={project.demo_link}
+                        aria-label="Visit Demo"
+                        onClick={
+                          project.demo_link === "#"
+                            ? (e) => {
+                                e.preventDefault();
+                              }
+                            : (e) => {
+                                e.preventDefault();
+                                window.open(project.demo_link, "_blank");
+                              }
+                        }
+                      >
+                        {project.demo_link === "#" ? "" : "Visit"}
+                      </a>
+                      <Link href={project.github_link} rel="noreferrer" title="Github Link" target="_blank">
+                        <AiFillGithub className="inline-block text-4xl text-black transition delay-75 ease-in-out hover:scale-110 dark:text-white" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </Fade>
         </div>
       </div>
       <div

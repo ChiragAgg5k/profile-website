@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { AiFillLinkedin, AiFillGithub } from "react-icons/ai";
 import { SiLeetcode } from "react-icons/si";
 import { Element } from "react-scroll";
+import Fade from "react-reveal/Fade";
 
 export default function LandingPage() {
   return (
