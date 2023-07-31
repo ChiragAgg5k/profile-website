@@ -82,7 +82,7 @@ export default function Projects() {
 							return (
 								<div
 									key={project.index}
-									className="group m-5 rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700"
+									className="m-5 rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700"
 								>
 									<Image
 										src={project.image}
@@ -93,7 +93,7 @@ export default function Projects() {
 										onClick={() => {
 											setModalImg(project.image);
 										}}
-										className="mb-4 h-auto max-h-52 w-full transform rounded-lg object-cover transition duration-500 ease-in-out hover:cursor-pointer group-hover:-translate-y-1 group-hover:scale-110"
+										className="mb-4 h-auto max-h-52 w-full transform rounded-lg object-cover transition duration-500 ease-in-out hover:cursor-pointer"
 									/>
 									<div>
 										<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
@@ -118,7 +118,12 @@ export default function Projects() {
 											>
 												{project.demo_link === '#' ? '' : 'Visit'}
 											</a>
-											<Link href={project.github_link} rel="noreferrer" title="Github Link" target="_blank">
+											<Link
+												href={project.github_link}
+												rel="noreferrer"
+												title="Github Link"
+												target="_blank"
+											>
 												<AiFillGithub className="inline-block text-4xl text-black transition delay-75 ease-in-out hover:scale-110 dark:text-white" />
 											</Link>
 										</div>
@@ -146,7 +151,13 @@ export default function Projects() {
 				</AiFillCloseCircle>
 
 				<div className="relative h-full w-full sm:m-10 lg:m-20">
-					<Image id="modal-img" fill alt="Modal Image" src={modalImg ? modalImg : ''} className="object-contain" />
+					<Image
+						id="modal-img"
+						fill
+						alt="Modal Image"
+						src={modalImg ? modalImg : ''}
+						className="object-contain"
+					/>
 				</div>
 			</div>
 		</>
