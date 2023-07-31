@@ -5,7 +5,7 @@ import { SiDjango, SiExpress, SiMysql, SiKotlin, SiFirebase, SiFlutter, SiSqlite
 import { BsGit, BsAndroid2 } from 'react-icons/bs';
 import { FcLinux } from 'react-icons/fc';
 import { FaDocker } from 'react-icons/fa';
-import Zoom from 'react-reveal/Zoom';
+import Slide from 'react-reveal/Slide';
 
 interface Tool {
 	index: number;
@@ -138,7 +138,7 @@ export default function ToolBox() {
 	const [tools, setTools] = useState(languageTools);
 
 	return (
-		<Zoom>
+		<Slide right>
 			<div className="mx-5 mb-32 overflow-hidden rounded-xl  border-2 border-cyan-300 bg-cyan-100 px-4 pb-5 pt-6 text-gray-700 dark:border-0 dark:bg-gray-800 dark:text-white md:mx-10 md:px-8 md:pb-8">
 				<h3 className="cursor-default text-center text-2xl font-medium md:text-3xl">My Toolbox</h3>
 				<div className="mt-6 flex flex-col sm:flex-row">
@@ -169,6 +169,6 @@ export default function ToolBox() {
 					</div>
 				</div>
 			</div>
-		</Zoom>
+		</Slide>
 	);
 }
