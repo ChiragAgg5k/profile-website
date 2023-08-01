@@ -11,12 +11,9 @@ export default function LandingPage() {
 				</h1>
 				<h2 className="cursor-default py-2 text-xl sm:text-2xl">A Computer Science Nerd.</h2>
 				<p className="cursor-default py-5 text-base leading-8 text-gray-600 dark:text-gray-400 md:text-lg">
-					Hi, I am a passionate computer science student from India🇮🇳 🇮🇳 <br />I like to learn new things and build
-					stuff.
+					Hi, I am a passionate computer science student from India🇮🇳 🇮🇳 <br />I like to learn new things and
+					build stuff.
 				</p>
-
-				{/* on hover make p take visible */}
-
 				<div className="flex justify-center gap-16 py-3 text-5xl text-gray-600">
 					<a
 						href="https://github.com/ChiragAgg5k"
@@ -52,7 +49,13 @@ export default function LandingPage() {
 			</div>
 
 			<div className="px-10 py-20 md:px-0">
-				<video autoPlay loop muted className="w-100 mx-auto rounded-full border-4 border-cyan-500">
+				<video
+					autoPlay
+					loop
+					muted
+					className="w-100 mx-auto rounded-full border-4 border-cyan-500"
+					poster="/coding_anim_thumb.jpg"
+				>
 					<source src="/coding_anim.mp4" type="video/mp4" />
 				</video>
 			</div>
