@@ -8,6 +8,8 @@ import ContactMe from './ContactMe';
 import Education from './Education';
 import AboutMe from './AboutMe';
 
+export const runtime = 'edge';
+
 export default function Home() {
 	return (
 		<ThemeProvider attribute="class" defaultTheme="dark">
