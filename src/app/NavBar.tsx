@@ -2,6 +2,7 @@
 import { BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function NavBar() {
 	const { theme, setTheme } = useTheme();
@@ -25,17 +26,35 @@ export default function NavBar() {
 					mounted && (
 						<li>
 							{theme === 'dark' ? (
-								<BsFillMoonStarsFill
-									title="Toggle Light Mode"
-									className="cursor-pointer text-xl  hover:text-cyan-600 dark:hover:text-cyan-500 sm:text-2xl"
-									onClick={() => setTheme('light')}
-								/>
+								<motion.div
+									whileHover={{ scale: 1.2, rotate: 90 }}
+									whileTap={{
+										scale: 0.8,
+										rotate: -90,
+										borderRadius: '100%',
+									}}
+								>
+									<BsFillMoonStarsFill
+										title="Toggle Light Mode"
+										className="cursor-pointer text-xl  hover:text-cyan-600 dark:hover:text-cyan-500 sm:text-2xl"
+										onClick={() => setTheme('light')}
+									/>
+								</motion.div>
 							) : (
-								<BsFillSunFill
-									title="Toggle Dark Mode"
-									className="cursor-pointer text-xl text-gray-700  hover:text-cyan-600 dark:hover:text-cyan-500 sm:text-2xl"
-									onClick={() => setTheme('dark')}
-								/>
+								<motion.div
+									whileHover={{ scale: 1.2, rotate: 90 }}
+									whileTap={{
+										scale: 0.8,
+										rotate: -90,
+										borderRadius: '100%',
+									}}
+								>
+									<BsFillSunFill
+										title="Toggle Dark Mode"
+										className="cursor-pointer text-xl text-gray-700  hover:text-cyan-600 dark:hover:text-cyan-500 sm:text-2xl"
+										onClick={() => setTheme('dark')}
+									/>
+								</motion.div>
 							)}
 						</li>
 					)

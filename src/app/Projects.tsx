@@ -3,10 +3,12 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { AiFillGithub, AiFillCloseCircle } from 'react-icons/ai';
 import Fade from 'react-reveal/Fade';
+import { useTheme } from 'next-themes';
 
 interface Project {
 	index: number;
 	image: string;
+	image_dark: string;
 	description: string;
 	name: string;
 	demo_link: string;
@@ -16,6 +18,7 @@ interface Project {
 export default function Projects() {
 	const [modalImg, setModalImg] = useState<string | undefined>(undefined);
 	const [showModal, setShowModal] = useState<boolean>(false);
+	const { theme } = useTheme();
 
 	useEffect(() => {
 		const closeOnEscapeKey = (e: KeyboardEvent) => {
@@ -38,7 +41,8 @@ export default function Projects() {
 	const projects: Project[] = [
 		{
 			index: 0,
-			image: 'https://github.com/ChiragAgg5k/asclepius/blob/master/assets/images/thumbnail.png?raw=true',
+			image: '/project_thumbnails/light/asclepius.png',
+			image_dark: '/project_thumbnails/dark/asclepius.png',
 			description: 'Desktop Application',
 			name: 'Asclepius',
 			demo_link: '#',
@@ -46,7 +50,8 @@ export default function Projects() {
 		},
 		{
 			index: 1,
-			image: 'https://github.com/ChiragAgg5k/spot-clone/blob/master/Thumbnail.png?raw=true',
+			image: '/project_thumbnails/spot-clone.png',
+			image_dark: '/project_thumbnails/spot-clone.png',
 			description: 'Web Application',
 			name: 'Spot Clone',
 			demo_link: 'https://spot-clonee.netlify.app/',
@@ -54,7 +59,8 @@ export default function Projects() {
 		},
 		{
 			index: 2,
-			image: 'https://github.com/ChiragAgg5k/bu-news-android/blob/master/screenshots/screenshot_2.png?raw=true',
+			image: '/project_thumbnails/light/bu-news-android.png',
+			image_dark: '/project_thumbnails/dark/bu-news-android.png',
 			description: 'Android Application',
 			name: 'BU News',
 			demo_link: '#',
@@ -62,11 +68,21 @@ export default function Projects() {
 		},
 		{
 			index: 3,
-			image: 'https://github.com/ChiragAgg5k/bu-news-website/blob/master/thumbnail.png?raw=true',
+			image: '/project_thumbnails/light/bu-news.png',
+			image_dark: '/project_thumbnails/dark/bu-news.png',
 			description: 'Web Application',
 			name: 'BU News',
 			demo_link: 'https://bu-news.vercel.app/',
 			github_link: 'https://github.com/ChiragAgg5k/bu-news-website',
+		},
+		{
+			index: 4,
+			image: '/project_thumbnails/light/weatherly.png',
+			image_dark: '/project_thumbnails/dark/weatherly.png',
+			description: 'Web Application',
+			name: 'Weatherly',
+			demo_link: 'https://weatherrly.vercel.app/',
+			github_link: 'https://github.com/ChiragAgg5k/weatherly',
 		},
 	];
 
@@ -85,15 +101,15 @@ export default function Projects() {
 									className="m-5 rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700"
 								>
 									<Image
-										src={project.image}
+										src={theme === 'dark' ? project.image_dark : project.image}
 										alt={project.name}
 										width={300}
 										height={300}
 										title="Click to enlarge"
 										onClick={() => {
-											setModalImg(project.image);
+											setModalImg(theme === 'dark' ? project.image_dark : project.image);
 										}}
-										className="mb-4 h-auto max-h-52 w-full transform rounded-lg object-cover transition duration-500 ease-in-out hover:cursor-pointer"
+										className="mb-4 h-auto max-h-56 w-full transform rounded-lg object-cover transition duration-500 ease-in-out hover:cursor-pointer"
 									/>
 									<div>
 										<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
@@ -140,24 +156,12 @@ export default function Projects() {
 					showModal ? 'flex' : 'hidden'
 				}
 				`}
+				onClick={() => {
+					setModalImg(undefined);
+				}}
 			>
-				<AiFillCloseCircle
-					className="fixed right-8 top-6 z-20 text-4xl font-bold text-white hover:cursor-pointer"
-					onClick={() => {
-						setModalImg(undefined);
-					}}
-				>
-					&times;
-				</AiFillCloseCircle>
-
 				<div className="relative h-full w-full sm:m-10 lg:m-20">
-					<Image
-						id="modal-img"
-						fill
-						alt="Modal Image"
-						src={modalImg ? modalImg : ''}
-						className="object-contain"
-					/>
+					<Image id="modal-img" fill alt="" src={modalImg ? modalImg : ''} className="object-contain" />
 				</div>
 			</div>
 		</>
