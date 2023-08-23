@@ -7,31 +7,34 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"pretty": "prettier --write ."
+		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"@types/react": "18.2.17",
+		"@emailjs/browser": "^3.11.0",
+		"@types/react": "18.2.20",
 		"@types/react-dom": "18.2.7",
-		"autoprefixer": "10.4.14",
-		"eslint": "8.46.0",
-		"eslint-config-next": "^13.4.12",
-		"next": "13.4.12",
+		"autoprefixer": "10.4.15",
+		"eslint": "8.47.0",
+		"eslint-config-next": "^13.4.19",
+		"framer-motion": "^10.16.1",
+		"next": "13.4.19",
 		"next-themes": "^0.2.1",
-		"postcss": "8.4.27",
+		"postcss": "8.4.28",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"react-icons": "^4.10.1",
 		"react-reveal": "^1.2.2",
 		"react-scroll": "^1.8.9",
-		"sharp": "^0.32.4",
+		"sharp": "^0.32.5",
 		"tailwindcss": "3.3.3",
-		"typescript": "5.1.6"
+		"typescript": "5.1.6",
+		"zod": "^3.22.2"
 	},
 	"devDependencies": {
-		"@cloudflare/next-on-pages": "^1.5.0",
-		"@types/node": "^20.4.5",
+		"@cloudflare/next-on-pages": "^1.5.1",
+		"@types/node": "^20.5.2",
 		"@types/react-scroll": "^1.8.7",
-		"prettier": "^3.0.0",
-		"prettier-plugin-tailwindcss": "^0.4.1"
+		"prettier": "^3.0.2",
+		"prettier-plugin-tailwindcss": "^0.5.3"
 	}
 }
