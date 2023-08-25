@@ -1,8 +1,108 @@
 'use client';
 import { BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs';
+import { AiOutlineMenu } from 'react-icons/ai';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { animateScroll, Link } from 'react-scroll';
+
+function navLinks(){
+	return (
+		<>
+			<li className="scroll-link my-1 mr-4 sm:my-0">
+				<Link
+					to="about-me"
+					smooth={true}
+					offset={-120}
+					duration={500}
+					onClick={() => {
+						const navbar = document.querySelector('#toggle-navbar');
+						if (navbar) {
+							navbar.classList.add('hidden');
+						}
+					}}
+					className="group transition duration-300 hover:cursor-pointer"
+				>
+					About Me
+					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
+				</Link>
+			</li>
+
+			<li className="scroll-link my-1 mr-4 sm:my-0">
+				<Link
+					to="education"
+					smooth={true}
+					offset={-120}
+					duration={500}
+					onClick={() => {
+						const navbar = document.querySelector('#toggle-navbar');
+						if (navbar) {
+							navbar.classList.add('hidden');
+						}
+					}}
+					className="group transition duration-300 hover:cursor-pointer"
+				>
+					Education
+					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
+				</Link>
+			</li>
+
+			<li className="scroll-link my-1 mr-4 sm:my-0">
+				<Link
+					to="toolbox"
+					smooth={true}
+					offset={-120}
+					duration={500}
+					onClick={() => {
+						const navbar = document.querySelector('#toggle-navbar');
+						if (navbar) {
+							navbar.classList.add('hidden');
+						}
+					}}
+					className="group transition duration-300 hover:cursor-pointer"
+				>
+					Toolbox
+					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
+				</Link>
+			</li>
+
+			<li className="scroll-link my-1 mr-4 sm:my-0">
+				<Link
+					to="projects"
+					smooth={true}
+					offset={-120}
+					duration={500}
+					onClick={() => {
+						const navbar = document.querySelector('#toggle-navbar');
+						if (navbar) {
+							navbar.classList.add('hidden');
+						}
+					}}
+					className="group transition duration-300 hover:cursor-pointer"
+				>
+					Projects
+					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
+				</Link>
+			</li>
+
+			<li className="scroll-link my-1 mr-6 sm:my-0">
+				<button
+					onClick={() => {
+						animateScroll.scrollToBottom();
+						const navbar = document.querySelector('#toggle-navbar');
+						if (navbar) {
+							navbar.classList.add('hidden');
+						}
+					}}
+					className="group w-full transition duration-300 hover:cursor-pointer"
+				>
+					Contact
+					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
+				</button>
+			</li>
+		</>
+	);
+}
 
 export default function NavBar() {
 	const { theme, setTheme } = useTheme();
@@ -11,69 +111,94 @@ export default function NavBar() {
 	// When mounted on client, now we can show the UI
 	useEffect(() => setMounted(true), []);
 
-	return (
-		<nav className="mb-10 flex w-full items-center justify-between border-b-2 border-cyan-400 bg-cyan-100 p-8 dark:border-0 dark:bg-gray-800 md:absolute">
-			<a
-				href="https://chiragagg5k.vercel.app/"
-				className="group text-lg text-gray-700 transition duration-300 dark:text-white sm:text-xl"
-			>
-				ChiragAgg5k
-				<span className="block h-0.5 max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
-			</a>
-			<ul className="flex items-center">
-				{
-					// Only show dark mode toggle if mounted and can be toggled
-					mounted && (
-						<li>
-							{theme === 'dark' ? (
-								<motion.div
-									whileHover={{ scale: 1.2, rotate: 90 }}
-									whileTap={{
-										scale: 0.8,
-										rotate: -90,
-										borderRadius: '100%',
-									}}
-								>
-									<BsFillMoonStarsFill
-										title="Toggle Light Mode"
-										className="cursor-pointer text-xl  hover:text-cyan-600 dark:hover:text-cyan-500 sm:text-2xl"
-										onClick={() => setTheme('light')}
-									/>
-								</motion.div>
-							) : (
-								<motion.div
-									whileHover={{ scale: 1.2, rotate: 90 }}
-									whileTap={{
-										scale: 0.8,
-										rotate: -90,
-										borderRadius: '100%',
-									}}
-								>
-									<BsFillSunFill
-										title="Toggle Dark Mode"
-										className="cursor-pointer text-xl text-gray-700  hover:text-cyan-600 dark:hover:text-cyan-500 sm:text-2xl"
-										onClick={() => setTheme('dark')}
-									/>
-								</motion.div>
-							)}
-						</li>
-					)
-				}
+	// decrease navbar height on scroll
+	useEffect(() => {
+		const handleScroll = () => {
+			const navbar = document.querySelector('nav');
 
-				<li>
-					<div className="ml-5 rounded bg-cyan-700 px-5 py-2  text-sm text-white sm:text-base">
-						<a
-							href="https://chirag-aggarwal-resume.tiiny.site/"
-							className="group text-white transition duration-300"
-							rel="noreferrer"
-							target="_blank"
-						>
-							Resume
-							<span className="block h-0.5 max-w-0 bg-white transition-all duration-500 group-hover:max-w-full"></span>
-						</a>
+			if (navbar) {
+				if (window.scrollY > 100) {
+					navbar.classList.add('py-5');
+					navbar.classList.remove('py-8');
+				} else {
+					navbar.classList.add('py-8');
+					navbar.classList.remove('py-5');
+				}
+			}
+		};
+		window.addEventListener('scroll', handleScroll);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
+
+	return (
+		<>
+			<nav className="sticky top-0 w-full z-10 border-b-2 border-cyan-400 bg-cyan-100 px-8 py-8 transition-all ease-in-out dark:border-0 dark:bg-gray-800">
+				<div className="flex w-full items-center justify-between">
+					<button
+						onClick={() => animateScroll.scrollToTop()}
+						className="group text-lg text-gray-700 transition duration-300 dark:text-white sm:text-xl"
+					>
+						ChiragAgg5k
+						<span className="block h-0.5 max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
+					</button>
+					<div className="flex">
+						<AiOutlineMenu
+							className="mr-4 block text-2xl hover:cursor-pointer sm:hidden"
+							onClick={() => {
+								const navbar = document.querySelector('#toggle-navbar');
+								if (navbar) {
+									navbar.classList.toggle('hidden');
+								}
+							}}
+						/>
+						<ul className="hidden flex-col items-center sm:flex sm:flex-row">{navLinks()}</ul>
+
+						{
+							// Only show dark mode toggle if mounted and can be toggled
+							mounted && (
+								<button>
+									{theme === 'dark' ? (
+										<motion.div
+											whileHover={{ scale: 1.2, rotate: 90 }}
+											whileTap={{
+												scale: 0.8,
+												rotate: -90,
+												borderRadius: '100%',
+											}}
+										>
+											<BsFillMoonStarsFill
+												title="Toggle Light Mode"
+												className="cursor-pointer text-lg  hover:text-cyan-600 dark:hover:text-cyan-500 sm:text-2xl"
+												onClick={() => setTheme('light')}
+											/>
+										</motion.div>
+									) : (
+										<motion.div
+											whileHover={{ scale: 1.2, rotate: 90 }}
+											whileTap={{
+												scale: 0.8,
+												rotate: -90,
+												borderRadius: '100%',
+											}}
+										>
+											<BsFillSunFill
+												title="Toggle Dark Mode"
+												className="cursor-pointer text-lg text-gray-700  hover:text-cyan-600 dark:hover:text-cyan-500 sm:text-2xl"
+												onClick={() => setTheme('dark')}
+											/>
+										</motion.div>
+									)}
+								</button>
+							)
+						}
 					</div>
-				</li>
-			</ul>
-		</nav>
+				</div>
+				<ul id="toggle-navbar" className="hidden text-center">
+					{navLinks()}
+				</ul>
+			</nav>
+		</>
 	);
 }

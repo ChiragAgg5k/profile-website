@@ -1,10 +1,9 @@
 import { AiFillLinkedin, AiFillGithub } from 'react-icons/ai';
 import { SiLeetcode } from 'react-icons/si';
-import { Element } from 'react-scroll';
 
 export default function LandingPage() {
 	return (
-		<Element className="min-h-screen w-full md:flex md:items-center md:justify-center" name="langing-page">
+		<div className="min-h-[90dvh] w-full md:flex md:items-center md:justify-center">
 			<div className="px-10 pt-10 text-center">
 				<h1 className="cursor-default py-2 text-3xl font-medium text-cyan-700 dark:text-cyan-600 sm:text-4xl md:text-5xl">
 					Chirag Aggarwal
@@ -59,6 +58,6 @@ export default function LandingPage() {
 					<source src="/coding_anim.mp4" type="video/mp4" />
 				</video>
 			</div>
-		</Element>
+		</div>
 	);
 }

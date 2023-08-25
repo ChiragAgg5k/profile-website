@@ -1,9 +1,12 @@
 import Image from 'next/image';
 import Slide from 'react-reveal/Slide';
+import { Element } from 'react-scroll';
 
 export default function Education() {
 	return (
-		<div className="mb-32 mt-20 sm:mt-0">
+		<>
+		<Element name="education" className="relative" />
+		<div className="mb-40 mt-20 sm:mt-0">
 			<h3 className="mb-16 cursor-default text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
 				Education
 			</h3>
@@ -78,5 +81,6 @@ export default function Education() {
 				{/* </Slide> */}
 			</div>
 		</div>
+		</>
 	);
 }

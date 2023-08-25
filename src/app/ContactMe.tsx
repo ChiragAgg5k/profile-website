@@ -1,4 +1,4 @@
-import { AiOutlineMail, AiOutlineWhatsApp } from 'react-icons/ai';
+import { AiOutlineMail, AiOutlineWhatsApp, AiOutlineLink } from 'react-icons/ai';
 import emailjs from '@emailjs/browser';
 import { FormEvent, useRef, useState } from 'react';
 
@@ -42,7 +42,7 @@ export default function ContactMe() {
 		<div className="flex flex-col items-center justify-center border-t-2 border-cyan-400 bg-cyan-100 py-5 text-gray-700 dark:border-0 dark:bg-gray-800 dark:text-white sm:flex-row">
 			<div className="min-w-1/2 flex flex-col justify-center sm:mr-10">
 				<h2 className="cursor-default pb-8 pt-8 text-5xl sm:pt-0">Get in touch</h2>
-				<span className="flex items-center pb-5">
+				<span className="flex items-center pb-4">
 					<AiOutlineMail className="mr-2" />
 					<a
 						href="mailto: chiragaggarwal5k@gmail.com"
@@ -54,7 +54,7 @@ export default function ContactMe() {
 						<span className="block h-0.5 max-w-0 bg-black transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
 					</a>
 				</span>
-				<span className="flex items-center">
+				<span className="flex items-center pb-4">
 					<AiOutlineWhatsApp className="mr-2" />
 					<a
 						href="https://wa.me/919667658415"
@@ -63,6 +63,18 @@ export default function ContactMe() {
 						target="_blank"
 					>
 						+91 96676 58415
+						<span className="block h-0.5 max-w-0 bg-black transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
+					</a>
+				</span>
+				<span className="flex items-center">
+					<AiOutlineLink className="mr-2" />
+					<a
+						href="https://chirag-aggarwal-resume.tiiny.site/"
+						rel="noreferrer"
+						className="group transition duration-300"
+						target="_blank"
+					>
+						Download Resume
 						<span className="block h-0.5 max-w-0 bg-black transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
 					</a>
 				</span>
