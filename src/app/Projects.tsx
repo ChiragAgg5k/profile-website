@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { AiFillGithub, AiFillCloseCircle } from 'react-icons/ai';
 import Fade from 'react-reveal/Fade';
 import { useTheme } from 'next-themes';
+import { Element } from 'react-scroll';
 
 interface Project {
 	index: number;
@@ -13,6 +14,8 @@ interface Project {
 	name: string;
 	demo_link: string;
 	github_link: string;
+	hover_gif_dark: string;
+	hover_gif_light: string;
 }
 
 export default function Projects() {
@@ -47,6 +50,8 @@ export default function Projects() {
 			name: 'Asclepius',
 			demo_link: '#',
 			github_link: 'https://github.com/ChiragAgg5k/asclepius',
+			hover_gif_dark: '/project_gifs/dark/asclepius.gif',
+			hover_gif_light: '/project_gifs/light/asclepius.gif',
 		},
 		{
 			index: 1,
@@ -56,6 +61,8 @@ export default function Projects() {
 			name: 'Spot Clone',
 			demo_link: 'https://spot-clonee.netlify.app/',
 			github_link: 'https://github.com/ChiragAgg5k/spot-clone',
+			hover_gif_dark: '/project_gifs/spot-clone.gif',
+			hover_gif_light: '/project_gifs/spot-clone.gif',
 		},
 		{
 			index: 2,
@@ -65,6 +72,8 @@ export default function Projects() {
 			name: 'BU News',
 			demo_link: '#',
 			github_link: 'https://github.com/ChiragAgg5k/bu-news-android',
+			hover_gif_dark: '/project_gifs/dark/bu-news-android.gif',
+			hover_gif_light: '/project_gifs/light/bu-news-android.gif',
 		},
 		{
 			index: 3,
@@ -74,6 +83,8 @@ export default function Projects() {
 			name: 'BU News',
 			demo_link: 'https://bu-news.vercel.app/',
 			github_link: 'https://github.com/ChiragAgg5k/bu-news-website',
+			hover_gif_dark: '/project_gifs/dark/bu-news.gif',
+			hover_gif_light: '/project_gifs/light/bu-news.gif',
 		},
 		{
 			index: 4,
@@ -83,34 +94,47 @@ export default function Projects() {
 			name: 'Weatherly',
 			demo_link: 'https://weatherrly.vercel.app/',
 			github_link: 'https://github.com/ChiragAgg5k/weatherly',
+			hover_gif_dark: '/project_gifs/dark/weatherly.gif',
+			hover_gif_light: '/project_gifs/light/weatherly.gif',
 		},
 	];
 
 	return (
 		<>
-			<div className="mb-32">
+			<Element name="projects" className="relative" />
+			<div className="mb-40">
 				<h1 className="mb-16 cursor-default text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
 					Projects
 				</h1>
-				<div className="mx-0 grid grid-cols-1 sm:grid-cols-2 md:mx-10 lg:grid-cols-3">
-					<Fade bottom cascade>
-						{projects.map((project, index) => {
-							return (
-								<div
-									key={project.index}
-									className="m-5 rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700"
-								>
-									<Image
-										src={theme === 'dark' ? project.image_dark : project.image}
-										alt={project.name}
-										width={300}
-										height={300}
-										title="Click to enlarge"
-										onClick={() => {
-											setModalImg(theme === 'dark' ? project.image_dark : project.image);
-										}}
-										className="mb-4 h-auto max-h-56 w-full transform rounded-lg object-cover transition duration-500 ease-in-out hover:cursor-pointer"
-									/>
+				<div className="mx-0 grid grid-cols-1 grid-rows-2 sm:grid-cols-2 md:mx-4 lg:grid-cols-3">
+					{projects.map((project) => {
+						return (
+							<div
+								key={project.index}
+								className={`group m-4 rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700`}
+							>
+								<Fade bottom>
+									<div className="relative">
+										<Image
+											src={theme === 'light' ? project.image : project.image_dark}
+											alt={project.name}
+											width={300}
+											height={224}
+											title="Click to enlarge"
+											onClick={() => {
+												setModalImg(theme === 'dark' ? project.image_dark : project.image);
+											}}
+											className={`absolute mb-4 h-auto max-h-56 w-full transform rounded-lg object-contain transition duration-500 ease-in-out hover:cursor-pointer group-hover:opacity-0`}
+										/>
+										<Image
+											src={theme === 'light' ? project.hover_gif_light : project.hover_gif_dark}
+											alt={project.name}
+											width={300}
+											height={224}
+											className={`mb-4 h-auto max-h-56 w-full rounded-lg object-contain`}
+										/>
+									</div>
+
 									<div>
 										<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
 											{project.description}
@@ -144,10 +168,10 @@ export default function Projects() {
 											</Link>
 										</div>
 									</div>
-								</div>
-							);
-						})}
-					</Fade>
+								</Fade>
+							</div>
+						);
+					})}
 				</div>
 			</div>
 			<div

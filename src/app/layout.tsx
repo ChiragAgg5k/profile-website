@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<head>
 				<title>{metadata.title}</title>
 				<meta name="description" content={metadata.description} />
-				<link rel="icon" href="icon.png" />
+				{/* <link rel="icon" href="profile_pic.png" /> */}
 			</head>
 			<body suppressHydrationWarning={true}>{children}</body>
 		</html>

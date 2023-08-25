@@ -8,15 +8,13 @@ import ContactMe from './ContactMe';
 import Education from './Education';
 import AboutMe from './AboutMe';
 
-export const runtime = 'edge';
-
 export default function Home() {
 	return (
 		<ThemeProvider attribute="class" defaultTheme="dark">
+			<NavBar />
 			<main className="bg-white font-geologica text-gray-800 dark:bg-gray-900 dark:text-white">
 				{/* Front Section, covers entire screen */}
 				<section>
-					<NavBar />
 					<LandingPage />
 				</section>
 
@@ -29,7 +27,9 @@ export default function Home() {
 				</section>
 
 				{/* Footer/Contact Me Section */}
-				<ContactMe />
+				<section>
+					<ContactMe />
+				</section>
 			</main>
 		</ThemeProvider>
 	);
