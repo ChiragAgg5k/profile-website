@@ -9,7 +9,7 @@ import { animateScroll, Link } from 'react-scroll';
 function navLinks(){
 	return (
 		<>
-			<li className="scroll-link my-1 mr-4 sm:my-0">
+			<li className="scroll-link mt-5 mb-1 mr-4 sm:my-0">
 				<Link
 					to="about-me"
 					smooth={true}
@@ -21,7 +21,7 @@ function navLinks(){
 							navbar.classList.add('hidden');
 						}
 					}}
-					className="group transition duration-300 hover:cursor-pointer"
+					className="group text-base transition duration-300 hover:cursor-pointer"
 				>
 					About Me
 					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
@@ -40,7 +40,7 @@ function navLinks(){
 							navbar.classList.add('hidden');
 						}
 					}}
-					className="group transition duration-300 hover:cursor-pointer"
+					className="group text-base transition duration-300 hover:cursor-pointer"
 				>
 					Education
 					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
@@ -59,7 +59,7 @@ function navLinks(){
 							navbar.classList.add('hidden');
 						}
 					}}
-					className="group transition duration-300 hover:cursor-pointer"
+					className="group text-base transition duration-300 hover:cursor-pointer"
 				>
 					Toolbox
 					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
@@ -78,7 +78,7 @@ function navLinks(){
 							navbar.classList.add('hidden');
 						}
 					}}
-					className="group transition duration-300 hover:cursor-pointer"
+					className="group text-base transition duration-300 hover:cursor-pointer"
 				>
 					Projects
 					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
@@ -94,7 +94,7 @@ function navLinks(){
 							navbar.classList.add('hidden');
 						}
 					}}
-					className="group w-full transition duration-300 hover:cursor-pointer"
+					className="group w-full text-base transition duration-300 hover:cursor-pointer"
 				>
 					Contact
 					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
@@ -134,7 +134,7 @@ export default function NavBar() {
 
 	return (
 		<>
-			<nav className="sticky top-0 w-full z-10 border-b-2 border-cyan-400 bg-cyan-100 px-8 py-8 transition-all ease-in-out dark:border-0 dark:bg-gray-800">
+			<nav className="sticky top-0 w-full z-10 border-b-2 border-cyan-400 bg-cyan-100 px-8 pt-8 pb-8 transition-all ease-in-out dark:border-0 dark:bg-gray-800" id='horizontal-navbar'>
 				<div className="flex w-full items-center justify-between">
 					<button
 						onClick={() => animateScroll.scrollToTop()}
@@ -148,8 +148,15 @@ export default function NavBar() {
 							className="mr-4 block text-2xl hover:cursor-pointer sm:hidden"
 							onClick={() => {
 								const navbar = document.querySelector('#toggle-navbar');
+								const horizontalNavbar = document.querySelector('#horizontal-navbar');
+
 								if (navbar) {
 									navbar.classList.toggle('hidden');
+								}
+
+								if (horizontalNavbar) {
+									horizontalNavbar.classList.toggle('pb-8');
+									horizontalNavbar.classList.toggle('pb-4');
 								}
 							}}
 						/>
