@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { animateScroll, Link } from 'react-scroll';
 
-function navLinks(){
+function navLinks() {
 	return (
 		<>
-			<li className="scroll-link mt-5 mb-1 mr-4 sm:my-0">
+			<li className="scroll-link mb-1 mt-4 sm:my-0 sm:mr-4">
 				<Link
 					to="about-me"
 					smooth={true}
@@ -21,14 +21,14 @@ function navLinks(){
 							navbar.classList.add('hidden');
 						}
 					}}
-					className="group text-base transition duration-300 hover:cursor-pointer"
+					className="group transition duration-300 hover:cursor-pointer"
 				>
 					About Me
 					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
 				</Link>
 			</li>
 
-			<li className="scroll-link my-1 mr-4 sm:my-0">
+			<li className="scroll-link my-1 sm:my-0 sm:mr-4">
 				<Link
 					to="education"
 					smooth={true}
@@ -40,14 +40,14 @@ function navLinks(){
 							navbar.classList.add('hidden');
 						}
 					}}
-					className="group text-base transition duration-300 hover:cursor-pointer"
+					className="group transition duration-300 hover:cursor-pointer"
 				>
 					Education
 					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
 				</Link>
 			</li>
 
-			<li className="scroll-link my-1 mr-4 sm:my-0">
+			<li className="scroll-link my-1 sm:my-0 sm:mr-4">
 				<Link
 					to="toolbox"
 					smooth={true}
@@ -59,14 +59,14 @@ function navLinks(){
 							navbar.classList.add('hidden');
 						}
 					}}
-					className="group text-base transition duration-300 hover:cursor-pointer"
+					className="group transition duration-300 hover:cursor-pointer"
 				>
 					Toolbox
 					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
 				</Link>
 			</li>
 
-			<li className="scroll-link my-1 mr-4 sm:my-0">
+			<li className="scroll-link my-1 sm:my-0 sm:mr-4">
 				<Link
 					to="projects"
 					smooth={true}
@@ -78,14 +78,14 @@ function navLinks(){
 							navbar.classList.add('hidden');
 						}
 					}}
-					className="group text-base transition duration-300 hover:cursor-pointer"
+					className="group transition duration-300 hover:cursor-pointer"
 				>
 					Projects
 					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
 				</Link>
 			</li>
 
-			<li className="scroll-link my-1 mr-6 sm:my-0">
+			<li className="scroll-link my-1 sm:my-0 sm:mr-6">
 				<button
 					onClick={() => {
 						animateScroll.scrollToBottom();
@@ -94,7 +94,7 @@ function navLinks(){
 							navbar.classList.add('hidden');
 						}
 					}}
-					className="group w-full text-base transition duration-300 hover:cursor-pointer"
+					className="group w-full transition duration-300 hover:cursor-pointer"
 				>
 					Contact
 					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
@@ -115,6 +115,7 @@ export default function NavBar() {
 	useEffect(() => {
 		const handleScroll = () => {
 			const navbar = document.querySelector('nav');
+			const horizontalNavbar = document.querySelector('#horizontal-navbar');
 
 			if (navbar) {
 				if (window.scrollY > 100) {
@@ -123,6 +124,16 @@ export default function NavBar() {
 				} else {
 					navbar.classList.add('py-8');
 					navbar.classList.remove('py-5');
+				}
+			}
+
+			if (horizontalNavbar) {
+				if (window.scrollY > 100) {
+					horizontalNavbar.classList.add('py-5');
+					horizontalNavbar.classList.remove('py-8');
+				} else {
+					horizontalNavbar.classList.add('py-8');
+					horizontalNavbar.classList.remove('py-5');
 				}
 			}
 		};
@@ -134,7 +145,10 @@ export default function NavBar() {
 
 	return (
 		<>
-			<nav className="sticky top-0 w-full z-10 border-b-2 border-cyan-400 bg-cyan-100 px-8 pt-8 pb-8 transition-all ease-in-out dark:border-0 dark:bg-gray-800" id='horizontal-navbar'>
+			<nav
+				className="sticky top-0 z-10 w-full border-b-2 border-cyan-400 bg-cyan-100 px-8 py-8 transition-all ease-in-out dark:border-0 dark:bg-gray-800 md:fixed"
+				id="horizontal-navbar"
+			>
 				<div className="flex w-full items-center justify-between">
 					<button
 						onClick={() => animateScroll.scrollToTop()}
@@ -145,7 +159,7 @@ export default function NavBar() {
 					</button>
 					<div className="flex">
 						<AiOutlineMenu
-							className="mr-4 block text-2xl hover:cursor-pointer sm:hidden"
+							className="mr-4 block text-2xl hover:cursor-pointer md:hidden"
 							onClick={() => {
 								const navbar = document.querySelector('#toggle-navbar');
 								const horizontalNavbar = document.querySelector('#horizontal-navbar');
@@ -160,7 +174,7 @@ export default function NavBar() {
 								}
 							}}
 						/>
-						<ul className="hidden flex-col items-center sm:flex sm:flex-row">{navLinks()}</ul>
+						<ul className="hidden flex-col items-center text-base md:flex md:flex-row">{navLinks()}</ul>
 
 						{
 							// Only show dark mode toggle if mounted and can be toggled
@@ -202,7 +216,7 @@ export default function NavBar() {
 						}
 					</div>
 				</div>
-				<ul id="toggle-navbar" className="hidden text-center">
+				<ul id="toggle-navbar" className="hidden text-center text-sm">
 					{navLinks()}
 				</ul>
 			</nav>

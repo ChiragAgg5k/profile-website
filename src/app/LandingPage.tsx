@@ -3,7 +3,7 @@ import { SiLeetcode } from 'react-icons/si';
 
 export default function LandingPage() {
 	return (
-		<div className="min-h-[90dvh] w-full md:flex md:items-center md:justify-center">
+		<div className="min-h-[100dvh] w-full md:flex md:items-center md:justify-center">
 			<div className="px-10 pt-10 text-center">
 				<h1 className="cursor-default py-2 text-3xl font-medium text-cyan-700 dark:text-cyan-600 sm:text-4xl md:text-5xl">
 					Chirag Aggarwal
