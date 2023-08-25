@@ -9,7 +9,7 @@ import { animateScroll, Link } from 'react-scroll';
 function navLinks(){
 	return (
 		<>
-			<li className="scroll-link mt-5 mb-1 mr-4 sm:my-0">
+			<li className="scroll-link pt-2 mb-1 mr-4 sm:my-0 sm:pt-0">
 				<Link
 					to="about-me"
 					smooth={true}
@@ -85,7 +85,7 @@ function navLinks(){
 				</Link>
 			</li>
 
-			<li className="scroll-link my-1 mr-6 sm:my-0">
+			<li className="scroll-link pb-4 mt-1 mr-6 sm:my-0 sm:pb-0">
 				<button
 					onClick={() => {
 						animateScroll.scrollToBottom();
@@ -134,8 +134,11 @@ export default function NavBar() {
 
 	return (
 		<>
-			<nav className="sticky top-0 w-full z-10 border-b-2 border-cyan-400 bg-cyan-100 px-8 pt-8 pb-8 transition-all ease-in-out dark:border-0 dark:bg-gray-800" id='horizontal-navbar'>
-				<div className="flex w-full items-center justify-between">
+			<nav
+				className="sticky top-0 z-10 h-[10dvh] w-full border-b-2 border-cyan-400 bg-cyan-100 px-8 transition-all ease-in-out dark:border-0 dark:bg-gray-800"
+				id="horizontal-navbar"
+			>
+				<div className="flex h-full w-full items-center justify-between">
 					<button
 						onClick={() => animateScroll.scrollToTop()}
 						className="group text-lg text-gray-700 transition duration-300 dark:text-white sm:text-xl"
@@ -148,19 +151,13 @@ export default function NavBar() {
 							className="mr-4 block text-2xl hover:cursor-pointer sm:hidden"
 							onClick={() => {
 								const navbar = document.querySelector('#toggle-navbar');
-								const horizontalNavbar = document.querySelector('#horizontal-navbar');
 
 								if (navbar) {
 									navbar.classList.toggle('hidden');
 								}
-
-								if (horizontalNavbar) {
-									horizontalNavbar.classList.toggle('pb-8');
-									horizontalNavbar.classList.toggle('pb-4');
-								}
 							}}
 						/>
-						<ul className="hidden flex-col items-center sm:flex sm:flex-row">{navLinks()}</ul>
+						<ul className="hidden items-center justify-center sm:flex flex-row">{navLinks()}</ul>
 
 						{
 							// Only show dark mode toggle if mounted and can be toggled
@@ -202,10 +199,13 @@ export default function NavBar() {
 						}
 					</div>
 				</div>
-				<ul id="toggle-navbar" className="hidden text-center">
-					{navLinks()}
-				</ul>
 			</nav>
+			<ul
+				id="toggle-navbar"
+				className="hidden border-cyan-400 bg-cyan-100 text-center transition-all ease-in-out dark:border-0 dark:bg-gray-800"
+			>
+				{navLinks()}
+			</ul>
 		</>
 	);
 }
