@@ -143,49 +143,49 @@ export default function ToolBox() {
 
 	return (
 		<>
-		<Element name="toolbox" className="relative" />
-		<div className="mx-5 mb-40 overflow-hidden rounded-xl  border-2 border-cyan-300 bg-cyan-100 px-4 pb-5 pt-6 text-gray-700 dark:border-0 dark:bg-gray-800 dark:text-white md:mx-10 md:px-8 md:pb-8">
-			<h3 className="cursor-default text-center text-2xl font-medium md:text-3xl">My Toolbox</h3>
-			<div className="mt-6 flex flex-col sm:flex-row">
-				<div className="mb-5 flex flex-row justify-between overflow-scroll rounded-xl bg-cyan-200 px-2 py-5 dark:bg-gray-700 sm:mb-0 sm:mr-8 sm:flex-col sm:overflow-visible md:px-5">
-					{columnHeaders.map((columnHeader) => {
-						return (
-							<Slide bottom key={columnHeader.name}>
-								<h4
-									className="mb-2 cursor-pointer whitespace-nowrap rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
-									onClick={() => {
-										setTools([...columnHeader.tools]);
-									}}
-								>
-									{columnHeader.name}
-								</h4>
-							</Slide>
-						);
-					})}
-				</div>
-				<div className="grid w-full grid-cols-2 rounded-xl bg-cyan-200 p-5 dark:bg-gray-700 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8  xl:grid-cols-10">
-					{tools.map((tool) => {
-						return (
-							<Roll right key={tool.index}>
-								<div className="m-auto">
-									<motion.button
-										whileHover={{
-											scale: 1.2,
-											rotate: 360,
-											transition: { duration: 2 },
+			<Element name="toolbox" className="relative" />
+			<div className="mx-5 mb-40 overflow-hidden rounded-xl  border-2 border-cyan-300 bg-cyan-100 px-4 pb-5 pt-6 text-gray-700 dark:border-0 dark:bg-gray-800 dark:text-white md:mx-10 md:px-8 md:pb-8">
+				<h3 className="cursor-default text-center text-2xl font-medium md:text-3xl">My Toolbox</h3>
+				<div className="mt-6 flex flex-col sm:flex-row">
+					<div className="mb-5 flex flex-row justify-between overflow-scroll rounded-xl bg-cyan-200 px-2 py-5 dark:bg-gray-700 sm:mb-0 sm:mr-8 sm:flex-col sm:overflow-visible md:px-5">
+						{columnHeaders.map((columnHeader) => {
+							return (
+								<Slide bottom key={columnHeader.name}>
+									<h4
+										className="mb-2 cursor-pointer whitespace-nowrap rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
+										onClick={() => {
+											setTools([...columnHeader.tools]);
 										}}
-										whileTap={{ scale: 0.9 }}
 									>
-										{tool.icon}
-									</motion.button>
-									<p className="text-center text-sm">{tool.name}</p>
-								</div>
-							</Roll>
-						);
-					})}
+										{columnHeader.name}
+									</h4>
+								</Slide>
+							);
+						})}
+					</div>
+					<div className="grid w-full grid-cols-2 rounded-xl bg-cyan-200 p-5 dark:bg-gray-700 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8  xl:grid-cols-10">
+						{tools.map((tool) => {
+							return (
+								<Roll right key={tool.index} cascade>
+									<div className="m-auto">
+										<motion.button
+											whileHover={{
+												scale: 1.2,
+												rotate: 360,
+												transition: { duration: 2 },
+											}}
+											whileTap={{ scale: 0.9 }}
+										>
+											{tool.icon}
+										</motion.button>
+										<p className="text-center text-sm">{tool.name}</p>
+									</div>
+								</Roll>
+							);
+						})}
+					</div>
 				</div>
 			</div>
-		</div>
 		</>
 	);
 }

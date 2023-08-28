@@ -8,7 +8,7 @@ export default function LandingPage() {
 				<h1 className="cursor-default py-2 text-3xl font-medium text-cyan-700 dark:text-cyan-600 sm:text-4xl md:text-5xl">
 					Chirag Aggarwal
 				</h1>
-				<h2 className="cursor-default py-2 text-xl sm:text-2xl">A Computer Science Nerd.</h2>
+				<h2 className="cursor-default py-2 text-xl sm:text-2xl">A Computer Science Nerd</h2>
 				<p className="cursor-default py-5 text-base leading-8 text-gray-600 dark:text-gray-400 md:text-lg">
 					Hi, I am a passionate computer science student from India🇮🇳 🇮🇳 <br />I like to learn new things and
 					build stuff.

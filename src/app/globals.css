@@ -12,3 +12,7 @@
 		-webkit-tap-highlight-color: transparent;
 	}
 }
+
+:root {
+	--cursor-color: #0891b2;
+}
