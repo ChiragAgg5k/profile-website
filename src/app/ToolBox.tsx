@@ -168,16 +168,18 @@ export default function ToolBox() {
 							return (
 								<Roll right key={tool.index} cascade>
 									<div className="m-auto">
-										<motion.button
-											whileHover={{
-												scale: 1.2,
-												rotate: 360,
-												transition: { duration: 2 },
-											}}
-											whileTap={{ scale: 0.9 }}
-										>
-											{tool.icon}
-										</motion.button>
+										<a>
+											<motion.button
+												whileHover={{
+													scale: 1.2,
+													rotate: 360,
+													transition: { duration: 2 },
+												}}
+												whileTap={{ scale: 0.9 }}
+											>
+												{tool.icon}
+											</motion.button>
+										</a>
 										<p className="text-center text-sm">{tool.name}</p>
 									</div>
 								</Roll>
