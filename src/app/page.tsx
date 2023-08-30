@@ -1,5 +1,5 @@
 'use client';
-import { ThemeProvider, useTheme } from 'next-themes';
+import { ThemeProvider } from 'next-themes';
 import NavBar from './NavBar';
 import LandingPage from './LandingPage';
 import ToolBox from './ToolBox';
@@ -23,7 +23,7 @@ export default function Home() {
 				<AnimatedCursor
 					innerSize={8}
 					outerSize={35}
-					innerScale={1}
+					innerScale={0}
 					outerScale={1.5}
 					outerAlpha={0}
 					innerStyle={{

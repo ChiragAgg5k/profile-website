@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Slide from 'react-reveal/Slide';
+import Fade from 'react-reveal/Fade';
 import { Element } from 'react-scroll';
 
 export default function Education() {
@@ -12,7 +12,7 @@ export default function Education() {
 				</h3>
 				<div className="mx-0 grid grid-cols-1 sm:grid-cols-2 md:mx-5 lg:grid-cols-4">
 					<div className="group m-4 flex justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700">
-						<Slide left cascade>
+						<Fade left cascade>
 							<div>
 								<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">2020</p>
 								<p className="my-1 text-xl font-medium">Class X</p>
@@ -32,10 +32,10 @@ export default function Education() {
 									className="hover:cursor-pointer"
 								/>
 							</div>
-						</Slide>
+						</Fade>
 					</div>
 					<div className="group m-4 flex justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700">
-						<Slide left>
+						<Fade left>
 							<div>
 								<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
 									2020-2022
@@ -57,10 +57,10 @@ export default function Education() {
 									className="hover:cursor-pointer"
 								/>
 							</div>
-						</Slide>
+						</Fade>
 					</div>
 					<div className="group m-4 flex justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500 dark:border-gray-800  dark:text-white dark:hover:border-cyan-700 sm:col-span-2">
-						<Slide left>
+						<Fade left>
 							<div>
 								<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
 									2022-2026
@@ -80,7 +80,7 @@ export default function Education() {
 								}}
 								className="object-contain hover:cursor-pointer"
 							/>
-						</Slide>
+						</Fade>
 					</div>
 					{/* </Slide> */}
 				</div>

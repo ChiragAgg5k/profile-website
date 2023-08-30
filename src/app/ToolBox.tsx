@@ -6,8 +6,7 @@ import { BsGit, BsAndroid2 } from 'react-icons/bs';
 import { BiLogoJavascript } from 'react-icons/bi';
 import { FcLinux } from 'react-icons/fc';
 import { FaDocker } from 'react-icons/fa';
-import Roll from 'react-reveal/Roll';
-import Slide from 'react-reveal/Slide';
+import Fade from 'react-reveal/Fade';
 import { motion } from 'framer-motion';
 import { Element } from 'react-scroll';
 
@@ -150,7 +149,7 @@ export default function ToolBox() {
 					<div className="mb-5 flex flex-row justify-between overflow-scroll rounded-xl bg-cyan-200 px-2 py-5 dark:bg-gray-700 sm:mb-0 sm:mr-8 sm:flex-col sm:overflow-visible md:px-5">
 						{columnHeaders.map((columnHeader) => {
 							return (
-								<Slide bottom key={columnHeader.name}>
+								<Fade bottom key={columnHeader.name}>
 									<h4
 										className="mb-2 cursor-pointer whitespace-nowrap rounded px-4 py-2 text-center hover:bg-cyan-500 hover:text-white dark:hover:bg-gray-600"
 										onClick={() => {
@@ -159,14 +158,14 @@ export default function ToolBox() {
 									>
 										{columnHeader.name}
 									</h4>
-								</Slide>
+								</Fade>
 							);
 						})}
 					</div>
 					<div className="grid w-full grid-cols-2 rounded-xl bg-cyan-200 p-5 dark:bg-gray-700 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8  xl:grid-cols-10">
 						{tools.map((tool) => {
 							return (
-								<Roll right key={tool.index} cascade>
+								<Fade right key={tool.index} cascade>
 									<div className="m-auto">
 										<a>
 											<motion.button
@@ -182,7 +181,7 @@ export default function ToolBox() {
 										</a>
 										<p className="text-center text-sm">{tool.name}</p>
 									</div>
-								</Roll>
+								</Fade>
 							);
 						})}
 					</div>
