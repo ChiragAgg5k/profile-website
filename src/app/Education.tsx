@@ -6,7 +6,7 @@ export default function Education() {
 	return (
 		<>
 			<Element name="education" className="relative" />
-			<div className="mb-40 mt-20 sm:mt-0">
+			<div className="mb-48 mt-20 sm:mt-0">
 				<h3 className="mb-16 cursor-default text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
 					Education
 				</h3>

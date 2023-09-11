@@ -10,9 +10,9 @@ If you are completely new to web.
 
 You need to have the following installed on your computer:
 
-- [Node.js](https://nodejs.org/en/)
-- [npm](https://www.npmjs.com/) or (optional) [pnpm](https://pnpm.io/)
-- [Git](https://git-scm.com/)
+-   [Node.js](https://nodejs.org/en/)
+-   [npm](https://www.npmjs.com/) or (optional) [pnpm](https://pnpm.io/)
+-   [Git](https://git-scm.com/)
 
 ## Step 1: Create a Next.js project
 
@@ -25,11 +25,11 @@ npx create-next-app@latest
 
 Options to choose:
 
-What is your project named?  `portfolio`
+What is your project named? `portfolio`
 Would you like to use TypeScript? `Yes`
 Would you like to use ESLint? `Yes`
-Would you like to use Tailwind CSS?  `Yes`
-Would you like to use `src/` directory?  `No`
+Would you like to use Tailwind CSS? `Yes`
+Would you like to use `src/` directory? `No`
 Would you like to use App Router? (recommended) `Yes`
 Would you like to customize the default import alias? `No`
 

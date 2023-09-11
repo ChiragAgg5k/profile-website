@@ -30,10 +30,16 @@ export default function LandingPage() {
 				<h1 className="cursor-default py-2 text-3xl font-medium text-cyan-700 dark:text-cyan-600 sm:text-4xl md:text-5xl">
 					Chirag Aggarwal
 				</h1>
-				<TextTransition springConfig={presets.default} className="flex items-center justify-center">
+
+				{mounted ? (
+					<TextTransition springConfig={presets.default} className="flex items-center justify-center">
+						<p className="cursor-default py-2 text-xl sm:text-2xl">{titles[titleIndex % titles.length]}</p>
+					</TextTransition>
+				) : (
 					<p className="cursor-default py-2 text-xl sm:text-2xl">{titles[titleIndex % titles.length]}</p>
-				</TextTransition>
-				{mounted && (
+				)}
+
+				{mounted ? (
 					<motion.h3
 						initial="hidden"
 						animate="visible"
@@ -84,6 +90,11 @@ export default function LandingPage() {
 							);
 						})}
 					</motion.h3>
+				) : (
+					<h3 className="cursor-default py-5 text-base leading-8 text-gray-600 dark:text-gray-400 md:text-lg">
+						{' '}
+						<br />{' '}
+					</h3>
 				)}
 				<div className="flex justify-center gap-16 py-3 text-5xl text-gray-600">
 					<a
