@@ -13,7 +13,7 @@ function navLinks() {
 				<Link
 					to="about-me"
 					smooth={true}
-					offset={-120}
+					offset={-160}
 					duration={500}
 					onClick={() => {
 						const navbar = document.querySelector('#toggle-navbar');
@@ -32,7 +32,7 @@ function navLinks() {
 				<Link
 					to="education"
 					smooth={true}
-					offset={-120}
+					offset={-200}
 					duration={500}
 					onClick={() => {
 						const navbar = document.querySelector('#toggle-navbar');
@@ -51,7 +51,7 @@ function navLinks() {
 				<Link
 					to="toolbox"
 					smooth={true}
-					offset={-120}
+					offset={-200}
 					duration={500}
 					onClick={() => {
 						const navbar = document.querySelector('#toggle-navbar');

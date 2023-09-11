@@ -97,12 +97,23 @@ export default function Projects() {
 			hover_gif_dark: '/project_gifs/dark/weatherly.gif',
 			hover_gif_light: '/project_gifs/light/weatherly.gif',
 		},
+		{
+			index: 5,
+			image: '/project_thumbnails/light/bug-squash.png',
+			image_dark: '/project_thumbnails/dark/bug-squash.png',
+			description: 'Web Application',
+			name: 'Bug Squash',
+			demo_link: 'https://bug-squash.co',
+			github_link: 'https://github.com/ChiragAgg5k/bug-squash',
+			hover_gif_dark: '/project_gifs/dark/bug-squash.gif',
+			hover_gif_light: '/project_gifs/light/bug-squash.gif',
+		},
 	];
 
 	return (
 		<>
 			<Element name="projects" className="relative" />
-			<div className="mb-40">
+			<div className="mb-48">
 				<h1 className="mb-16 cursor-default text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
 					Projects
 				</h1>
@@ -111,7 +122,7 @@ export default function Projects() {
 						return (
 							<div
 								key={project.index}
-								className={`group m-4 rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700`}
+								className={`group m-6 rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700`}
 							>
 								<Fade bottom>
 									<div className="relative">
