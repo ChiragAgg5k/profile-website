@@ -2,6 +2,14 @@ import { AiOutlineMail, AiOutlineWhatsApp, AiOutlineLink } from 'react-icons/ai'
 import emailjs from '@emailjs/browser';
 import { FormEvent, useRef, useState } from 'react';
 
+const validateEmail = (email: string) => {
+	return String(email)
+		.toLowerCase()
+		.match(
+			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		);
+};
+
 export default function ContactMe() {
 	const form = useRef<HTMLFormElement | null>(null);
 	const [disable, setDisable] = useState<boolean>(false);
@@ -9,6 +17,15 @@ export default function ContactMe() {
 
 	const submitForm = (e: FormEvent) => {
 		e.preventDefault();
+
+		if (validateEmail(form.current?.from_email.value) === null) {
+			setStatus('Invalid Email!');
+			setTimeout(() => {
+				setStatus('Submit');
+			}, 3000);
+			return;
+		}
+
 		setDisable(true);
 		setStatus('Sending...');
 

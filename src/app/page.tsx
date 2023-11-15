@@ -36,7 +36,7 @@ export default function Home() {
 			)}
 
 			<NavBar />
-			<main className="bg-white font-geologica text-gray-800 dark:bg-gray-900 dark:text-white">
+			<main className="bg-white text-gray-800 dark:bg-gray-900 dark:text-white">
 				{/* Front Section, covers entire screen */}
 				<section>
 					<LandingPage />

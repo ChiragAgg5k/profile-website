@@ -1,17 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-	body {
-		@apply font-geologica;
-
-		/*  Remove the blue highlight on tap */
-		-webkit-tap-highlight-color: transparent;
-	}
-}
 
 :root {
 	--cursor-color: #0891b2;
