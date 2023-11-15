@@ -4,7 +4,8 @@ import { Geologica } from 'next/font/google';
 
 const montserrat = Geologica({
 	subsets: ['latin'],
-	display: 'swap', adjustFontFallback: false
+	display: 'swap',
+	adjustFontFallback: false,
 });
 
 export const metadata = {

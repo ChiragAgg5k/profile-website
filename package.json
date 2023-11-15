@@ -33,7 +33,7 @@
 		"typescript": "5.2.2"
 	},
 	"devDependencies": {
-		"@cloudflare/next-on-pages": "^1.6.3",
+		"@cloudflare/next-on-pages": "^1.6.0",
 		"@types/node": "^20.9.0",
 		"@types/react-scroll": "^1.8.10",
 		"prettier": "^3.1.0",
