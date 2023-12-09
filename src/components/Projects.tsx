@@ -158,12 +158,12 @@ export default function Projects() {
 												onClick={
 													project.demo_link === '#'
 														? (e) => {
-															e.preventDefault();
-														}
+																e.preventDefault();
+														  }
 														: (e) => {
-															e.preventDefault();
-															window.open(project.demo_link, '_blank');
-														}
+																e.preventDefault();
+																window.open(project.demo_link, '_blank');
+														  }
 												}
 											>
 												{project.demo_link === '#' ? '' : 'Visit'}
@@ -174,8 +174,7 @@ export default function Projects() {
 												title="Github Link"
 												target="_blank"
 											>
-												<AiFillGithub
-													className="inline-block text-4xl text-black transition delay-75 ease-in-out hover:scale-110 dark:text-white" />
+												<AiFillGithub className="inline-block text-4xl text-black transition delay-75 ease-in-out hover:scale-110 dark:text-white" />
 											</Link>
 										</div>
 									</div>

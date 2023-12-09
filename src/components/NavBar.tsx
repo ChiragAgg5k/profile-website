@@ -146,7 +146,7 @@ export default function NavBar() {
 	return (
 		<>
 			<nav
-				className="sticky top-0 z-10 w-full border-b-2 border-cyan-400 bg-cyan-100 px-8 py-8 transition-all ease-in-out text-gray-700 dark:text-white dark:border-0 dark:bg-gray-800 md:fixed"
+				className="sticky top-0 z-10 w-full border-b-2 border-cyan-400 bg-cyan-100 px-8 py-8 text-gray-700 transition-all ease-in-out dark:border-0 dark:bg-gray-800 dark:text-white md:fixed"
 				id="horizontal-navbar"
 			>
 				<div className="flex w-full items-center justify-between">
@@ -159,7 +159,7 @@ export default function NavBar() {
 					</button>
 					<div className="flex">
 						<AiOutlineMenu
-							className="mr-4 block text-2xl hover:cursor-pointer md:hidden hover:text-cyan-600 dark:hover:text-cyan-500 transition-all duration-300 ease-in-out"
+							className="mr-4 block text-2xl transition-all duration-300 ease-in-out hover:cursor-pointer hover:text-cyan-600 dark:hover:text-cyan-500 md:hidden"
 							onClick={() => {
 								const navbar = document.querySelector('#toggle-navbar');
 								const horizontalNavbar = document.querySelector('#horizontal-navbar');
@@ -216,10 +216,10 @@ export default function NavBar() {
 						}
 					</div>
 				</div>
-				<div className={`w-full flex items-center justify-center`}>
-				<ul id="toggle-navbar" className="hidden text-center w-fit text-sm space-y-2">
-					{navLinks()}
-				</ul>
+				<div className={`flex w-full items-center justify-center`}>
+					<ul id="toggle-navbar" className="hidden w-fit space-y-2 text-center text-sm">
+						{navLinks()}
+					</ul>
 				</div>
 			</nav>
 		</>
