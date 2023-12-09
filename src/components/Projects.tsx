@@ -145,7 +145,6 @@ export default function Projects() {
 											className={`mb-4 h-auto max-h-56 w-full rounded-lg object-contain`}
 										/>
 									</div>
-
 									<div>
 										<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
 											{project.description}
@@ -159,12 +158,12 @@ export default function Projects() {
 												onClick={
 													project.demo_link === '#'
 														? (e) => {
-																e.preventDefault();
-														  }
+															e.preventDefault();
+														}
 														: (e) => {
-																e.preventDefault();
-																window.open(project.demo_link, '_blank');
-														  }
+															e.preventDefault();
+															window.open(project.demo_link, '_blank');
+														}
 												}
 											>
 												{project.demo_link === '#' ? '' : 'Visit'}
@@ -175,7 +174,8 @@ export default function Projects() {
 												title="Github Link"
 												target="_blank"
 											>
-												<AiFillGithub className="inline-block text-4xl text-black transition delay-75 ease-in-out hover:scale-110 dark:text-white" />
+												<AiFillGithub
+													className="inline-block text-4xl text-black transition delay-75 ease-in-out hover:scale-110 dark:text-white" />
 											</Link>
 										</div>
 									</div>
@@ -195,8 +195,9 @@ export default function Projects() {
 					setModalImg(undefined);
 				}}
 			>
-				<div className="relative h-full w-full sm:m-10 lg:m-20">
-					<Image id="modal-img" fill alt="" src={modalImg ? modalImg : ''} className="object-contain" />
+				<div className="flex items-center justify-center sm:m-10 lg:m-20">
+					{/* eslint-disable @next/next/no-img-element */}
+					<img id="modal-img" alt="" src={modalImg ? modalImg : ''} className="max-h-[90dvh]" />
 				</div>
 			</div>
 		</>

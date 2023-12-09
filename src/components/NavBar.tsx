@@ -9,7 +9,7 @@ import { animateScroll, Link } from 'react-scroll';
 function navLinks() {
 	return (
 		<>
-			<li className="scroll-link mb-1 mt-4 sm:my-0 sm:mr-4">
+			<li className="scroll-link mt-4 sm:my-0 sm:mr-4">
 				<Link
 					to="about-me"
 					smooth={true}
@@ -28,7 +28,7 @@ function navLinks() {
 				</Link>
 			</li>
 
-			<li className="scroll-link my-1 sm:my-0 sm:mr-4">
+			<li className="scroll-link sm:my-0 sm:mr-4">
 				<Link
 					to="education"
 					smooth={true}
@@ -85,7 +85,7 @@ function navLinks() {
 				</Link>
 			</li>
 
-			<li className="scroll-link my-1 sm:my-0 sm:mr-6">
+			<li className="scroll-link my-1 sm:my-0 sm:mr-4">
 				<button
 					onClick={() => {
 						animateScroll.scrollToBottom();
@@ -146,20 +146,20 @@ export default function NavBar() {
 	return (
 		<>
 			<nav
-				className="sticky top-0 z-10 w-full border-b-2 border-cyan-400 bg-cyan-100 px-8 py-8 transition-all ease-in-out dark:border-0 dark:bg-gray-800 md:fixed"
+				className="sticky top-0 z-10 w-full border-b-2 border-cyan-400 bg-cyan-100 px-8 py-8 transition-all ease-in-out text-gray-700 dark:text-white dark:border-0 dark:bg-gray-800 md:fixed"
 				id="horizontal-navbar"
 			>
 				<div className="flex w-full items-center justify-between">
 					<button
 						onClick={() => animateScroll.scrollToTop()}
-						className="group text-lg text-gray-700 transition duration-300 dark:text-white sm:text-xl"
+						className="group text-lg transition duration-300 sm:text-xl"
 					>
 						ChiragAgg5k
 						<span className="block h-0.5 max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
 					</button>
 					<div className="flex">
 						<AiOutlineMenu
-							className="mr-4 block text-2xl hover:cursor-pointer md:hidden"
+							className="mr-4 block text-2xl hover:cursor-pointer md:hidden hover:text-cyan-600 dark:hover:text-cyan-500 transition-all duration-300 ease-in-out"
 							onClick={() => {
 								const navbar = document.querySelector('#toggle-navbar');
 								const horizontalNavbar = document.querySelector('#horizontal-navbar');
@@ -179,7 +179,7 @@ export default function NavBar() {
 						{
 							// Only show dark mode toggle if mounted and can be toggled
 							mounted && (
-								<button>
+								<button className={`ml-2`}>
 									{theme === 'dark' ? (
 										<motion.div
 											whileHover={{ scale: 1.2, rotate: 90 }}
@@ -216,9 +216,11 @@ export default function NavBar() {
 						}
 					</div>
 				</div>
-				<ul id="toggle-navbar" className="hidden text-center text-sm">
+				<div className={`w-full flex items-center justify-center`}>
+				<ul id="toggle-navbar" className="hidden text-center w-fit text-sm space-y-2">
 					{navLinks()}
 				</ul>
+				</div>
 			</nav>
 		</>
 	);

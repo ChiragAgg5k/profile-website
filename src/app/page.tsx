@@ -1,14 +1,14 @@
 'use client';
 import { ThemeProvider } from 'next-themes';
-import NavBar from './NavBar';
-import LandingPage from './LandingPage';
-import ToolBox from './ToolBox';
-import Projects from './Projects';
-import ContactMe from './ContactMe';
-import Education from './Education';
-import AboutMe from './AboutMe';
 import AnimatedCursor from 'react-animated-cursor';
 import { useEffect, useState } from 'react';
+import NavBar from '@/components/NavBar';
+import LandingPage from '@/components/LandingPage';
+import AboutMe from '@/components/AboutMe';
+import Education from '@/components/Education';
+import ToolBox from '@/components/ToolBox';
+import Projects from '@/components/Projects';
+import ContactMe from '@/components/ContactMe';
 
 export default function Home() {
 	const [mounted, setMounted] = useState(false);
