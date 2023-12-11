@@ -7,14 +7,14 @@ export default function Education() {
 		<>
 			<Element name="education" className="relative" />
 			<div className="mb-48 mt-20 sm:mt-0">
-				<h3 className="mb-16 cursor-default text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
+				<h3 className="mb-16 text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
 					Education
 				</h3>
 				<div className="mx-0 grid grid-cols-1 sm:grid-cols-2 md:mx-5 lg:grid-cols-4">
 					<div className="group m-4 flex justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700">
 						<Fade left cascade>
 							<div>
-								<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">2020</p>
+								<p className="mb-2 text-base text-cyan-600 dark:text-cyan-500">2020</p>
 								<p className="my-1 text-xl font-medium">Class X</p>
 								<p className="my-1 text-sm font-medium">CBSE</p>
 								<p className="text-sm">Grade: 91.2% </p>
@@ -37,7 +37,7 @@ export default function Education() {
 					<div className="group m-4 flex justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700">
 						<Fade left>
 							<div>
-								<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
+								<p className="mb-2 text-base text-cyan-600 dark:text-cyan-500">
 									2020-2022
 								</p>
 								<p className="my-1 text-xl font-medium">Class XII</p>
@@ -62,7 +62,7 @@ export default function Education() {
 					<div className="group m-4 flex justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500 dark:border-gray-800  dark:text-white dark:hover:border-cyan-700 sm:col-span-2">
 						<Fade left>
 							<div>
-								<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
+								<p className="mb-2 text-base text-cyan-600 dark:text-cyan-500">
 									2022-2026
 								</p>
 								<p className="my-1 font-medium sm:text-xl">B.Tech in Computer Science</p>

@@ -114,7 +114,7 @@ export default function Projects() {
 		<>
 			<Element name="projects" className="relative" />
 			<div className="mb-48">
-				<h1 className="mb-16 cursor-default text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
+				<h1 className="mb-16 text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
 					Projects
 				</h1>
 				<div className="mx-0 grid grid-cols-1 grid-rows-2 sm:grid-cols-2 md:mx-4 lg:grid-cols-3">
@@ -122,10 +122,10 @@ export default function Projects() {
 						return (
 							<div
 								key={project.index}
-								className={`group m-6 rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700`}
+								className={`group m-6 flex items-center flex-col justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700`}
 							>
 								<Fade bottom>
-									<div className="relative">
+									<div className="relative flex items-center justify-center h-full">
 										<Image
 											src={theme === 'light' ? project.image : project.image_dark}
 											alt={project.name}
@@ -145,36 +145,38 @@ export default function Projects() {
 											className={`mb-4 h-auto max-h-56 w-full rounded-lg object-contain`}
 										/>
 									</div>
-									<div>
-										<p className="mb-2 cursor-default text-base text-cyan-600 dark:text-cyan-500">
+									<div className={`w-full`}>
+										<p className="mb-2 text-base text-cyan-600 dark:text-cyan-500">
 											{project.description}
 										</p>
 										<p className="my-1 text-xl font-medium">{project.name}</p>
 										<div className="flex justify-between">
-											<a
-												className="text-sm  hover:underline"
+											<Link
+												className="text-sm"
 												href={project.demo_link}
 												aria-label="Visit Demo"
 												onClick={
 													project.demo_link === '#'
 														? (e) => {
-																e.preventDefault();
-														  }
+															e.preventDefault();
+														}
 														: (e) => {
-																e.preventDefault();
-																window.open(project.demo_link, '_blank');
-														  }
+															e.preventDefault();
+															window.open(project.demo_link, '_blank');
+														}
 												}
 											>
 												{project.demo_link === '#' ? '' : 'Visit'}
-											</a>
+												<span
+													className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
+											</Link>
 											<Link
 												href={project.github_link}
 												rel="noreferrer"
 												title="Github Link"
 												target="_blank"
 											>
-												<AiFillGithub className="inline-block text-4xl text-black transition delay-75 ease-in-out hover:scale-110 dark:text-white" />
+												<AiFillGithub className="inline-block text-4xl text-black transition delay-75 ease-in-out hover:scale-125 dark:text-white" />
 											</Link>
 										</div>
 									</div>

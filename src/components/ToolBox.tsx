@@ -144,7 +144,7 @@ export default function ToolBox() {
 		<>
 			<Element name="toolbox" className="relative" />
 			<div className="mx-5 mb-48 overflow-hidden rounded-xl  border-2 border-cyan-300 bg-cyan-100 px-4 pb-5 pt-6 text-gray-700 dark:border-0 dark:bg-gray-800 dark:text-white md:mx-10 md:px-8 md:pb-8">
-				<h3 className="cursor-default text-center text-2xl font-medium md:text-3xl">My Toolbox</h3>
+				<h3 className="text-center text-2xl font-medium md:text-3xl">My Toolbox</h3>
 				<div className="mt-6 flex flex-col sm:flex-row">
 					<div className="mb-5 flex flex-row justify-between overflow-scroll rounded-xl bg-cyan-200 px-2 py-5 dark:bg-gray-700 sm:mb-0 sm:mr-8 sm:flex-col sm:overflow-visible md:px-5">
 						{columnHeaders.map((columnHeader) => {
