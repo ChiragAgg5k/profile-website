@@ -37,9 +37,7 @@ export default function Education() {
 					<div className="group m-4 flex justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700">
 						<Fade left>
 							<div>
-								<p className="mb-2 text-base text-cyan-600 dark:text-cyan-500">
-									2020-2022
-								</p>
+								<p className="mb-2 text-base text-cyan-600 dark:text-cyan-500">2020-2022</p>
 								<p className="my-1 text-xl font-medium">Class XII</p>
 								<p className="my-1 text-sm font-medium">Science</p>
 								<p className="text-sm">Grade: 89.5% </p>
@@ -62,9 +60,7 @@ export default function Education() {
 					<div className="group m-4 flex justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500 dark:border-gray-800  dark:text-white dark:hover:border-cyan-700 sm:col-span-2">
 						<Fade left>
 							<div>
-								<p className="mb-2 text-base text-cyan-600 dark:text-cyan-500">
-									2022-2026
-								</p>
+								<p className="mb-2 text-base text-cyan-600 dark:text-cyan-500">2022-2026</p>
 								<p className="my-1 font-medium sm:text-xl">B.Tech in Computer Science</p>
 								<p className="my-1 text-sm font-medium">Bennett University</p>
 								<p className="text-sm">CGPA: 9.66</p>

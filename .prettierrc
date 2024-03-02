@@ -4,7 +4,6 @@
 	"tabWidth": 4,
 	"useTabs": true,
 	"semi": true,
-	"editor.formatOnSave": true,
 	"singleQuote": true,
 	"plugins": ["prettier-plugin-tailwindcss"]
 }

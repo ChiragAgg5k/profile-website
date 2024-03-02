@@ -122,10 +122,10 @@ export default function Projects() {
 						return (
 							<div
 								key={project.index}
-								className={`group m-6 flex items-center flex-col justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700`}
+								className={`group m-6 flex flex-col items-center justify-between rounded-xl border-2 border-cyan-200 p-5 text-gray-700 hover:border-cyan-500  dark:border-gray-800 dark:text-white dark:hover:border-cyan-700`}
 							>
 								<Fade bottom>
-									<div className="relative flex items-center justify-center h-full">
+									<div className="relative flex h-full items-center justify-center">
 										<Image
 											src={theme === 'light' ? project.image : project.image_dark}
 											alt={project.name}
@@ -142,6 +142,7 @@ export default function Projects() {
 											alt={project.name}
 											width={300}
 											height={224}
+											unoptimized={true}
 											className={`mb-4 h-auto max-h-56 w-full rounded-lg object-contain`}
 										/>
 									</div>
@@ -158,17 +159,16 @@ export default function Projects() {
 												onClick={
 													project.demo_link === '#'
 														? (e) => {
-															e.preventDefault();
-														}
+																e.preventDefault();
+															}
 														: (e) => {
-															e.preventDefault();
-															window.open(project.demo_link, '_blank');
-														}
+																e.preventDefault();
+																window.open(project.demo_link, '_blank');
+															}
 												}
 											>
 												{project.demo_link === '#' ? '' : 'Visit'}
-												<span
-													className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
+												<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
 											</Link>
 											<Link
 												href={project.github_link}
