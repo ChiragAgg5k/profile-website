@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { AiFillGithub, AiFillCloseCircle } from 'react-icons/ai';
+import { AiFillGithub } from 'react-icons/ai';
 import Fade from 'react-reveal/Fade';
 import { useTheme } from 'next-themes';
 import { Element } from 'react-scroll';
@@ -114,9 +114,9 @@ export default function Projects() {
 		<>
 			<Element name="projects" className="relative" />
 			<div className="mb-48">
-				<h1 className="mb-16 text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
+				<h2 className="mb-16 text-center text-4xl font-medium text-gray-800 transition duration-300 dark:text-white lg:mb-20 xl:mb-24">
 					Projects
-				</h1>
+				</h2>
 				<div className="mx-0 grid grid-cols-1 grid-rows-2 sm:grid-cols-2 md:mx-4 lg:grid-cols-3">
 					{projects.map((project) => {
 						return (

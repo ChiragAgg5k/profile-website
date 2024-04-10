@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { TbBrandCpp, TbBrandNextjs, TbBrandTypescript } from 'react-icons/tb';
-import { DiJava, DiPython, DiMongodb, DiPostgresql } from 'react-icons/di';
-import { SiDjango, SiExpress, SiMysql, SiFirebase, SiFlutter, SiSqlite } from 'react-icons/si';
-import { BsGit, BsAndroid2 } from 'react-icons/bs';
+import { DiJava, DiMongodb, DiPostgresql, DiPython } from 'react-icons/di';
+import { SiDjango, SiExpress, SiFirebase, SiFlutter, SiMysql, SiSqlite } from 'react-icons/si';
+import { FaRust } from "react-icons/fa";
+import { BsAndroid2, BsGit } from 'react-icons/bs';
 import { BiLogoJavascript } from 'react-icons/bi';
 import { FcLinux } from 'react-icons/fc';
 import { FaDocker } from 'react-icons/fa';
@@ -42,6 +43,11 @@ const languageTools: Tool[] = [
 		name: 'TypeScript',
 		icon: <TbBrandTypescript className="m-4 text-6xl text-blue-600" />,
 	},
+	{
+		index: 5,
+		name: 'Rust',
+		icon: <FaRust className="m-4 text-6xl text-orange-600" />,
+	}
 ];
 
 const frameworkTools: Tool[] = [

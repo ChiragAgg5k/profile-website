@@ -1,4 +1,4 @@
-import { AiFillLinkedin, AiFillGithub } from 'react-icons/ai';
+import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
 import { SiLeetcode } from 'react-icons/si';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
@@ -33,10 +33,10 @@ export default function LandingPage() {
 
 				{mounted ? (
 					<TextTransition springConfig={presets.default} className="flex items-center justify-center">
-						<p className="py-2 text-xl sm:text-2xl">{titles[titleIndex % titles.length]}</p>
+						<p className="py-2 text-xl font-medium sm:text-2xl">{titles[titleIndex % titles.length]}</p>
 					</TextTransition>
 				) : (
-					<p className="py-2 text-xl sm:text-2xl">{titles[titleIndex % titles.length]}</p>
+					<p className="py-2 text-xl font-medium sm:text-2xl">{titles[titleIndex % titles.length]}</p>
 				)}
 
 				{mounted ? (
@@ -91,10 +91,10 @@ export default function LandingPage() {
 						})}
 					</motion.h3>
 				) : (
-					<h3 className="py-5 text-base leading-8 text-gray-600 dark:text-gray-400 md:text-lg">
+					<div className="py-5 text-base leading-8 text-gray-600 dark:text-gray-400 md:text-lg">
 						{' '}
 						<br />{' '}
-					</h3>
+					</div>
 				)}
 				<div className="flex justify-center gap-16 py-3 text-5xl text-gray-600">
 					<a

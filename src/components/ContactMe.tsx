@@ -1,4 +1,4 @@
-import { AiOutlineMail, AiOutlineWhatsApp, AiOutlineLink } from 'react-icons/ai';
+import { AiOutlineLink, AiOutlineMail, AiOutlineWhatsApp } from 'react-icons/ai';
 import emailjs from '@emailjs/browser';
 import { FormEvent, useRef, useState } from 'react';
 import Link from 'next/link';

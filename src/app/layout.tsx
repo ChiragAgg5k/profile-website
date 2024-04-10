@@ -1,8 +1,9 @@
 import './globals.css';
 import { Analytics } from '@vercel/analytics/react';
 import { Geologica } from 'next/font/google';
+import React from 'react';
 
-const montserrat = Geologica({
+const geologica = Geologica({
 	subsets: ['latin'],
 	display: 'swap',
 	adjustFontFallback: false,
@@ -10,17 +11,14 @@ const montserrat = Geologica({
 
 export const metadata = {
 	title: 'Chirag Aggarwal',
-	description: "Hi There! I'm a student at Bennett University in Greater Noida, India...",
+	description:
+		"Showcasing the projects, skills, and achievements of Chirag Aggarwal, a talented computer science engineering student from India. Explore Chirag Aggarwal's expertise in programming, problem-solving, and technical development through this carefully curated portfolio.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning={true}>
-			<head>
-				<title>{metadata.title}</title>
-				<meta name="description" content={metadata.description} />
-			</head>
-			<body suppressHydrationWarning={true} className={montserrat.className}>
+			<body suppressHydrationWarning={true} className={geologica.className}>
 				{children}
 				<Analytics />
 			</body>

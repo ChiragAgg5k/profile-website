@@ -1,10 +1,13 @@
 # Learn.md
 
-So, you want to learn how to create this stunning portfolio website yourself? Well first of all its not stunning, but I appreciate the compliment. Second of all, you've come to the right place! This is a step-by-step guide on how to create this website from scratch.
+So, you want to learn how to create this stunning portfolio website yourself? Well first of all its not stunning, but I
+appreciate the compliment. Second of all, you've come to the right place! This is a step-by-step guide on how to create
+this website from scratch.
 
 ## Prerequisites
 
-Although you can create this website with no prior knowledge of React, Next.js, Tailwind CSS, or TypeScript, I would recommend having some basic knowledge of these technologies before you start.
+Although you can create this website with no prior knowledge of React, Next.js, Tailwind CSS, or TypeScript, I would
+recommend having some basic knowledge of these technologies before you start.
 
 If you are completely new to web.
 
@@ -48,4 +51,6 @@ npm run dev
 # pnpm run dev
 ```
 
-Now you have a basic Next.js project running on `http://localhost:3000/`. You can open this URL in your browser to see the website. You can now start tinkering with the code to make it your own! Take inspiration from the code in this repository, but remember to always experiment and try new things!
+Now you have a basic Next.js project running on `http://localhost:3000/`. You can open this URL in your browser to see
+the website. You can now start tinkering with the code to make it your own! Take inspiration from the code in this
+repository, but remember to always experiment and try new things!
