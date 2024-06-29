@@ -1,9 +1,10 @@
 import "@/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
 import { TRPCReactProvider } from "@/trpc/react";
-import React from 'react';
+import React from "react";
+import Navbar from "@/components/navbar";
 
 export const metadata = {
   title: "Create T3 App",
@@ -21,14 +22,17 @@ export default function RootLayout({
       <body>
         <TRPCReactProvider>
           <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
           >
-          {children}
+            <main className={`flex h-[100vh] flex-col p-2`}>
+              <Navbar />
+              {children}
+            </main>
           </ThemeProvider>
-          </TRPCReactProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );
