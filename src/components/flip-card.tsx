@@ -12,7 +12,7 @@ function CardBack() {
 
 export default function FlipCard() {
   return (
-    <div className="card relative  overflow-hidden rounded-xl border border-foreground/50 text-white transition-all duration-1000">
+    <div className="card relative  overflow-hidden rounded-xl border border-foreground/20 text-white transition-all duration-1000">
       <CardFront />
       <CardBack />
     </div>

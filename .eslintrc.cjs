@@ -28,6 +28,9 @@ const config = {
         "argsIgnorePattern": "^_"
       }
     ],
+    "@typescript-eslint/ban-ts-comment": [
+      "warn"
+    ],
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",
