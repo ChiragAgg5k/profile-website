@@ -33,9 +33,9 @@ export default function Laptop() {
       <Canvas
         className="h-full w-full"
         camera={{
-          position: [2.5, 2, 5],
+          position: [5, 1.5, 5],
           fov: 45,
-          zoom: 1.5,
+          zoom: 2,
         }}
       >
         <OrbitControls />

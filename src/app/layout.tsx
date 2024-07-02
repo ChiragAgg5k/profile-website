@@ -4,10 +4,12 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { TRPCReactProvider } from "@/trpc/react";
 import React from "react";
 import Navbar from "@/components/navbar";
-import { Coda } from "next/font/google";
+import { VT323 } from "next/font/google";
+import CustomCursor from "@/components/custom-cursor";
 
-const coda = Coda({
-  weight: ["400", "800"],
+const vt323 = VT323({
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata = {
@@ -22,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={coda.className}>
-      <body>
+    <html lang="en" className={vt323.className}>
+      <body className={`sm:cursor-none`}>
         <TRPCReactProvider>
           <ThemeProvider
             attribute="class"
@@ -35,6 +37,7 @@ export default function RootLayout({
               <Navbar />
               {children}
             </main>
+            <CustomCursor />
           </ThemeProvider>
         </TRPCReactProvider>
       </body>
