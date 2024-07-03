@@ -84,3 +84,39 @@
 .card-back {
     transform: rotateY(180deg);
 }
+
+::view-transition-group(root) {
+    animation-duration: 0.7s;
+    animation-timing-function: var(--expo-out);
+}
+
+::view-transition-new(root) {
+    animation-name: reveal-light;
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+    animation: none;
+    z-index: -1;
+}
+.dark::view-transition-new(root) {
+    animation-name: reveal-dark;
+}
+
+@keyframes reveal-dark {
+    from {
+        clip-path: polygon(50% -71%, -50% 71%, -50% 71%, 50% -71%);
+    }
+    to {
+        clip-path: polygon(50% -71%, -50% 71%, 50% 171%, 171% 50%);
+    }
+}
+
+@keyframes reveal-light {
+    from {
+        clip-path: polygon(171% 50%, 50% 171%, 50% 171%, 171% 50%);
+    }
+    to {
+        clip-path: polygon(171% 50%, 50% 171%, -50% 71%, 50% -71%);
+    }
+}

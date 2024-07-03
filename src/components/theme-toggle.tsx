@@ -3,52 +3,38 @@
 import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const switchTheme = () => {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className={`rounded-full p-2`}>
-          <Sun
-            className={`
+    <button
+      className={` rounded-full p-2`}
+      onClick={() => {
+        // @ts-ignore
+        if (!document.startViewTransition) switchTheme();
+        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        document.startViewTransition(switchTheme);
+      }}
+    >
+      <Sun
+        className={`
           	hidden h-[20px] w-[20px] transition-transform duration-300 hover:rotate-180 dark:block
           `}
-          />
-          <Moon
-            className={`block h-[20px] w-[20px] transition-transform
+      />
+      <Moon
+        className={`block h-[20px] w-[20px] transition-transform
            duration-300 hover:rotate-180 dark:hidden
           `}
-          />
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem
-          onClick={() => setTheme("light")}
-          className={`text-lg`}
-        >
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => setTheme("dark")}
-          className={`text-lg`}
-        >
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => setTheme("system")}
-          className={`text-lg`}
-        >
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+      />
+    </button>
   );
 }

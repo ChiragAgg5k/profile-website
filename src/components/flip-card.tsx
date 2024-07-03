@@ -18,7 +18,7 @@ export default function FlipCard({
   backgroundText?: string;
 }) {
   return (
-    <div className="card relative overflow-hidden rounded-xl border border-foreground/20 text-white transition-all duration-1000">
+    <div className="card relative overflow-hidden rounded-xl border border-foreground/20 text-2xl text-white transition-all duration-1000">
       <CardFront />
       <CardBack backgroundText={backgroundText} />
     </div>

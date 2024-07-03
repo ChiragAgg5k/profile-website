@@ -4,12 +4,12 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { TRPCReactProvider } from "@/trpc/react";
 import React from "react";
 import Navbar from "@/components/navbar";
-import { VT323 } from "next/font/google";
+import { Mukta } from "next/font/google";
 import CustomCursor from "@/components/custom-cursor";
 
-const vt323 = VT323({
+const mukta = Mukta({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["200", "300", "400", "500", "600", "700"],
 });
 
 export const metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={vt323.className}>
+    <html lang="en" className={mukta.className}>
       <body className={`sm:cursor-none`}>
         <TRPCReactProvider>
           <ThemeProvider
@@ -33,7 +33,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <main className={`flex h-[100vh] flex-col p-2`}>
+            <main className={`flex flex-col p-2 md:h-[100vh]`}>
               <Navbar />
               {children}
             </main>
