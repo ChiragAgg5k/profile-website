@@ -1,40 +1,53 @@
 "use client";
 
-import TypingAnimation from "@/components/magicui/typing-animation";
+import React, { useState, useEffect, ReactNode } from "react";
 import { VT323 } from "next/font/google";
-import GitHubCalendar from "react-github-calendar";
-import MouseTracker from "@/components/mouse-tracker";
-import { useState } from "react";
 import { useTheme } from "next-themes";
+import dynamic from "next/dynamic";
+
+const TypingAnimation = dynamic(
+  () => import("@/components/magicui/typing-animation"),
+  { ssr: false },
+);
+const GitHubCalendar = dynamic(() => import("react-github-calendar"), {
+  ssr: false,
+});
+
+const MouseTracker = dynamic(() => import("@/components/mouse-tracker"), {
+  ssr: false,
+});
 
 const vt323 = VT323({
   subsets: ["latin"],
   weight: ["400"],
 });
 
-export default function Hero() {
+const Hero: React.FC = () => {
   const [showMouseTracker, setShowMouseTracker] = useState<boolean>(false);
   const { theme } = useTheme();
+  const [isClient, setIsClient] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <>
-      <MouseTracker
-        offset={{
-          x: 12,
-          y: 12,
-        }}
-        show={showMouseTracker}
-      >
-        <p>About Me</p>
-      </MouseTracker>
+      {isClient && (
+        <MouseTracker
+          offset={{
+            x: 12,
+            y: 12,
+          }}
+          show={showMouseTracker}
+        >
+          <div>About Me</div>
+        </MouseTracker>
+      )}
       <div
         className={`rounded-xl border border-foreground/20`}
-        onMouseEnter={() => {
-          setShowMouseTracker(true);
-        }}
-        onMouseLeave={() => {
-          setShowMouseTracker(false);
-        }}
+        onMouseEnter={() => setShowMouseTracker(true)}
+        onMouseLeave={() => setShowMouseTracker(false)}
       >
         <div className={`p-8`}>
           <h1 className={`mb-4 text-7xl text-foreground ${vt323.className}`}>
@@ -55,12 +68,16 @@ export default function Hero() {
           />
         </div>
         <div className={`mx-8 mb-6 md:mb-0`}>
-          <GitHubCalendar
-            username="ChiragAgg5k"
-            colorScheme={theme === "dark" ? "dark" : "light"}
-          />
+          {isClient && (
+            <GitHubCalendar
+              username="ChiragAgg5k"
+              colorScheme={theme === "dark" ? "dark" : "light"}
+            />
+          )}
         </div>
       </div>
     </>
   );
-}
+};
+
+export default Hero;

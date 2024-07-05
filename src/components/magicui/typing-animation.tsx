@@ -36,7 +36,7 @@ export default function TypingAnimation({
   return (
     <h1
       className={cn(
-        "font-display text-xl font-light tracking-[-0.02em] drop-shadow-sm",
+        "font-display text-lg font-light tracking-[-0.02em] drop-shadow-sm",
         className,
       )}
     >

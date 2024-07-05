@@ -1,46 +1,57 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { createPortal } from "react-dom";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 
-const MouseTracker = ({
+interface MouseTrackerProps {
+  children: ReactNode;
+  offset: {
+    x: number;
+    y: number;
+  };
+  show: boolean;
+}
+
+interface Position {
+  x: number;
+  y: number;
+}
+
+const MouseTracker: React.FC<MouseTrackerProps> = ({
   children,
-  offset = { x: 0, y: 0 },
-  show = true,
-}: {
-  children: React.ReactNode;
-  offset?: { x: number; y: number };
-  show?: boolean;
+  offset,
+  show,
 }) => {
-  const element = useRef<HTMLDivElement | null>(null);
+  const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
 
   useEffect(() => {
-    function handler(
-      e: MouseEvent | React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ) {
-      if (element.current) {
-        const x = e.clientX + offset.x,
-          y = e.clientY + offset.y;
-        element.current.style.transform = `translate(${x}px, ${y}px)`;
-        element.current.style.visibility = "visible";
-      }
+    const updatePosition = (e: MouseEvent) => {
+      setPosition({ x: e.clientX + offset.x, y: e.clientY + offset.y });
+    };
+
+    if (show) {
+      window.addEventListener("mousemove", updatePosition);
     }
-    document.addEventListener("mousemove", handler);
-    return () => document.removeEventListener("mousemove", handler);
-  }, [offset.x, offset.y]);
 
-  if (typeof window === "undefined") {
-    return null;
-  }
+    return () => {
+      window.removeEventListener("mousemove", updatePosition);
+    };
+  }, [show, offset]);
 
-  return createPortal(
+  if (!show) return null;
+
+  return (
     <div
-      className={`pointer-events-none invisible fixed z-50 rounded-full border bg-background px-4 py-2 ${show ? "block" : "hidden"}`}
-      ref={element}
+      className={`rounded-full border bg-background px-4 py-2`}
+      style={{
+        position: "fixed",
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        pointerEvents: "none",
+        zIndex: 9999,
+      }}
     >
       {children}
-    </div>,
-    document.body,
+    </div>
   );
 };
 

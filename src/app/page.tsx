@@ -3,6 +3,8 @@ import Laptop from "@/components/Laptop";
 import Hero from "@/components/Hero";
 import Link from "next/link";
 import { GoArrowDownRight } from "react-icons/go";
+import ResumeRotate from "@/components/resume-rotate";
+import { Button } from "@/components/ui/button";
 
 export default async function Home() {
   return (
@@ -23,10 +25,14 @@ export default async function Home() {
         </div>
       </div>
       <div className={`grid h-1/3 grid-cols-2 gap-1 md:grid-cols-4`}>
-        <FlipCard backgroundText={`Projects`} />
-        <FlipCard backgroundText={`Experience`} />
-        <FlipCard backgroundText={`Skills`} />
-        <FlipCard backgroundText={`Contact`} />
+        <FlipCard back={`Projects`} />
+        <FlipCard
+          back={<ResumeRotate className={`opacity-70`} />}
+          front={<ResumeRotate />}
+          mouseText={`Experience`}
+        />
+        <FlipCard back={`Skills`} />
+        <FlipCard back={`Contact`} />
       </div>
     </div>
   );
