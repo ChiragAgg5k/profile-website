@@ -8,9 +8,7 @@ function CustomCursor() {
     y: number;
   }>({ x: 0, y: 0 });
 
-  const handleMouseMove = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent,
-  ) => {
+  const handleMouseMove = (e: MouseEvent) => {
     setPosition({ x: e.clientX, y: e.clientY });
   };
 

@@ -1,11 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-
-const MouseTracker = dynamic(() => import("@/components/mouse-tracker"), {
-  ssr: false,
-});
+import { useCursorStore } from "@/components/mouse-tracker";
 
 function CardFront({ front }: { front?: React.ReactNode }) {
   return (
@@ -32,36 +28,18 @@ export default function FlipCard({
   back?: React.ReactNode;
   mouseText?: string;
 }) {
-  const [showMouseTracker, setShowMouseTracker] = useState<boolean>(false);
-  const [isClient, setIsClient] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const { setContent } = useCursorStore();
 
   return (
-    <>
-      {isClient && (
-        <MouseTracker
-          offset={{
-            x: 12,
-            y: 12,
-          }}
-          show={showMouseTracker}
-        >
-          <div>{mouseText}</div>
-        </MouseTracker>
-      )}
-      <div
-        onMouseEnter={() => setShowMouseTracker(true)}
-        onMouseLeave={() => setShowMouseTracker(false)}
-        className={`min-h-54 w-full`}
-      >
-        <div className="card relative h-full w-full overflow-hidden rounded-xl border border-foreground/20 text-2xl text-white transition-all duration-1000">
-          <CardFront front={front} />
-          <CardBack back={back} />
-        </div>
+    <div
+      onMouseEnter={() => setContent(mouseText)}
+      onMouseLeave={() => setContent(null)}
+      className={`min-h-54 w-full`}
+    >
+      <div className="card relative h-full w-full overflow-hidden rounded-xl border border-foreground/20 text-2xl text-white transition-all duration-1000">
+        <CardFront front={front} />
+        <CardBack back={back} />
       </div>
-    </>
+    </div>
   );
 }

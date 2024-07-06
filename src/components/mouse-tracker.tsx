@@ -1,14 +1,13 @@
 "use client";
 
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect } from "react";
+import { create } from "zustand";
 
 interface MouseTrackerProps {
-  children: ReactNode;
   offset: {
     x: number;
     y: number;
   };
-  show: boolean;
 }
 
 interface Position {
@@ -16,12 +15,23 @@ interface Position {
   y: number;
 }
 
-const MouseTracker: React.FC<MouseTrackerProps> = ({
-  children,
-  offset,
-  show,
-}) => {
-  const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
+interface CursorStore {
+  content: ReactNode;
+  show: boolean;
+  setContent: (content: ReactNode) => void;
+  setShow: (show: boolean) => void;
+}
+
+const useCursorStore = create<CursorStore>((set) => ({
+  content: null,
+  show: true,
+  setContent: (content: ReactNode) => set({ content }),
+  setShow: (show: boolean) => set({ show }),
+}));
+
+const MouseTracker: React.FC<MouseTrackerProps> = ({ offset }) => {
+  const { content, show } = useCursorStore();
+  const [position, setPosition] = React.useState<Position>({ x: 0, y: 0 });
 
   useEffect(() => {
     const updatePosition = (e: MouseEvent) => {
@@ -50,9 +60,9 @@ const MouseTracker: React.FC<MouseTrackerProps> = ({
         zIndex: 9999,
       }}
     >
-      {children}
+      {content}
     </div>
   );
 };
 
-export default MouseTracker;
+export { MouseTracker, useCursorStore };

@@ -6,6 +6,7 @@ import React from "react";
 import Navbar from "@/components/navbar";
 import { Mukta } from "next/font/google";
 import CustomCursor from "@/components/custom-cursor";
+import { MouseTracker } from "@/components/mouse-tracker";
 
 const mukta = Mukta({
   subsets: ["latin"],
@@ -25,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={mukta.className}>
-      <body className={`sm:cursor-none`}>
+      <body>
         <TRPCReactProvider>
           <ThemeProvider
             attribute="class"
@@ -38,6 +39,12 @@ export default function RootLayout({
               {children}
             </main>
             <CustomCursor />
+            <MouseTracker
+              offset={{
+                x: 16,
+                y: 16,
+              }}
+            />
           </ThemeProvider>
         </TRPCReactProvider>
       </body>
