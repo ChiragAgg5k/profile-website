@@ -38,7 +38,7 @@ export default function Laptop() {
           zoom: 2,
         }}
       >
-        <OrbitControls />
+        <OrbitControls enableZoom={false} />
         <ambientLight intensity={4} />
         <pointLight position={[0, 5, 0]} intensity={1.5} />
         <MeshComponent />

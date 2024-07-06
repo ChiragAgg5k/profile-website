@@ -34,7 +34,7 @@ export default function FlipCard({
     <div
       onMouseEnter={() => setContent(mouseText)}
       onMouseLeave={() => setContent(null)}
-      className={`min-h-54 w-full`}
+      className={`w-full`}
     >
       <div className="card relative h-full w-full overflow-hidden rounded-xl border border-foreground/20 text-2xl text-white transition-all duration-1000">
         <CardFront front={front} />
