@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { useEffect, useState } from "react";
 import { VT323 } from "next/font/google";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
@@ -50,7 +50,11 @@ const Hero: React.FC = () => {
         onMouseLeave={() => setShowMouseTracker(false)}
       >
         <div className={`p-8`}>
-          <h1 className={`mb-4 text-7xl text-foreground ${vt323.className}`}>
+          <h1
+            className={`mb-4 text-7xl
+           text-foreground
+           ${vt323.className}`}
+          >
             Chirag
             <br />
             <div className={`mt-[-1rem]`}>Aggarwal</div>

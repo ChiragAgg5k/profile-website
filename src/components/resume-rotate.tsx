@@ -1,12 +1,9 @@
-import Image from "next/image";
-import dynamic from "next/dynamic";
+import Image from "next/legacy/image";
 
 export default function ResumeRotate({
   className = "",
-  showMouseTracker = false,
 }: {
   className?: string;
-  showMouseTracker?: boolean;
 }) {
   return (
     <div className={`flex w-full items-center justify-center ${className}`}>

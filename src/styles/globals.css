@@ -99,6 +99,7 @@
     animation: none;
     z-index: -1;
 }
+
 .dark::view-transition-new(root) {
     animation-name: reveal-dark;
 }

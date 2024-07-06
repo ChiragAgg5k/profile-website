@@ -4,7 +4,6 @@ import Hero from "@/components/Hero";
 import Link from "next/link";
 import { GoArrowDownRight } from "react-icons/go";
 import ResumeRotate from "@/components/resume-rotate";
-import { Button } from "@/components/ui/button";
 
 export default async function Home() {
   return (

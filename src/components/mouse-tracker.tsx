@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 
 interface MouseTrackerProps {
   children: ReactNode;
