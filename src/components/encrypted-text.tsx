@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const TARGET_TEXT = "ChiragAgg5k";
 const CYCLES_PER_LETTER = 2;
@@ -48,20 +49,22 @@ const EncryptedText = () => {
   };
 
   return (
-    <motion.button
-      whileHover={{
-        scale: 1.025,
-      }}
-      whileTap={{
-        scale: 0.975,
-      }}
-      onMouseEnter={scramble}
-      onMouseLeave={stopScramble}
-    >
-      <div className="relative z-10 flex items-center gap-2">
-        <span>{text}</span>
-      </div>
-    </motion.button>
+    <Link href={"/"}>
+      <motion.button
+        whileHover={{
+          scale: 1.025,
+        }}
+        whileTap={{
+          scale: 0.975,
+        }}
+        onMouseEnter={scramble}
+        onMouseLeave={stopScramble}
+      >
+        <div className="relative z-10 flex items-center gap-2">
+          <span>{text}</span>
+        </div>
+      </motion.button>
+    </Link>
   );
 };
 

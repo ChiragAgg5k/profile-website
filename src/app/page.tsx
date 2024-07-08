@@ -17,6 +17,7 @@ export default async function Home() {
         <FlipCard
           back={<ResumeRotate className={`opacity-70`} />}
           front={<ResumeRotate />}
+          redirect={`/resume`}
           mouseText={`Resume 📄`}
         />
         <FlipCard back={`Skills`} />

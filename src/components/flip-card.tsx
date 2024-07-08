@@ -1,21 +1,64 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { useCursorStore } from "@/components/mouse-tracker";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
 
-function CardFront({ front }: { front?: React.ReactNode }) {
+function CardFront({
+  front,
+  isFlipped,
+}: {
+  front?: React.ReactNode;
+  isFlipped: boolean;
+}) {
   return (
-    <div className="absolute inset-0 z-20 flex h-full w-full items-center justify-center bg-background transition-all delay-200 duration-100 hover:opacity-0">
+    <motion.div
+      className="absolute inset-0 z-20 flex h-full w-full items-center justify-center bg-background"
+      initial={{
+        opacity: 1,
+        rotateY: 0,
+      }}
+      animate={{
+        opacity: isFlipped ? 0 : 1,
+        rotateY: isFlipped ? 180 : 0,
+      }}
+      transition={{ duration: 0.6 }}
+      style={{ backfaceVisibility: "hidden" }}
+    >
       {front}
-    </div>
+    </motion.div>
   );
 }
 
-function CardBack({ back }: { back?: React.ReactNode }) {
+function CardBack({
+  back,
+  isFlipped,
+}: {
+  back?: React.ReactNode;
+  isFlipped: boolean;
+}) {
   return (
-    <div className="card-back absolute inset-0 z-10 flex h-full w-full items-center justify-center bg-background transition-all">
-      {back}
-    </div>
+    <motion.div
+      className="card-back absolute inset-0 z-10 flex h-full w-full items-center justify-center bg-background"
+      initial={{
+        opacity: 0,
+        rotateY: -180,
+      }}
+      animate={{
+        opacity: isFlipped ? 1 : 0,
+        rotateY: isFlipped ? 0 : -180,
+      }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.div
+        initial={{ rotateY: 180 }}
+        animate={{ rotateY: 180 }}
+        transition={{ duration: 0 }}
+      >
+        {back}
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -23,23 +66,41 @@ export default function FlipCard({
   front = <div></div>,
   back = <div></div>,
   mouseText = "",
+  redirect = "",
 }: {
   front?: React.ReactNode;
   back?: React.ReactNode;
   mouseText?: string;
+  redirect?: string;
 }) {
   const { setContent } = useCursorStore();
+  const [isFlipped, setIsFlipped] = useState(false);
 
   return (
-    <div
-      onMouseEnter={() => setContent(mouseText)}
-      onMouseLeave={() => setContent(null)}
+    <Link
+      onMouseEnter={() => {
+        setContent(mouseText);
+        setIsFlipped(true);
+      }}
+      onMouseLeave={() => {
+        setContent(null);
+        setIsFlipped(false);
+      }}
       className={`w-full`}
+      href={redirect}
     >
-      <div className="card relative h-full w-full overflow-hidden rounded-xl border border-foreground/20 text-2xl text-white transition-all duration-1000">
-        <CardFront front={front} />
-        <CardBack back={back} />
-      </div>
-    </div>
+      <motion.div
+        className="card relative h-full w-full overflow-hidden rounded-xl border text-2xl text-white"
+        initial={{ rotateY: 0 }}
+        animate={{
+          rotateY: isFlipped ? 180 : 0,
+        }}
+        transition={{ duration: 0.6 }}
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        <CardFront front={front} isFlipped={isFlipped} />
+        <CardBack back={back} isFlipped={isFlipped} />
+      </motion.div>
+    </Link>
   );
 }

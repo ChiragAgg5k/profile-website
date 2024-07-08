@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/legacy/image";
+import { motion } from "framer-motion";
 
 export default function ResumeRotate({
   className = "",
@@ -7,7 +10,19 @@ export default function ResumeRotate({
 }) {
   return (
     <div className={`flex w-full items-center justify-center ${className}`}>
-      <div className="relative h-56 w-48 animate-flip-slow border border-foreground/30 bg-white/90">
+      <motion.div
+        className="relative h-56 w-48 border border-foreground/30 bg-white/90"
+        animate={{
+          rotate: [0, 1, -1, 0],
+          translateX: [0, 2, -2, 0],
+          translateY: [0, -2, 2, 0],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+      >
         <Image
           src="/resume.png"
           alt="Resume"
@@ -16,7 +31,7 @@ export default function ResumeRotate({
           objectPosition="center"
           quality={100}
         />
-      </div>
+      </motion.div>
     </div>
   );
 }

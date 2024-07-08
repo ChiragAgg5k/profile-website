@@ -5,6 +5,7 @@ import { VT323 } from "next/font/google";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 import { useCursorStore } from "@/components/mouse-tracker";
+import Link from "next/link";
 
 const TypingAnimation = dynamic(
   () => import("@/components/magicui/typing-animation"),
@@ -29,7 +30,14 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <div
+    <Link
+      href="/about-me"
+      onClick={
+        () =>
+          setContent(
+            null,
+          ) /* Reset the cursor content on navigation to about me */
+      }
       onMouseEnter={() => setContent("👋")}
       onMouseLeave={() => setContent(null)}
       className={`rounded-xl border border-foreground/20`}
@@ -64,7 +72,7 @@ const Hero: React.FC = () => {
           />
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 
