@@ -90,7 +90,7 @@ export default function FlipCard({
       href={redirect}
     >
       <motion.div
-        className="card relative h-full w-full overflow-hidden rounded-xl border text-2xl text-white"
+        className="card relative h-full w-full overflow-hidden rounded-xl border border-foreground/20 text-2xl text-white"
         initial={{ rotateY: 0 }}
         animate={{
           rotateY: isFlipped ? 180 : 0,
