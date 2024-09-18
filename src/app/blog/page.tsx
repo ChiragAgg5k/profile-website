@@ -2,7 +2,8 @@ import BlurFade from "@/components/magicui/blur-fade";
 
 export const metadata = {
   title: "Blogs",
-  description: "A list of all my content related work published on various sites."
+  description:
+    "A list of all my content related work published on various sites.",
 };
 
 const BLUR_FADE_DELAY = 0.04;
@@ -13,7 +14,9 @@ export default async function BlogPage() {
       <BlurFade delay={BLUR_FADE_DELAY}>
         <h1 className="font-medium text-2xl mb-8 tracking-tighter">Blogs ✏️</h1>
         <p>
-          So... I not only like to read long and boring documentations, research papers and journals, I also like to write them! Here you can find all my content related work published on various sites.
+          So... I not only like to read long and boring documentations, research
+          papers and journals, I also like to write them! Here you can find all
+          my content related work published on various sites.
         </p>
       </BlurFade>
       {/* {posts

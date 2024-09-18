@@ -120,7 +120,8 @@ export default function Page() {
                   Projects 📝
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  I like to build projects. I have built a lot of projects, here are just some of my favorites.
+                  I like to build projects. I have built a lot of projects, here
+                  are just some of my favorites.
                 </p>
               </div>
             </div>
@@ -164,7 +165,10 @@ export default function Page() {
                   days. It was eye-opening to see the endless possibilities
                   brought to life by a group of motivated and passionate
                   individuals. */}
-                  I believe in the power of collaboration and teamwork. So I like to keep myself busy while working in different communities and projects. Here are some of the positions I have held.
+                  I believe in the power of collaboration and teamwork. So I
+                  like to keep myself busy while working in different
+                  communities and projects. Here are some of the positions I
+                  have held.
                 </p>
               </div>
             </div>
@@ -211,10 +215,15 @@ export default function Page() {
                 or any other social media below.
               </p>
 
-              <p
-                className="mx-auto max-w-[600px] text-muted-foreground text-sm pt-8"
-              >
-                Thanks to Magicui for providing this <Link href="https://magicui.design/docs/templates/portfolio" className="text-blue-500 hover:underline">Template</Link>.
+              <p className="mx-auto max-w-[600px] text-muted-foreground text-sm pt-8">
+                Thanks to Magicui for providing this{" "}
+                <Link
+                  href="https://magicui.design/docs/templates/portfolio"
+                  className="text-blue-500 hover:underline"
+                >
+                  Template
+                </Link>
+                .
               </p>
             </div>
           </BlurFade>

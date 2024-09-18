@@ -115,13 +115,7 @@ export const DATA = {
       active: true,
       description:
         "An AI powered home security system providing accurate anomaly and threat detection along with real-time alerts and notifications.",
-      technologies: [
-        "Python",
-        "Flask",
-        "Firebase",
-        "Chart.js",
-        "YOLOv8"
-      ],
+      technologies: ["Python", "Flask", "Firebase", "Chart.js", "YOLOv8"],
       links: [
         {
           type: "Source",
@@ -129,7 +123,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/suraksha-ai.png"
+      image: "/suraksha-ai.png",
     },
     {
       title: "Asclepius",
@@ -138,11 +132,7 @@ export const DATA = {
       active: true,
       description:
         "A desktop application developed in Python and Custom Tkinter to view and request medicines from the Wellness center, check medicine availability, and order medicines directly.",
-      technologies: [
-        "Python",
-        "Tkinter",
-        "SQLite",
-      ],
+      technologies: ["Python", "Tkinter", "SQLite"],
       links: [
         {
           type: "Source",
@@ -150,7 +140,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/asclepius.png"
+      image: "/asclepius.png",
     },
     {
       title: "BU News",
@@ -159,12 +149,7 @@ export const DATA = {
       active: true,
       description:
         "A news sharing platform targetting university students in particular, aiming to reduce spread of misinformation.",
-      technologies: [
-        "Java",
-        "XML",
-        "Firebase",
-        "Android Studio"
-      ],
+      technologies: ["Java", "XML", "Firebase", "Android Studio"],
       links: [
         {
           type: "Source",
@@ -186,7 +171,7 @@ export const DATA = {
         "Typescript",
         "MongoDB",
         "TailwindCSS",
-        "OpenAI"
+        "OpenAI",
       ],
       links: [
         {
@@ -215,8 +200,8 @@ export const DATA = {
       links: [
         {
           title: "Contributions",
-          href: "https://www.geeksforgeeks.org/user/chiragaggarwal5k/contributions/"
-        }
+          href: "https://www.geeksforgeeks.org/user/chiragaggarwal5k/contributions/",
+        },
       ],
     },
     {
@@ -230,12 +215,12 @@ export const DATA = {
       links: [
         {
           title: "Website",
-          href: "https://international.fpt.edu.vn/"
+          href: "https://international.fpt.edu.vn/",
         },
         {
           title: "Photos",
-          href: "https://www.linkedin.com/posts/bennett-university_bennettuniversity-globalexposure-entrepreneurshipjourney-ugcPost-7232006796473683968-tKMa?utm_source=share&utm_medium=member_desktop"
-        }
+          href: "https://www.linkedin.com/posts/bennett-university_bennettuniversity-globalexposure-entrepreneurshipjourney-ugcPost-7232006796473683968-tKMa?utm_source=share&utm_medium=member_desktop",
+        },
       ],
     },
     {
@@ -248,8 +233,14 @@ export const DATA = {
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGnicMMBfXdQJrZy9RvzmnhzvVw1bgLTs_qA&s",
       links: [
         { title: "Website", href: "https://csiindia.org/" },
-        { title: "LinkedIn", href: "https://www.linkedin.com/company/csi-india/" },
-        { title: "Welcome Letter", href: "https://www.linkedin.com/posts/chiragagg5k_newrole-bennettuniversity-technology-activity-7097467074863636480-M1q6" },
+        {
+          title: "LinkedIn",
+          href: "https://www.linkedin.com/company/csi-india/",
+        },
+        {
+          title: "Welcome Letter",
+          href: "https://www.linkedin.com/posts/chiragagg5k_newrole-bennettuniversity-technology-activity-7097467074863636480-M1q6",
+        },
       ],
     },
   ],
