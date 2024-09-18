@@ -1,227 +1,76 @@
-'use client';
-import { BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs';
-import { AiOutlineMenu } from 'react-icons/ai';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { animateScroll, Link } from 'react-scroll';
+import { Dock, DockIcon } from "@/components/magicui/dock";
+import { ModeToggle } from "@/components/mode-toggle";
+import { buttonVariants } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { DATA } from "@/data/resume";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
-function navLinks() {
-	return (
-		<>
-			<li className="scroll-link mt-4 sm:my-0 sm:mr-4">
-				<Link
-					to="about-me"
-					smooth={true}
-					offset={-160}
-					duration={500}
-					onClick={() => {
-						const navbar = document.querySelector('#toggle-navbar');
-						if (navbar) {
-							navbar.classList.add('hidden');
-						}
-					}}
-					className="group transition duration-300 hover:cursor-pointer"
-				>
-					About Me
-					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
-				</Link>
-			</li>
-
-			<li className="scroll-link sm:my-0 sm:mr-4">
-				<Link
-					to="education"
-					smooth={true}
-					offset={-200}
-					duration={500}
-					onClick={() => {
-						const navbar = document.querySelector('#toggle-navbar');
-						if (navbar) {
-							navbar.classList.add('hidden');
-						}
-					}}
-					className="group transition duration-300 hover:cursor-pointer"
-				>
-					Education
-					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
-				</Link>
-			</li>
-
-			<li className="scroll-link my-1 sm:my-0 sm:mr-4">
-				<Link
-					to="toolbox"
-					smooth={true}
-					offset={-200}
-					duration={500}
-					onClick={() => {
-						const navbar = document.querySelector('#toggle-navbar');
-						if (navbar) {
-							navbar.classList.add('hidden');
-						}
-					}}
-					className="group transition duration-300 hover:cursor-pointer"
-				>
-					Toolbox
-					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
-				</Link>
-			</li>
-
-			<li className="scroll-link my-1 sm:my-0 sm:mr-4">
-				<Link
-					to="projects"
-					smooth={true}
-					offset={-120}
-					duration={500}
-					onClick={() => {
-						const navbar = document.querySelector('#toggle-navbar');
-						if (navbar) {
-							navbar.classList.add('hidden');
-						}
-					}}
-					className="group transition duration-300 hover:cursor-pointer"
-				>
-					Projects
-					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
-				</Link>
-			</li>
-
-			<li className="scroll-link my-1 sm:my-0 sm:mr-4">
-				<button
-					onClick={() => {
-						animateScroll.scrollToBottom();
-						const navbar = document.querySelector('#toggle-navbar');
-						if (navbar) {
-							navbar.classList.add('hidden');
-						}
-					}}
-					className="group w-full transition duration-300 hover:cursor-pointer"
-				>
-					Contact
-					<span className="block h-[1px] max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
-				</button>
-			</li>
-		</>
-	);
-}
-
-export default function NavBar() {
-	const { theme, setTheme } = useTheme();
-	const [mounted, setMounted] = useState(false);
-
-	// When mounted on client, now we can show the UI
-	useEffect(() => setMounted(true), []);
-
-	// decrease navbar height on scroll
-	useEffect(() => {
-		const handleScroll = () => {
-			const navbar = document.querySelector('nav');
-			const horizontalNavbar = document.querySelector('#horizontal-navbar');
-
-			if (navbar) {
-				if (window.scrollY > 100) {
-					navbar.classList.add('py-5');
-					navbar.classList.remove('py-8');
-				} else {
-					navbar.classList.add('py-8');
-					navbar.classList.remove('py-5');
-				}
-			}
-
-			if (horizontalNavbar) {
-				if (window.scrollY > 100) {
-					horizontalNavbar.classList.add('py-5');
-					horizontalNavbar.classList.remove('py-8');
-				} else {
-					horizontalNavbar.classList.add('py-8');
-					horizontalNavbar.classList.remove('py-5');
-				}
-			}
-		};
-		window.addEventListener('scroll', handleScroll);
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
-	}, []);
-
-	return (
-		<>
-			<nav
-				className="sticky top-0 z-10 w-full border-b-2 border-cyan-400 bg-cyan-100 px-8 py-8 text-gray-700 transition-all ease-in-out dark:border-0 dark:bg-gray-800 dark:text-white md:fixed"
-				id="horizontal-navbar"
-			>
-				<div className="flex w-full items-center justify-between">
-					<button
-						onClick={() => animateScroll.scrollToTop()}
-						className="group text-lg transition duration-300 sm:text-xl"
-					>
-						ChiragAgg5k
-						<span className="block h-0.5 max-w-0 bg-gray-700 transition-all duration-500 group-hover:max-w-full dark:bg-white"></span>
-					</button>
-					<div className="flex">
-						<AiOutlineMenu
-							className="mr-4 block text-2xl transition-all duration-300 ease-in-out hover:cursor-pointer hover:text-cyan-600 dark:hover:text-cyan-500 md:hidden"
-							onClick={() => {
-								const navbar = document.querySelector('#toggle-navbar');
-								const horizontalNavbar = document.querySelector('#horizontal-navbar');
-
-								if (navbar) {
-									navbar.classList.toggle('hidden');
-								}
-
-								if (horizontalNavbar) {
-									horizontalNavbar.classList.toggle('pb-8');
-									horizontalNavbar.classList.toggle('pb-4');
-								}
-							}}
-						/>
-						<ul className="hidden flex-col items-center text-base md:flex md:flex-row">{navLinks()}</ul>
-
-						{
-							// Only show dark mode toggle if mounted and can be toggled
-							mounted && (
-								<button className={`ml-2`}>
-									{theme === 'dark' ? (
-										<motion.div
-											whileHover={{ scale: 1.2, rotate: 90 }}
-											whileTap={{
-												scale: 0.8,
-												rotate: -90,
-												borderRadius: '100%',
-											}}
-										>
-											<BsFillMoonStarsFill
-												title="Toggle Light Mode"
-												className="cursor-pointer text-lg  hover:text-cyan-600 dark:hover:text-cyan-500 sm:text-2xl"
-												onClick={() => setTheme('light')}
-											/>
-										</motion.div>
-									) : (
-										<motion.div
-											whileHover={{ scale: 1.2, rotate: 90 }}
-											whileTap={{
-												scale: 0.8,
-												rotate: -90,
-												borderRadius: '100%',
-											}}
-										>
-											<BsFillSunFill
-												title="Toggle Dark Mode"
-												className="cursor-pointer text-lg text-gray-700  hover:text-cyan-600 dark:hover:text-cyan-500 sm:text-2xl"
-												onClick={() => setTheme('dark')}
-											/>
-										</motion.div>
-									)}
-								</button>
-							)
-						}
-					</div>
-				</div>
-				<div className={`flex w-full items-center justify-center`}>
-					<ul id="toggle-navbar" className="hidden w-fit space-y-2 text-center text-sm">
-						{navLinks()}
-					</ul>
-				</div>
-			</nav>
-		</>
-	);
+export default function Navbar() {
+  return (
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
+      <div className="fixed bottom-0 inset-x-0 h-16 w-full bg-background to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_top,black,transparent)] dark:bg-background"></div>
+      <Dock className="z-50 pointer-events-auto relative mx-auto flex min-h-full h-full items-center px-1 bg-background [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] ">
+        {DATA.navbar.map((item) => (
+          <DockIcon key={item.href}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon" }),
+                    "size-12",
+                  )}
+                >
+                  <item.icon className="size-4" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{item.label}</p>
+              </TooltipContent>
+            </Tooltip>
+          </DockIcon>
+        ))}
+        <Separator orientation="vertical" className="h-full" />
+        {Object.entries(DATA.contact.social)
+          .filter(([_, social]) => social.navbar)
+          .map(([name, social]) => (
+            <DockIcon key={name}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    href={social.url}
+                    className={cn(
+                      buttonVariants({ variant: "ghost", size: "icon" }),
+                      "size-12",
+                    )}
+                  >
+                    <social.icon className="size-4" />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{name}</p>
+                </TooltipContent>
+              </Tooltip>
+            </DockIcon>
+          ))}
+        <Separator orientation="vertical" className="h-full py-2" />
+        <DockIcon>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <ModeToggle />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Theme</p>
+            </TooltipContent>
+          </Tooltip>
+        </DockIcon>
+      </Dock>
+    </div>
+  );
 }
