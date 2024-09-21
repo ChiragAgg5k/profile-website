@@ -93,7 +93,7 @@ export const DATA = {
     {
       school: "Bennett University",
       href: "https://bennett.edu.in/",
-      degree: "Bachelor's of Technology in Computer Science Engineering",
+      degree: "Bachelor's of Technology in Computer Science Engineering | 9.71 CGPA",
       logoUrl: "/bennett.png",
       start: "2022",
       end: "2026",
@@ -101,7 +101,7 @@ export const DATA = {
     {
       school: "Bharti Public School",
       href: "https://www.bps.edu.in/",
-      degree: "Senior Secondary (CBSE)",
+      degree: "Senior Secondary (CBSE) | X - 91.2% | XII - 89.5%",
       logoUrl: "/bharti.jpg",
       start: "2010",
       end: "2022",
@@ -170,8 +170,6 @@ export const DATA = {
         "Next.js",
         "Typescript",
         "MongoDB",
-        "TailwindCSS",
-        "OpenAI",
       ],
       links: [
         {
