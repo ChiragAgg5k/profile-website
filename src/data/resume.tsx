@@ -93,7 +93,8 @@ export const DATA = {
     {
       school: "Bennett University",
       href: "https://bennett.edu.in/",
-      degree: "Bachelor's of Technology in Computer Science Engineering | 9.71 CGPA",
+      degree:
+        "Bachelor's of Technology in Computer Science Engineering | 9.71 CGPA",
       logoUrl: "/bennett.png",
       start: "2022",
       end: "2026",
@@ -166,11 +167,7 @@ export const DATA = {
       active: true,
       description:
         "A community-driven Q&A platform that leverages AI to expand, enhance, and get more in-depth answers to various questions from a diverse range of categories.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "MongoDB",
-      ],
+      technologies: ["Next.js", "Typescript", "MongoDB"],
       links: [
         {
           type: "Website",
@@ -193,8 +190,7 @@ export const DATA = {
       location: "GeeksForGeeks",
       description:
         "I like to write technical articles for GeeksForGeeks in my past time. Let's me be updated with various kinds of technologies.",
-      image:
-        "https://play-lh.googleusercontent.com/ZI21NMObsjB7DbPU_EXRymHJL3HQpfsrB2N4CWb-diXm4xjl_13mmetYQZvcpgGf-64",
+      image: "/gfg.png",
       links: [
         {
           title: "Contributions",
