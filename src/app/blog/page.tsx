@@ -13,7 +13,7 @@ const posts = [
     thumbnail: "/blog/npm-guide.png",
     icon: "📦",
     href: "https://dev.to/chiragagg5k/mastering-npm-a-comprehensive-guide-to-package-management-3h0m",
-    publishedAt: "2023-01-01",
+    publishedAt: "2024-07-05",
     tags: ["npm", "javascript", "guide"],
     description:
       "A comprehensive guide to npm, covering everything from installation to publishing packages.",
@@ -30,7 +30,7 @@ const posts = [
     thumbnail: "/blog/conditional-maven.png",
     icon: "📦",
     href: "https://www.geeksforgeeks.org/conditional-dependency-management-using-maven-profiles/?itm_source=auth&itm_medium=contributions&itm_campaign=articles",
-    publishedAt: "2023-01-01",
+    publishedAt: "2024-08-06",
     tags: ["maven", "java", "guide"],
     description:
       "Introduction to Maven profiles and how to use them to conditionally manage dependencies in a Maven project.",
@@ -97,27 +97,47 @@ const posts = [
 
 const BLUR_FADE_DELAY = 0.04;
 
+const timeToHowLongAgo = (date: string) => {
+  const dateObject = new Date(date);
+  const currentDate = new Date();
+  const timeDifference = currentDate.getTime() - dateObject.getTime();
+
+  const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
+  const months = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 30));
+  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+  const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+
+  if(months > 12){
+    return years === 1 ? `${years} year ago` : `${years} years ago`;
+  }
+
+  if(months > 0){
+    return months === 1 ? `${months} month ago` : `${months} months ago`;
+  }
+
+  if(days > 0){
+    return days === 1 ? `${days} day ago` : `${days} days ago`;
+  }
+
+  if(hours > 0){
+    return hours === 1 ? `${hours} hour ago` : `${hours} hours ago`;
+  }
+
+  if(minutes > 0){
+    return minutes === 1 ? `${minutes} minute ago` : `${minutes} minutes ago`;
+  }
+
+  return "few seconds ago";
+};
+
 export default async function BlogPage() {
   return (
     <section>
       <BlurFade delay={BLUR_FADE_DELAY}>
-        <div className="flex items-center justify-between">
-          <h1 className="font-medium text-2xl mb-8 tracking-tighter">
+          <h1 className="font-medium text-3xl font-semibold mb-8 tracking-tighter">
             Blogs ✏️
           </h1>
-          {/* <div className="space-x-2">
-            <Link href={"https://www.linkedin.com/in/chiragagg5k/"} target="_blank">
-              <Button size={"sm"}>
-                dev.to
-              </Button>
-            </Link>
-            <Link href={"https://www.linkedin.com/in/chiragagg5k/"} target="_blank">
-              <Button size={"sm"}>
-                geeksforgeeks
-              </Button>
-            </Link>
-          </div> */}
-        </div>
         <p className="mb-8">
           So... I not only like to read long and boring documentations, research
           papers and journals, I also like to write them! Here you can find some
@@ -138,7 +158,7 @@ export default async function BlogPage() {
                 key={post.title}
                 title={post.title}
                 description={post.description}
-                dates={post.publishedAt}
+                dates={timeToHowLongAgo(post.publishedAt)}
                 tags={post.tags}
                 href={post.href}
                 image={post.thumbnail}
