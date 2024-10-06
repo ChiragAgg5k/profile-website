@@ -43,6 +43,8 @@ export const ResumeCard = ({
       href={href || "#"}
       className="block cursor-pointer"
       onClick={handleClick}
+      target="_blank"
+      rel="noopener noreferrer"
     >
       <Card className="flex">
         <div className="flex-none">
@@ -73,12 +75,12 @@ export const ResumeCard = ({
                     ))}
                   </span>
                 )}
-                <ChevronRightIcon
+                {description ? <ChevronRightIcon
                   className={cn(
-                    "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
+                    "size-3 ml-1 translate-x-0 transform opacity-80 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:size-4",
                     isExpanded ? "rotate-90" : "rotate-0",
                   )}
-                />
+                /> : null}
               </h3>
               <div className="text-xs sm:text-sm tabular-nums text-muted-foreground text-right">
                 {period}

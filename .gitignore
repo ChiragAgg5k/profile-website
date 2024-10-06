@@ -42,3 +42,6 @@ jspm_packages
 
 # Vercel
 .vercel
+
+# Env
+.env.local

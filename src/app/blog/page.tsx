@@ -1,5 +1,6 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
+import { createClient } from '@/utils/supabase/server';
 
 export const metadata = {
   title: "Blogs",
@@ -11,7 +12,6 @@ const posts = [
   {
     title: "Mastering npm: A Comprehensive Guide to Package Management",
     thumbnail: "/blog/npm-guide.png",
-    icon: "📦",
     href: "https://dev.to/chiragagg5k/mastering-npm-a-comprehensive-guide-to-package-management-3h0m",
     publishedAt: "2024-07-05",
     tags: ["npm", "javascript", "guide"],
@@ -28,7 +28,6 @@ const posts = [
   {
     title: "Conditional Dependency Management Using Maven Profiles",
     thumbnail: "/blog/conditional-maven.png",
-    icon: "📦",
     href: "https://www.geeksforgeeks.org/conditional-dependency-management-using-maven-profiles/?itm_source=auth&itm_medium=contributions&itm_campaign=articles",
     publishedAt: "2024-08-06",
     tags: ["maven", "java", "guide"],
@@ -45,7 +44,6 @@ const posts = [
   {
     title: "Neon T3 Starter Kit: Supercharging Web Development with Serverless Postgres",
     thumbnail: "/blog/neon-starter.png",
-    icon: "💻",
     href: "https://dev.to/chiragagg5k/neon-t3-starter-kit-supercharging-web-development-with-serverless-postgres-13fg",
     publishedAt: "2024-08-28",
     tags: ["neon", "typescript", "guide"],
@@ -62,7 +60,6 @@ const posts = [
   {
     title: "From Kubernetes Chaos to Calm: A Cyclops Adventure",
     thumbnail: "/blog/cyclops.png",
-    icon: "💻",
     href: "https://dev.to/chiragagg5k/from-kubernetes-chaos-to-calm-a-cyclops-adventure-1b5m",
     publishedAt: "2024-07-30",
     tags: ["kubernetes", "cyclops", "guide"],
@@ -79,7 +76,6 @@ const posts = [
   {
     title: "My Journey in Authorization with OPAL",
     thumbnail: "/blog/opal.png",
-    icon: "💻",
     href: "https://dev.to/chiragagg5k/my-journey-in-authorization-with-opal-1072",
     publishedAt: "2024-06-23",
     tags: ["opal", "authorization", "guide"],
@@ -108,36 +104,39 @@ const timeToHowLongAgo = (date: string) => {
   const hours = Math.floor(timeDifference / (1000 * 60 * 60));
   const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
 
-  if(months > 12){
-    return years === 1 ? `${years} year ago` : `${years} years ago`;
-  }
-
-  if(months > 0){
-    return months === 1 ? `${months} month ago` : `${months} months ago`;
-  }
-
-  if(days > 0){
-    return days === 1 ? `${days} day ago` : `${days} days ago`;
-  }
-
-  if(hours > 0){
-    return hours === 1 ? `${hours} hour ago` : `${hours} hours ago`;
-  }
-
-  if(minutes > 0){
-    return minutes === 1 ? `${minutes} minute ago` : `${minutes} minutes ago`;
-  }
+  if (months > 12) return years === 1 ? `${years} year ago` : `${years} years ago`;
+  if (months > 0) return months === 1 ? `${months} month ago` : `${months} months ago`;
+  if (days > 0)return days === 1 ? `${days} day ago` : `${days} days ago`;
+  if (hours > 0)return hours === 1 ? `${hours} hour ago` : `${hours} hours ago`;
+  if (minutes > 0)return minutes === 1 ? `${minutes} minute ago` : `${minutes} minutes ago`;
 
   return "few seconds ago";
 };
 
 export default async function BlogPage() {
+
+  const fetchBlogs = async () => {
+    "use server"
+
+    const supabase = createClient();
+    let { data: blogs } = await supabase
+      .from('blogs')
+      .select('*, links (icon, type, href)')
+    return blogs
+  }
+
+  // const blogs = await fetchBlogs()
+
+  // if(!blogs) return null;
+
+  const blogs = posts;
+
   return (
     <section>
       <BlurFade delay={BLUR_FADE_DELAY}>
-          <h1 className="font-medium text-3xl font-semibold mb-8 tracking-tighter">
-            Blogs ✏️
-          </h1>
+        <h1 className="font-medium text-3xl font-semibold mb-8 tracking-tighter">
+          Blogs ✏️
+        </h1>
         <p className="mb-8">
           So... I not only like to read long and boring documentations, research
           papers and journals, I also like to write them! Here you can find some
@@ -145,7 +144,7 @@ export default async function BlogPage() {
         </p>
       </BlurFade>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mx-auto">
-        {posts
+        {blogs
           .sort((a, b) => {
             if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
               return -1;
@@ -162,7 +161,7 @@ export default async function BlogPage() {
                 tags={post.tags}
                 href={post.href}
                 image={post.thumbnail}
-                links={post.links}
+                links={[post.links[0]]}
               />
             </BlurFade>
           ))}

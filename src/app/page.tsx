@@ -203,21 +203,12 @@ export default function Page() {
                 <Link
                   href={DATA.contact.social.X.url}
                   className="text-blue-500 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   on Twitter
                 </Link>{" "}
                 or any other social media below.
-              </p>
-
-              <p className="mx-auto max-w-[600px] text-muted-foreground text-xs pt-8">
-                Thanks to Magicui for providing this{" "}
-                <Link
-                  href="https://magicui.design/docs/templates/portfolio"
-                  className="text-blue-500 hover:underline"
-                >
-                  Template
-                </Link>
-                .
               </p>
             </div>
           </BlurFade>

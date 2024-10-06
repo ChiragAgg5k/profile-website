@@ -8,7 +8,7 @@ export const DATA = {
   location: "Delhi NCR, India",
   locationLink: "https://maps.app.goo.gl/Zbzok1mCik445h1C6",
   description:
-    "Passionate, Caffienated and Sleep-deprived Software Engineer from India",
+    "A developer building cool solutions with open source technologies.",
   summary:
     "I am Chirag Aggarwal, a third-year Bachelor of Technology student from India, currently studying Computer Science Engineering. As a Fullstack Developer, I enjoy both frontend and backend development equally. Additionally, I have a passion for content writing and conducting research on various topics, particularly in the fields of Artificial Intelligence and Computer Vision.",
   avatarUrl: "/me.jpg",
