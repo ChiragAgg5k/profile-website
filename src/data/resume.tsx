@@ -1,16 +1,16 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon } from "lucide-react";
+import { HomeIcon, NotebookIcon, Play } from "lucide-react";
 
 export const DATA = {
   name: "Chirag Aggarwal",
   initials: "CA",
-  url: "https://chirag.is-a.dev/",
+  url: "https://www.chiragaggarwal.tech/",
   location: "Delhi NCR, India",
   locationLink: "https://maps.app.goo.gl/Zbzok1mCik445h1C6",
   description:
     "A developer building cool solutions with open source technologies.",
   summary:
-    "I am Chirag Aggarwal, a third-year Bachelor of Technology student from India, currently studying Computer Science Engineering. As a Fullstack Developer, I enjoy both frontend and backend development equally. Additionally, I have a passion for content writing and conducting research on various topics, particularly in the fields of Artificial Intelligence and Computer Vision.",
+    "I am Chirag Aggarwal, a third-year Bachelor of Technology student from India, currently studying Computer Science Engineering. As a **Full-stack Developer**, I enjoy both frontend and backend development equally. Additionally, I have a passion for content writing and conducting research on various topics, particularly in the fields of **Artificial Intelligence** and **Computer Vision**.",
   avatarUrl: "/me.jpg",
   skills: [
     "React",
@@ -73,8 +73,20 @@ export const DATA = {
       logoUrl: "/skillarena.png",
       start: "July 2024",
       end: "September 2024",
-      description:
-        "Developed and maintained core backend systems for mobile and web applications using Node.js and Express.js, improving overall application performance by 30% | Designed and implemented a real-time chat application backend utilizing WebSockets and FastAPI (Python), resulting in a 50% increase in user engagement",
+      description: `-Improved and maintained core backend systems written in the **MERN** stack
+        -Implemented a **real-time chat application** backend utilizing WebSockets and FastAPI`,
+      links: [
+        {
+          type: "Website",
+          href: "https://skillarena.in/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Letter of Recommendation",
+          href: "https://drive.google.com/file/d/1ONCudngptfuLZuR7hjSinbvVSr7fEnbd/view?usp=sharing",
+          icon: <Icons.email className="size-3" />,
+        },
+      ],
     },
     {
       company: "Clearmind AI",
@@ -85,8 +97,20 @@ export const DATA = {
       logoUrl: "/clearmind.png",
       start: "October 2023",
       end: "December 2023",
-      description:
-        "Analyzed and implemented 75% user feedback suggestions, leading to a 15% increase in user satisfaction ratings and a 20% increase in page visits. | Integrated Stripe payment gateway, increasing online transactions by 30% and reducing checkout abandonment by 25%.",
+      description: `-Implemented **user feedback suggestions** such as more personalized recommendations, memory history etc.
+        -Integrated a seamless payment gateway using **Stripe**`,
+      links: [
+        {
+          type: "Website",
+          href: "https://www.clearmind.plus/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Letter of Recommendation",
+          href: "https://drive.google.com/file/d/1cgXwtu__St6bJzZNiq7SId0kWw5UVdPc/view?usp=sharing",
+          icon: <Icons.email className="size-3" />,
+        },
+      ],
     },
   ],
   education: [
@@ -116,7 +140,7 @@ export const DATA = {
       active: true,
       description:
         "An AI powered home security system providing accurate anomaly and threat detection along with real-time alerts and notifications.",
-      technologies: ["Python", "Flask", "Firebase", "Chart.js", "YOLOv8"],
+      technologies: ["Python", "Flask", "Firebase", "Chart.js", "YOLOv11"],
       links: [
         {
           type: "Source",
@@ -156,6 +180,11 @@ export const DATA = {
           type: "Source",
           href: "https://github.com/ChiragAgg5k/bu-news-android",
           icon: <Icons.github className="size-3" />,
+        },
+        {
+          type: "Play Store",
+          href: "https://play.google.com/store/apps/details?id=com.chiragagg5k.bu_news_android",
+          icon: <Play className="size-3" />,
         },
       ],
       image: "/bu-news.png",
@@ -218,7 +247,7 @@ export const DATA = {
       ],
     },
     {
-      title: "Technical CO-Head",
+      title: "Technical Co-Head",
       dates: "August 2023 - May 2024",
       location: "Computer Society of India, Bennett University",
       description:
@@ -234,6 +263,21 @@ export const DATA = {
         {
           title: "Welcome Letter",
           href: "https://www.linkedin.com/posts/chiragagg5k_newrole-bennettuniversity-technology-activity-7097467074863636480-M1q6",
+        },
+      ],
+    },
+    {
+      title: "Rearch Content Management",
+      dates: "September 2022 - May 2023",
+      location: "Bennett Undergraduate Research Society (BURS)",
+      description:
+        "The research society peaked my interest in the field of research, allowing me to be guided by seniors to work on various research related projects as well as organizing events like Rescon.",
+      image: "/burs.png",
+      links: [
+        { title: "Website", href: "https://www.burs.bennett.edu.in/" },
+        {
+          title: "LinkedIn",
+          href: "https://www.linkedin.com/company/buresearchsociety/posts/?feedView=all/",
         },
       ],
     },

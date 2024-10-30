@@ -22,8 +22,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${DATA.name}`,
     description: DATA.description,
-    url: DATA.url,
-    siteName: `${DATA.name}`,
+    url: "/me.jpg",
+    siteName: `${DATA.name}'s Portfolio`,
     locale: "en_US",
     type: "website",
   },

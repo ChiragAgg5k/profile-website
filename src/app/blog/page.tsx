@@ -1,6 +1,6 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from "@/utils/supabase/server";
 
 export const metadata = {
   title: "Blogs",
@@ -42,7 +42,8 @@ const posts = [
     ],
   },
   {
-    title: "Neon T3 Starter Kit: Supercharging Web Development with Serverless Postgres",
+    title:
+      "Neon T3 Starter Kit: Supercharging Web Development with Serverless Postgres",
     thumbnail: "/blog/neon-starter.png",
     href: "https://dev.to/chiragagg5k/neon-t3-starter-kit-supercharging-web-development-with-serverless-postgres-13fg",
     publishedAt: "2024-08-28",
@@ -104,26 +105,29 @@ const timeToHowLongAgo = (date: string) => {
   const hours = Math.floor(timeDifference / (1000 * 60 * 60));
   const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
 
-  if (months > 12) return years === 1 ? `${years} year ago` : `${years} years ago`;
-  if (months > 0) return months === 1 ? `${months} month ago` : `${months} months ago`;
-  if (days > 0)return days === 1 ? `${days} day ago` : `${days} days ago`;
-  if (hours > 0)return hours === 1 ? `${hours} hour ago` : `${hours} hours ago`;
-  if (minutes > 0)return minutes === 1 ? `${minutes} minute ago` : `${minutes} minutes ago`;
+  if (months > 12)
+    return years === 1 ? `${years} year ago` : `${years} years ago`;
+  if (months > 0)
+    return months === 1 ? `${months} month ago` : `${months} months ago`;
+  if (days > 0) return days === 1 ? `${days} day ago` : `${days} days ago`;
+  if (hours > 0)
+    return hours === 1 ? `${hours} hour ago` : `${hours} hours ago`;
+  if (minutes > 0)
+    return minutes === 1 ? `${minutes} minute ago` : `${minutes} minutes ago`;
 
   return "few seconds ago";
 };
 
 export default async function BlogPage() {
-
   const fetchBlogs = async () => {
-    "use server"
+    "use server";
 
     const supabase = createClient();
     let { data: blogs } = await supabase
-      .from('blogs')
-      .select('*, links (icon, type, href)')
-    return blogs
-  }
+      .from("blogs")
+      .select("*, links (icon, type, href)");
+    return blogs;
+  };
 
   // const blogs = await fetchBlogs()
 

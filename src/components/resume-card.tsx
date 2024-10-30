@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import Markdown from "react-markdown";
 
 interface ResumeCardProps {
   logoUrl: string;
@@ -18,7 +19,13 @@ interface ResumeCardProps {
   badges?: readonly string[];
   period: string;
   description?: string;
+  links?: readonly {
+    type: string;
+    href: string;
+    icon: React.ReactNode;
+  }[];
 }
+
 export const ResumeCard = ({
   logoUrl,
   altText,
@@ -28,23 +35,30 @@ export const ResumeCard = ({
   badges,
   period,
   description,
+  links,
 }: ResumeCardProps) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleCardClick = () => {
     if (description) {
-      e.preventDefault();
       setIsExpanded(!isExpanded);
     }
   };
 
+  const handleDescriptionClick = (e: React.MouseEvent) => {
+    // Prevent the expanded content clicks from triggering card collapse
+    e.stopPropagation();
+  };
+
   return (
-    <Link
-      href={href || "#"}
-      className="block cursor-pointer"
-      onClick={handleClick}
-      target="_blank"
-      rel="noopener noreferrer"
+    <div
+      aria-label={`${title} resume`}
+      className={cn(
+        "block",
+        description ? "cursor-pointer" : "",
+        !href ? "pointer-events-none" : "",
+      )}
+      onClick={handleCardClick}
     >
       <Card className="flex">
         <div className="flex-none">
@@ -75,12 +89,14 @@ export const ResumeCard = ({
                     ))}
                   </span>
                 )}
-                {description ? <ChevronRightIcon
-                  className={cn(
-                    "size-3 ml-1 translate-x-0 transform opacity-80 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:size-4",
-                    isExpanded ? "rotate-90" : "rotate-0",
-                  )}
-                /> : null}
+                {description ? (
+                  <ChevronRightIcon
+                    className={cn(
+                      "size-3 ml-1 translate-x-0 transform opacity-80 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:size-4",
+                      isExpanded ? "rotate-90" : "rotate-0",
+                    )}
+                  />
+                ) : null}
               </h3>
               <div className="text-xs sm:text-sm tabular-nums text-muted-foreground text-right">
                 {period}
@@ -93,20 +109,51 @@ export const ResumeCard = ({
               initial={{ opacity: 0, height: 0 }}
               animate={{
                 opacity: isExpanded ? 1 : 0,
-
                 height: isExpanded ? "auto" : 0,
               }}
               transition={{
                 duration: 0.7,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="mt-2 text-xs sm:text-sm mb-4"
+              className="mt-2 text-xs sm:text-sm mb-4 px-4"
+              onClick={handleDescriptionClick}
             >
-              {description}
+              <div className="prose prose-sm dark:prose-invert max-w-none">
+                <Markdown
+                  components={{
+                    p: ({ children }) => (
+                      <p className="whitespace-pre-wrap mb-2">{children}</p>
+                    ),
+                    ul: ({ children }) => (
+                      <ul className="list-disc pl-4 mb-2">{children}</ul>
+                    ),
+                    li: ({ children }) => <li className="mb-1">{children}</li>,
+                  }}
+                >
+                  {description}
+                </Markdown>
+                {links && (
+                  <div className="flex flex-wrap gap-x-2 mt-4">
+                    {links.map((link, index) => (
+                      <Link
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        key={index}
+                        href={link.href}
+                        className="flex items-center gap-x-2 text-xs no-underline hover:underline"
+                        onClick={handleDescriptionClick}
+                      >
+                        {link.icon}
+                        {link.type}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             </motion.div>
           )}
         </div>
       </Card>
-    </Link>
+    </div>
   );
 };

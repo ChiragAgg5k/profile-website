@@ -5,7 +5,9 @@ import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { DATA } from "@/data/resume";
+import { Notebook } from "lucide-react";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
@@ -47,6 +49,18 @@ export default function Page() {
           <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
             {DATA.summary}
           </Markdown>
+          <div className="flex items-center justify-end">
+            <Link
+              href="/ChiragAggarwal_resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size={`sm`} variant={`outline`}>
+                Download Resume
+                <Notebook className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </BlurFade>
       </section>
       <section id="work">
@@ -69,6 +83,7 @@ export default function Page() {
                 badges={work.badges}
                 period={`${work.start} - ${work.end ?? "Present"}`}
                 description={work.description}
+                links={work.links}
               />
             </BlurFade>
           ))}
@@ -86,7 +101,6 @@ export default function Page() {
             >
               <ResumeCard
                 key={education.school}
-                href={education.href}
                 logoUrl={education.logoUrl}
                 altText={education.school}
                 title={education.school}
@@ -156,12 +170,6 @@ export default function Page() {
                   Positions of Responsibility 💼
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  {/* During my time in university, I attended{" "}
-                  {DATA.hackathons.length}+ hackathons. People from around the
-                  country would come together and build incredible things in 2-3
-                  days. It was eye-opening to see the endless possibilities
-                  brought to life by a group of motivated and passionate
-                  individuals. */}
                   I believe in the power of collaboration and teamwork. So I
                   like to keep myself busy while working in different
                   communities and projects. Here are some of the positions I
