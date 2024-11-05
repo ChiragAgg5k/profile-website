@@ -190,26 +190,26 @@ export const DATA = {
       image: "/bu-news.png",
     },
     {
-      title: "Askit",
-      href: "https://www.askit.study/",
-      dates: "April 2023 - September 2023",
+      title: "Cal Buddy",
+      href: "https://cal-buddy.vercel.app/",
+      dates: "September 2024 - October 2024",
       active: true,
       description:
-        "A community-driven Q&A platform that leverages AI to expand, enhance, and get more in-depth answers to various questions from a diverse range of categories.",
-      technologies: ["Next.js", "Typescript", "MongoDB"],
+        "Cal Buddy is a smart calendar assistant that helps you schedule, manage, and chat with your calendar. Boost your productivity with AI-powered task management.",
+      technologies: ["Next.js", "Typescript", "CopilotKit", "LLaMa3.2"],
       links: [
         {
           type: "Website",
-          href: "https://www.askit.study/",
+          href: "https://cal-buddy.vercel.app/",
           icon: <Icons.globe className="size-3" />,
         },
         {
           type: "Source",
-          href: "https://github.com/ChiragAgg5k/askit",
+          href: "https://github.com/ChiragAgg5k/cal-buddy",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/askit.png",
+      image: "/cal-buddy.png",
     },
   ],
   positions: [
