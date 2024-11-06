@@ -31,18 +31,20 @@ export function HackathonCard({
           <AvatarFallback>{title[0]}</AvatarFallback>
         </Avatar>
       </div>
-      <div className="flex flex-1 flex-col justify-start gap-1">
+      <div className="flex flex-1 flex-col justify-start gap-2">
         {dates && (
           <time className="text-xs text-muted-foreground">{dates}</time>
         )}
         <h2 className="font-semibold leading-none">{title}</h2>
         {location && (
-          <p className="text-sm text-muted-foreground">{location}</p>
+          <p className="text-sm text-muted-foreground font-semibold">
+            {location}
+          </p>
         )}
         {description && (
-          <span className="prose dark:prose-invert text-sm text-muted-foreground">
+          <p className=" dark:prose-invert text-sm text-muted-foreground">
             {description}
-          </span>
+          </p>
         )}
       </div>
       {links && links.length > 0 && (

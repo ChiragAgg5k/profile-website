@@ -1,3 +1,4 @@
+import ContactMeForm from "@/components/contact-me-form";
 import { HackathonCard } from "@/components/hackathon-card";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
@@ -49,7 +50,7 @@ export default function Page() {
           <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
             {DATA.summary}
           </Markdown>
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end mt-4">
             <Link
               href="/ChiragAggarwal_resume.pdf"
               target="_blank"
@@ -199,24 +200,35 @@ export default function Page() {
           </BlurFade>
         </div>
       </section>
-      <section id="contact">
+      <section id="contact" className="">
         <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
-            <div className="space-y-3">
+            <div className="space-y-0">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
                 Get in Touch
               </h2>
-              <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Want to talk about something? Just shoot me a dm{" "}
+              <ContactMeForm />
+              <p className="mx-auto max-w-[600px] text-muted-foreground text-sm/relaxed md:text-base/relaxed">
+                Or just want to have a casual chat? you can just shoot me a dm
+                on{" "}
                 <Link
                   href={DATA.contact.social.X.url}
                   className="text-blue-500 hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  on Twitter
+                  Twitter
                 </Link>{" "}
-                or any other social media below.
+                or{" "}
+                <Link
+                  href={DATA.contact.social.X.url}
+                  className="text-blue-500 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </Link>
+                .
               </p>
             </div>
           </BlurFade>

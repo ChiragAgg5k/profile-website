@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
@@ -69,6 +70,7 @@ export default function RootLayout({
             {children}
             <Navbar />
           </TooltipProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

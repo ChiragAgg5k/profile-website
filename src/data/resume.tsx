@@ -134,60 +134,26 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Suraksha AI",
-      href: "https://github.com/ChiragAgg5k/suraksha-ai",
-      dates: "Feb 2024 - May 2024",
+      title: "Prabhawatt",
+      href: "https://github.com/ChiragAgg5k/prabhawatt",
+      dates: "Nov 2024 - Present",
       active: true,
       description:
-        "An AI powered home security system providing accurate anomaly and threat detection along with real-time alerts and notifications.",
-      technologies: ["Python", "Flask", "Firebase", "Chart.js", "YOLOv11"],
+        "Time of Use (TOU) Tariff based Solar and Grid energy management platform along with Web3 based excess energy trading.",
+      technologies: ["Next.js", "Typescript", "LLaMa3.2", "Web Scraping"],
       links: [
         {
+          type: "Website",
+          href: "https://prabhawatt.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
           type: "Source",
-          href: "https://github.com/ChiragAgg5k/suraksha-ai",
+          href: "https://github.com/ChiragAgg5k/prabhawatt",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/suraksha-ai.png",
-    },
-    {
-      title: "Asclepius",
-      href: "https://github.com/ChiragAgg5k/asclepius",
-      dates: "Dec 2022 - Jan 2023",
-      active: true,
-      description:
-        "A desktop application developed in Python and Custom Tkinter to view and request medicines from the Wellness center, check medicine availability, and order medicines directly.",
-      technologies: ["Python", "Tkinter", "SQLite"],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/ChiragAgg5k/asclepius",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "/asclepius.png",
-    },
-    {
-      title: "BU News",
-      href: "https://github.com/ChiragAgg5k/bu-news-android",
-      dates: "April 2023 - March 2024",
-      active: true,
-      description:
-        "A news sharing platform targetting university students in particular, aiming to reduce spread of misinformation.",
-      technologies: ["Java", "XML", "Firebase", "Android Studio"],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/ChiragAgg5k/bu-news-android",
-          icon: <Icons.github className="size-3" />,
-        },
-        {
-          type: "Play Store",
-          href: "https://play.google.com/store/apps/details?id=com.chiragagg5k.bu_news_android",
-          icon: <Play className="size-3" />,
-        },
-      ],
-      image: "/bu-news.png",
+      image: "/prabhawatt.png",
     },
     {
       title: "Cal Buddy",
@@ -210,6 +176,45 @@ export const DATA = {
         },
       ],
       image: "/cal-buddy.png",
+    },
+    {
+      title: "BU News",
+      href: "https://github.com/ChiragAgg5k/bu-news-android",
+      dates: "April 2023 - March 2023",
+      active: true,
+      description:
+        "A news sharing platform targetting university students in particular, aiming to reduce spread of misinformation.",
+      technologies: ["Java", "XML", "Firebase", "Android Studio"],
+      links: [
+        {
+          type: "Play Store",
+          href: "https://play.google.com/store/apps/details?id=com.chiragagg5k.bu_news_android",
+          icon: <Play className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/ChiragAgg5k/bu-news-android",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/bu-news.png",
+    },
+    {
+      title: "Asclepius",
+      href: "https://github.com/ChiragAgg5k/asclepius",
+      dates: "Dec 2022 - Jan 2023",
+      active: true,
+      description:
+        "A desktop application developed in Python and Custom Tkinter to view and request medicines from the Wellness center, check medicine availability, and order medicines directly.",
+      technologies: ["Python", "Tkinter", "SQLite"],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/ChiragAgg5k/asclepius",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/asclepius.png",
     },
   ],
   positions: [
