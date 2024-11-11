@@ -7,8 +7,10 @@ import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Marquee from "@/components/ui/marquee";
 import { DATA } from "@/data/resume";
 import { Notebook } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
@@ -200,7 +202,43 @@ export default function Page() {
           </BlurFade>
         </div>
       </section>
-      <section id="contact" className="">
+      <section id="achievements">
+        <div className="space-y-12 w-full py-12">
+          <BlurFade delay={BLUR_FADE_DELAY * 13}>
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Achievements
+                </h2>
+                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  From going to Vietnam to participating in Hackathons, I like
+                  to keep exploring and learning new things.
+                </p>
+              </div>
+            </div>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 14}>
+            <Marquee>
+              {DATA.achievements.map((achievement, id) => (
+                <div key={achievement.title + id}>
+                  <div>
+                    <Image
+                      className="w-72 h-48 object-cover"
+                      src={achievement.image}
+                      alt={achievement.title}
+                      width={400}
+                      height={400}
+                    />
+                  </div>
+                </div>
+              ))}
+            </Marquee>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r from-white dark:from-background"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/6 bg-gradient-to-l from-white dark:from-background"></div>
+          </BlurFade>
+        </div>
+      </section>
+      <section id="contact">
         <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="space-y-0">

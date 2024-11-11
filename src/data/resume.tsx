@@ -287,4 +287,36 @@ export const DATA = {
       ],
     },
   ],
+  achievements: [
+    {
+      title: "Summer Immersion in Vietnam",
+      dates: "July 2024",
+      location: "FPT University, Da Nang, Vietnam",
+      image: "/achievements/summer-immersion.jpeg",
+    },
+    {
+      title: "Github Constellation",
+      dates: "June 2024",
+      location: "Bangalore",
+      image: "/achievements/github-constellation.jpeg",
+    },
+    {
+      title: "Hackaccino",
+      dates: "April 2024",
+      location: "CSI Bennett University",
+      image: "/achievements/hackaccino.jpeg",
+    },
+    {
+      title: "HackWithDelhi",
+      dates: "April 2024",
+      location: "GL Bajaj Institute of Technology and Management",
+      image: "/achievements/hackwithdelhi.jpeg",
+    },
+    {
+      title: "HackCBS",
+      dates: "Nob3 2023",
+      location: "Shaheed Sukhdev College of Business Studies",
+      image: "/achievements/hackcbs.jpeg",
+    },
+  ],
 } as const;
