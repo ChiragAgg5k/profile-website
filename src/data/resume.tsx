@@ -23,6 +23,7 @@ export const DATA = {
     "Kubernetes",
     "Java",
     "C++",
+    "Appwrite",
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -162,7 +163,7 @@ export const DATA = {
       active: true,
       description:
         "Cal Buddy is a smart calendar assistant that helps you schedule, manage, and chat with your calendar. Boost your productivity with AI-powered task management.",
-      technologies: ["Next.js", "Typescript", "CopilotKit", "LLaMa3.2"],
+      technologies: ["Next.js", "Typescript", "CopilotKit", "Appwrite"],
       links: [
         {
           type: "Website",
