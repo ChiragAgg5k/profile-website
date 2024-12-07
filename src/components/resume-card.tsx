@@ -45,7 +45,6 @@ export const ResumeCard = ({
   };
 
   const handleDescriptionClick = (e: React.MouseEvent) => {
-    // Prevent the expanded content clicks from triggering card collapse
     e.stopPropagation();
   };
 
@@ -106,6 +105,7 @@ export const ResumeCard = ({
                 ease: [0.16, 1, 0.3, 1],
               }}
               className="mt-2 text-xs sm:text-sm mb-4 px-4"
+              // @ts-ignore
               onClick={handleDescriptionClick}
             >
               <div className="prose prose-sm dark:prose-invert max-w-none">

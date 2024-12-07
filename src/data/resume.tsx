@@ -71,7 +71,7 @@ export const DATA = {
       badges: [],
       location: "Remote",
       title: "Backend Developer",
-      logoUrl: "/skillarena.png",
+      logoUrl: "/work-experience/skillarena.png",
       start: "July 2024",
       end: "September 2024",
       description: `-Improved and maintained core backend systems written in the **MERN** stack
@@ -94,8 +94,8 @@ export const DATA = {
       badges: [],
       href: "https://www.clearmind.plus/",
       location: "Remote",
-      title: "Next.js Developer",
-      logoUrl: "/clearmind.png",
+      title: "Fullstack Developer",
+      logoUrl: "/work-experience/clearmind.png",
       start: "October 2023",
       end: "December 2023",
       description: `-Implemented **user feedback suggestions** such as more personalized recommendations, memory history etc.
@@ -154,7 +154,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/prabhawatt.png",
+      image: "/projects/prabhawatt.png",
     },
     {
       title: "Cal Buddy",
@@ -176,7 +176,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/cal-buddy.png",
+      image: "/projects/cal-buddy.png",
     },
     {
       title: "BU News",
@@ -198,7 +198,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/bu-news.png",
+      image: "/projects/bu-news.png",
     },
     {
       title: "Asclepius",
@@ -215,7 +215,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/asclepius.png",
+      image: "/projects/asclepius.png",
     },
   ],
   positions: [

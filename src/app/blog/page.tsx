@@ -1,96 +1,16 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
-import { createClient } from "@/utils/supabase/server";
+import { posts } from "@/data/posts";
+import Link from "next/link";
 
 export const metadata = {
-  title: "Blogs",
+  title: "Blogs - My Content Related Work",
   description:
-    "A list of all my content related work published on various sites.",
+    "Explore a curated list of my content-related work, including articles, research papers, and journals published across various platforms. Discover insights and knowledge shared through my writing.",
+  keywords:
+    "blogs, articles, research papers, content writing, journals, publications",
+  robots: "index, follow",
 };
-
-const posts = [
-  {
-    title: "Mastering npm: A Comprehensive Guide to Package Management",
-    thumbnail: "/blog/npm-guide.png",
-    href: "https://dev.to/chiragagg5k/mastering-npm-a-comprehensive-guide-to-package-management-3h0m",
-    publishedAt: "2024-07-05",
-    tags: ["npm", "javascript", "guide"],
-    description:
-      "A comprehensive guide to npm, covering everything from installation to publishing packages.",
-    links: [
-      {
-        icon: "💻",
-        type: " dev.to",
-        href: "https://dev.to/chiragagg5k/mastering-npm-a-comprehensive-guide-to-package-management-3h0m",
-      },
-    ],
-  },
-  {
-    title: "Conditional Dependency Management Using Maven Profiles",
-    thumbnail: "/blog/conditional-maven.png",
-    href: "https://www.geeksforgeeks.org/conditional-dependency-management-using-maven-profiles/?itm_source=auth&itm_medium=contributions&itm_campaign=articles",
-    publishedAt: "2024-08-06",
-    tags: ["maven", "java", "guide"],
-    description:
-      "Introduction to Maven profiles and how to use them to conditionally manage dependencies in a Maven project.",
-    links: [
-      {
-        icon: "🟩",
-        type: " geeksforgeeks",
-        href: "https://www.geeksforgeeks.org/conditional-dependency-management-using-maven-profiles/?itm_source=auth&itm_medium=contributions&itm_campaign=articles",
-      },
-    ],
-  },
-  {
-    title:
-      "Neon T3 Starter Kit: Supercharging Web Development with Serverless Postgres",
-    thumbnail: "/blog/neon-starter.png",
-    href: "https://dev.to/chiragagg5k/neon-t3-starter-kit-supercharging-web-development-with-serverless-postgres-13fg",
-    publishedAt: "2024-08-28",
-    tags: ["neon", "typescript", "guide"],
-    description:
-      "A starter kit that uses Neon database and T3 stack to build a full-stack web application with TypeScript.",
-    links: [
-      {
-        icon: "💻",
-        type: " dev.to",
-        href: "https://dev.to/chiragagg5k/neon-t3-starter-kit-supercharging-web-development-with-serverless-postgres-13fg",
-      },
-    ],
-  },
-  {
-    title: "From Kubernetes Chaos to Calm: A Cyclops Adventure",
-    thumbnail: "/blog/cyclops.png",
-    href: "https://dev.to/chiragagg5k/from-kubernetes-chaos-to-calm-a-cyclops-adventure-1b5m",
-    publishedAt: "2024-07-30",
-    tags: ["kubernetes", "cyclops", "guide"],
-    description:
-      "A guide to understanding and managing Kubernetes Chaos, and how to use it to improve the reliability of your applications.",
-    links: [
-      {
-        icon: "💻",
-        type: " dev.to",
-        href: "https://dev.to/chiragagg5k/from-kubernetes-chaos-to-calm-a-cyclops-adventure-1b5m",
-      },
-    ],
-  },
-  {
-    title: "My Journey in Authorization with OPAL",
-    thumbnail: "/blog/opal.png",
-    href: "https://dev.to/chiragagg5k/my-journey-in-authorization-with-opal-1072",
-    publishedAt: "2024-06-23",
-    tags: ["opal", "authorization", "guide"],
-    description:
-      "Understanding the basics of authorization and how to implement it using OPAL, a powerful authorization library.",
-    links: [
-      {
-        icon: "💻",
-        type: " dev.to",
-        href: "https://dev.to/chiragagg5k/my-journey-in-authorization-with-opal-1072",
-      },
-    ],
-  },
-];
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -119,22 +39,6 @@ const timeToHowLongAgo = (date: string) => {
 };
 
 export default async function BlogPage() {
-  const fetchBlogs = async () => {
-    "use server";
-
-    const supabase = createClient();
-    let { data: blogs } = await supabase
-      .from("blogs")
-      .select("*, links (icon, type, href)");
-    return blogs;
-  };
-
-  // const blogs = await fetchBlogs()
-
-  // if(!blogs) return null;
-
-  const blogs = posts;
-
   return (
     <section>
       <BlurFade delay={BLUR_FADE_DELAY}>
@@ -148,7 +52,7 @@ export default async function BlogPage() {
         </p>
       </BlurFade>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mx-auto">
-        {blogs
+        {posts
           .sort((a, b) => {
             if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
               return -1;
@@ -170,6 +74,18 @@ export default async function BlogPage() {
             </BlurFade>
           ))}
       </div>
+      <BlurFade delay={BLUR_FADE_DELAY * 2 + posts.length * 0.05}>
+        <p className="text-center my-8 text-sm text-muted-foreground">
+          Follow me on{" "}
+          <Link
+            className="underline text-foreground"
+            href="https://dev.to/chiragagg5k"
+          >
+            dev.to
+          </Link>{" "}
+          for more content!
+        </p>
+      </BlurFade>
     </section>
   );
 }

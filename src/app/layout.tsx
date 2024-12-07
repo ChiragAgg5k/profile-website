@@ -20,10 +20,17 @@ export const metadata: Metadata = {
     template: `%s | ${DATA.name}`,
   },
   description: DATA.description,
+  keywords:
+    "software engineer, web developer, full stack developer, frontend developer, React developer, TypeScript, Next.js, portfolio, software development, programming",
+  authors: [
+    {
+      name: "Chirag Aggarwal",
+    },
+  ],
   openGraph: {
     title: `${DATA.name}`,
     description: DATA.description,
-    images: ["/me.jpg"],
+    images: ["/preview.jpg"],
     url: "https://www.chiragaggarwal.tech",
     siteName: `${DATA.name}'s Portfolio`,
     locale: "en_US",

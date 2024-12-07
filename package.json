@@ -17,9 +17,8 @@
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
-    "@supabase/ssr": "^0.5.1",
     "@types/mdx": "^2.0.13",
-    "axios": "^1.7.7",
+    "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.5.4",
@@ -35,7 +34,6 @@
     "sonner": "^1.7.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "unified": "^11.0.5",
     "zod": "^3.23.8"
   },
   "devDependencies": {

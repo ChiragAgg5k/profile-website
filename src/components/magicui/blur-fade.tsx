@@ -30,6 +30,7 @@ const BlurFade = ({
   blur = "6px",
 }: BlurFadeProps) => {
   const ref = useRef(null);
+  // @ts-ignore
   const inViewResult = useInView(ref, {
     once: true,
     // @ts-ignore
