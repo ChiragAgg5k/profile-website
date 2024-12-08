@@ -1,5 +1,9 @@
 import { Icons } from "@/components/icons";
 import { HomeIcon, NotebookIcon, Play } from "lucide-react";
+import { DiPostgresql } from "react-icons/di";
+import { FaDocker, FaJava, FaNodeJs, FaPython } from "react-icons/fa";
+import { PiFileCppFill } from "react-icons/pi";
+import { SiAppwrite, SiKubernetes } from "react-icons/si";
 
 export const DATA = {
   name: "Chirag Aggarwal",
@@ -13,17 +17,55 @@ export const DATA = {
     "I am Chirag Aggarwal, a third-year Bachelor of Technology student from India, currently studying Computer Science Engineering. As a **Full-stack Developer**, I enjoy both frontend and backend development equally. Additionally, I have a passion for content writing and conducting research on various topics, particularly in the fields of **Artificial Intelligence** and **Computer Vision**.",
   avatarUrl: "/me.jpg",
   skills: [
-    "React",
-    "Next.js",
-    "Typescript",
-    "Node.js",
-    "Python",
-    "Postgres",
-    "Docker",
-    "Kubernetes",
-    "Java",
-    "C++",
-    "Appwrite",
+    {
+      name: "Next.js",
+      icon: <Icons.nextjs className="size-3" />,
+    },
+    // "Typescript",
+    // "Node.js",
+    // "Python",
+    // "Postgres",
+    // "Docker",
+    // "Kubernetes",
+    // "Java",
+    // "C++",
+    // "Appwrite",
+    {
+      name: "Typescript",
+      icon: <Icons.typescript className="size-3" />,
+    },
+    {
+      name: "Node.js",
+      icon: <FaNodeJs className="size-3" />,
+    },
+    {
+      name: "Python",
+      icon: <FaPython className="size-3" />,
+    },
+    {
+      name: "Postgres",
+      icon: <DiPostgresql className="size-3" />,
+    },
+    {
+      name: "Docker",
+      icon: <FaDocker className="size-3" />,
+    },
+    {
+      name: "Kubernetes",
+      icon: <SiKubernetes className="size-3" />,
+    },
+    {
+      name: "Java",
+      icon: <FaJava className="size-3" />,
+    },
+    {
+      name: "C++",
+      icon: <PiFileCppFill className="size-3" />,
+    },
+    {
+      name: "Appwrite",
+      icon: <SiAppwrite className="size-3" />,
+    },
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },

@@ -104,7 +104,7 @@ export const ResumeCard = ({
                 duration: 0.7,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="mt-2 text-xs sm:text-sm mb-4 px-4"
+              className="mt-2 text-xs sm:text-sm mb-4"
               // @ts-ignore
               onClick={handleDescriptionClick}
             >

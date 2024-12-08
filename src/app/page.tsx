@@ -56,7 +56,7 @@ export default function Page() {
             </Markdown>
             <div className="flex items-center justify-end mt-4">
               <Link
-                href="/ChiragAggarwal_resume.pdf"
+                href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -123,8 +123,14 @@ export default function Page() {
             </BlurFade>
             <div className="flex flex-wrap gap-1">
               {DATA.skills.map((skill, id) => (
-                <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                  <Badge key={skill}>{skill}</Badge>
+                <BlurFade
+                  key={skill.name}
+                  delay={BLUR_FADE_DELAY * 10 + id * 0.05}
+                >
+                  <Badge key={skill.name} className="hover:cursor-default">
+                    <span className="mr-2">{skill.icon}</span>
+                    {skill.name}
+                  </Badge>
                 </BlurFade>
               ))}
             </div>
@@ -140,7 +146,8 @@ export default function Page() {
                   </h2>
                   <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                     I like to build projects. I have built a lot of projects,
-                    here are just some of my favorites.
+                    here are just some of my{" "}
+                    <span className="font-bold">favorites</span>.
                   </p>
                 </div>
               </div>
@@ -174,11 +181,12 @@ export default function Page() {
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
                     Positions of Responsibility 💼
                   </h2>
-                  <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  <p className="text-muted-foreground md:text-base/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                     I believe in the power of collaboration and teamwork. So I
                     like to keep myself busy while working in different
-                    communities and projects. Here are some of the positions I
-                    have held.
+                    <span className="font-bold"> communities</span> and{" "}
+                    <span className="font-bold">projects</span>. Here are some
+                    of the positions I have held.
                   </p>
                 </div>
               </div>
