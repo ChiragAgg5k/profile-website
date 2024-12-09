@@ -60,7 +60,7 @@ export function HackathonCard({
                 variant={"outline"}
                 key={idx}
                 title={link.title}
-                className="flex gap-2"
+                className="flex gap-2 hover:border-foreground hover:cursor-pointer"
               >
                 {link.icon}
                 {link.title}

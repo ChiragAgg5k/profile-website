@@ -17,7 +17,7 @@ interface ResumeCardProps {
   href?: string;
   badges?: readonly string[];
   period: string;
-  description?: string;
+  description?: readonly string[];
   links?: readonly {
     type: string;
     href: string;
@@ -31,7 +31,6 @@ export const ResumeCard = ({
   title,
   subtitle,
   href,
-  badges,
   period,
   description,
   links,
@@ -109,21 +108,26 @@ export const ResumeCard = ({
               onClick={handleDescriptionClick}
             >
               <div className="prose prose-sm dark:prose-invert max-w-none">
-                <Markdown
-                  components={{
-                    p: ({ children }) => (
-                      <p className="whitespace-pre-wrap mb-2">{children}</p>
-                    ),
-                    ul: ({ children }) => (
-                      <ul className="list-disc pl-4 mb-2">{children}</ul>
-                    ),
-                    li: ({ children }) => <li className="mb-1">{children}</li>,
-                  }}
-                >
-                  {description}
-                </Markdown>
+                {description.map((item, index) => (
+                  <Markdown
+                    key={index}
+                    components={{
+                      p: ({ children }) => (
+                        <p className="whitespace-pre-wrap mb-2">{children}</p>
+                      ),
+                      ul: ({ children }) => (
+                        <ul className="list-disc pl-4 mb-2">{children}</ul>
+                      ),
+                      li: ({ children }) => (
+                        <li className="-mb-3">{children}</li>
+                      ),
+                    }}
+                  >
+                    {item}
+                  </Markdown>
+                ))}
                 {links && (
-                  <div className="flex flex-wrap gap-x-2 mt-4">
+                  <div className="flex flex-wrap gap-x-2 mt-8">
                     {links.map((link, index) => (
                       <Link
                         target="_blank"

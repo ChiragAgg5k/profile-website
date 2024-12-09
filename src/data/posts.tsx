@@ -85,7 +85,7 @@ export const posts = [
       "My Hacktoberfest 2024 Experience with Cal Buddy, Your Smart Calendar Assistant",
     thumbnail: "/blog/cal-buddy.png",
     href: "https://dev.to/chiragagg5k/my-hacktoberfest-2024-experience-with-cal-buddy-your-smart-calendar-assistant-456c",
-    publishedAt: "2024-12-05",
+    publishedAt: "2024-11-01",
     tags: ["hacktoberfest", "cal-buddy", "guide"],
     description:
       "A detailed guide on my journey with Hacktoberfest and Cal Buddy, and how I used them to navigate development challenges.",
@@ -111,6 +111,22 @@ export const posts = [
         icon: "💻",
         type: " dev.to",
         href: "https://dev.to/chiragagg5k/my-hackfrost-journey-navigating-development-challenges-with-daytona-hdc",
+      },
+    ],
+  },
+  {
+    title: "How to Register Users in Django REST Framework?",
+    thumbnail: "/blog/django-tute.png",
+    href: "https://www.geeksforgeeks.org/how-to-register-users-in-django-rest-framework",
+    publishedAt: "2024-10-01",
+    tags: ["django", "rest-framework", "guide"],
+    description:
+      "A detailed guide on how to register users in Django REST Framework.",
+    links: [
+      {
+        icon: "🟩",
+        type: " geeksforgeeks",
+        href: "https://www.geeksforgeeks.org/how-to-register-users-in-django-rest-framework",
       },
     ],
   },

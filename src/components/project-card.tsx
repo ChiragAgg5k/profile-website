@@ -14,9 +14,9 @@ import Markdown from "react-markdown";
 interface Props {
   title: string;
   href?: string;
-  description: string;
+  description?: string;
   dates: string;
-  tags: readonly string[];
+  tags?: readonly string[];
   link?: string;
   image?: string;
   video?: string;

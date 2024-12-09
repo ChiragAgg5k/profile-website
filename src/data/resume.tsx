@@ -1,8 +1,7 @@
 import { Icons } from "@/components/icons";
 import { HomeIcon, NotebookIcon, Play } from "lucide-react";
 import { DiPostgresql } from "react-icons/di";
-import { FaDocker, FaJava, FaNodeJs, FaPython } from "react-icons/fa";
-import { PiFileCppFill } from "react-icons/pi";
+import { FaDocker, FaNodeJs, FaPython } from "react-icons/fa";
 import { SiAppwrite, SiKubernetes } from "react-icons/si";
 
 export const DATA = {
@@ -21,15 +20,6 @@ export const DATA = {
       name: "Next.js",
       icon: <Icons.nextjs className="size-3" />,
     },
-    // "Typescript",
-    // "Node.js",
-    // "Python",
-    // "Postgres",
-    // "Docker",
-    // "Kubernetes",
-    // "Java",
-    // "C++",
-    // "Appwrite",
     {
       name: "Typescript",
       icon: <Icons.typescript className="size-3" />,
@@ -53,14 +43,6 @@ export const DATA = {
     {
       name: "Kubernetes",
       icon: <SiKubernetes className="size-3" />,
-    },
-    {
-      name: "Java",
-      icon: <FaJava className="size-3" />,
-    },
-    {
-      name: "C++",
-      icon: <PiFileCppFill className="size-3" />,
     },
     {
       name: "Appwrite",
@@ -108,6 +90,26 @@ export const DATA = {
 
   work: [
     {
+      company: "Appwrite",
+      href: "https://appwrite.io/",
+      badges: [],
+      location: "Remote",
+      title: "Engineering Intern",
+      logoUrl: "/work-experience/appwrite.png",
+      start: "December 2024",
+      end: "Present",
+      description: [
+        "- Working with the Appwrite **backend** team to improve the platform and add new features",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://appwrite.io/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+    },
+    {
       company: "Skillarena",
       href: "https://skillarena.in/",
       badges: [],
@@ -116,8 +118,10 @@ export const DATA = {
       logoUrl: "/work-experience/skillarena.png",
       start: "July 2024",
       end: "September 2024",
-      description: `-Improved and maintained core backend systems written in the **MERN** stack
-        -Implemented a **real-time chat application** backend utilizing WebSockets and FastAPI`,
+      description: [
+        "- Improved and maintained core backend systems written in the **MERN** stack",
+        "- Implemented a **real-time chat application** backend utilizing WebSockets and FastAPI",
+      ],
       links: [
         {
           type: "Website",
@@ -140,8 +144,10 @@ export const DATA = {
       logoUrl: "/work-experience/clearmind.png",
       start: "October 2023",
       end: "December 2023",
-      description: `-Implemented **user feedback suggestions** such as more personalized recommendations, memory history etc.
-        -Integrated a seamless payment gateway using **Stripe**`,
+      description: [
+        "- Implemented **user feedback suggestions** such as more personalized recommendations, memory history etc.",
+        "- Integrated a seamless payment gateway using **Stripe**",
+      ],
       links: [
         {
           type: "Website",
@@ -357,9 +363,15 @@ export const DATA = {
     },
     {
       title: "HackCBS",
-      dates: "Nob3 2023",
+      dates: "November 2023",
       location: "Shaheed Sukhdev College of Business Studies",
       image: "/achievements/hackcbs.jpeg",
+    },
+    {
+      title: "Luminous TechnoX Hackathon",
+      dates: "December 2023",
+      location: "Taj City Center, Gurugram",
+      image: "/achievements/luminous.jpg",
     },
   ],
 } as const;

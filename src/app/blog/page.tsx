@@ -40,7 +40,7 @@ const timeToHowLongAgo = (date: string) => {
 
 export default async function BlogPage() {
   return (
-    <section>
+    <section className="mx-8">
       <BlurFade delay={BLUR_FADE_DELAY}>
         <h1 className="font-medium text-3xl font-semibold mb-8 tracking-tighter">
           Blogs ✏️
@@ -51,7 +51,7 @@ export default async function BlogPage() {
           of my favourite content related work published on various sites.
         </p>
       </BlurFade>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mx-auto">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 mx-auto">
         {posts
           .sort((a, b) => {
             if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
@@ -64,9 +64,7 @@ export default async function BlogPage() {
               <ProjectCard
                 key={post.title}
                 title={post.title}
-                description={post.description}
                 dates={timeToHowLongAgo(post.publishedAt)}
-                tags={post.tags}
                 href={post.href}
                 image={post.thumbnail}
                 links={[post.links[0]]}

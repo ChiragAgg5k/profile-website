@@ -8,7 +8,7 @@ export default function NotFound() {
         Oops... Page not found
       </h1>
       <p className="text-center text-base mt-4 text-muted-foreground">
-        Sorry I don't have the necessary page you were looking for in my
+        Sorry I don&apos;t have the necessary page you were looking for in my
         portfolio. <br />
         Can you please check the URL or <a href="/">go back to home</a>?
       </p>

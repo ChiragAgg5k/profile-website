@@ -29,7 +29,7 @@ export default function ContactMeForm() {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
+  const onSubmit = () => {
     const formElement = document.querySelector("form") as HTMLFormElement;
     formElement?.submit();
   };
@@ -42,7 +42,7 @@ export default function ContactMeForm() {
     const errors = form.formState.errors;
 
     if (errors.email || errors.message) {
-      toast.error("Hey! Looks like you forgot to fill something.", {
+      toast.error("You forgot something!", {
         description: `Looks like you forgot to enter a valid ${
           errors.email ? "email" : "message"
         }.`,

@@ -38,7 +38,7 @@ export default function Page() {
                 />
               </div>
               <BlurFade delay={BLUR_FADE_DELAY}>
-                <Avatar className="size-28 border">
+                <Avatar className="size-28 border hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 ease-in-out">
                   <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
                   <AvatarFallback>{DATA.initials}</AvatarFallback>
                 </Avatar>
@@ -121,13 +121,16 @@ export default function Page() {
             <BlurFade delay={BLUR_FADE_DELAY * 9}>
               <h2 className="text-xl font-bold">Skills</h2>
             </BlurFade>
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1 items-center justify-center">
               {DATA.skills.map((skill, id) => (
                 <BlurFade
                   key={skill.name}
                   delay={BLUR_FADE_DELAY * 10 + id * 0.05}
                 >
-                  <Badge key={skill.name} className="hover:cursor-default">
+                  <Badge
+                    key={skill.name}
+                    className={`hover:cursor-default transition-all duration-300 ease-in-out ${skill.name === "Appwrite" ? "hover:bg-[#FF1F5E] hover:text-white" : ""}`}
+                  >
                     <span className="mr-2">{skill.icon}</span>
                     {skill.name}
                   </Badge>
