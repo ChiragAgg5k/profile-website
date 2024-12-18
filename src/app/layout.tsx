@@ -17,10 +17,10 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
-    default: DATA.name,
+    default: `${DATA.name} | Engineering Intern @Appwrite`,
     template: `%s | ${DATA.name}`,
   },
-  description: DATA.description,
+  description: `${DATA.description} | ${DATA.summary}`,
   keywords:
     "software engineer, web developer, full stack developer, frontend developer, React developer, TypeScript, Next.js, portfolio, software development, programming",
   authors: [
@@ -53,9 +53,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [`${DATA.url}/previews/preview.png`],
   },
-  verification: {
-    google: "",
-    yandex: "",
+  alternates: {
+    canonical: `${DATA.url}`,
   },
 };
 
