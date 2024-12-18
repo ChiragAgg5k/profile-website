@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${DATA.name}`,
     description: DATA.description,
-    images: ["/preview.png"],
+    images: ["/previews/preview.png", "/previews/preview-square.png"],
     url: "https://www.chiragaggarwal.tech",
     siteName: `${DATA.name}'s Portfolio`,
     locale: "en_US",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   twitter: {
     title: `${DATA.name}`,
     card: "summary_large_image",
-    images: [`${DATA.url}/preview.jpg`],
+    images: [`${DATA.url}/previews/preview.png`],
   },
   verification: {
     google: "",
@@ -68,10 +68,21 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/me.jpg" type="image/jpeg" sizes="32x32" />
-        <meta property="og:image" content={`${DATA.url}/preview.jpg`} />
-        <meta property="og:image:type" content="image/jpeg" />
+        <link rel="apple-touch-icon" href="/me.jpg" />
+        <meta
+          property="og:image"
+          content={`${DATA.url}/previews/preview.png`}
+        />
+        <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta
+          property="og:image"
+          content={`${DATA.url}/previews/preview-square.png`}
+        />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="400" />
       </head>
       <body
         className={cn(

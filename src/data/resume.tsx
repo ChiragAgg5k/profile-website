@@ -232,7 +232,7 @@ export const DATA = {
       dates: "April 2023 - March 2023",
       active: true,
       description:
-        "A news sharing platform targetting university students in particular, aiming to reduce spread of misinformation.",
+        "A news sharing platform targeting university students in particular, aiming to reduce spread of misinformation.",
       technologies: ["Java", "XML", "Firebase", "Android Studio"],
       links: [
         {
