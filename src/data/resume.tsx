@@ -7,7 +7,7 @@ import { SiAppwrite, SiKubernetes } from "react-icons/si";
 export const DATA = {
   name: "Chirag Aggarwal",
   initials: "CA",
-  url: "https://www.chiragaggarwal.tech/",
+  url: "https://www.chiragaggarwal.tech",
   location: "Delhi NCR, India",
   locationLink: "https://maps.app.goo.gl/Zbzok1mCik445h1C6",
   description:
