@@ -16,6 +16,10 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
+  icons: {
+    icon: "/me.jpg",
+    apple: "/me.jpg",
+  },
   title: {
     default: `${DATA.name} | Engineering Intern @Appwrite`,
     template: `%s | ${DATA.name}`,
@@ -31,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${DATA.name}`,
     description: DATA.description,
-    images: ["/previews/preview.png", "/previews/preview-square.png"],
+    images: ["/previews/preview.png"],
     url: "https://www.chiragaggarwal.tech",
     siteName: `${DATA.name}'s Portfolio`,
     locale: "en_US",
@@ -65,24 +69,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/me.jpg" type="image/jpeg" sizes="32x32" />
-        <link rel="apple-touch-icon" href="/me.jpg" />
-        <meta
-          property="og:image"
-          content={`${DATA.url}/previews/preview.png`}
-        />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta
-          property="og:image"
-          content={`${DATA.url}/previews/preview-square.png`}
-        />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="400" />
-        <meta property="og:image:height" content="400" />
-      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased max-w-4xl mx-auto py-12 sm:py-24",
