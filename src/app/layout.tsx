@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${DATA.name}`,
     description: DATA.description,
-    images: ["/previews/preview.png"],
+    images: ["/previews/preview-1200-630.png"],
     url: "https://www.chiragaggarwal.tech",
     siteName: `${DATA.name}'s Portfolio`,
     locale: "en_US",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     title: `${DATA.name}`,
     card: "summary_large_image",
-    images: [`${DATA.url}/previews/preview.png`],
+    images: [`${DATA.url}/previews/preview-1200-630.png`],
   },
   alternates: {
     canonical: `${DATA.url}`,
