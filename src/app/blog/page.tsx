@@ -1,6 +1,6 @@
 import BlurFade from "@/components/magicui/blur-fade";
-import { ProjectCard } from "@/components/project-card";
 import { posts } from "@/data/posts";
+import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -43,15 +43,15 @@ export default async function BlogPage() {
     <section className="mx-8">
       <BlurFade delay={BLUR_FADE_DELAY}>
         <h1 className="font-medium text-3xl font-semibold mb-8 tracking-tighter">
-          Blogs ✏️
+          Blogs
         </h1>
-        <p className="mb-8">
+        <p className="mb-8 text-muted-foreground text-sm">
           So... I not only like to read long and boring documentations, research
           papers and journals, I also like to write them! Here you can find some
           of my favourite content related work published on various sites.
         </p>
       </BlurFade>
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 mx-auto">
+      <div className="flex flex-col gap-4">
         {posts
           .sort((a, b) => {
             if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
@@ -61,14 +61,17 @@ export default async function BlogPage() {
           })
           .map((post, id) => (
             <BlurFade delay={BLUR_FADE_DELAY * 2 + id * 0.05} key={id}>
-              <ProjectCard
-                key={post.title}
-                title={post.title}
-                dates={timeToHowLongAgo(post.publishedAt)}
-                href={post.href}
-                image={post.thumbnail}
-                links={[post.links[0]]}
-              />
+              <Link href={post.href} className="pb-4">
+                <div key={id} className="pb-4 group">
+                  <div className="flex items-center justify-start gap-4">
+                    <h1>{post.title}</h1>
+                    <ArrowRightIcon className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out" />
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {timeToHowLongAgo(post.publishedAt)}
+                  </p>
+                </div>
+              </Link>
             </BlurFade>
           ))}
       </div>
