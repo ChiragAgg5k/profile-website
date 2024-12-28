@@ -42,4 +42,9 @@ export const posts = [
     href: "https://www.geeksforgeeks.org/how-to-register-users-in-django-rest-framework",
     publishedAt: "2024-10-01",
   },
+  {
+    title: "Architecture Patterns for Beginners: MVC, MVP, and MVVM",
+    href: "https://dev.to/chiragagg5k/architecture-patterns-for-beginners-mvc-mvp-and-mvvm-2pe7",
+    publishedAt: "2024-12-28",
+  },
 ];
