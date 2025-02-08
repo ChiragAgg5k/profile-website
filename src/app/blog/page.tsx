@@ -12,6 +12,8 @@ export const metadata = {
   robots: "index, follow",
 };
 
+export const dynamic = "force-dynamic";
+
 const BLUR_FADE_DELAY = 0.04;
 
 const timeToHowLongAgo = (date: string) => {
