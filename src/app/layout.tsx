@@ -17,11 +17,11 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   icons: {
-    icon: "/me.jpg",
-    apple: "/me.jpg",
+    icon: "/me.png",
+    apple: "/me.png",
   },
   title: {
-    default: `${DATA.name} | Engineering Intern @Appwrite`,
+    default: `${DATA.name}`,
     template: `%s | ${DATA.name}`,
   },
   description: `${DATA.description} | ${DATA.summary}`,

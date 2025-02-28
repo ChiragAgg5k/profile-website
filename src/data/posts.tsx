@@ -53,4 +53,9 @@ export const posts = [
     href: "https://dev.to/chiragagg5k/writing-event-driven-serverless-code-to-build-scalable-applications-2mol",
     publishedAt: "2025-01-26",
   },
+  {
+    title: "Self-hosting Appwrite with Coolify",
+    href: "https://dev.to/chiragagg5k/self-hosting-appwrite-with-coolify-2025-02-28",
+    publishedAt: "2025-02-28",
+  },
 ];
