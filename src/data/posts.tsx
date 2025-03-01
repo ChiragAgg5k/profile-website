@@ -44,13 +44,13 @@ export const posts = [
   },
   {
     title: "Architecture Patterns for Beginners: MVC, MVP, and MVVM",
-    href: "https://dev.to/chiragagg5k/architecture-patterns-for-beginners-mvc-mvp-and-mvvm-2pe7",
+    href: "/blog/architecture-patterns-for-beginners-mvc-mvp-and-mvvm",
     publishedAt: "2024-12-28",
   },
   {
     title:
       "Writing Event-Driven Serverless Code to Build Scalable Applications",
-    href: "https://dev.to/chiragagg5k/writing-event-driven-serverless-code-to-build-scalable-applications-2mol",
+    href: "/blog/writing-event-driven-serverless-code-to-build-scalable-applications",
     publishedAt: "2025-01-26",
   },
   {

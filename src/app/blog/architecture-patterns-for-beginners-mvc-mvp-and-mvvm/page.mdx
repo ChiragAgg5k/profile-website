@@ -1,0 +1,141 @@
+import { OriginalPost } from "@/components/original-post";
+
+![Cover Image](https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fquarxzmh6jyqhmhiqfsb.png)
+
+# Architecture Patterns for Beginners: MVC, MVP, and MVVM
+
+Building software can be complex.
+
+You might not have to think much about it when building your side project, but production software differs.
+
+It can require multiple components, all of which if not handled correctly can lead to chaos.
+
+But it doesn't need to be this complex. In today's article we will be delving into the world of architectural patterns, and discuss some divides your software into 3 simple components, each focusing on related tasks.
+
+---
+
+## Architectural patterns
+
+Whenever we are talking about architectural patterns in software design, the first ones to top the list include architectures like client-server, layered, monolithic, microkernel, even-driven, etc. These patterns are concerned with overall system architecture, including multiple applications, services, servers, etc.
+
+However, MVP, MVC, and MVVM focus on organizing code within a single application by separating data, user interface, and logic. These are a subset of architecture patterns that focus on the overall system.
+
+![Client-Server Architecture vs MVC](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tsnn1y32wzy0gz5bnl4z.png)
+
+---
+
+## MVC, MVP, and MVVM
+
+For the sake of keeping the blog readable and not exceeding the word length, we will focus on just the architectural patterns that organize the code within a single application, namely:
+
+1. Model-View-Controller
+2. Model-View-Presenter
+3. Model-View-ViewModel
+
+Clearly, all three models have two components fixed, i.e. the Model and the View. So let's first discuss them in detail before coming to each of the architecture.
+
+### Model
+
+The model consists of all the code that is related to **data** present in the software. It's the layer for communication of the database and network layers with the rest of the application. Its main responsibilities include:
+
+1. Handle data and business logic.
+2. Encapsulate the application's data and the rules governing access to that data.
+3. Handling data structures.
+4. Performing CRUD (Create, Read, Update, and Delete) operations on data.
+
+![Functioning of Model layer](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yacza08pqkbmgb5ae9cf.png)
+
+### View
+
+View is pretty much the front end of your application or everything that the user will be able to see and interact with. It's also known as the User Interface (UI) of your application. Its responsibilities include:
+
+1. Handle non-business logic and purely presentational logic.
+2. Present the data provided by other layers to the user.
+3. Receive user input and forward it to other layers.
+4. May or may communicate directly with the Model layer.
+
+## Model-View-Controller (MVC) Architecture
+
+![Model-View-Controller Architecture](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t34ojxv1pyae6kogh33t.png)
+
+Now that we have an understanding of what Model and View layers do, let's take a look at individual architectural patterns.
+
+Starting with MVC, it uses a **Controller** layer that communicates with both the Model and View layers.
+
+It's main responsibilities of the controller include:
+
+1. Manipulating data through the Model layer.
+2. Receive instructions, aka the UI, from the View layer.
+3. Update the View with changes defined due to control logic.
+
+Here, although the View layer cannot directly interact with the Model layer, it can however receive updates based on changes in the data. Hence all three layers are connected to each other in some form, with the controller being the main component.
+
+## Model-View-Presenter (MVP) Architecture
+
+![Model-View-Presenter Architecture](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hw9i30c4jrun2ryzxup8.png)
+
+Here, the Presenter layer assumes the functionality of the "middle-man" between the Model and View layers and handles all the communication between them. There is no communication at all between the Model and View layers directly.
+
+Its responsibilities include:
+
+1. Update the UI or the View layer based on user actions.
+2. Update the data or Model layer based on code logic.
+3. Handle much of the business logic that would be otherwise handled in the controller in MVC architecture.
+
+## Model-View-ViewModel (MVVM) Architecture
+
+![Model-View-ViewModel Architecture](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r7ik37i57yt9vbx70z7c.png)
+
+This architecture at first glance is almost identical to MVP architecture. But there are some key differences between them:
+
+1. Multiple views can be mapped to a single ViewModel layer.
+2. It uses data binding between the ViewModel layer and the View layer, making it more event-driven.
+3. There is no concept of User Interface in this architecture. The View layer represents the actions of the user, not the interface.
+
+## Side by Side comparison
+
+| Aspect                     | MVC                                 | MVP                                     | MVVM                                           |
+| -------------------------- | ----------------------------------- | --------------------------------------- | ---------------------------------------------- |
+| Full Name                  | Model-View-Controller               | Model-View-Presenter                    | Model-View-ViewModel                           |
+| Separation of Concerns     | Basic                               | Better                                  | Best                                           |
+| Data Flow                  | Two-way                             | One-way                                 | One-way with data binding                      |
+| View-Logic Relationship    | Many-to-one                         | One-to-one                              | Many-to-one                                    |
+| Testability                | Hard                                | Good                                    | Best                                           |
+| Maintenance                | Hard                                | Easy                                    | Easy                                           |
+| Learning Curve             | Easy                                | Easy                                    | Harder                                         |
+| Performance                | Can be slower due to tight coupling | Better performance with looser coupling | Smooth performance, especially for complex UIs |
+| UI Updates                 | Controller updates View             | Presenter updates View                  | ViewModel updates View through data binding    |
+| Dependency on UI Framework | High                                | Low                                     | Low or no dependency                           |
+| Scalability                | Suitable for small-scale projects   | Good for simple and complex projects    | Ideal for large, data-heavy apps               |
+
+But which is the most popular you might ask? All of them are equally popular architectures being used according to the company's respective requirements for a product. Some companies adopting these different architectures are:
+
+1. MVC: StackOverflow, GoDaddy, Visual Studio website
+   Dell
+2. MVP: Google (for some Android apps)
+3. MVVM: Apple (for some iOS apps using SwiftUI), Angular framework, Vue.js framework
+
+Also, many companies use a mix of these architectures depending on the specific needs of each project or product. The choice of architecture often depends on factors such as the complexity of the application, the development team's expertise, and the specific requirements of the project.
+
+---
+
+## Conclusion
+
+This article covered the basics of architectural patterns, from how overall architecture is designed to how a single application can be further divided into three components for better management and scalability.
+
+- MVC, with its straightforward approach, remains popular for web applications.
+- MVP builds upon MVC's foundation, offering improved testability and a cleaner separation of concerns.
+- MVVM, the most recent of the three, has gained significant traction in modern application development.
+
+There is no clear winner between them and each pattern offers unique advantages and is suited to different projects and development scenarios. As the software development landscape continues to evolve, we may see further refinements of these patterns or the emergence of new architectures altogether.
+
+Want to learn more about the architectural patterns discussed? Here are some references I found helpful:
+
+1. https://www.geeksforgeeks.org/android-architecture-patterns/
+2. https://www.masaischool.com/blog/comparing-software-architecture-patterns/
+3. https://www.apptension.com/blog-posts/mvc-vs-mvvm-vs-mvp
+
+<OriginalPost
+  text="Read the original post on Dev.to"
+  link="https://dev.to/chiragagg5k/architecture-patterns-for-beginners-mvc-mvp-and-mvvm-2pe7"
+/>

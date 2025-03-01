@@ -1,6 +1,6 @@
 {
-  "name": "porfolio",
-  "version": "0.1.1",
+  "name": "portfolio-website",
+  "version": "0.2.0",
   "private": false,
   "scripts": {
     "dev": "next dev",
