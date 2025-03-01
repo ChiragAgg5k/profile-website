@@ -1,46 +1,46 @@
 export const posts = [
   {
+    title: "My Journey in Authorization with OPAL",
+    href: "/blog/my-journey-in-authorization-with-opal",
+    publishedAt: "2024-06-23",
+  },
+  {
     title: "Mastering npm: A Comprehensive Guide to Package Management",
-    href: "https://dev.to/chiragagg5k/mastering-npm-a-comprehensive-guide-to-package-management-3h0m",
+    href: "/blog/mastering-npm-a-comprehensive-guide-to-package-management",
     publishedAt: "2024-07-05",
   },
   {
+    title: "From Kubernetes Chaos to Calm: A Cyclops Adventure",
+    href: "/blog/from-kubernetes-chaos-to-calm-a-cyclops-adventure",
+    publishedAt: "2024-07-30",
+  },
+  {
     title: "Conditional Dependency Management Using Maven Profiles",
-    href: "https://www.geeksforgeeks.org/conditional-dependency-management-using-maven-profiles/?itm_source=auth&itm_medium=contributions&itm_campaign=articles",
+    href: "/blog/conditional-dependency-management-using-maven-profiles",
     publishedAt: "2024-08-06",
   },
   {
     title:
       "Neon T3 Starter Kit: Supercharging Web Development with Serverless Postgres",
-    href: "https://dev.to/chiragagg5k/neon-t3-starter-kit-supercharging-web-development-with-serverless-postgres-13fg",
+    href: "/blog/neon-t3-starter-kit-supercharging-web-development-with-serverless-postgres",
     publishedAt: "2024-08-28",
   },
   {
-    title: "From Kubernetes Chaos to Calm: A Cyclops Adventure",
-    href: "https://dev.to/chiragagg5k/from-kubernetes-chaos-to-calm-a-cyclops-adventure-1b5m",
-    publishedAt: "2024-07-30",
-  },
-  {
-    title: "My Journey in Authorization with OPAL",
-    href: "https://dev.to/chiragagg5k/my-journey-in-authorization-with-opal-1072",
-    publishedAt: "2024-06-23",
+    title: "How to Register Users in Django REST Framework?",
+    href: "/blog/how-to-register-users-in-django-rest-framework",
+    publishedAt: "2024-10-01",
   },
   {
     title:
       "My Hacktoberfest 2024 Experience with Cal Buddy, Your Smart Calendar Assistant",
-    href: "https://dev.to/chiragagg5k/my-hacktoberfest-2024-experience-with-cal-buddy-your-smart-calendar-assistant-456c",
+    href: "/blog/my-hacktoberfest-2024-experience-with-cal-buddy-your-smart-calendar-assistant",
     publishedAt: "2024-11-01",
   },
   {
     title:
       "My Hackfrost Journey: Navigating Development Challenges with Daytona",
-    href: "https://dev.to/chiragagg5k/my-hackfrost-journey-navigating-development-challenges-with-daytona-hdc",
+    href: "/blog/my-hackfrost-journey-navigating-development-challenges-with-daytona",
     publishedAt: "2024-12-05",
-  },
-  {
-    title: "How to Register Users in Django REST Framework?",
-    href: "https://www.geeksforgeeks.org/how-to-register-users-in-django-rest-framework",
-    publishedAt: "2024-10-01",
   },
   {
     title: "Architecture Patterns for Beginners: MVC, MVP, and MVVM",

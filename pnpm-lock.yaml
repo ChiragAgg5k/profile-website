@@ -67,6 +67,9 @@ importers:
       prettier:
         specifier: ^3.3.3
         version: 3.4.2
+      prism-react-renderer:
+        specifier: ^2.4.1
+        version: 2.4.1(react@18.3.1)
       react:
         specifier: ^18
         version: 18.3.1
@@ -1137,6 +1140,12 @@ packages:
     resolution:
       {
         integrity: sha512-0JOXkRyLanfGPE2QRCwgxhzlBAvaRdCNMcvbd7jFfpmD4eEXll7LRwy5ymJmyeZqk7Nh7eD2LeUyQ68BbndmXw==,
+      }
+
+  "@types/prismjs@1.26.5":
+    resolution:
+      {
+        integrity: sha512-AUZTa7hQ2KY5L7AmtSiqxlhWxb4ina0yd8hNbl4TWuqnv/pFP0nDMb3YrfSBf4hJVGLh2YEIBfKaBW/9UEl6IQ==,
       }
 
   "@types/prop-types@15.7.14":
@@ -3683,6 +3692,14 @@ packages:
     engines: { node: ">=14" }
     hasBin: true
 
+  prism-react-renderer@2.4.1:
+    resolution:
+      {
+        integrity: sha512-ey8Ls/+Di31eqzUxC46h8MksNuGx/n0AAC8uKpwFau4RPDYLuE3EXTp8N8G2vX2N7UC/+IXeNUnlWBGGcAG+Ig==,
+      }
+    peerDependencies:
+      react: ">=16.0.0"
+
   prop-types@15.8.1:
     resolution:
       {
@@ -5062,6 +5079,8 @@ snapshots:
   "@types/node@20.17.9":
     dependencies:
       undici-types: 6.19.8
+
+  "@types/prismjs@1.26.5": {}
 
   "@types/prop-types@15.7.14": {}
 
@@ -6985,6 +7004,12 @@ snapshots:
   prelude-ls@1.2.1: {}
 
   prettier@3.4.2: {}
+
+  prism-react-renderer@2.4.1(react@18.3.1):
+    dependencies:
+      "@types/prismjs": 1.26.5
+      clsx: 2.1.1
+      react: 18.3.1
 
   prop-types@15.8.1:
     dependencies:

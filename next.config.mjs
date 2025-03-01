@@ -31,6 +31,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "media.geeksforgeeks.org",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

@@ -1,0 +1,208 @@
+import { OriginalPost } from "@/components/original-post";
+
+# How to Register Users in Django REST Framework?
+
+**Django REST Framework (DRF)** is a powerful and flexible toolkit for building Web APIs. One of the most common requirements in web applications is user registration. In this article, we'll explore how to implement user registration using [Django REST Framework](https://www.geeksforgeeks.org/django-rest-api-crud-with-drf/).
+
+## Setting Up Django REST Framework
+
+Before we dive into the Django REST Framework, let's set up a new Django project. Follow these steps:
+
+1. First, ensure we have Python installed on our system. We can download Python from [python.org](https://www.python.org/).
+
+2. Install Django and Django REST Framework using `pip`:
+
+```bash
+pip install django djangorestframework
+```
+
+3. Create a new Django project:
+
+```bash
+django-admin startproject django_rest_demo
+cd django_rest_demo
+```
+
+4. Create a new Django app:
+
+```bash
+python manage.py startapp user_auth
+```
+
+5. Open `django_rest_demo/settings.py` and add the `user_auth` and `rest_framework` to `INSTALLED_APPS`:
+
+```py
+INSTALLED_APPS = [
+    # ...
+    'rest_framework',
+  	# Token authentication
+    'rest_framework.authtoken',
+    'user_auth',
+]
+```
+
+6. Run initial migrations:
+
+```bash
+python manage.py migrate
+```
+
+Now that we have our Django project set up, let's configure Django REST Framework:
+
+1. In the `django_rest_demo/settings.py`, we can add any DRF-specific settings. For example:
+
+```py
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+```
+
+2. If we're using token authentication, make sure we've added `rest_framework.authtoken` to `INSTALLED_APPS` as shown in **step 5** above.
+
+Here's how our project structure might look:
+
+```bash
+django_rest_demo/
+│
+├── user_auth/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── views.py
+│   └── urls.py
+│
+├── django_rest_demo/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+│
+└── manage.py
+```
+
+## Creating a Registration Serializer
+
+Serializers in DRF allow complex data, such as querysets and model instances to be converted to native Python datatypes that can then be easily rendered into **JSON**, **XML** or other content types. They also provide deserialization, allowing parsed data to be converted back into complex types, after first validating the incoming data.
+
+Let's create a serializer for user registration: In the `user_auth/serializers.py`:
+
+```py
+from rest_framework import serializers
+from django.contrib.auth.models import User
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', 'password2']
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError({"password": "Password fields didn't match."})
+        return attrs
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password']
+        )
+        return user
+```
+
+This serializer extends ModelSerializer and uses the User model. It includes a password confirmation field and custom validation to ensure the passwords match.
+
+## Handling User Registration with Views
+
+Now that we have our serializer, let's create a view to handle the registration process. In the `user_auth/views.py`:
+
+```py
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import UserRegistrationSerializer
+
+class UserRegistrationView(APIView):
+    def post(self, request):
+        serializer = UserRegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+              "message": "User registered successfully"
+            }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+```
+
+This view uses the UserRegistrationSerializer to validate the incoming data and create a new user if the data is valid.
+
+### Example Code
+
+To complete our code, let's set up the URLs to make our registration view accessible.
+
+In our `user_auth/urls.py` (create this file if it doesn't exist):
+
+```py
+from django.urls import path
+from .views import UserRegistrationView
+
+urlpatterns = [
+    path('register/', UserRegistrationView.as_view(), name='register'),
+]
+```
+
+Then, in the project's `django_rest_demo/urls.py`:
+
+```py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('user_auth.urls')),
+]
+```
+
+## Testing the Registration Endpoint
+
+We can now run our Django development server:
+
+```bash
+python manage.py runserver
+```
+
+To test the registration endpoint, we can use tools like curl, Postman, or even the Django REST Framework browsable API. Here's an example using curl:
+
+```bash
+curl -X POST http://localhost:8000/api/register/
+-H "Content-Type: application/json" -d
+'{"username":"newuser",
+"email":"newuser@example.com",
+"password":"securepassword",
+"password2":"securepassword"}'
+```
+
+If successful, we should receive a response indicating that the user was registered successfully.
+
+![api-call-success](https://media.geeksforgeeks.org/wp-content/uploads/20241001015217/api-call-success.png)
+
+## Conclusion
+
+In this article, we've covered how to set up a Django project named "django-rest-demo" from scratch and implement user registration using Django REST Framework in an app called "user_auth". We created a custom serializer to handle the registration data, including password confirmation and validation. We then created a view to process the registration and return appropriate responses.
+
+This implementation provides a solid foundation for user registration in our DRF project. Remember to add appropriate permissions and authentication to our views as needed, and consider adding features like email verification for a more robust registration process.
+
+<OriginalPost
+  text="Checkout the original post on GeeksforGeeks"
+  link="https://www.geeksforgeeks.org/how-to-register-users-in-django-rest-framework"
+  in
+/>
