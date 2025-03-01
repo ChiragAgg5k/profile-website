@@ -55,7 +55,7 @@ export const posts = [
   },
   {
     title: "Self-hosting Appwrite with Coolify",
-    href: "https://dev.to/chiragagg5k/self-hosting-appwrite-with-coolify-2025-02-28",
+    href: "/blog/self-hosting-appwrite-with-coolify",
     publishedAt: "2025-02-28",
   },
 ];
