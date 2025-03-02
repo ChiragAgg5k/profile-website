@@ -15,7 +15,6 @@ type HeadingProps = {
   children: React.ReactNode;
 } & Omit<ComponentProps<"h1">, "id">;
 
-// You can create custom components here
 const CustomLink = ({ href, children, ...props }: CustomLinkProps) => {
   if (href.startsWith("/")) {
     return (
@@ -49,7 +48,15 @@ const CustomLink = ({ href, children, ...props }: CustomLinkProps) => {
 const CustomImage = ({ alt = "", ...props }: ComponentProps<typeof Image>) => {
   return (
     <div className="my-6 w-full overflow-hidden relative aspect-[16/9]">
-      <Image alt={alt} fill className="object-contain rounded-lg" {...props} />
+      <Image
+        alt={alt}
+        fill
+        className="object-contain rounded-lg"
+        loading="lazy"
+        placeholder="blur"
+        blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQ3NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+        {...props}
+      />
     </div>
   );
 };

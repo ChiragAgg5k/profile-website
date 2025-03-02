@@ -63,7 +63,7 @@ export default async function BlogPage() {
           })
           .map((post, id) => (
             <BlurFade delay={BLUR_FADE_DELAY * 2 + id * 0.05} key={id}>
-              <Link href={post.href} className="pb-4">
+              <Link href={`/blog/${post.slug}`} className="pb-4">
                 <div key={id} className="pb-4 group">
                   <div className="flex items-center justify-start gap-4">
                     <h1>{post.title}</h1>
