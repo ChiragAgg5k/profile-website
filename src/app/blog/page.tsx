@@ -1,6 +1,6 @@
+import BlogPostItem from "@/components/blog-post-item";
 import BlurFade from "@/components/magicui/blur-fade";
 import { posts } from "@/data/posts";
-import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -62,19 +62,13 @@ export default async function BlogPage() {
             return 1;
           })
           .map((post, id) => (
-            <BlurFade delay={BLUR_FADE_DELAY * 2 + id * 0.05} key={id}>
-              <Link href={`/blog/${post.slug}`} className="pb-4">
-                <div key={id} className="pb-4 group">
-                  <div className="flex items-center justify-start gap-4">
-                    <h1>{post.title}</h1>
-                    <ArrowRightIcon className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out" />
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    {timeToHowLongAgo(post.publishedAt)}
-                  </p>
-                </div>
-              </Link>
-            </BlurFade>
+            <BlogPostItem
+              key={id}
+              title={post.title}
+              slug={post.slug}
+              publishedAt={post.publishedAt}
+              delay={BLUR_FADE_DELAY * 2 + id * 0.05}
+            />
           ))}
       </div>
       <BlurFade delay={BLUR_FADE_DELAY * 2 + posts.length * 0.05}>

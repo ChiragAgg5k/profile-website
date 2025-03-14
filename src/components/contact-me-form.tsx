@@ -50,11 +50,22 @@ export default function ContactMeForm() {
     }
   };
 
+  if (!process.env.NEXT_PUBLIC_FORM_SPREE_URL) {
+    return (
+      <div className="py-6">
+        <p className="text-sm border border-red-500 rounded-md p-4">
+          Formspree is not configured. Please check the{" "}
+          <span className="font-bold underline">.env.local</span> file.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <Form {...form}>
       <form
         onSubmit={handleSubmit}
-        action="https://formspree.io/f/xbljognz"
+        action={process.env.FORM_SPREE_URL}
         method="POST"
         className="space-y-8 max-w-3xl mx-auto py-10"
       >

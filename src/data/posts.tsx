@@ -58,4 +58,9 @@ export const posts = [
     slug: "self-hosting-appwrite-with-coolify",
     publishedAt: "2025-02-28",
   },
+  {
+    title: "Debugging with Source Maps: A Comprehensive Guide",
+    slug: "debugging-with-source-maps-a-comprehensive-guide",
+    publishedAt: "2025-03-9",
+  },
 ];
