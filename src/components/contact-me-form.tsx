@@ -65,7 +65,7 @@ export default function ContactMeForm() {
     <Form {...form}>
       <form
         onSubmit={handleSubmit}
-        action={process.env.FORM_SPREE_URL}
+        action={process.env.NEXT_PUBLIC_FORM_SPREE_URL}
         method="POST"
         className="space-y-8 max-w-3xl mx-auto py-10"
       >
