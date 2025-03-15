@@ -1,11 +1,21 @@
 "use client";
 import { posts } from "@/data/posts";
+import { getBlogVotesBySlug, upvoteBlog } from "@/lib/utils";
 import { ArrowUpIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export const BlogTitle = ({ slug }: { slug: string }) => {
   const [upvotes, setUpvotes] = useState(0);
   const post = posts.find((post) => post.slug === slug);
+
+  useEffect(() => {
+    const fetchBlogVotes = async () => {
+      const blogVotes = await getBlogVotesBySlug(slug);
+      setUpvotes(blogVotes);
+    };
+    fetchBlogVotes();
+  }, [slug]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -16,9 +26,19 @@ export const BlogTitle = ({ slug }: { slug: string }) => {
     });
   };
 
-  const handleUpvote = () => {
+  const handleUpvote = async () => {
     setUpvotes((prev) => prev + 1);
-    // Add API call here to persist upvotes
+    const success = await upvoteBlog(slug);
+    if (!success) {
+      toast.error("Failed to upvote blog", {
+        description: "Seems like you have already upvoted this one!",
+      });
+      setUpvotes((prev) => prev - 1);
+    } else {
+      toast.success("Upvoted blog", {
+        description: "You have upvoted this blog successfully!",
+      });
+    }
   };
 
   return (

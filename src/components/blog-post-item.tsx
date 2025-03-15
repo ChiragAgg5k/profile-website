@@ -1,8 +1,10 @@
 "use client";
 
+import { formatDate, upvoteBlog } from "@/lib/utils";
 import { ArrowRightIcon, ArrowUpIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "sonner";
 import BlurFade from "./magicui/blur-fade";
 
 interface BlogPostItemProps {
@@ -10,43 +12,31 @@ interface BlogPostItemProps {
   slug: string;
   publishedAt: string;
   delay: number;
+  votes: number;
 }
-
-const timeToHowLongAgo = (date: string) => {
-  const dateObject = new Date(date);
-  const currentDate = new Date();
-  const timeDifference = currentDate.getTime() - dateObject.getTime();
-
-  const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
-  const months = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 30));
-  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-  const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-
-  if (months > 12)
-    return years === 1 ? `${years} year ago` : `${years} years ago`;
-  if (months > 0)
-    return months === 1 ? `${months} month ago` : `${months} months ago`;
-  if (days > 0) return days === 1 ? `${days} day ago` : `${days} days ago`;
-  if (hours > 0)
-    return hours === 1 ? `${hours} hour ago` : `${hours} hours ago`;
-  if (minutes > 0)
-    return minutes === 1 ? `${minutes} minute ago` : `${minutes} minutes ago`;
-
-  return "few seconds ago";
-};
 
 export default function BlogPostItem({
   title,
   slug,
   publishedAt,
   delay,
+  votes,
 }: BlogPostItemProps) {
-  const [upvotes, setUpvotes] = useState(0);
+  const [upvotes, setUpvotes] = useState(votes);
 
-  const handleUpvote = () => {
+  const handleUpvote = async () => {
     setUpvotes((prev) => prev + 1);
-    // Add API call here to persist upvotes
+    const success = await upvoteBlog(slug);
+    if (!success) {
+      toast.error("Failed to upvote blog", {
+        description: "Seems like you have already upvoted this one!",
+      });
+      setUpvotes((prev) => prev - 1);
+    } else {
+      toast.success("Upvoted blog", {
+        description: "You have upvoted this blog successfully!",
+      });
+    }
   };
 
   return (
@@ -72,7 +62,7 @@ export default function BlogPostItem({
           </button>
         </div>
         <p className="text-sm text-muted-foreground">
-          {timeToHowLongAgo(publishedAt)}
+          {formatDate(publishedAt)}
         </p>
       </div>
     </BlurFade>
