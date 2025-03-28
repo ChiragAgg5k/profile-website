@@ -28,7 +28,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.5.4",
     "lucide-react": "^0.477.0",
-    "next": "14.2.12",
+    "next": "15.2.4",
     "next-themes": "^0.3.0",
     "prettier": "^3.5.2",
     "prism-react-renderer": "^2.4.1",

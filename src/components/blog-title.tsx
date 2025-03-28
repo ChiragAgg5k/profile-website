@@ -1,7 +1,6 @@
 "use client";
 import { posts } from "@/data/posts";
 import { getBlogVotesBySlug, upvoteBlog } from "@/lib/utils";
-import { ArrowUpIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -50,7 +49,7 @@ export const BlogTitle = ({ slug }: { slug: string }) => {
         <h1 className="md:text-4xl sm:text-3xl text-2xl font-bold">
           {post?.title}
         </h1>
-        <button
+        {/* <button
           className="flex items-center gap-1 px-4 py-2 border border-gray-300 rounded-full text-sm hover:bg-muted transition-colors"
           onClick={handleUpvote}
         >
@@ -58,7 +57,7 @@ export const BlogTitle = ({ slug }: { slug: string }) => {
           {upvotes > 0 && (
             <span className="text-muted-foreground">{upvotes}</span>
           )}
-        </button>
+        </button> */}
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-400">
         {post?.publishedAt ? formatDate(post.publishedAt) : ""}

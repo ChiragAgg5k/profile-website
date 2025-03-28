@@ -1,7 +1,7 @@
 "use client";
 
 import { formatDate, upvoteBlog } from "@/lib/utils";
-import { ArrowRightIcon, ArrowUpIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -51,7 +51,7 @@ export default function BlogPostItem({
               </div>
             </div>
           </Link>
-          <button
+          {/* <button
             className="flex items-center gap-1 px-3 py-1 rounded-full text-sm hover:bg-muted transition-colors"
             onClick={handleUpvote}
           >
@@ -59,7 +59,7 @@ export default function BlogPostItem({
             {upvotes > 0 && (
               <span className="text-muted-foreground">{upvotes}</span>
             )}
-          </button>
+          </button> */}
         </div>
         <p className="text-sm text-muted-foreground">
           {formatDate(publishedAt)}
