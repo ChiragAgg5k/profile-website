@@ -63,4 +63,9 @@ export const posts = [
     slug: "debugging-with-source-maps-a-comprehensive-guide",
     publishedAt: "2025-03-9",
   },
+  {
+    title: "Focus on the product, not the tech stack",
+    slug: "focus-on-the-product-not-the-tech-stack",
+    publishedAt: "2025-05-14",
+  },
 ];
