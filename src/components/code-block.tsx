@@ -1,14 +1,22 @@
 "use client";
+import { useTheme } from "next-themes";
 import { Highlight, themes, type Language } from "prism-react-renderer";
 import { ComponentProps, useState } from "react";
 
 const CodeBlock = (props: ComponentProps<"pre">) => {
   const [copied, setCopied] = useState(false);
+  const { theme, resolvedTheme } = useTheme();
 
   const codeElement = props.children as React.ReactElement;
   const codeText = codeElement?.props?.children || "";
   const language = (codeElement?.props?.className?.replace(/language-/, "") ||
     "typescript") as Language;
+
+  // Choose theme based on current theme
+  const prismTheme =
+    theme === "dark" || resolvedTheme === "dark"
+      ? themes.vsDark
+      : themes.vsLight;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(codeText).then(() => {
@@ -18,10 +26,13 @@ const CodeBlock = (props: ComponentProps<"pre">) => {
   };
 
   return (
-    <div className="relative group rounded-lg overflow-hidden my-6">
-      <Highlight theme={themes.vsDark} code={codeText} language={language}>
+    <div className="relative group rounded-lg overflow-hidden my-6 border border-border">
+      <Highlight theme={prismTheme} code={codeText} language={language}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={`${className} p-4 overflow-x-auto`} style={style}>
+          <pre
+            className={`${className} p-4 overflow-x-auto bg-background`}
+            style={style}
+          >
             {tokens
               .filter(
                 (line, i) =>
@@ -33,7 +44,7 @@ const CodeBlock = (props: ComponentProps<"pre">) => {
               )
               .map((line, i) => (
                 <div key={i} {...getLineProps({ line, key: i })}>
-                  <span className="text-gray-500 mr-4 inline-block w-6 text-right select-none">
+                  <span className="text-muted-foreground mr-4 inline-block w-6 text-right select-none">
                     {i + 1}
                   </span>
                   {line.map((token, key) => (
@@ -46,7 +57,7 @@ const CodeBlock = (props: ComponentProps<"pre">) => {
       </Highlight>
       <button
         onClick={copyToClipboard}
-        className="absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-gray-200 p-1 rounded text-xs transition-all opacity-0 group-hover:opacity-100"
+        className="absolute top-2 right-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground p-1 rounded text-xs transition-all opacity-0 group-hover:opacity-100 border border-border"
         aria-label="Copy code to clipboard"
       >
         {copied ? "Copied!" : "Copy"}

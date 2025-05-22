@@ -68,4 +68,9 @@ export const posts = [
     slug: "focus-on-the-product-not-the-tech-stack",
     publishedAt: "2025-05-14",
   },
+  {
+    title: "Announcing Dev Keys: faster local development without rate limits",
+    slug: "announcing-dev-keys",
+    publishedAt: "2025-05-21",
+  },
 ];

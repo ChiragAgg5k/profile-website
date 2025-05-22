@@ -117,12 +117,15 @@ const InlineCode = (props: ComponentProps<"code">) => (
 );
 
 const Paragraph = (props: ComponentProps<"p">) => (
-  <p className="text-sm sm:text-base leading-6 sm:leading-7 mb-4" {...props} />
+  <p
+    className="text-sm text-black dark:text-gray-400 sm:text-base leading-6 sm:leading-7 mb-4"
+    {...props}
+  />
 );
 
 const Blockquote = (props: ComponentProps<"blockquote">) => (
   <blockquote
-    className="border-l-4 border-gray-300 pl-4 italic my-6 text-sm sm:text-base"
+    className="border-l-4 underline border-gray-300 pl-4 italic my-6 text-sm sm:text-base"
     {...props}
   />
 );
@@ -158,7 +161,10 @@ const OrderedList = (props: ComponentProps<"ol">) => (
 );
 
 const ListItem = (props: ComponentProps<"li">) => (
-  <li className="mt-2 text-sm sm:text-base" {...props} />
+  <li
+    className="mt-2 text-sm text-black dark:text-gray-400 sm:text-base"
+    {...props}
+  />
 );
 
 const MDXWrapper = (props: ComponentProps<"div">) => (
