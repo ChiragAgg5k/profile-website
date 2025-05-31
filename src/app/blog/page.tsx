@@ -20,6 +20,33 @@ export const revalidate = 3600;
 export default async function BlogPage() {
   const blogVotes = await getBlogVotes();
 
+  // Group posts by year
+  const postsByYear = posts
+    .sort((a, b) => {
+      if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
+        return -1;
+      }
+      return 1;
+    })
+    .reduce(
+      (acc, post) => {
+        const year = new Date(post.publishedAt).getFullYear();
+        if (!acc[year]) {
+          acc[year] = [];
+        }
+        acc[year].push(post);
+        return acc;
+      },
+      {} as Record<number, typeof posts>,
+    );
+
+  // Get sorted years (newest first)
+  const sortedYears = Object.keys(postsByYear)
+    .map(Number)
+    .sort((a, b) => b - a);
+
+  let delayIndex = 0;
+
   return (
     <section className="mx-8">
       <BlurFade delay={BLUR_FADE_DELAY}>
@@ -32,28 +59,41 @@ export default async function BlogPage() {
           of my favourite content related work published on various sites.
         </p>
       </BlurFade>
-      <div className="flex flex-col gap-4">
-        {posts
-          .sort((a, b) => {
-            if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
-              return -1;
-            }
-            return 1;
-          })
-          .map((post, id) => (
-            <BlogPostItem
-              key={id}
-              title={post.title}
-              slug={post.slug}
-              publishedAt={post.publishedAt}
-              delay={BLUR_FADE_DELAY * 2 + id * 0.05}
-              votes={
-                blogVotes.find((vote) => vote.slug === post.slug)?.count || 0
-              }
-            />
-          ))}
+      <div className="flex flex-col gap-6">
+        {sortedYears.map((year) => (
+          <div key={year} className="relative group">
+            <BlurFade delay={BLUR_FADE_DELAY * 2 + delayIndex * 0.05}>
+              <h2
+                className="absolute top-0 right-0 text-3xl opacity-50 font-bold text-transparent hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto z-10"
+                style={{
+                  WebkitTextStroke: "1px hsl(var(--muted-foreground))",
+                }}
+              >
+                {year}
+              </h2>
+            </BlurFade>
+            <div className="flex flex-col gap-4 mb-8">
+              {postsByYear[year].map((post) => {
+                delayIndex++;
+                return (
+                  <BlogPostItem
+                    key={post.slug}
+                    title={post.title}
+                    slug={post.slug}
+                    publishedAt={post.publishedAt}
+                    delay={BLUR_FADE_DELAY * 2 + delayIndex * 0.05}
+                    votes={
+                      blogVotes.find((vote) => vote.slug === post.slug)
+                        ?.count || 0
+                    }
+                  />
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </div>
-      <BlurFade delay={BLUR_FADE_DELAY * 2 + posts.length * 0.05}>
+      <BlurFade delay={BLUR_FADE_DELAY * 2 + delayIndex * 0.05}>
         <p className="text-center my-8 text-sm text-muted-foreground">
           Follow me on{" "}
           <Link

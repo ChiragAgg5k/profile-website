@@ -121,6 +121,9 @@ export const ResumeCard = ({
                       li: ({ children }) => (
                         <li className="-mb-3">{children}</li>
                       ),
+                      hr: () => (
+                        <div className="py-1 border-b border-muted-foreground opacity-20 w-[75%]" />
+                      ),
                     }}
                   >
                     {item}
