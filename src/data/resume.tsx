@@ -101,9 +101,10 @@ export const DATA = {
       description: [
         "- Joined Appwrite as a **full-time** Platform Engineer in June, 2025.",
         "---",
-        "- Working with the Platform Engineering team as an **Engineering Intern**.",
+        "- Started working with Appwrite as an **Engineering Intern**.",
         "- Took ownership of the project **Synapse**, an SDK for remote serverless operating systems.",
         "- Worked on over **200+ PRs** in the OSS repo, along with many other in private repos.",
+        "- Worked on Major features like Figma OAuth, Image Transformations, Types generation in CLI etc.",
       ],
       links: [
         {
