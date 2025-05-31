@@ -13,7 +13,7 @@ export const DATA = {
   description:
     "A developer building cool solutions with open source technologies.",
   summary:
-    "I am Chirag Aggarwal, a third-year Bachelor of Technology student from India, currently studying Computer Science Engineering. As a **Full-stack Developer**, I enjoy both frontend and backend development equally. Additionally, I have a passion for content writing and conducting research on various topics, particularly in the fields of **Artificial Intelligence** and **Computer Vision**.",
+    "I am Chirag Aggarwal, a fourth-year Bachelor of Technology student from India, currently studying Computer Science Engineering. Although I am primarily a **Platform Engineer**, specializing in building scalable and robust backend systems, I also do enjoy working in Frontend side of things. Additionally, I have a passion for content writing and conducting research on various topics, particularly in the fields of **Artificial Intelligence** and **System Architecture**.",
   avatarUrl: "/me.png",
   skills: [
     {
@@ -94,12 +94,16 @@ export const DATA = {
       href: "https://appwrite.io/",
       badges: [],
       location: "Remote",
-      title: "Engineering Intern",
+      title: "Platform Engineer",
       logoUrl: "/work-experience/appwrite.png",
       start: "December 2024",
       end: "Present",
       description: [
-        "- Working with the Appwrite **backend** team to improve the platform and add new features",
+        "- Joined Appwrite as a **full-time** Platform Engineer in June, 2025.",
+        "---",
+        "- Working with the Platform Engineering team as an **Engineering Intern**.",
+        "- Took ownership of the project **Synapse**, an SDK for remote serverless operating systems.",
+        "- Worked on over **200+ PRs** in the OSS repo, along with many other in private repos.",
       ],
       links: [
         {

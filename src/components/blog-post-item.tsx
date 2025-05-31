@@ -44,10 +44,10 @@ export default function BlogPostItem({
       <div className="pb-4">
         <div className="flex items-center justify-between">
           <Link href={`/blog/${slug}`}>
-            <div className="group">
+            <div className="group/title">
               <div className="flex items-center justify-start gap-4">
                 <h1>{title}</h1>
-                <ArrowRightIcon className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out" />
+                <ArrowRightIcon className="w-4 h-4 opacity-0 -translate-x-2 group-hover/title:opacity-100 group-hover/title:translate-x-0 transition-all duration-500 ease-out" />
               </div>
             </div>
           </Link>
