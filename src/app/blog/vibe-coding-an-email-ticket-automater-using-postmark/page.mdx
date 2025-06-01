@@ -1,0 +1,90 @@
+import { BlogTitle } from "@/components/blog-title";
+import { OriginalPost } from "@/components/original-post";
+
+<BlogTitle slug="vibe-coding-an-email-ticket-automater-using-postmark" />
+
+This is a submission for the [Postmark Challenge: Inbox Innovators](https://dev.to/challenges/postmark).
+
+## What I Built
+
+Support tickets…
+
+Nobody really loves either writing or much worse reading them. And managing them is much much worse than managing my laundry, and that is a really high bar to pass.
+
+So, in a world where we all are writing and summarising emails for the sake of maintaining formality, automating support tickets seems like the logical next step.
+
+And sure there are companies that do this… not really going to name them, but my vision here was to just create something that takes the unorganized text and convert it to organized boxes, while still being pretty to look at… _cough_ Jira _cough._
+
+Meet EmailTicket. Firstly hoping that marks are not being deducted for the lack of naming creativity, it's here to do exactly what it says. Create tickets based on emails. Sounds simple right? Well kind of… but with some headaches.
+
+Historically, when creating tickets you would have to ask the user a bunch of information like whether it is a billing issue, a bug, or feedback, when did the issue start, etc.
+
+After creation, you would have to manually keep track of information like how urgent is it. Has the ticket been closed or is it still in progress? etc. etc.
+
+You know… the boring stuff.
+
+![Ticket Modal](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yg0bvs81e953d8r4bu37.png)
+
+> Image captured during the pre-AI times (just kidding it was created using ChatGPT)
+
+---
+
+But with AI, we no longer need to take care of that stuff. Just give it a random block of text and out comes structured beauty (It’s like a dream come true for data scientists honestly).
+
+This is pretty much what Email Ticket does for now. It’s highly inspired by platforms like HelpScout (an amazing tool btw do check it out) and in the future can extend a lot more if good guys like the ones from Postmark support it :D
+
+## Demo
+
+<YouTube id="yvApeUgQcVs" />
+
+Checkout the live link here - [https://email-ticket-automator.vercel.app](https://email-ticket-automator.vercel.app/)
+
+If your emails are stuck on processing/waiting, It’s highly likely that I ran out of the 100 free emails. So… don’t sweat too much about it 😅
+
+## Code Repository
+
+<GitHub id="ChiragAgg5k/email-ticket-automator" />
+
+## How I Built It
+
+So most of the application is vibe-coded using Lovable. Was it because I am lazy? Probably yes. But that’s not the exact reason. In my opinion tools like Lovable, V0, Firebase Studio (god there are so many now), etc. are perfectly fine to use to get an initial MVP of your idea up and running.
+
+And in a world where AI is dominating the entire development process, not utilizing these tools is just slowing you down.
+
+So let’s talk about the 10% of coding I actually did.
+
+The first was integration with a database. Or more specifically a Backend as a Service because who codes their own backend nowadays? So naturally I went with Appwrite. Lovable refused to do this integration, but thankfully Appwrite is extremely easy to set up. I used it to implement Authentication flow, as well as Database for ticket storing and retrieval.
+
+Next was the start of the application, Postmark. Postmark made the entire process of receiving an email, parsing it into JSON, and receiving it just via an API call so easy, I forgot dealing with emails was such an annoying task.
+
+Firstly, I needed to A) Either get inbound domain forwarding setup, or B) Get my account approved to be able to send emails to the default inbound email address with no domain restrictions. I tried both techniques and luckily got my account approved in 2 days!
+
+![Postmark Email](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lid9dtnuzzd6gktuziv5.png)
+
+Not so luckily I was never able to set my inbound domain even tho I had my MX record set properly and could verify it using https://www.whatsmydns.net/ (You can check my comment here complaining about it - https://dev.to/chiragagg5k/comment/2o6hi). So something to note down @Postmark team.
+
+To utilize the API seamlessly without ever needing to touch a single line of actual backend code, I came up with this flow:
+
+1. Appwrite triggers a “create” document/ticket event.
+2. The event triggers a function that then calls the Postmark’s API for sending an inbound email.
+3. Postmark listens to the inbound email and triggers an email parsing flow.
+4. After parsing is done it returns the output to a webhook URL which is just an Appwrite function.
+5. The Appwrite function finally processes the parsed content and stores it back to the database.
+
+![Flow Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qsmi3ogtpgd07jqm5k9g.png)
+
+Finally time for structured outputs. Almost all LLMs offer a way to generate structured outputs now in their APIs. Here are some docs I found for this:
+
+1. https://docs.perplexity.ai/guides/structured-outputs
+2. https://platform.openai.com/docs/guides/structured-outputs?api-mode=responses
+3. https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/increase-consistency
+
+and on and on…
+
+(a small plug would be to check this repo I worked on which allows you to use any LLM with structured outputs and consistent syntax in PHP - https://github.com/utopia-php/agents)
+
+You can check the [repository code](https://github.com/ChiragAgg5k/email-ticket-automator/blob/main/functions/email-parsed-webhook/src/main.js) itself to see which one I picked because I might have changed it by the time you are reading it :p
+
+That’s it then. Let me know in the comments how was your experience using EmailTicket Automater. You can reach out to me on any of my social media links if you have any queries or just wanna have a casual talk. A big shoutout to Postmark for arranging this contest and letting me have fun with their platform, as well as my company Appwrite for supporting the application’s backend :D
+
+Bye!

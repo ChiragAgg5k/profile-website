@@ -73,4 +73,9 @@ export const posts = [
     slug: "announcing-dev-keys",
     publishedAt: "2025-05-21",
   },
+  {
+    title: "Vibe coding an Email Ticket Automater using Postmark",
+    slug: "vibe-coding-an-email-ticket-automater-using-postmark",
+    publishedAt: "2025-06-01",
+  },
 ];

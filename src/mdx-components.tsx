@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ComponentProps } from "react";
 import CodeBlock from "./components/code-block";
+import GitHub from "./components/ui/github";
+import YouTube from "./components/ui/youtube";
 
 type CustomLinkProps = {
   href: string;
@@ -195,5 +197,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ul: List,
     ol: OrderedList,
     li: ListItem,
+    YouTube,
+    GitHub,
   };
 }
