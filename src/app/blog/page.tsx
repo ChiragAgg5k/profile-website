@@ -64,7 +64,7 @@ export default async function BlogPage() {
           <div key={year} className="relative group">
             <BlurFade delay={BLUR_FADE_DELAY * 2 + delayIndex * 0.05}>
               <h2
-                className="absolute top-0 right-0 text-3xl opacity-50 font-bold text-transparent hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto z-10"
+                className="relative md:absolute top-0 right-0 md:top-0 md:right-0 text-3xl opacity-50 font-bold text-transparent group-hover:opacity-100 transition-all duration-300 pointer-events-auto z-10 mb-4 md:mb-0 text-right"
                 style={{
                   WebkitTextStroke: "1px hsl(var(--muted-foreground))",
                 }}
