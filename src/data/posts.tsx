@@ -78,4 +78,9 @@ export const posts = [
     slug: "vibe-coding-an-email-ticket-automater-using-postmark",
     publishedAt: "2025-06-01",
   },
+  {
+    title: "Automate anything - Making research analysis effortless",
+    slug: "automate-anything-making-research-analysis-effortless",
+    publishedAt: "2025-06-14",
+  },
 ];
