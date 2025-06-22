@@ -83,4 +83,9 @@ export const posts = [
     slug: "automate-anything-making-research-analysis-effortless",
     publishedAt: "2025-06-14",
   },
+  {
+    title: "From student to full-time Platform Engineer at Appwrite",
+    slug: "from-student-to-full-time-platform-engineer-at-appwrite",
+    publishedAt: "2025-06-21",
+  },
 ];
