@@ -55,7 +55,7 @@ export const posts = [
   },
   {
     title: "Self-hosting Appwrite with Coolify",
-    slug: "self-hosting-appwrite-with-coolify",
+    href: "https://appwrite.io/blog/post/self-hosting-appwrite-with-coolify",
     publishedAt: "2025-02-28",
   },
   {
@@ -70,7 +70,7 @@ export const posts = [
   },
   {
     title: "Announcing Dev Keys: faster local development without rate limits",
-    slug: "announcing-dev-keys",
+    href: "https://appwrite.io/blog/post/announcing-dev-keys",
     publishedAt: "2025-05-21",
   },
   {
@@ -87,5 +87,11 @@ export const posts = [
     title: "From student to full-time Platform Engineer at Appwrite",
     slug: "from-student-to-full-time-platform-engineer-at-appwrite",
     publishedAt: "2025-06-21",
+  },
+  {
+    title:
+      "Introducing Type generation: Automate your type definitions with Appwrite",
+    href: "https://appwrite.io/blog/post/announcing-type-generation-feature",
+    publishedAt: "2025-06-24",
   },
 ];

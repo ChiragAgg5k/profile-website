@@ -79,6 +79,7 @@ export default async function BlogPage() {
                   <BlogPostItem
                     key={post.slug}
                     title={post.title}
+                    href={post.href}
                     slug={post.slug}
                     publishedAt={post.publishedAt}
                     delay={BLUR_FADE_DELAY * 2 + delayIndex * 0.05}
