@@ -1,7 +1,6 @@
 import BlogPostItem from "@/components/blog-post-item";
 import BlurFade from "@/components/magicui/blur-fade";
 import { posts } from "@/data/posts";
-import { getBlogVotes } from "@/lib/utils";
 import Link from "next/link";
 
 export const metadata = {
@@ -18,8 +17,6 @@ const BLUR_FADE_DELAY = 0.04;
 export const revalidate = 3600;
 
 export default async function BlogPage() {
-  const blogVotes = await getBlogVotes();
-
   // Group posts by year
   const postsByYear = posts
     .sort((a, b) => {
@@ -83,10 +80,6 @@ export default async function BlogPage() {
                     slug={post.slug}
                     publishedAt={post.publishedAt}
                     delay={BLUR_FADE_DELAY * 2 + delayIndex * 0.05}
-                    votes={
-                      blogVotes.find((vote) => vote.slug === post.slug)
-                        ?.count || 0
-                    }
                   />
                 );
               })}

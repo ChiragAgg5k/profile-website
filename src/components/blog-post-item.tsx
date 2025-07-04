@@ -1,10 +1,8 @@
 "use client";
 
-import { formatDate, upvoteBlog } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import { ArrowRightIcon, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-import { toast } from "sonner";
 import BlurFade from "./magicui/blur-fade";
 import {
   Tooltip,
@@ -19,7 +17,6 @@ interface BlogPostItemProps {
   slug?: string;
   publishedAt: string;
   delay: number;
-  votes: number;
 }
 
 export default function BlogPostItem({
@@ -28,25 +25,7 @@ export default function BlogPostItem({
   slug,
   publishedAt,
   delay,
-  votes,
 }: BlogPostItemProps) {
-  const [upvotes, setUpvotes] = useState(votes);
-
-  const handleUpvote = async () => {
-    setUpvotes((prev) => prev + 1);
-    const success = await upvoteBlog(slug || "");
-    if (!success) {
-      toast.error("Failed to upvote blog", {
-        description: "Seems like you have already upvoted this one!",
-      });
-      setUpvotes((prev) => prev - 1);
-    } else {
-      toast.success("Upvoted blog", {
-        description: "You have upvoted this blog successfully!",
-      });
-    }
-  };
-
   return (
     <BlurFade delay={delay}>
       <div className="pb-4">
