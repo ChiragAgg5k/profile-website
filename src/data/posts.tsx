@@ -94,4 +94,10 @@ export const posts = [
     href: "https://appwrite.io/blog/post/announcing-type-generation-feature",
     publishedAt: "2025-06-24",
   },
+  {
+    title:
+      "JStack + Appwrite: A Match Made in Heaven for Modern Web Development",
+    slug: "jstack-appwrite-a-match-made-in-heaven-for-modern-web-development",
+    publishedAt: "2025-07-06",
+  },
 ];

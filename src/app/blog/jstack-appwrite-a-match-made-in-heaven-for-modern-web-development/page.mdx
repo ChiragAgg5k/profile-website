@@ -1,0 +1,291 @@
+import { BlogTitle } from "@/components/blog-title";
+import { OriginalPost } from "@/components/original-post";
+
+<BlogTitle slug="jstack-appwrite-a-match-made-in-heaven-for-modern-web-development" />
+
+If I had a penny for each time a youtuber has launched his own tech stack, I would have 2 pennies, which isn't much but its weird that it happened twice.
+
+I am talking about [T3 Stack](https://create.t3.gg/) launched a while back by everyone's favourite Theo, but recently a new player has entered the market called [JStack](https://jstack.app/), by Josh who is the lead Devrel at Upstash. To be fair, its not even that recent, but as always ~~I am late to the party~~ I try to give a framework time to mature and gather feedback from community before giving it a shot.
+
+So, did I prefer JStack over T3 stack? Did it have more compatibility with Appwrite, my favourite backend provider? Can it be hosted on Appwrite Sites? Let's find out.
+
+## Getting Started
+
+Let's start with initialising the project:
+
+```bash
+bunx create-jstack-app@latest
+```
+
+Options selected:
+
+```bash
+┌   jStack CLI
+│
+◇  What will your project be called?
+│  testing-jstack-appwrite
+│
+◇  Which database ORM would you like to use?
+│  None
+│
+◇  Should we run 'bun install' for you?
+│  Yes
+
+Using: bun
+
+✔ testing-jstack-appwrite scaffolded successfully!
+```
+
+Let's just quickly run a dev server to see what we get out of the box:
+
+```bash
+cd cd testing-jstack-appwrite
+bun dev
+```
+
+![JStack landing page](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/z9c9q9ae61yzugugap9b.png)
+
+## Initialising Project
+
+On skipping the ORM option, the stack still sets up a `/src/server` folder with an example posts router. But it only mocks the DB using an array which does not persist:
+
+```tsx
+// Mocked DB
+interface Post {
+  id: number;
+  name: string;
+}
+
+const posts: Post[] = [
+  {
+    id: 1,
+    name: "Hello World",
+  },
+];
+```
+
+We skipped the ORM option because Appwrite provides built-in schema management through its SDK, eliminating the need for a separate ORM layer. To get started, let's head over to [https://cloud.appwrite.io](https://cloud.appwrite.io/) to set up our project.
+
+If you are using Appwrite for the first time, I highly recommend you check out our [Start with Web docs](https://appwrite.io/docs/quick-starts/web).
+
+Here is a quick setup guide:
+
+- Create a new project -
+
+![New project model (Appwrite)](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/z6w0nn7x3pt9x8tott78.png)
+
+- Add a new web platform and select Next.js -
+
+![New platform screen (Appwrite)](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/w2cvx6dkh8zdrntpy4js.png)
+
+- Go to project overview and grab your project's ID and region-specific endpoint:
+
+![Project ID and endpoint (Appwrite)](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jom1n3wjbri8qpko7z7a.png)
+
+- Create a new `.env` file in your project directory and paste in those values:
+
+```env
+NEXT_PUBLIC_APPWRITE_PROJECT_ID=686a271700323696d223
+NEXT_PUBLIC_APPWRITE_ENDPOINT=https://fra.cloud.appwrite.io/v1
+NEXT_PUBLIC_APP_DOMAIN=localhost # we will change it later
+```
+
+- Now, let's initialise the Appwrite SDK in the project using:
+
+```jsx
+bun add appwrite
+```
+
+This covers up on how to initialize Appwrite in normal Next.js project. Now we need to configure our Appwrite databases according to the project. For this demo, let's create a `Posts` collection to shift the mock database JStack uses as an example to Appwrite.
+
+## Defining Schema
+
+- Go to the Appwrite Console > Databases > Create Database. We will call it `main` , and keep it' ID as main as well:
+
+![Create database (Appwrite)](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rsmpij8n1yqok80pfm15.png)
+
+- Similarly, create a collection `posts` and keep its ID as `posts`.
+- Each document in Appwrite already has an unique ID attached to it, so the only attribute we need is `name` for now:
+
+![Create string attribute (Appwrite)](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/caheyx67pondngmv139t.png)
+
+- Lastly, you will need to define who can access your collection. To learn more about it, check out the docs for [Appwrite Permissions](https://appwrite.io/docs/advanced/platform/permissions). For now, we will set it to any:
+
+![Create permissions](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2m4jl1939fxqa93olacw.png)
+
+## Syncing Types
+
+That's it, we are all set with configuration on the Appwrite Console. Now let's set it up in our project. I will also take the help of the Appwrite CLI to help me set up things faster. You can learn more about how to install it by following the installation docs.
+
+Once done, run:
+
+```jsx
+testing-jstack-appwrite appwrite init project
+
+? How would you like to start? Link directory to an existing project
+? Choose your organization 67610b8ee51f147ca943
+? Choose your Appwrite project. [object Object]
+✓ Success: Project successfully linked. Details are now stored in appwrite.json file.
+Would you like to pull all resources from project you just linked? Yes
+```
+
+Once done, let's utilize the last Types Generation feature to sync our defined types:
+
+```jsx
+appwrite types src/types
+
+ℹ Info: Detected language: ts
+ℹ Info: Directory: src/types does not exist, creating...
+ℹ Info: Found 1 collections: posts
+ℹ Info: Found 1 attributes across all collections
+ℹ Info: Added types to src/types/appwrite.d.ts
+✓ Success: Generated types for all the listed collections
+```
+
+Result will look something like this:
+
+```jsx
+import { type Models } from 'appwrite';
+
+/**
+ * This file is auto-generated by the Appwrite CLI.
+ * You can regenerate it by running `appwrite types -l ts src/types`.
+ */
+
+export type Posts = Models.Document & {
+  name: string;
+}
+```
+
+Obviously pretty small for now, but a really helpful feature once the project expands and more collections are defined.
+
+## Configuring Code
+
+Final steps are to connect the Appwrite backend with our tech stack. For that let's create a simple `appwrite.ts` file in `src/lib` folder:
+
+```jsx
+import { Client, Databases, ID } from "appwrite";
+
+const client = new Client()
+    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
+    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
+
+const databases = new Databases(client);
+
+export { client, databases };
+```
+
+Now, we can modify the original `post-router.ts` file to use the defined database:
+
+```jsx
+import { z } from "zod";
+import { j, publicProcedure } from "../jstack";
+import { databases } from "@/lib/appwrite";
+import { type Posts } from "@/types/appwrite";
+import { ID } from "appwrite";
+
+const DATABASE_ID = "main";
+const POSTS_COLLECTION_ID = "posts";
+
+export const postRouter = j.router({
+  recent: publicProcedure.query(async ({ c }) => {
+    const posts = await databases.listDocuments<Posts>(
+      DATABASE_ID,
+      POSTS_COLLECTION_ID,
+    );
+    return c.superjson(posts.documents.at(-1) ?? null);
+  }),
+
+  create: publicProcedure
+    .input(z.object({ name: z.string().min(1) }))
+    .mutation(async ({ c, input }) => {
+      const post = await databases.createDocument<Posts>(
+        DATABASE_ID,
+        POSTS_COLLECTION_ID,
+        ID.unique(),
+        {
+          name: input.name,
+        },
+      );
+
+      return c.superjson(post);
+    }),
+});
+```
+
+And done! Now your JStack application is using Appwrite as its backend provider.
+
+## Testing
+
+- Start the dev server if not already by running:
+
+```jsx
+bun run dev
+```
+
+- Your application should have started on: http://localhost:3000/
+- Create a new post.
+- You should be able to see it in recent posts:
+
+![Recent posts image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/oy9htyvp77qqct8grhzf.png)
+
+- Also, the data should be visible in your Appwrite Console:
+
+![Appwrite console showing data](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/oce30jvc16lb80e7v9qu.png)
+
+## Deploying your application
+
+Until recently, to deploy your Next.js application, you had pretty low choices. But no more [Appwrite Sites](https://appwrite.io/products/sites). Now, you can have your backend and frontend hosted on Appwrite.
+
+Check out these docs on how to get started with Sites - https://appwrite.io/docs/advanced/self-hosting/sites
+
+Let's deploy your application using Sites:
+
+- Go to Appwrite Console > Sites > Create Site.
+- You can upload a tar file directly, or connect to a GitHub repository (I prefer the GitHub option for automatic deployments).
+- Select the repository:
+
+![Selecting repository screen](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e6ww9m9mb2z7w8hc5ggk.png)
+
+- You can keep all the settings as the default ones, just make sure to upload the environment variables we defined earlier:
+
+![Add environment variables screen](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wsthkangby5vgqfnntio.png)
+
+- Depending on the domain you are assigned / plan to use, you also need to update the `APP_DOMAIN` variable we defined earlier. For me I will keep it:
+
+```jsx
+NEXT_PUBLIC_APP_DOMAIN = jstack - appwrite - template.appwrite.network;
+```
+
+- Click on deploy.
+
+And done! Your application should be live 🎉
+
+![Deployment successful screenshot](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mfxrz2dfa7nhwu26n93o.png)
+
+You can checkout the demo application here - https://jstack-appwrite-template.appwrite.network/
+
+## Conclusion
+
+Let's start by answering the question the blog began with: Do I prefer JStack over T3 Stack? I'm sorry, Theo, but I do.
+
+JStack solves the fundamental problems I have always had with Next.js:
+
+- Using [Hono](https://hono.dev/) instead of Next.js's inbuilt convention for defining API routes.
+- Using [TanStack](https://tanstack.com/) query out of the box. Trust me, you should start now if you are not using it.
+- Type safe and uses [Zod](https://zod.dev/).
+
+The most noticeable difference between T3 Stack and JStack is how light they are, mainly due to the inclusion of the TRPC protocol in T3 Stack. Most projects do not require it, and it makes the code 10x more complicated to maintain, in my opinion.
+
+So, give JStack a shot if you are starting with a new project (or want to spend a weekend migrating your existing stack to it). Huge shoutout to [Josh](https://www.youtube.com/@joshtriedcoding) for creating this wonderful stack. And lastly, give Appwrite a chance to be your next all in one cloud platform, both for your backend and frontend needs.
+
+## Sources:
+
+- JStack - https://jstack.app/
+- Appwrite Docs - https://appwrite.io/docs
+- Github repository - https://github.com/ChiragAgg5k/jstack-appwrite-template
+
+<OriginalPost
+  text="Checkout the original post on Dev.to"
+  link="https://dev.to/chiragagg5k/jstack-appwrite-a-match-made-in-heaven-for-modern-web-development-1cln"
+/>

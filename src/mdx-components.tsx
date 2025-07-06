@@ -120,7 +120,7 @@ const InlineCode = (props: ComponentProps<"code">) => (
 
 const Paragraph = (props: ComponentProps<"p">) => (
   <p
-    className="text-sm text-black dark:text-gray-400 sm:text-base leading-6 sm:leading-7 mb-4"
+    className="text-sm text-black dark:text-gray-300 sm:text-base leading-6 sm:leading-7 mb-4"
     {...props}
   />
 );
@@ -164,7 +164,7 @@ const OrderedList = (props: ComponentProps<"ol">) => (
 
 const ListItem = (props: ComponentProps<"li">) => (
   <li
-    className="mt-2 text-sm text-black dark:text-gray-400 sm:text-base"
+    className="mt-2 text-sm text-black dark:text-gray-300 sm:text-base"
     {...props}
   />
 );
