@@ -1,0 +1,187 @@
+# Conditional Dependency Management Using Maven Profiles
+
+Maven is an efficient build tool and project management tool mainly known for effectively building projects in Java. It is one of the most useful features in Maven, to effectively manage the consumers and producers of dependencies in a project.
+
+In complex projects, you might need different dependencies or configurations based on various conditions such as the development environment, target platform, or specific build requirements. This is where Maven Profiles come into play.
+Maven Profiles
+
+Maven Profiles is a set of parameters that can be adapted to set or alter the default parameters of Maven build. They enable you to define the application construction process according to specific contexts like development, testing, or production.
+
+**Key Concepts:**
+
+- **Profile Activation:** Activations can be of several types depending on the option keys like command-line, Maven option settings, system environment variables, and system preferences.
+- **Dependency Management:** It is possible to use profiles to specify which dependencies should be included and which ones should be excluded based on the currently active profile.
+- **Build Customization:** With profiles, you can control how your build process is set up in aspects like plug-in settings, resources being filtered etc.
+
+## Setting Up a Maven Project with Profiles
+
+Let's walk through the process of setting up a Maven project that uses profiles for conditional dependency management.
+
+### Step 1: Create a New Maven Project
+
+First, let's create a new Maven project using the command line:
+
+```bash
+mvn archetype:generate -DgroupId=com.example -DartifactId=profile-demo -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+```
+
+**Output:**
+
+This command will create a new Maven project with a basic structure. Here is what the output should look like:
+
+![Output of the create new Maven project command](https://media.geeksforgeeks.org/wp-content/uploads/20240804001437/screenshot.png)
+
+Now, let's take a look at the directory structure that Maven has created for us:
+
+![Directory Structure](https://media.geeksforgeeks.org/wp-content/uploads/20240806105510/mvn-pro.png)
+
+### Step 2: Configure pom.xml
+
+Now, let's modify the pom.xml file to include profiles. We'll create two profiles: development and production, each with its own set of dependencies.
+
+```xml
+
+    4.0.0
+
+    com.example
+    profile-demo
+    1.0-SNAPSHOT
+
+        1.8
+        1.8
+
+            junit
+            junit
+            4.13.2
+            test
+
+            development
+            
+                true
+
+                    org.slf4j
+                    slf4j-simple
+                    1.7.32
+
+            production
+
+                    ch.qos.logback
+                    logback-classic
+                    1.2.6
+
+```
+
+In this configuration:
+
+- We have a common dependency (JUnit) that's always included.
+- The development profile includes the slf4j-simple logger.
+- The production profile includes the logback-classic logger.
+- The development profile is set as the default profile.
+
+### Step 3: Create Java Classes
+
+Let's create a simple Java class that uses the logger:
+
+```java
+package com.example;
+
+public class App {
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
+
+    public static void main(String[] args) {
+        logger.info("Hello, Maven Profiles!");
+    }
+}
+```
+
+### Step 4: Build the Project
+
+Now that we have set up our project with profiles, let's see how to use them.
+
+#### Building with the Default Profile
+
+To build the project with the default profile (development in our case), simply run:
+
+```bash
+mvn clean package
+```
+
+This will include the slf4j-simple logger in the build.
+
+#### Building with a Specific Profile
+
+To build the project with the production profile, use the -P flag:
+
+```bash
+mvn clean package -Pproduction
+```
+
+This will include the logback-classic logger in the build instead.
+
+### Advanced Profile Usage
+
+Profiles can be activated in various ways:
+
+1. **Command Line:** As shown above, using `-P`.
+
+For example, To activate the 'development' profile:
+
+```bash
+mvn clean package -Pdevelopment
+```
+
+2. **Maven Settings:** In the `settings.xml` file:
+
+```xml
+
+  production
+
+```
+
+3. **Environment Variable:** In the `pom.xml`:
+
+```xml
+
+    env
+    prod
+
+```
+
+Then activate using: `mvn clean package -Denv=prod`
+
+4. **OS Settings:** Activate based on the operating system:
+
+```xml
+
+    Windows 10
+    Windows
+    amd64
+    10.0
+
+```
+
+#### Resource Filtering:
+
+Profiles can also be used for resource filtering. For example:
+
+```xml
+
+    development
+
+                src/main/resources
+                true
+                
+                    application-dev.properties
+
+```
+
+This will only include the `application-dev.properties` file when the development profile is active.
+
+### Conclusion
+
+Maven Profiles provide a powerful way to manage conditional dependencies and configurations in your Java projects. By using profiles, you can easily switch between different build configurations for various environments or conditions. This flexibility allows for more maintainable and adaptable projects, especially when dealing with complex build requirements or multiple deployment scenarios.
+
+### References:
+
+- GeeksforGeeks: [Apache Maven](https://www.geeksforgeeks.org/apache-maven/)
+- GeeksforGeeks: [Maven Lifecycle and Basic Maven Commands](https://www.geeksforgeeks.org/maven-lifecycle-and-basic-maven-commands/)

@@ -30,7 +30,7 @@ const CodeBlock = (props: ComponentProps<"pre">) => {
       <Highlight theme={prismTheme} code={codeText} language={language}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
-            className={`${className} p-4 overflow-x-auto bg-background`}
+            className={`${className} p-4 overflow-x-auto bg-background text-xs sm:text-sm md:text-base lg:text-base xl:text-base`}
             style={style}
           >
             {tokens

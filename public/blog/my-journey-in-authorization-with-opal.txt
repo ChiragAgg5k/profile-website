@@ -1,0 +1,58 @@
+# My Journey in Authorization with OPAL
+
+Before we even begin, many of you like my a-month-old self will wonder what even is Authorization, and especially... OPAL?? So let's break them down one by one. Starting with Authorization.
+
+## Authentication vs Authorization
+
+![Authentication vs Authorization](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ctcbpynn0b1cwme7ze42.png)
+
+Well, I started the article off with just one term, `Authorization`. Then why am I covering `Authentication` as well? Well because they are quite similar and can be easily confused with.
+
+**Authentication** is the process of _identifying_ an user. It tells us "who" the user is. For a website, whenever a user visits it, all it sees is an IP address asking for a document, that the server then renders and sends. To differentiate multiple requests, it needs to authenticate the request, more specifically the user calling the request.
+
+**Authorization** on the other hand is the step that comes _after_ authentication. It's the process of identifying what the user is allowed (authorized) to do. In simple words, it's the set of permissions that a particular user must follow depending upon who he/she is.
+
+## OK but why?
+
+![Why Authorization](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ygo1fds4h7233gygvghd.png)
+
+I think most of you would have already understood why we need Authentication. Without websites would have no idea who you are! You will be another random Guest visiting the website. No wonder all the websites have `Signup/Login` as a basic functionality nowadays.
+
+But why do we need Authorization???
+
+Authorization determines if the user has the permission to do a particular task. For eg. on a blog website, all the users might have permission to read your blog but only **you** can edit it. Incorrect or not setting up an authorization policy at all can lead to a lot of.... bad things 💀.
+
+## Policies and OPA
+
+![Policy in OPA](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1c55h9vv2pjzxfj7lif1.png)
+
+Just above I mentioned a term, `policy`. What is it? Policy is just a set of rules to establish the authorization system. There are many ways to write these policies. The one we will be covering here is called OPA.
+
+OPA, short for Open Policy Agent, is a high-level declarative language used for writing policies. It allows you to define the policies in a single language that can used across many parts of your system, rather than relying on vendor-specific technologies.
+
+## OPAL and the problems with OPA
+
+While OPA is great for decoupling the policy from code in a highly performant and elegant way, it suffers from keeping the policy up to date as the requirements change on a day-to-day basis.
+
+This is where OPAL, Open Policy Agent Layer, comes and provides **real-time** policy updates. It continuously runs in backgrounds and updates the policy agents whenever needed.
+
+For eg. A user created a private blog page. So a policy was created so that it can only be accessed by the creator. But layer he/she wanted to allow access to a specific user with a given email ID. So OPAL can update the policy in real-time to allow that to happen.
+
+## Conclusion
+
+![Conclusion](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1wnonldramx6rhlef2w6.png)
+
+After all this, you might have two types of thoughts. Some people thought "Wow this was amazing and I was totally missing out on this". But a mass majority, like me when first learning all this, thought "Why do we need all this just for authorization. Just used an If/Else call".
+
+And the funny thing is, for especially your use case, you might be right! You really don't need this much complexity for your average 10-user SaaS application.
+
+But this becomes essential for companies handling millions of users like Netflix, T-Mobile and Goldman-Sachs, who all use OPA to handle their policy layers. They can't afford a wrong policy being declared, that's why they use OPA which provides a definitive syntax for writing it. They can't afford the updates to take time, so they use OPAL for real-time synchronization.
+
+I hope you learnt something new today.
+
+Here are the links to my sources:
+
+- `OPA` - https://www.openpolicyagent.org/
+- `OPAL` - https://opal.ac/
+
+> End Note: If you check out my profile, this is my first-ever post. So please let me know how I did, and how I can improve in future. Thanks!

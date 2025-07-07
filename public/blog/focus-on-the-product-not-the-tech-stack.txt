@@ -1,0 +1,86 @@
+# Focus on the product, not the tech stack
+
+Recently I got this DM,
+
+“Which tech stack should I learn?”
+
+“Should I use Next.js or Svelte?”
+
+“Is Python better for the backend than node?”
+
+I am sure we have asked or been asked questions like this several times in our tech journeys. As someone who is just starting out, I think it seems like a very important thing to ask. You don’t wanna waste your time learning a technology that might become worthless soon? Or isn’t fast enough? or isn’t the “industry standard”… right?
+
+Or should it matter?
+
+## Languages are just tools
+
+Back in 2003 when Facebook was originally founded, its backend was written in PHP. Was it the lack of options? You can say so. Back then they certainly didn’t have a plethora of frameworks or hell even languages to choose from. But what about now? Realistically PHP should be dead by now…
+
+Right?
+
+But if you look at the [statistics by Kinsta](https://kinsta.com/php-market-share/), around 79.2% of the internet still relies on PHP to some degree. Okay, but that number has to be declining for sure!
+
+But wait...
+
+![PHP Trend Chart](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/iytuwpkuplv3pxtq2ypn.png)
+
+Nope, it has been on a steady increase since 2011, peaking at 80.6% in 2015, and maintaining a steady line.
+
+But how?
+
+It’s because language is just a tool. It does not matter how many new bleeding edge languages enter the market increasing the performance metrics by some fractions of seconds, as long as a ~~tool~~ language sufficiently fulfills its job, it will stay relevant. PHP has done a great job at that. It’s constantly evolving as well, something which is direly required to stay alive in the software world.
+
+So next time if someone asks you “Which language should I choose?”, ask them two things:
+
+1. Which language are you more comfortable with?
+2. Do the other languages provide a set of features more beneficial for your use case? Even if so are they worth the effort to learn? (arguments like uh it's 0.001sec faster should not be relevant)
+
+## It’s OK to not upgrade
+
+    Image from: https://foreverealize.me/posts/how-to-update-dependencies/
+
+I was once asked, “Why is your website still at Next version 13 when 15 has arrived?”
+
+To which I ask, why does it matter? Sure software is meant to be ever-evolving, but that doesn’t necessarily mean it's a good idea to always hop on the upgrade bandwagon without looking at the consequences.
+
+This in this case will be a complete re-write since Next 15 introduces a ton of breaking changes.
+
+And it's OK not to upgrade every time.
+
+## Judge a product by its usefulness, not complexity
+
+A lot of people especially those building projects just for improving their resume will try to make them extremely complex. It will be a wobbly mess of high-end sounding technologies like SSR, TRPC, GraphQL, Kubernetes, Redis, etc.
+
+Sure I do understand the thinking behind this, it does show your ability to work with complex technologies.
+
+But in the age of AI and the really fast-moving pace of technology, it's pretty trivial for someone to learn technologies on the go and incorporate them into their project. Real engineering will always be that “**solves a problem, not create one**”. Solving problems always requires asking questions first:
+
+1. Does your project really need TRPC or GraphQL? Why not just use REST like everyone does bruh?
+2. Do I really need Kubernetes for those 5 concurrent connections?
+3. Does my really interactive website need SSR where then each button click will be a server action and take ages to process any action?
+
+![Tutorial hell meme](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6ikoimzgzcyvgo9c1ot8.png)
+
+And please, stop building clones. It does not matter:
+
+- how many services you use in it
+- how much knowledge you gained from creating it
+- how complex the project was to make
+
+The YouTube clone you made by following a random Youtuber’s 8-hour-long guide is not going to help you in any way.
+
+Quoting [Theo](https://www.youtube.com/@t3dotgg) (idk where he said tho):
+
+> To build a great product, you need to first be a customer
+
+If you want project ideas, look around you. Try to solve problems you face every day. If you just try looking, you WILL find many.
+
+## Final words
+
+This blog is a summary of my (I admit very short-lived) experience of working in tech till now. I always tried not to treat tech as something I specialize in, but as a tool that helps me solve problems.
+
+I started off my journey in web with a simple problem, I just wanted a website of my own because it would be cool :D
+
+Then a simple problem gave birth to more problems with a chain reaction ongoing, to me finding myself working with PHP, something I would have never imagined doing in a million years before.
+
+So…. that’s it. Keep building and showcasing your work, and most importantly, have fun at it!

@@ -1,0 +1,220 @@
+# Writing Event-Driven Serverless Code to Build Scalable Applications
+
+Serverless isn't just trendy—it's rewriting how software scales.
+
+Netflix streams billions of hours without servers. Coca-Cola automates workflows without infrastructure. Figma and T-Mobile ditch downtime. What do they know that you don't?
+
+The secret? Event-driven serverless code. It's the backbone of apps that scale instantly, cut costs, and survive traffic spikes. No servers. No guesswork. Just code that reacts.
+
+This isn't hype—it's a blueprint. Ready to build smarter? Let's break down how event-driven serverless turns scalability from a challenge into a reflex.
+
+---
+
+## **Brief Intro to Serverless**
+
+> Spoiler alert: servers are still there.
+
+There are multiple definitions for this term online, often filled with complex jargon. The best way I like to define it is:  
+_A "fashion" of deploying your code where YOU don't have to think about the servers running your code._
+
+Let's take an example:
+
+![Serverless Deployment Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/884rktyfom0qj4zwatzm.png)
+
+Take Bob. He built _mytrashcode.com_ but panicked at "server setup." He's a developer, not a sysadmin. Instead, he uploaded his code to a cloud provider. They handled security, scaling, and traffic—his site went live. No late-night server meltdowns. No panic during traffic surges. Done.
+
+---
+
+## **Why Can't I Manage My Own Servers?**
+
+Managing your own servers usually takes one of two paths. You either run physical hardware—like turning an old laptop into a DIY server—or rent a Virtual Private Server (VPS) from providers like DigitalOcean Droplets, Azure VMs, or AWS Lightsail. These fall under IaaS (Infrastructure as a Service), where the cloud company provides the bare-metal infrastructure, but the rest—updates, scaling, security—is entirely up to you.
+
+Does this mean self-managing servers is impossible?
+
+Not at all. Plenty of teams still do it. But managing your own servers comes with a lot of... challenges, including:
+
+1. Knowing how to manage **infrastructure**/hardware.
+2. Setting up **auto-scaling** and downscaling.
+3. Periodically applying **system patches** and updates to avoid exposing vulnerabilities.
+4. Configuring proxies, SSL certificate generation, **network settings**, etc.
+
+---
+
+## **Dividing Your Code into Functions**
+
+Serverless code doesn't need to be monolithic, i.e., all code doesn't need to be in the same place. It can be a collection of bite-sized, event-triggered functions.
+
+A **Function** is nothing but a set of code that performs a specific task. When writing your entire code serverless, you'll find that you can divide your code into various functions, each handling a specific part of your application. Let's understand this more deeply with an example:
+
+![Functions Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rc9zdithhna5sjs2gup4.png)
+
+When Bob first logs into _mytrashcode.com_ as a new user, the system triggers a "send welcome email" function before redirecting him. Subsequent logins bypass this function entirely, routing him straight to the dashboard. This separation serves a critical purpose—while 99% of users interact solely with the dashboard, isolating secondary functions (like email triggers) enables independent scaling.
+
+Though trivial in this example, the cost implications compound dramatically at scale. Each decoupled function operates on its own resource allocation curve—high-frequency features like dashboard access demand consistent infrastructure, while one-time actions (welcome emails) can scale down during inactive periods. This modular approach prevents overprovisioning for rarely triggered events, even before considering complex systems with hundreds of interdependent functions.
+
+---
+
+## **Where to Deploy???**
+
+Okay, so just a quick recap—we now know:
+
+1. Deploying serverless is great!
+2. Dividing your code into functions is modular and scalable.
+3. Functions can be triggered by events.
+
+So, where do you deploy this architecture? Leading platforms like AWS Lambda, Azure Functions, and Google Cloud Functions support it, but we'll focus on Appwrite Functions.
+
+![Function Deployment Options](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/l9sqdus26z0ygxclj0ms.png)
+
+Appwrite, an open-source Backend-as-a-Service (BaaS), bundles authentication, databases, storage, and serverless functions into a single toolkit. This tight integration streamlines deployment—instead of managing fragmented cloud services, Appwrite centralizes backend logic, letting you deploy event-driven functions with minimal overhead. For developers prioritizing simplicity without sacrificing scalability, this unified approach reduces operational friction significantly.
+
+So, let's deploy our function!
+
+---
+
+## **Deploying Your First Function**
+
+Before writing code, set up your backend on Appwrite:
+
+1. Go to [appwrite.io](https://appwrite.io/) and register or log in.
+2. Create an organization (if new).
+3. Create a new project.
+4. Copy your **Project ID** for later use.
+
+Now, let's simulate a server-side project using the `node-appwrite` package:
+
+- Create a project directory:
+
+```bash
+mkdir my-project
+cd my-project
+```
+
+- Install the [Appwrite CLI](https://appwrite.io/docs/tooling/command-line/installation) and initialize your project:
+
+```bash
+npm init -y
+appwrite init
+```
+
+- Install dependencies:
+
+```bash
+npm install dotenv node-appwrite
+```
+
+- Create your function using the Appwrite CLI:
+
+```bash
+appwrite init function
+```
+
+For the runtime, I selected **Node 20**, but you can choose any runtime.
+
+- Write your main function in `src/main.js`:
+
+```js
+
+dotenv.config();
+
+const client = new Client();
+client.setEndpoint("https://cloud.appwrite.io/v1");
+client.setProject(process.env.PROJECT_ID);
+
+const users = new Users(client);
+const account = new Account(client);
+
+const main = async () => {
+  await account.create("test-user", "test@test.com", "test@123", "test");
+  const session = await account.createEmailPasswordSession(
+    "test@test.com",
+    "test@123",
+  );
+  console.log(session);
+};
+
+main();
+```
+
+- Add a `start` script in `package.json` to run `node src/main.js`.
+
+- Create a `.env` file with the required environment variables.
+
+This function simulates a new user creation and login, logging the session details.
+
+> **Note:** Replace the email IDs with actual emails to receive the email.
+
+![Functions Architecture](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/pa9qh5cp756w6a5jpjrt.png)
+
+Now, let's set up the function logic. Navigate to `functions/your-function` where your function resides.
+
+For this demo, we'll use [Resend](https://resend.com) to send emails:
+
+- Install the `resend` package:
+
+```bash
+npm install resend
+```
+
+- Update `src/main.js` with this code:
+
+```js
+
+// https://appwrite.io/docs/advanced/platform/events
+export default async ({ res, req, log }) => {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  await resend.emails.send({
+    from: "hello@yourdomain.com",
+    to: req.body.email,
+    subject: "Hello!",
+    text: "Hi, its nice to meet you!",
+  });
+
+  log("Email sent successfully");
+
+  return res.json({
+    success: true,
+    message: "Email sent successfully",
+  });
+};
+```
+
+You need to set up an account on Resend to get the API Key. Resend also requires you to connect to your own domain to send emails. You can read more about it on the [Resend docs](https://resend.com/docs/introduction).
+
+Now, let's push the created function to the console using:
+
+```bash
+appwrite push functions
+```
+
+The final step is to set up the event that connects the two pieces of code together using the `users.*.create` event:
+
+1. Go to the Appwrite console and navigate to your created project.
+2. Navigate to the Functions tab.
+3. You should see your newly created function there—click on it.
+4. Go to its settings and under the Events section.
+5. Add a new event to trigger this function: `users.*.create`.
+
+![Appwrite Console showing Events](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/sb7etulqcgb31sx5at2t.png)
+
+And... voila! Your program is done. If everything is set up correctly, running your main script should send the newly created user an invitation email. Try it using:
+
+```bash
+npm run start
+```
+
+---
+
+## **Conclusion**
+
+In conclusion, serverless architecture is more than just a passing trend—it's a transformative approach to building and scaling modern applications.
+
+Platforms like Appwrite further simplify the process, offering a unified backend solution that integrates seamlessly with serverless functions. Whether you're a solo developer like Bob or part of a larger team, adopting serverless can turn scalability from a daunting challenge into an effortless reflex.
+
+![Conclusion Image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jnuiov1eikg0u26hgpyt.png)
+
+---
+
+_Thanks for reading!_  
+_You can also connect with me here: [https://www.chiragaggarwal.tech/](https://www.chiragaggarwal.tech/)_

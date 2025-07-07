@@ -1,0 +1,2314 @@
+# Chirag Aggarwal's Blog Posts
+
+This file contains all blog posts from Chirag Aggarwal's personal website.
+Generated automatically from MDX files during build.
+
+---
+
+## My Journey in Authorization with OPAL
+
+**Slug:** my-journey-in-authorization-with-opal
+
+Before we even begin, many of you like my a-month-old self will wonder what even is Authorization, and especially... OPAL?? So let's break them down one by one. Starting with Authorization.
+
+## Authentication vs Authorization
+
+![Authentication vs Authorization](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ctcbpynn0b1cwme7ze42.png)
+
+Well, I started the article off with just one term, `Authorization`. Then why am I covering `Authentication` as well? Well because they are quite similar and can be easily confused with.
+
+**Authentication** is the process of _identifying_ an user. It tells us "who" the user is. For a website, whenever a user visits it, all it sees is an IP address asking for a document, that the server then renders and sends. To differentiate multiple requests, it needs to authenticate the request, more specifically the user calling the request.
+
+**Authorization** on the other hand is the step that comes _after_ authentication. It's the process of identifying what the user is allowed (authorized) to do. In simple words, it's the set of permissions that a particular user must follow depending upon who he/she is.
+
+## OK but why?
+
+![Why Authorization](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ygo1fds4h7233gygvghd.png)
+
+I think most of you would have already understood why we need Authentication. Without websites would have no idea who you are! You will be another random Guest visiting the website. No wonder all the websites have `Signup/Login` as a basic functionality nowadays.
+
+But why do we need Authorization???
+
+Authorization determines if the user has the permission to do a particular task. For eg. on a blog website, all the users might have permission to read your blog but only **you** can edit it. Incorrect or not setting up an authorization policy at all can lead to a lot of.... bad things 💀.
+
+## Policies and OPA
+
+![Policy in OPA](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1c55h9vv2pjzxfj7lif1.png)
+
+Just above I mentioned a term, `policy`. What is it? Policy is just a set of rules to establish the authorization system. There are many ways to write these policies. The one we will be covering here is called OPA.
+
+OPA, short for Open Policy Agent, is a high-level declarative language used for writing policies. It allows you to define the policies in a single language that can used across many parts of your system, rather than relying on vendor-specific technologies.
+
+## OPAL and the problems with OPA
+
+While OPA is great for decoupling the policy from code in a highly performant and elegant way, it suffers from keeping the policy up to date as the requirements change on a day-to-day basis.
+
+This is where OPAL, Open Policy Agent Layer, comes and provides **real-time** policy updates. It continuously runs in backgrounds and updates the policy agents whenever needed.
+
+For eg. A user created a private blog page. So a policy was created so that it can only be accessed by the creator. But layer he/she wanted to allow access to a specific user with a given email ID. So OPAL can update the policy in real-time to allow that to happen.
+
+## Conclusion
+
+![Conclusion](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1wnonldramx6rhlef2w6.png)
+
+After all this, you might have two types of thoughts. Some people thought "Wow this was amazing and I was totally missing out on this". But a mass majority, like me when first learning all this, thought "Why do we need all this just for authorization. Just used an If/Else call".
+
+And the funny thing is, for especially your use case, you might be right! You really don't need this much complexity for your average 10-user SaaS application.
+
+But this becomes essential for companies handling millions of users like Netflix, T-Mobile and Goldman-Sachs, who all use OPA to handle their policy layers. They can't afford a wrong policy being declared, that's why they use OPA which provides a definitive syntax for writing it. They can't afford the updates to take time, so they use OPAL for real-time synchronization.
+
+I hope you learnt something new today.
+
+Here are the links to my sources:
+
+- `OPA` - https://www.openpolicyagent.org/
+- `OPAL` - https://opal.ac/
+
+> End Note: If you check out my profile, this is my first-ever post. So please let me know how I did, and how I can improve in future. Thanks!
+
+---
+
+## Mastering npm: A Comprehensive Guide to Package Management
+
+**Slug:** mastering-npm-a-comprehensive-guide-to-package-management
+
+Ah, npm – the Node Package Manager. For web developers, it's like that quirky old friend who's simultaneously invaluable and infuriating. Whether you're a newbie fumbling through your first `npm install` or a seasoned dev who can recite package versions in your sleep, npm is an inescapable part of the modern JavaScript ecosystem.
+
+I've been on quite the journey with npm, from my early days of copy-pasting commands I barely understood, to now, where I can confidently say I've tamed this beast (most days, anyway). So, grab your favourite caffeinated beverage, and let's dive into the wild world of npm!
+
+## Why Do We Even Need npm?
+
+![The real fullform of NPM](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/34pjfktpzzia7o3qy7w3.png)
+
+Picture this: You're building a web app, and you need a date picker. Sure, you _could_ write one from scratch, accounting for leap years, time zones, and all those delightful edge cases. Or... you could type `npm install moment` and have a battle-tested solution at your fingertips in seconds.
+
+That's the magic of npm. It's like having access to a vast library of code, written and maintained by developers worldwide. Need routing? Authentication? A library to validate email addresses? There's probably an npm package for that.
+
+But npm isn't just about installing packages. It's a powerful tool for:
+
+1. **Managing Dependencies**: Keep track of what your project needs and which versions.
+2. **Script Running**: Standardize commands across your team (ever seen `npm run build`?).
+3. **Version Control**: Ensure everyone on your team is using the same package versions.
+4. **Publishing**: Share your own code with the world (or just your team).
+
+In essence, npm is the glue that holds the JavaScript ecosystem together. It allows us to stand on the shoulders of giants and build amazing things without reinventing the wheel every time.
+
+## But why just NPM?
+
+![NPM vs The competition](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ajl9dfkpp5uiyfc8wjlm.png)
+
+Of course NPM isn't alone, it has its own family! Sadly it isn't the most loved... but still, it's the good ol' reliable! If you want to be called a 10xengineer, you should probably switch to the alternatives. And the contenders are:
+
+|      | Pros                                                                           | Cons                                                                 |
+| ---- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| npm  | • Default for Node.js • Massive package ecosystem                              | • Historically slower than alternatives • node_modules can get large |
+| Yarn | • Faster installation • Offline mode                                           | • Another tool to learn • Occasional compatibility issues with npm   |
+| pnpm | • Efficient disk space usage • Lightning-fast installations                    | • Different node_modules structure • Less mainstream adoption        |
+| Bun  | • Blazing fast performance • All-in-one solution: runtime, transpiler, bundler | • Still in development • Limited ecosystem compared to npm           |
+
+In contrast to popular belief, a 10x engineer like me is not using the freshly baked (pun intended) technology like bun! I still stick to pnpm. Why is that so you might ask? Well, it's a case specific to a Mac user like me, where Bun isn't very efficient with caching the files for repeated downloads. So it is less efficient for Macbook (or it was till the day I wrote this).
+
+## But what are these files???
+
+![User asking PNPM why does it need to many lines for the lock file](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fjeus8ks2tsjw7ldfxe1.png)
+
+At the core of every JavaScript project, regardless of the package manager, lies the `package.json` file. This crucial manifest outlines project details and dependencies in a structured JSON format:
+
+```json
+{
+  "name": "my-awesome-project",
+  "version": "1.0.0",
+  "dependencies": { ... },
+  "devDependencies": { ... },
+  "scripts": { ... }
+}
+```
+
+Complementing `package.json`, each package manager employs a unique lock file to ensure dependency consistency across environments. These files meticulously detail every dependency, including sub-dependencies and their exact versions:
+
+- npm: package-lock.json
+- Yarn: yarn.lock
+- pnpm: pnpm-lock.yaml
+- Bun: bun.lockb (in binary format)
+
+If you've ever peeked inside these lock files, you've likely encountered a daunting wall of text or, in Bun's case, indecipherable binary data. Don't panic! These files aren't meant for human editing. They're the domain of your chosen package manager, automatically generated and updated to keep your project's dependency ecosystem in perfect harmony.
+
+## Surviving the Dependency Management Nightmare
+
+![NPM Errors!](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8133yerzwiilzljab5lo.png)
+
+Picture this: It's 2 AM, and you're fueled by coffee and determination, trying to resurrect an old project. Suddenly, npm throws a fit. One package is outdated. No, wait—all of them are. And oh, joy! That innocent-looking major update just turned your project into a digital dumpster fire.
+
+Welcome to dependency management hell, where "it works on my machine" goes to die.
+
+While we can't completely exorcise these demons (it's part of the JavaScript circle of life), we can at least arm ourselves with some holy water. Let's explore two powerful tools to keep your sanity intact.
+
+## 1. npm-check-updates: The Blunt Force Approach
+
+First up is `npm-check-updates`, the sledgehammer of the update world. It doesn't care about your feelings or your project's delicate ecosystem. It has one job: update all the things.
+
+```bash
+npm install -g npm-check-updates  # Install globally
+
+ncu     # List available updates (look before you leap)
+ncu -u  # Update everything and pray
+```
+
+## 2. npm-check: The Sophisticated Sibling
+
+For those who prefer a more refined approach, meet `npm-check`. It's like having a personal assistant for your dependencies, complete with a monocle and a British accent.
+
+```bash
+npm install -g npm-check  # Install globally
+
+npm-check    # Get a detailed report of your dependency situation
+npm-check -u # Interactive update process, like a choose-your-own-adventure book
+```
+
+This tool doesn't just check for updates; it's also a snitch. It'll rat out those packages you installed and never used (we've all been there). Plus, it categorizes updates into patch, minor, and major groups, allowing you to update with the precision of a surgeon rather than the recklessness of a caffeinated developer at 2 AM.
+
+## Conclusion
+
+We've ventured through the npm universe, from decoding `package.json` to escaping dependency hell. Here's your survival kit:
+
+1. Choose your package manager wisely - npm, Yarn, or pnpm each have their strengths.
+2. Treat your `package.json` and lock files with respect - they're the backbone of your project.
+3. Use tools like npm-check-updates and npm-check to keep dependencies in check.
+4. Update regularly, but cautiously. Always read changelogs and run tests.
+5. Remember, even seasoned devs sometimes get lost in dependency hell - you're not alone.
+
+In the ever-changing JavaScript landscape, managing packages is more art than science. Stay curious, update wisely, and may your builds always be successful!
+
+P.S. When all else fails, there's always `rm -rf node_modules && npm install`. It's the "turn it off and on again" of the npm world!
+
+---
+
+## From Kubernetes Chaos to Calm: A Cyclops Adventure
+
+**Slug:** from-kubernetes-chaos-to-calm-a-cyclops-adventure
+
+Hey there, fellow coders! 👋 Ever felt like managing Kubernetes clusters was about as fun as herding cats? Well, buckle up, because we're about to dive into the world of Cyclops - the tool that promises to make Kubernetes management a walk in the park. (Spoiler alert: It actually does!)
+
+## What's This Cyclops Thing Anyway?
+
+![Cyclops Introduction Image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/eq4a48v1nu6kp4lysc6q.png)
+
+Cyclops is like that cool friend who always knows how to simplify complex stuff. It's a tool for managing Kubernetes clusters with a fancy GUI that even your non-tech-savvy cousin could probably figure out. (No offence to your cousin, of course.)
+
+Imagine Kubernetes as a massive, tangled ball of yarn, and Cyclops as the patient cat that somehow helps you unravel it without getting caught in a fur-ball of confusion. It's designed for developers, system admins, and DevOps pros who'd rather not spend their days deciphering cryptic YAML files. (Because let's face it, life's too short for that much indentation.)
+
+## Getting Started: The "Fun" Part
+
+![Cyclops Coding Introduction Image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s6tybhm9ghnlk9b33xs6.png)
+
+### Step 1: Get Yourself a Kubernetes Cluster
+
+First things first, you need a Kubernetes cluster. If you don't have one lying around (who does?), Minikube is your new best friend. It's like having a mini Kubernetes playground right on your laptop. Perfect for when you want to feel like a DevOps god without the fear of breaking production.
+
+Here's how to start Minikube:
+
+```bash
+minikube start
+```
+
+If you're feeling fancy, you can even specify the driver:
+
+```bash
+minikube start --driver=docker
+```
+
+### Step 2: Install Cyclops
+
+Now comes the "fun" part - installing Cyclops on your cluster. Follow their installation guide, and pray to the tech gods that everything goes smoothly. (Spoiler: It probably will, but where's the drama in that?)
+
+Here's a snippet to install Cyclops using Helm:
+
+```bash
+helm repo add cyclops https://cyclops-ui.github.io/helm-charts/
+helm repo update
+helm install cyclops cyclops/cyclops
+```
+
+### Step 3: Containerize Your App
+
+Got an app? Great! No app? Well, time to whip one up faster than you can say "Docker." Remember, it needs a UI (even if it's just a "Hello, World!" page), and it should play nice with localhost:8881.
+
+Here's a simple Dockerfile for a basic Node.js app:
+
+```dockerfile
+FROM node:14
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 8881
+CMD [ "node", "server.js" ]
+```
+
+Now, containerize it and push it to Docker Hub. It's like gift-wrapping your app, but instead of paper and ribbons, you're using layers of filesystem and environmental variables. Festive!
+
+```bash
+docker build -t yourusername/your-awesome-app:v1 .
+docker push yourusername/your-awesome-app:v1
+```
+
+### Step 4: Deploy with Cyclops
+
+Fire up the Cyclops GUI on localhost. Navigate to the modules section like you're Christopher Columbus discovering the New World of Kubernetes management. Click "Add new module" and select the demo template. You'll see a screen that looks like it's straight out of a sci-fi movie, but don't panic! This is where the magic happens.
+
+If you're more of a CLI person (we don't judge), you can use kubectl to apply your Cyclops-generated YAML:
+
+```bash
+kubectl apply -f your-cyclops-generated-config.yaml
+```
+
+### Step 5: Port Forwarding (Because Why Make Things Simple?)
+
+After your service is deployed, it's time for some command-line fun. Run this magical incantation:
+
+```bash
+kubectl port-forward svc/your-awesome-app 8881:80
+```
+
+Replace `your-awesome-app` with, well, your awesome app's name. If it doesn't work, don't freak out. Cyclops likes to keep you on your toes by defaulting to port 80. Just change it to another port and pretend that's what you meant to do all along.
+
+## The Grand Finale
+
+Voilà! Your app should now be running on localhost:8881 (or whatever port you ended up using). Take a moment to bask in the glory of your achievement. You've just deployed an app using Cyclops, and the Kubernetes gods are smiling upon you.
+
+To check if your app is really running (and not just hiding from you), try:
+
+```bash
+curl http://localhost:8881
+```
+
+If you see your app's content, congratulations! If not, well, welcome to the wonderful world of debugging Kubernetes deployments!
+
+## Contributing to Cyclops: My Adventure with GitHub Issues
+
+![Contributing to Cyclops Image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/j1o9lxijj0vhrrvs922m.png)
+
+Now that we've gone through the basics of using Cyclops, let's talk about something even cooler - contributing to the project itself! As part of this quest, I had the opportunity to work on a real GitHub issue for Cyclops. Let me tell you, it's as exciting as finding an unattended snack in the office kitchen!
+
+### The Issue: Taming the Impatient User (Including Myself)
+
+The issue I tackled was #423: "Disable all actions while the template is loading". Sounds thrilling, right? Well, hold onto your keyboards, because it actually is pretty important!
+
+Here's the gist: When adding a new module in Cyclops, you choose a template. But templates, like your colleague's never-ending status updates, can take a while to load. The problem was that impatient users (guilty as charged) could click around and potentially cause chaos while the template was still loading.
+
+### The Solution: Adding a Digital Straitjacket
+
+To solve this, we needed to add some restrictions - a digital straitjacket, if you will. Here's what I did:
+
+1. Disabled the 'save' button while loading
+2. Disabled the 'load values from file' button
+3. Prevented users from changing the template mid-load
+
+Here's a simplified snippet of the changes I made:
+
+```typescript
+const [isLoading, setIsLoading] = useState(false);
+
+const handleTemplateLoad = async () => {
+  setIsLoading(true);
+  try {
+    await loadTemplate();
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+return (
+
+      Load Template
+
+      Save
+
+      Load Values from File
+
+      {/* Template options */}
+
+);
+```
+
+The key was using a loading state to control the UI elements. It's like putting a "Do Not Disturb" sign on your desk but for web components.
+
+### How You Can Contribute
+
+Think you can't contribute because you're not a Cyclops expert? Nonsense! Here's a quick guide to getting started:
+
+1. **Find an Issue**: Browse the [Cyclops GitHub Issues](https://github.com/cyclops-ui/cyclops/issues) page. Look for "good first issue" or "help wanted" labels - they're the low-hanging fruit of the coding world.
+
+2. **Dive In**: Set up your environment, comment on an issue to claim it (no one likes a code stealer), and start coding. Don't forget to test your changes - untested code is like a mystery flavour jellybean.
+
+3. **Submit and Iterate**: Send in your pull request, describing your changes like you're selling them on a late-night infomercial. Be ready for feedback - it's all part of the open-source tango.
+
+Contributing isn't just about the code - it's about learning, connecting with fellow developers, and getting that warm, fuzzy feeling of making the world a tiny bit better. Plus, it looks pretty snazzy on your resume. So why wait? Dive in and start your Cyclops adventure today!
+
+Remember, in the world of open-source, we're all Cyclops - focused on one goal at a time, but with a vision that spans the entire Kubernetes landscape. Happy coding!
+
+## What's Next?
+
+Now that you've dipped your toes into the Cyclops pool, why not dive deeper? Explore more of Cyclops' tools, poke around your Kubernetes cluster, break things (in a non-production environment, of course), and learn from the chaos.
+
+And hey, if all else fails, you can always fall back on the age-old tech solution: turn it off and on again. Works every time, 60% of the time.
+
+```bash
+minikube stop
+minikube start
+```
+
+Happy Cycloptic adventures, and may your containers always be running!
+
+---
+
+_P.S. If you found this guide helpful, consider giving Cyclops some love by starring their [GitHub repo](https://github.com/cyclops-ui/cyclops). After all, they're the reason we're not all crying into our keyboards trying to manage Kubernetes the old-fashioned way._
+
+---
+
+## Conditional Dependency Management Using Maven Profiles
+
+**Slug:** conditional-dependency-management-using-maven-profiles
+
+Maven is an efficient build tool and project management tool mainly known for effectively building projects in Java. It is one of the most useful features in Maven, to effectively manage the consumers and producers of dependencies in a project.
+
+In complex projects, you might need different dependencies or configurations based on various conditions such as the development environment, target platform, or specific build requirements. This is where Maven Profiles come into play.
+Maven Profiles
+
+Maven Profiles is a set of parameters that can be adapted to set or alter the default parameters of Maven build. They enable you to define the application construction process according to specific contexts like development, testing, or production.
+
+**Key Concepts:**
+
+- **Profile Activation:** Activations can be of several types depending on the option keys like command-line, Maven option settings, system environment variables, and system preferences.
+- **Dependency Management:** It is possible to use profiles to specify which dependencies should be included and which ones should be excluded based on the currently active profile.
+- **Build Customization:** With profiles, you can control how your build process is set up in aspects like plug-in settings, resources being filtered etc.
+
+## Setting Up a Maven Project with Profiles
+
+Let's walk through the process of setting up a Maven project that uses profiles for conditional dependency management.
+
+### Step 1: Create a New Maven Project
+
+First, let's create a new Maven project using the command line:
+
+```bash
+mvn archetype:generate -DgroupId=com.example -DartifactId=profile-demo -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+```
+
+**Output:**
+
+This command will create a new Maven project with a basic structure. Here is what the output should look like:
+
+![Output of the create new Maven project command](https://media.geeksforgeeks.org/wp-content/uploads/20240804001437/screenshot.png)
+
+Now, let's take a look at the directory structure that Maven has created for us:
+
+![Directory Structure](https://media.geeksforgeeks.org/wp-content/uploads/20240806105510/mvn-pro.png)
+
+### Step 2: Configure pom.xml
+
+Now, let's modify the pom.xml file to include profiles. We'll create two profiles: development and production, each with its own set of dependencies.
+
+```xml
+
+    4.0.0
+
+    com.example
+    profile-demo
+    1.0-SNAPSHOT
+
+        1.8
+        1.8
+
+            junit
+            junit
+            4.13.2
+            test
+
+            development
+            
+                true
+
+                    org.slf4j
+                    slf4j-simple
+                    1.7.32
+
+            production
+
+                    ch.qos.logback
+                    logback-classic
+                    1.2.6
+
+```
+
+In this configuration:
+
+- We have a common dependency (JUnit) that's always included.
+- The development profile includes the slf4j-simple logger.
+- The production profile includes the logback-classic logger.
+- The development profile is set as the default profile.
+
+### Step 3: Create Java Classes
+
+Let's create a simple Java class that uses the logger:
+
+```java
+package com.example;
+
+public class App {
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
+
+    public static void main(String[] args) {
+        logger.info("Hello, Maven Profiles!");
+    }
+}
+```
+
+### Step 4: Build the Project
+
+Now that we have set up our project with profiles, let's see how to use them.
+
+#### Building with the Default Profile
+
+To build the project with the default profile (development in our case), simply run:
+
+```bash
+mvn clean package
+```
+
+This will include the slf4j-simple logger in the build.
+
+#### Building with a Specific Profile
+
+To build the project with the production profile, use the -P flag:
+
+```bash
+mvn clean package -Pproduction
+```
+
+This will include the logback-classic logger in the build instead.
+
+### Advanced Profile Usage
+
+Profiles can be activated in various ways:
+
+1. **Command Line:** As shown above, using `-P`.
+
+For example, To activate the 'development' profile:
+
+```bash
+mvn clean package -Pdevelopment
+```
+
+2. **Maven Settings:** In the `settings.xml` file:
+
+```xml
+
+  production
+
+```
+
+3. **Environment Variable:** In the `pom.xml`:
+
+```xml
+
+    env
+    prod
+
+```
+
+Then activate using: `mvn clean package -Denv=prod`
+
+4. **OS Settings:** Activate based on the operating system:
+
+```xml
+
+    Windows 10
+    Windows
+    amd64
+    10.0
+
+```
+
+#### Resource Filtering:
+
+Profiles can also be used for resource filtering. For example:
+
+```xml
+
+    development
+
+                src/main/resources
+                true
+                
+                    application-dev.properties
+
+```
+
+This will only include the `application-dev.properties` file when the development profile is active.
+
+### Conclusion
+
+Maven Profiles provide a powerful way to manage conditional dependencies and configurations in your Java projects. By using profiles, you can easily switch between different build configurations for various environments or conditions. This flexibility allows for more maintainable and adaptable projects, especially when dealing with complex build requirements or multiple deployment scenarios.
+
+### References:
+
+- GeeksforGeeks: [Apache Maven](https://www.geeksforgeeks.org/apache-maven/)
+- GeeksforGeeks: [Maven Lifecycle and Basic Maven Commands](https://www.geeksforgeeks.org/maven-lifecycle-and-basic-maven-commands/)
+
+---
+
+## Neon T3 Starter Kit: Supercharging Web Development with Serverless Postgres
+
+**Slug:** neon-t3-starter-kit-supercharging-web-development-with-serverless-postgres
+
+The Neon T3 Starter Kit is the ultimate open-source starter kit assembled around the T3 stack that uses Neon’s serverless Postgres database. This kit can easily be described as a game changer, offering developers a solid base from which they can build engaging, modern web applications with relative ease.
+
+Our starter kit leverages the following technologies:
+
+- Next.js framework for server-side rendering capabilities and a Full-stack environment.
+- TypeScript for type-safe programming.
+- Tailwind CSS for rapid frontend development/\.
+- tRPC to provide end-to-end Typesafe APIs
+- Prisma to provide ORM in database operations.
+- Neon to provide a fully scalable and easy-to-set-up server-less Postgres database. (Not to mention completely free!)
+
+> Note there were also other tools I used such as Shadcn, Magicpin, Lucide Icons, etc. A detailed list can be found on the GitHub Repository.
+
+With this powerful combination, developers can dedicate more time to creating features instead of worrying about infrastructural issues.
+
+## Link to Kit
+
+Link to live demo site: https://neon-t3-starter-kit.vercel.app/
+
+You can find the Neon T3 Starter Kit on GitHub: https://github.com/ChiragAgg5k/neon-t3-starter-kit
+
+This repository also contains a well-structured README that guides the user on how to use the said starter kit. We have also documented well how to set up the environment, configure Neon database, and deploy on sites like Vercel.
+
+## My Journey
+
+Selecting the T3 stack as a base for this Start kit was quite an obvious decision. The T3 stack created by Theo Browne is quite simple, type-safe, and is quite friendly to developers. In doing so, it serves as a reliable framework that allows for the development of scalable web applications.
+
+Bringing Neon’s serverless Postgres into this stack was a fun task. I was glad to learn a lot about the server-less architecture of databases and how to make my applications faster and more scalable than before. Learning how to integrate Prisma with Neon’s Postgres instance was learning in itself because it demonstrated how other modern ORMs can easily integrate with modern databases.
+
+Throughout this journey, I gained valuable insights into:
+
+1. Using optimal database connections in a serverless environment
+2. Utilising Neon’s branching for effective development workflows
+3. Prisma and tRPC Type-Safe Database Operations
+4. Challenges of maintaining both performance and developer experience in a full-stack application
+
+Developing this starter kit has been a wonderful learning process. The developer’s tools have been improved through the collaboration of other developers to ensure that documentation is well-provided and easily accessible.
+
+This Neon T3 Starter Kit should assist developers who are now facing issues with finding the right, maintainable, and enjoyable project stack!
+
+![Landing Page](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/pgmusk7stzqsbff46eta.png)
+
+---
+
+## How to Register Users in Django REST Framework?
+
+**Slug:** how-to-register-users-in-django-rest-framework
+
+**Django REST Framework (DRF)** is a powerful and flexible toolkit for building Web APIs. One of the most common requirements in web applications is user registration. In this article, we'll explore how to implement user registration using [Django REST Framework](https://www.geeksforgeeks.org/django-rest-api-crud-with-drf/).
+
+## Setting Up Django REST Framework
+
+Before we dive into the Django REST Framework, let's set up a new Django project. Follow these steps:
+
+1. First, ensure we have Python installed on our system. We can download Python from [python.org](https://www.python.org/).
+
+2. Install Django and Django REST Framework using `pip`:
+
+```bash
+pip install django djangorestframework
+```
+
+3. Create a new Django project:
+
+```bash
+django-admin startproject django_rest_demo
+cd django_rest_demo
+```
+
+4. Create a new Django app:
+
+```bash
+python manage.py startapp user_auth
+```
+
+5. Open `django_rest_demo/settings.py` and add the `user_auth` and `rest_framework` to `INSTALLED_APPS`:
+
+```py
+INSTALLED_APPS = [
+    # ...
+    'rest_framework',
+  	# Token authentication
+    'rest_framework.authtoken',
+    'user_auth',
+]
+```
+
+6. Run initial migrations:
+
+```bash
+python manage.py migrate
+```
+
+Now that we have our Django project set up, let's configure Django REST Framework:
+
+1. In the `django_rest_demo/settings.py`, we can add any DRF-specific settings. For example:
+
+```py
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+```
+
+2. If we're using token authentication, make sure we've added `rest_framework.authtoken` to `INSTALLED_APPS` as shown in **step 5** above.
+
+Here's how our project structure might look:
+
+```bash
+django_rest_demo/
+│
+├── user_auth/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── views.py
+│   └── urls.py
+│
+├── django_rest_demo/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+│
+└── manage.py
+```
+
+## Creating a Registration Serializer
+
+Serializers in DRF allow complex data, such as querysets and model instances to be converted to native Python datatypes that can then be easily rendered into **JSON**, **XML** or other content types. They also provide deserialization, allowing parsed data to be converted back into complex types, after first validating the incoming data.
+
+Let's create a serializer for user registration: In the `user_auth/serializers.py`:
+
+```py
+from rest_framework import serializers
+from django.contrib.auth.models import User
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', 'password2']
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError({"password": "Password fields didn't match."})
+        return attrs
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password']
+        )
+        return user
+```
+
+This serializer extends ModelSerializer and uses the User model. It includes a password confirmation field and custom validation to ensure the passwords match.
+
+## Handling User Registration with Views
+
+Now that we have our serializer, let's create a view to handle the registration process. In the `user_auth/views.py`:
+
+```py
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import UserRegistrationSerializer
+
+class UserRegistrationView(APIView):
+    def post(self, request):
+        serializer = UserRegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+              "message": "User registered successfully"
+            }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+```
+
+This view uses the UserRegistrationSerializer to validate the incoming data and create a new user if the data is valid.
+
+### Example Code
+
+To complete our code, let's set up the URLs to make our registration view accessible.
+
+In our `user_auth/urls.py` (create this file if it doesn't exist):
+
+```py
+from django.urls import path
+from .views import UserRegistrationView
+
+urlpatterns = [
+    path('register/', UserRegistrationView.as_view(), name='register'),
+]
+```
+
+Then, in the project's `django_rest_demo/urls.py`:
+
+```py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('user_auth.urls')),
+]
+```
+
+## Testing the Registration Endpoint
+
+We can now run our Django development server:
+
+```bash
+python manage.py runserver
+```
+
+To test the registration endpoint, we can use tools like curl, Postman, or even the Django REST Framework browsable API. Here's an example using curl:
+
+```bash
+curl -X POST http://localhost:8000/api/register/
+-H "Content-Type: application/json" -d
+'{"username":"newuser",
+"email":"newuser@example.com",
+"password":"securepassword",
+"password2":"securepassword"}'
+```
+
+If successful, we should receive a response indicating that the user was registered successfully.
+
+![api-call-success](https://media.geeksforgeeks.org/wp-content/uploads/20241001015217/api-call-success.png)
+
+## Conclusion
+
+In this article, we've covered how to set up a Django project named "django-rest-demo" from scratch and implement user registration using Django REST Framework in an app called "user_auth". We created a custom serializer to handle the registration data, including password confirmation and validation. We then created a view to process the registration and return appropriate responses.
+
+This implementation provides a solid foundation for user registration in our DRF project. Remember to add appropriate permissions and authentication to our views as needed, and consider adding features like email verification for a more robust registration process.
+
+---
+
+## My Hacktoberfest 2024 Experience with Cal Buddy, Your Smart Calendar Assistant
+
+**Slug:** my-hacktoberfest-2024-experience-with-cal-buddy-your-smart-calendar-assistant
+
+_This is was submission for the [2024 Hacktoberfest Writing challenge](https://dev.to/challenges/hacktoberfest): Maintainer Experience_
+
+Oh boy, what a ride! 🎢 As Hacktoberfest 2024 comes to a close, I can't help but grin thinking about the amazing journey we've had with Cal Buddy, the AI-powered calendar assistant that's been turning heads and stealing hearts in the open-source community.
+
+## From Quest to Conquest!
+
+Here's a fun origin story for you: Cal Buddy wasn't just born out of a random shower thought—it actually started as my submission for a Quira quest! Quira (https://quira.dev) is a developer platform that hosts technical challenges where developers can showcase their skills and build innovative projects. Their quests are tech challenges that push developers to build something cool with specific technologies. My mission? Create something amazing using CopilotKit. Talk about a quest that turned into an adventure!
+
+![Quira quest page](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0ckf8jv3mmhp4ypuyzgi.png)
+
+Just as I was scheduling this task of working on the submission on my Google calendar, I thought, "Hey, what if we made calendars actually fun to use?" And thus, Cal Buddy was born—a smart calendar assistant that proves even time management can have a personality!
+
+## The Little Calendar That Could
+
+You know what's better than a regular calendar? A calendar with a brain! That's exactly what Cal Buddy is—a smart calendar assistant that helps you manage your schedule with the power of AI. Think of it as having a super-organized friend who never forgets a meeting and always knows exactly when to schedule that coffee break you desperately need.
+
+## The Numbers Don't Lie (They're Just Really Excited!)
+
+Here's something that made us do a happy dance: during Hacktoberfest, Cal Buddy snagged an impressive 26 stars! ⭐ That's like getting 26 high-fives from developers around the world saying, "Hey, this is pretty cool!" But wait, it gets better—we had 6 awesome contributors join our calendar-revolutionising crusade. Each one bringing their unique flavour to our code cocktail!
+
+![Cal Buddy star history](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/x7h0igo4skuoawuneuh5.png)
+
+## What Makes Cal Buddy Special?
+
+Let me tell you, this isn't your grandmother's calendar app (though she'd probably love it too!). Thanks to the power of CopilotKit, we've packed it with some seriously cool features:
+
+- 🤖 AI-powered scheduling that's smarter than a calendar has any right to be
+- 💬 A chat interface so friendly, you'll forget you're talking to an app
+- 📊 Productivity insights that make spreadsheets look like child's play
+- 🔗 Calendar service integrations that play nicer than kids at a birthday party
+
+![Chat Interface](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/o13cfyzeflnw64wc4ks8.png)
+
+## The Open Source Spirit
+
+What really made this Hacktoberfest special was seeing how Cal Buddy evolved from a quest submission into a full-fledged open-source project. Our contributors brought thoughtful improvements and clever optimizations that transformed the project beyond our initial vision.
+
+## Looking Ahead
+
+While 26 stars might not break any GitHub records, each one represents someone who believed in what we're building. And those 6 contributors? They're the real MVPs, turning our calendar assistant dream into reality, one commit at a time. Not bad for something that started as a quest submission, right?
+
+## Want to Join the Calendar Revolution?
+
+The party doesn't stop with Hacktoberfest! Cal Buddy's door is always open to new contributors who want to help make scheduling smarter and more fun. Whether you're a coding wizard or just getting started, there's room for everyone in our calendar family.
+
+🔗 [Github Repository](https://github.com/ChiragAgg5k/cal-buddy)
+
+## The Bottom Line
+
+Hacktoberfest 2024 taught us something important: sometimes the best projects come from unexpected beginnings. What started as a Quira quest with CopilotKit turned into something that brought people together and sparked joy in the developer community. Cal Buddy might be an AI calendar assistant, but the real intelligence comes from the amazing humans who've helped build it.
+
+So here's to the quest that started it all—the stars, the contributors, and everyone who believed that calendars deserved better. Cal Buddy is just getting started, and the future is looking bright—and perfectly scheduled! 📅✨
+
+Remember, in a world full of regular calendars, be a Cal Buddy! 🚀
+
+---
+
+_Got time management problems? Cal Buddy's got your back! Check us out at [cal-buddy.vercel.app](https://cal-buddy.vercel.app/)_
+
+---
+
+## My Hackfrost Journey: Navigating Development Challenges with Daytona
+
+**Slug:** my-hackfrost-journey-navigating-development-challenges-with-daytona
+
+## The Winter of Tech Innovation
+
+As the crisp winter winds swept across India, the tech community buzzed with excitement. Hackfrost, a hackathon organized by the dynamic WeMakeDevs community—founded by the renowned tech educator Kunal Kushwaha—promised to be more than just another coding competition. This 48-hour virtual event was set to challenge developers, foster innovation, and bring together a diverse group of tech enthusiasts from across the country.
+
+![Hackfrost Cover Image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5tpogusxub7v18mw2cec.png)
+
+## The Allure of the Challenge
+
+When I first stumbled upon the hackathon announcement, it was the prize lineup that immediately caught my eye—a treasure trove that would make any developer's heart race:
+
+- Latest MacBook Pro
+- High-end Dell Monitor
+- Sleek iPad
+- Compact M4 Mac Mini
+- Premium Keychron Keyboards
+- An assortment of exclusive tech swag
+
+But this wasn't just a simple giveaway. The competition had a unique twist: every project needed to incorporate Kestra, an open-source orchestration tool that was gaining significant traction in the developer community. What seemed like a constraint at first quickly transformed into an exciting opportunity for innovation.
+
+## Team Formation: A Community-Driven Approach
+
+My journey began in the vibrant corridors of Quira, an open-source community that has been my technical home for quite some time. Networking has always been more than just collecting contact information—it's about finding passionate individuals who complement your skills and share your vision.
+
+I was fortunate to connect with an incredible team:
+
+- **K Om Senapati**: A brilliant problem solver with a knack for backend architecture
+- **Juanita**: A frontend wizard with an eye for user experience
+- **Chelsea**: Our team's DevOps expert who understands the intricacies of cloud infrastructure
+
+Our diversity was our strength. Each of us brought unique perspectives and skills to the table, transforming a potential challenge into an opportunity for collaborative innovation.
+
+## The Development Environment Dilemma
+
+Any developer who has worked on a team project knows the pain of environment setup. It's a time-consuming process typically involving:
+
+- Endless configuration scripts
+- Dependency version conflicts
+- Complex environment variable management
+- Hours of synchronization between team members
+
+This is where Daytona emerged as our unexpected hero. What would traditionally take days was reduced to mere minutes. The tool's ability to streamline development environments was nothing short of revolutionary for our team.
+
+![Daytona Thumbnail](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0dylirv94hune4s3bynf.png)
+
+### Development Container Configuration with Daytona
+
+To ensure a consistent development environment, we leveraged Daytona's powerful configuration capabilities. Here's a step-by-step guide to setting up Daytona for our project:
+
+1. **Install Daytona**: You can find the instructions specific to your OS on their website [here](https://www.daytona.io/).
+
+2. **Create Devcontainer Configuration**
+   We crafted a detailed devcontainer configuration to standardize our development environment:
+
+   ```json
+   {
+     "name": "Flow Forge Development Container",
+     "build": {
+       "dockerfile": "Dockerfile",
+       "context": ".."
+     },
+     "customizations": {
+       "vscode": {
+         "settings": {
+           "terminal.integrated.shell.linux": "/bin/sh",
+           "eslint.enable": true,
+           "prettier.resolveGlobalModules": true
+         },
+         "extensions": [
+           "esbenp.prettier-vscode",
+           "dbaeumer.vscode-eslint",
+           "ms-vscode.vscode-typescript-tslint"
+         ]
+       }
+     }
+   }
+   ```
+
+3. **Add a Provider**: We opted for a cloud provider due to low-spec configurations on some of our teammates' systems. Specifically, due to an abundance of Azure credits, we chose Azure using:
+
+   ```bash
+   daytona provider install
+   ```
+
+4. **Running the Project**: After pushing our devcontainer to the project repo, we can start the environment easily with:
+   ```bash
+   daytona create https://github.com/ChiragAgg5k/flow-forge --devcontainer-path=.devcontainer/devcontainer.json
+   ```
+
+**Feedback and Reflections**
+
+While traditional development environments often feel like navigating a maze of configurations, Daytona emerged as a breath of fresh air. Its intuitive approach to setting up development environments was nothing short of revolutionary for our team.
+
+Key Observations:
+
+- **Simplicity**: What traditionally took hours of manual configuration was reduced to a few command-line interactions.
+- **Consistency**: Every team member's environment was identical, eliminating the notorious "it works on my machine" syndrome.
+- **Flexibility**: The tool seamlessly handled different development setups, from local machines to cloud-based environments.
+
+### Cloud-Powered Development
+
+Given my modest MacBook's specifications, we decided to leverage cloud computing. Daytona's seamless Azure integration was a game-changer. With just a few clicks, I added Azure as our cloud provider, and suddenly, our entire development ecosystem was accessible, consistent, and performant.
+
+The magic of Daytona wasn't just in its simplicity, but in its ability to democratize development environments. Teammates with varying hardware could now collaborate effortlessly, breaking down technological barriers.
+
+## Architecting the GitHub Workflow Manager
+
+Our project aimed to solve a real-world problem: simplifying GitHub workflow management using Kestra's powerful orchestration capabilities.
+
+### Technical Architecture
+
+- **Frontend**: Next.js, chosen for its server-side rendering and robust ecosystem
+- **Orchestration**: Kestra, running on an Azure VM
+- **Authentication & Backend**: Appwrite, providing a flexible Backend-as-a-Service solution
+
+We implemented basic authentication to interact with the Kestra instance, allowing users to define, monitor, and execute complex workflows with unprecedented ease.
+
+### Key Features
+
+- Seamless GitHub workflow creation
+- Real-time workflow status tracking
+- Customizable workflow templates
+- Secure authentication mechanisms
+
+![Kestra Worfklow Thumbnail](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hdblxgqij2hp93upccg9.png)
+
+## Beyond the Competition
+
+While the prize table remained unclaimed by our team, the true value of Hackfrost transcended material rewards. We had:
+
+- Learned cutting-edge technologies
+- Practiced collaborative development
+- Solved a tangible industry problem
+- Strengthened our professional network
+
+**Daytona's Impact**: The development tool didn't just simplify our setup—it transformed how we think about collaborative coding.
+
+## Final Thoughts
+
+Tech competitions are rarely about winning. They're about growth, learning, and pushing technological boundaries. Our Hackfrost journey exemplified this philosophy—a testament to the power of community, innovation, and the right tools.
+
+To Daytona, Kestra, and the entire WeMakeDevs community: Thank you for creating spaces where innovation thrives.
+
+---
+
+_Check out the live project [here](https://flow-forge-iota.vercel.app/)_
+
+_For more information about me, checkout my [Portfolio](https://www.chiragaggarwal.tech/)_
+
+---
+
+## Architecture Patterns for Beginners: MVC, MVP, and MVVM
+
+**Slug:** architecture-patterns-for-beginners-mvc-mvp-and-mvvm
+
+Building software can be complex.
+
+You might not have to think much about it when building your side project, but production software differs.
+
+It can require multiple components, all of which if not handled correctly can lead to chaos.
+
+But it doesn't need to be this complex. In today's article we will be delving into the world of architectural patterns, and discuss some divides your software into 3 simple components, each focusing on related tasks.
+
+---
+
+## Architectural patterns
+
+Whenever we are talking about architectural patterns in software design, the first ones to top the list include architectures like client-server, layered, monolithic, microkernel, even-driven, etc. These patterns are concerned with overall system architecture, including multiple applications, services, servers, etc.
+
+However, MVP, MVC, and MVVM focus on organizing code within a single application by separating data, user interface, and logic. These are a subset of architecture patterns that focus on the overall system.
+
+![Client-Server Architecture vs MVC](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tsnn1y32wzy0gz5bnl4z.png)
+
+---
+
+## MVC, MVP, and MVVM
+
+For the sake of keeping the blog readable and not exceeding the word length, we will focus on just the architectural patterns that organize the code within a single application, namely:
+
+1. Model-View-Controller
+2. Model-View-Presenter
+3. Model-View-ViewModel
+
+Clearly, all three models have two components fixed, i.e. the Model and the View. So let's first discuss them in detail before coming to each of the architecture.
+
+### Model
+
+The model consists of all the code that is related to **data** present in the software. It's the layer for communication of the database and network layers with the rest of the application. Its main responsibilities include:
+
+1. Handle data and business logic.
+2. Encapsulate the application's data and the rules governing access to that data.
+3. Handling data structures.
+4. Performing CRUD (Create, Read, Update, and Delete) operations on data.
+
+![Functioning of Model layer](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yacza08pqkbmgb5ae9cf.png)
+
+### View
+
+View is pretty much the front end of your application or everything that the user will be able to see and interact with. It's also known as the User Interface (UI) of your application. Its responsibilities include:
+
+1. Handle non-business logic and purely presentational logic.
+2. Present the data provided by other layers to the user.
+3. Receive user input and forward it to other layers.
+4. May or may communicate directly with the Model layer.
+
+## Model-View-Controller (MVC) Architecture
+
+![Model-View-Controller Architecture](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t34ojxv1pyae6kogh33t.png)
+
+Now that we have an understanding of what Model and View layers do, let's take a look at individual architectural patterns.
+
+Starting with MVC, it uses a **Controller** layer that communicates with both the Model and View layers.
+
+It's main responsibilities of the controller include:
+
+1. Manipulating data through the Model layer.
+2. Receive instructions, aka the UI, from the View layer.
+3. Update the View with changes defined due to control logic.
+
+Here, although the View layer cannot directly interact with the Model layer, it can however receive updates based on changes in the data. Hence all three layers are connected to each other in some form, with the controller being the main component.
+
+## Model-View-Presenter (MVP) Architecture
+
+![Model-View-Presenter Architecture](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hw9i30c4jrun2ryzxup8.png)
+
+Here, the Presenter layer assumes the functionality of the "middle-man" between the Model and View layers and handles all the communication between them. There is no communication at all between the Model and View layers directly.
+
+Its responsibilities include:
+
+1. Update the UI or the View layer based on user actions.
+2. Update the data or Model layer based on code logic.
+3. Handle much of the business logic that would be otherwise handled in the controller in MVC architecture.
+
+## Model-View-ViewModel (MVVM) Architecture
+
+![Model-View-ViewModel Architecture](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r7ik37i57yt9vbx70z7c.png)
+
+This architecture at first glance is almost identical to MVP architecture. But there are some key differences between them:
+
+1. Multiple views can be mapped to a single ViewModel layer.
+2. It uses data binding between the ViewModel layer and the View layer, making it more event-driven.
+3. There is no concept of User Interface in this architecture. The View layer represents the actions of the user, not the interface.
+
+## Side by Side comparison
+
+| Aspect                     | MVC                                 | MVP                                     | MVVM                                           |
+| -------------------------- | ----------------------------------- | --------------------------------------- | ---------------------------------------------- |
+| Full Name                  | Model-View-Controller               | Model-View-Presenter                    | Model-View-ViewModel                           |
+| Separation of Concerns     | Basic                               | Better                                  | Best                                           |
+| Data Flow                  | Two-way                             | One-way                                 | One-way with data binding                      |
+| View-Logic Relationship    | Many-to-one                         | One-to-one                              | Many-to-one                                    |
+| Testability                | Hard                                | Good                                    | Best                                           |
+| Maintenance                | Hard                                | Easy                                    | Easy                                           |
+| Learning Curve             | Easy                                | Easy                                    | Harder                                         |
+| Performance                | Can be slower due to tight coupling | Better performance with looser coupling | Smooth performance, especially for complex UIs |
+| UI Updates                 | Controller updates View             | Presenter updates View                  | ViewModel updates View through data binding    |
+| Dependency on UI Framework | High                                | Low                                     | Low or no dependency                           |
+| Scalability                | Suitable for small-scale projects   | Good for simple and complex projects    | Ideal for large, data-heavy apps               |
+
+But which is the most popular you might ask? All of them are equally popular architectures being used according to the company's respective requirements for a product. Some companies adopting these different architectures are:
+
+1. MVC: StackOverflow, GoDaddy, Visual Studio website
+   Dell
+2. MVP: Google (for some Android apps)
+3. MVVM: Apple (for some iOS apps using SwiftUI), Angular framework, Vue.js framework
+
+Also, many companies use a mix of these architectures depending on the specific needs of each project or product. The choice of architecture often depends on factors such as the complexity of the application, the development team's expertise, and the specific requirements of the project.
+
+---
+
+## Conclusion
+
+This article covered the basics of architectural patterns, from how overall architecture is designed to how a single application can be further divided into three components for better management and scalability.
+
+- MVC, with its straightforward approach, remains popular for web applications.
+- MVP builds upon MVC's foundation, offering improved testability and a cleaner separation of concerns.
+- MVVM, the most recent of the three, has gained significant traction in modern application development.
+
+There is no clear winner between them and each pattern offers unique advantages and is suited to different projects and development scenarios. As the software development landscape continues to evolve, we may see further refinements of these patterns or the emergence of new architectures altogether.
+
+Want to learn more about the architectural patterns discussed? Here are some references I found helpful:
+
+1. https://www.geeksforgeeks.org/android-architecture-patterns/
+2. https://www.masaischool.com/blog/comparing-software-architecture-patterns/
+3. https://www.apptension.com/blog-posts/mvc-vs-mvvm-vs-mvp
+
+---
+
+## Writing Event-Driven Serverless Code to Build Scalable Applications
+
+**Slug:** writing-event-driven-serverless-code-to-build-scalable-applications
+
+Serverless isn't just trendy—it's rewriting how software scales.
+
+Netflix streams billions of hours without servers. Coca-Cola automates workflows without infrastructure. Figma and T-Mobile ditch downtime. What do they know that you don't?
+
+The secret? Event-driven serverless code. It's the backbone of apps that scale instantly, cut costs, and survive traffic spikes. No servers. No guesswork. Just code that reacts.
+
+This isn't hype—it's a blueprint. Ready to build smarter? Let's break down how event-driven serverless turns scalability from a challenge into a reflex.
+
+---
+
+## **Brief Intro to Serverless**
+
+> Spoiler alert: servers are still there.
+
+There are multiple definitions for this term online, often filled with complex jargon. The best way I like to define it is:  
+_A "fashion" of deploying your code where YOU don't have to think about the servers running your code._
+
+Let's take an example:
+
+![Serverless Deployment Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/884rktyfom0qj4zwatzm.png)
+
+Take Bob. He built _mytrashcode.com_ but panicked at "server setup." He's a developer, not a sysadmin. Instead, he uploaded his code to a cloud provider. They handled security, scaling, and traffic—his site went live. No late-night server meltdowns. No panic during traffic surges. Done.
+
+---
+
+## **Why Can't I Manage My Own Servers?**
+
+Managing your own servers usually takes one of two paths. You either run physical hardware—like turning an old laptop into a DIY server—or rent a Virtual Private Server (VPS) from providers like DigitalOcean Droplets, Azure VMs, or AWS Lightsail. These fall under IaaS (Infrastructure as a Service), where the cloud company provides the bare-metal infrastructure, but the rest—updates, scaling, security—is entirely up to you.
+
+Does this mean self-managing servers is impossible?
+
+Not at all. Plenty of teams still do it. But managing your own servers comes with a lot of... challenges, including:
+
+1. Knowing how to manage **infrastructure**/hardware.
+2. Setting up **auto-scaling** and downscaling.
+3. Periodically applying **system patches** and updates to avoid exposing vulnerabilities.
+4. Configuring proxies, SSL certificate generation, **network settings**, etc.
+
+---
+
+## **Dividing Your Code into Functions**
+
+Serverless code doesn't need to be monolithic, i.e., all code doesn't need to be in the same place. It can be a collection of bite-sized, event-triggered functions.
+
+A **Function** is nothing but a set of code that performs a specific task. When writing your entire code serverless, you'll find that you can divide your code into various functions, each handling a specific part of your application. Let's understand this more deeply with an example:
+
+![Functions Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rc9zdithhna5sjs2gup4.png)
+
+When Bob first logs into _mytrashcode.com_ as a new user, the system triggers a "send welcome email" function before redirecting him. Subsequent logins bypass this function entirely, routing him straight to the dashboard. This separation serves a critical purpose—while 99% of users interact solely with the dashboard, isolating secondary functions (like email triggers) enables independent scaling.
+
+Though trivial in this example, the cost implications compound dramatically at scale. Each decoupled function operates on its own resource allocation curve—high-frequency features like dashboard access demand consistent infrastructure, while one-time actions (welcome emails) can scale down during inactive periods. This modular approach prevents overprovisioning for rarely triggered events, even before considering complex systems with hundreds of interdependent functions.
+
+---
+
+## **Where to Deploy???**
+
+Okay, so just a quick recap—we now know:
+
+1. Deploying serverless is great!
+2. Dividing your code into functions is modular and scalable.
+3. Functions can be triggered by events.
+
+So, where do you deploy this architecture? Leading platforms like AWS Lambda, Azure Functions, and Google Cloud Functions support it, but we'll focus on Appwrite Functions.
+
+![Function Deployment Options](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/l9sqdus26z0ygxclj0ms.png)
+
+Appwrite, an open-source Backend-as-a-Service (BaaS), bundles authentication, databases, storage, and serverless functions into a single toolkit. This tight integration streamlines deployment—instead of managing fragmented cloud services, Appwrite centralizes backend logic, letting you deploy event-driven functions with minimal overhead. For developers prioritizing simplicity without sacrificing scalability, this unified approach reduces operational friction significantly.
+
+So, let's deploy our function!
+
+---
+
+## **Deploying Your First Function**
+
+Before writing code, set up your backend on Appwrite:
+
+1. Go to [appwrite.io](https://appwrite.io/) and register or log in.
+2. Create an organization (if new).
+3. Create a new project.
+4. Copy your **Project ID** for later use.
+
+Now, let's simulate a server-side project using the `node-appwrite` package:
+
+- Create a project directory:
+
+```bash
+mkdir my-project
+cd my-project
+```
+
+- Install the [Appwrite CLI](https://appwrite.io/docs/tooling/command-line/installation) and initialize your project:
+
+```bash
+npm init -y
+appwrite init
+```
+
+- Install dependencies:
+
+```bash
+npm install dotenv node-appwrite
+```
+
+- Create your function using the Appwrite CLI:
+
+```bash
+appwrite init function
+```
+
+For the runtime, I selected **Node 20**, but you can choose any runtime.
+
+- Write your main function in `src/main.js`:
+
+```js
+
+dotenv.config();
+
+const client = new Client();
+client.setEndpoint("https://cloud.appwrite.io/v1");
+client.setProject(process.env.PROJECT_ID);
+
+const users = new Users(client);
+const account = new Account(client);
+
+const main = async () => {
+  await account.create("test-user", "test@test.com", "test@123", "test");
+  const session = await account.createEmailPasswordSession(
+    "test@test.com",
+    "test@123",
+  );
+  console.log(session);
+};
+
+main();
+```
+
+- Add a `start` script in `package.json` to run `node src/main.js`.
+
+- Create a `.env` file with the required environment variables.
+
+This function simulates a new user creation and login, logging the session details.
+
+> **Note:** Replace the email IDs with actual emails to receive the email.
+
+![Functions Architecture](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/pa9qh5cp756w6a5jpjrt.png)
+
+Now, let's set up the function logic. Navigate to `functions/your-function` where your function resides.
+
+For this demo, we'll use [Resend](https://resend.com) to send emails:
+
+- Install the `resend` package:
+
+```bash
+npm install resend
+```
+
+- Update `src/main.js` with this code:
+
+```js
+
+// https://appwrite.io/docs/advanced/platform/events
+export default async ({ res, req, log }) => {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  await resend.emails.send({
+    from: "hello@yourdomain.com",
+    to: req.body.email,
+    subject: "Hello!",
+    text: "Hi, its nice to meet you!",
+  });
+
+  log("Email sent successfully");
+
+  return res.json({
+    success: true,
+    message: "Email sent successfully",
+  });
+};
+```
+
+You need to set up an account on Resend to get the API Key. Resend also requires you to connect to your own domain to send emails. You can read more about it on the [Resend docs](https://resend.com/docs/introduction).
+
+Now, let's push the created function to the console using:
+
+```bash
+appwrite push functions
+```
+
+The final step is to set up the event that connects the two pieces of code together using the `users.*.create` event:
+
+1. Go to the Appwrite console and navigate to your created project.
+2. Navigate to the Functions tab.
+3. You should see your newly created function there—click on it.
+4. Go to its settings and under the Events section.
+5. Add a new event to trigger this function: `users.*.create`.
+
+![Appwrite Console showing Events](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/sb7etulqcgb31sx5at2t.png)
+
+And... voila! Your program is done. If everything is set up correctly, running your main script should send the newly created user an invitation email. Try it using:
+
+```bash
+npm run start
+```
+
+---
+
+## **Conclusion**
+
+In conclusion, serverless architecture is more than just a passing trend—it's a transformative approach to building and scaling modern applications.
+
+Platforms like Appwrite further simplify the process, offering a unified backend solution that integrates seamlessly with serverless functions. Whether you're a solo developer like Bob or part of a larger team, adopting serverless can turn scalability from a daunting challenge into an effortless reflex.
+
+![Conclusion Image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jnuiov1eikg0u26hgpyt.png)
+
+---
+
+_Thanks for reading!_  
+_You can also connect with me here: [https://www.chiragaggarwal.tech/](https://www.chiragaggarwal.tech/)_
+
+---
+
+## Debugging with Source Maps: A Comprehensive Guide
+
+**Slug:** debugging-with-source-maps-a-comprehensive-guide
+
+We all have been there, working on a new feature for 10+ hours straight, and everything is going well. You build your project and push the code to production. And boom, a new production error alert! Everyone in your team - whether at a company or a hackathon - starts to look for someone to blame. Found it; it was from you. But none of your test suites resulted in an error. Everything with the code itself looks excellent.
+
+You check the logs. The error is:
+
+```bash
+Uncaught Error: Cannot read property 'xyz' of undefined at app.min.js:1:45678
+```
+
+You think to yourself, what the heck is `app.min.js:1:45678` supposed to mean? There was no file like that in the entire source code? Your file was called `app.js`. And it's 45678 characters long! That's impossible to debug!! Still, you try to open the file and potentially find the root cause of the error. It's a mess. The entire file is filled with random gibberish you are unable to understand. What should you do?
+
+Now, this is where Source Maps come into play. Source Maps allow you to map the minified code in your production environment, _aka the random gibberish you just saw_, with the actual source code, allowing you to pinpoint the root cause of the error in your source code and debug it effectively.
+
+In this blog, we will detail what source maps are, why and how they are created, and give some tips on effectively using source maps to debug your code. Let's dive in!
+
+## **Why is source code minified?**
+
+Before we delve into Source Maps, let's first decode what happened to your clean, formatted and linked source code and why it looks nothing like it on the browser.
+
+The simple answer is minification.
+
+Minification is the process of converting your source code into production-ready code without changing any of its functionality. This is typically done by the bundler you are using, such as Webpack. To learn more about bundlers, you can check out this awesome [guide on Javascript bundlers](https://snipcart.com/blog/javascript-module-bundler) by [Snipcart](https://snipcart.com/).
+
+Simply put, bundlers optimise your source code by stripping out whitespaces, comments, and redundant code and even removing or renaming variables for shorter alternatives. This makes your code super efficient and much smaller in size.
+
+Why does this happen?
+
+- **Improved load times** - Smaller file sizes lead to better website loading times.
+- **Obfuscation—**Although it won't make your code entirely illegible, it does make it harder for regular users to understand.
+- **Browser Performance** - The code is altered in a way that's easy for browser engines to parse.
+
+Here is an example of what a minified React app code looks like:
+
+![Bundle.js file containing minified code](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ykp4yriiyci828833oct.png)
+_bundle.js file created by Webpack on building a simple React app, even the text is overflowing from the terminal screenshot!_
+
+## What are source maps?
+
+Source maps are files whose names end with `.map` and that map the minified code to your actual source code. Examples of such files can be `example.min.js.map` or for css, `styles.css.map`. They are explicitly generated only by build tools like Webpack, Vite, Rollup, Parcel etc. Since source maps are only required for debugging purposes, these tools usually have the option to generate source maps off by default. For example to enable it in Webpack, you can do:
+
+```jsx
+// add this to your package.json file
+"scripts": {
+	"build:dev": "webpack --mode development --devtool source-map",
+}
+```
+
+or add it to your `webpack.config.js` file:
+
+```jsx
+module.exports = {
+  devtool: "source-map",
+  // ...rest of your config
+};
+```
+
+A source map includes crucial information on how the mapping is done, including the actual source file name, the content it includes, various variable name the source code has, name of the minified code file etc.
+
+Here is a format of how a typical source map file looks like:
+
+```jsx
+{
+  "mappings": "AAAA,SAAQA,MAAMA,QAAQ,OAAO;AAC7B,SAAQC...",
+  "sources": ["src/index.js"],
+  "sourcesContent": [
+    "import React from 'react';\nimport { createRoot } from 'react-dom/..."
+  ],
+  "names": ["React", "createRoot", "App", "count", "setCount", "useState", ...],
+  "version": 3,
+  "file": "bundle.js.map"
+}
+```
+
+The most important section here is `mappings`. This uses a special kind of encoding called [VLQ base 64 encoded string](https://developer.chrome.com/blog/sourcemaps#base64-vlq-and-keeping-the-source-map-small) to map the lines and locations to compiled file and its corresponding original file.
+
+## Visualising source maps
+
+"Okay, great!" I hear you saying. "How is this actually helpful? I still can't read the source maps and manually decode the mappings."
+
+That's a great question! This brings me to the main highlight of this blog—source map visualisers. These tools allow you to see the mappings in a visual manner to locate and debug the problem effectively. There are many source map visualisers on the market, but today, we will be focusing on Sokra & Paulirish's source map visualization. You can find the source code for this on their [Github Repository](https://github.com/sokra/source-map-visualization/).
+
+Here is a side-by-side comparison of how your code (on the right-hand side) can look like a jumbled mess when minified (on the left-hand side). However, the colour-coded mapping of the visualiser helps us map these two codes by hovering over them.
+
+![Comparison between minified code and source code](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mpgftukud1078hx2iui4.png)
+
+## Working Example
+
+Let’s create a simple React app and play around with it’s sourcemaps!
+
+1. Start with creating a project directory:
+
+```bash
+mkdir my-project
+cd my-project
+```
+
+1. Init a new project:
+
+```bash
+npm init -y
+```
+
+1. Add the following dependencies into `package.json`
+
+```json
+{
+  "name": "react-counter-app",
+  "version": "1.0.0",
+  "description": "Simple React Counter App",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "@babel/preset-react": "^7.22.15",
+    "babel-loader": "^9.1.3",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
+```
+
+1. Create a `src/index.js` file with following React code:
+
+```jsx
+// src/index.js
+
+function App() {
+  const [count, setCount] = React.useState(0);
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    setCount(count - 1);
+  };
+
+  return (
+    
+      Counter: {count}
+      Increment
+      Decrement
+    
+  );
+}
+
+// New React 18 createRoot API
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render();
+```
+
+1. Add styling by adding a `src/styles.css` file:
+
+```css
+/* src/styles.css */
+.app {
+  font-family: Arial, sans-serif;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+```
+
+1. Now define the webpack config by creating a `webpack.config.js` file in the root folder:
+
+```jsx
+// webpack.config.js
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+    }),
+  ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "public"),
+    },
+    port: 3000,
+    open: true,
+  },
+  resolve: {
+    extensions: [".js", ".jsx"],
+  },
+};
+```
+
+1. Now you can start the application by running:
+
+```bash
+webpack serve --mode development
+```
+
+This is how it should look (very basic i know :D):
+
+![Basic UI Image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dpawfyjl38iit5x40seg.png)
+
+You can find the source maps using your browser's dev tools. The format can look different depending on the browser you are using. Here, I am using Zen, but the format should look similar for all browsers.
+
+You can do so by right-clicking anywhere on the page and clicking on **Inspect Element**. Then, go to the **Sources** section of your browser and find the source file. Here on Zen, it's available in the debugger section since it's mainly used for debugging purposes.
+
+![Showing source map in dev tools](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/55ye3ujrmwuhjw9o62zo.png)
+
+Now, you can load this in the [source-map-visualization](https://sokra.github.io/source-map-visualization/). It will look something like this:
+
+![Showing a visualization of source map](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/241myprsrlt92gf2a25b.png)
+
+On right you can skip all the React code and skip to the section that contains just your code. On hovering over each section of your code you will see exactly which part of the minified code it maps to!
+
+It can look pretty confusing at first, but try hovering over various elements in the UI and you will see how intuitive it actually is. For eg. in this example code,
+
+```jsx
+React.useState(0) ----> t().createElement("h1",null,"Counter: ",n) .... // so on
+```
+
+Hovering over `React.useState` reveals that it maps to a `createElement` in the minified code. So our bundler, Webpack, in this case, optimised our code by directly converting our state into a javascript element and directly modifying it in subsequent code. This makes our application much, much more performant and reduces the file sizes the browser has to load!
+
+## Security Considerations
+
+While creating the example app, you may have noticed we had to explicitly add the flag `--mode development` to the Webpack run command. This is because source maps are supposed to be used for debugging purposes only, and can lead to security concerns when used in production, including:
+
+| Concern              | Description                                                         | Mitigation                                                      |
+| -------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Exposing Source Code | Source maps reveal your original code, including comments and logic | Use `hidden-source-map` or `nosources-source-map` in production |
+| IP Protection        | Intellectual property may be exposed via full source maps           | Deploy source maps to secure, authenticated location            |
+| File Size            | Source maps can be large, affecting download performance            | Generate maps only in development, or serve separately          |
+| Server Configuration | CORS issues may prevent source map loading                          | Configure proper `Access-Control-Allow-Origin` headers          |
+
+There are also tools like **Sentry** or **Rollbar** which use your source maps for better error reports without violating any of the security concerns. Tools like these are considered best practise for production environments.
+
+## Conclusion
+
+Source maps are a mind-blowing feature that lets you map your source code precisely to the minified code loaded by your browsers, which is generated by bundlers like Webpack for performance and speed. We explored how debugging can be made easy using this feature and tools like source map visualisers to aid in the process.
+
+The web is built on top of layers and layers of abstractions done by tools like bundlers, but when things go catastrophically wrong, we might discover that these abstractions are not always hundred percent perfect, and hence, we need to take out our tools, look under the hood, and find the fix ourselves.
+
+To learn more about package managers like NPM, Bun, PNPM, and yarn, you can check out my other article, [Mastering npm: A Comprehensive Guide to Package Management](https://www.chiragaggarwal.tech/blog/mastering-npm-a-comprehensive-guide-to-package-management).
+
+## References
+
+Thanks to these fantastic references by the Google Chrome dev team that helped me learn about source maps myself and in writing this article:
+
+- [Debug your original code instead of deployed with source maps](https://developer.chrome.com/docs/devtools/javascript/source-maps)
+- [What are source maps? #DevToolsTips](https://www.youtube.com/watch?v=FIYkjjFYvoI)
+- [Using source maps in DevTools #DevToolsTips](https://www.youtube.com/watch?v=SkUcO4ML5U0&t=241s)
+
+---
+
+## Focus on the product, not the tech stack
+
+**Slug:** focus-on-the-product-not-the-tech-stack
+
+Recently I got this DM,
+
+“Which tech stack should I learn?”
+
+“Should I use Next.js or Svelte?”
+
+“Is Python better for the backend than node?”
+
+I am sure we have asked or been asked questions like this several times in our tech journeys. As someone who is just starting out, I think it seems like a very important thing to ask. You don’t wanna waste your time learning a technology that might become worthless soon? Or isn’t fast enough? or isn’t the “industry standard”… right?
+
+Or should it matter?
+
+## Languages are just tools
+
+Back in 2003 when Facebook was originally founded, its backend was written in PHP. Was it the lack of options? You can say so. Back then they certainly didn’t have a plethora of frameworks or hell even languages to choose from. But what about now? Realistically PHP should be dead by now…
+
+Right?
+
+But if you look at the [statistics by Kinsta](https://kinsta.com/php-market-share/), around 79.2% of the internet still relies on PHP to some degree. Okay, but that number has to be declining for sure!
+
+But wait...
+
+![PHP Trend Chart](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/iytuwpkuplv3pxtq2ypn.png)
+
+Nope, it has been on a steady increase since 2011, peaking at 80.6% in 2015, and maintaining a steady line.
+
+But how?
+
+It’s because language is just a tool. It does not matter how many new bleeding edge languages enter the market increasing the performance metrics by some fractions of seconds, as long as a ~~tool~~ language sufficiently fulfills its job, it will stay relevant. PHP has done a great job at that. It’s constantly evolving as well, something which is direly required to stay alive in the software world.
+
+So next time if someone asks you “Which language should I choose?”, ask them two things:
+
+1. Which language are you more comfortable with?
+2. Do the other languages provide a set of features more beneficial for your use case? Even if so are they worth the effort to learn? (arguments like uh it's 0.001sec faster should not be relevant)
+
+## It’s OK to not upgrade
+
+    Image from: https://foreverealize.me/posts/how-to-update-dependencies/
+
+I was once asked, “Why is your website still at Next version 13 when 15 has arrived?”
+
+To which I ask, why does it matter? Sure software is meant to be ever-evolving, but that doesn’t necessarily mean it's a good idea to always hop on the upgrade bandwagon without looking at the consequences.
+
+This in this case will be a complete re-write since Next 15 introduces a ton of breaking changes.
+
+And it's OK not to upgrade every time.
+
+## Judge a product by its usefulness, not complexity
+
+A lot of people especially those building projects just for improving their resume will try to make them extremely complex. It will be a wobbly mess of high-end sounding technologies like SSR, TRPC, GraphQL, Kubernetes, Redis, etc.
+
+Sure I do understand the thinking behind this, it does show your ability to work with complex technologies.
+
+But in the age of AI and the really fast-moving pace of technology, it's pretty trivial for someone to learn technologies on the go and incorporate them into their project. Real engineering will always be that “**solves a problem, not create one**”. Solving problems always requires asking questions first:
+
+1. Does your project really need TRPC or GraphQL? Why not just use REST like everyone does bruh?
+2. Do I really need Kubernetes for those 5 concurrent connections?
+3. Does my really interactive website need SSR where then each button click will be a server action and take ages to process any action?
+
+![Tutorial hell meme](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6ikoimzgzcyvgo9c1ot8.png)
+
+And please, stop building clones. It does not matter:
+
+- how many services you use in it
+- how much knowledge you gained from creating it
+- how complex the project was to make
+
+The YouTube clone you made by following a random Youtuber’s 8-hour-long guide is not going to help you in any way.
+
+Quoting [Theo](https://www.youtube.com/@t3dotgg) (idk where he said tho):
+
+> To build a great product, you need to first be a customer
+
+If you want project ideas, look around you. Try to solve problems you face every day. If you just try looking, you WILL find many.
+
+## Final words
+
+This blog is a summary of my (I admit very short-lived) experience of working in tech till now. I always tried not to treat tech as something I specialize in, but as a tool that helps me solve problems.
+
+I started off my journey in web with a simple problem, I just wanted a website of my own because it would be cool :D
+
+Then a simple problem gave birth to more problems with a chain reaction ongoing, to me finding myself working with PHP, something I would have never imagined doing in a million years before.
+
+So…. that’s it. Keep building and showcasing your work, and most importantly, have fun at it!
+
+---
+
+## Vibe coding an Email Ticket Automater using Postmark
+
+**Slug:** vibe-coding-an-email-ticket-automater-using-postmark
+
+This is a submission for the [Postmark Challenge: Inbox Innovators](https://dev.to/challenges/postmark).
+
+## What I Built
+
+Support tickets…
+
+Nobody really loves either writing or much worse reading them. And managing them is much much worse than managing my laundry, and that is a really high bar to pass.
+
+So, in a world where we all are writing and summarising emails for the sake of maintaining formality, automating support tickets seems like the logical next step.
+
+And sure there are companies that do this… not really going to name them, but my vision here was to just create something that takes the unorganized text and convert it to organized boxes, while still being pretty to look at… _cough_ Jira _cough._
+
+Meet EmailTicket. Firstly hoping that marks are not being deducted for the lack of naming creativity, it's here to do exactly what it says. Create tickets based on emails. Sounds simple right? Well kind of… but with some headaches.
+
+Historically, when creating tickets you would have to ask the user a bunch of information like whether it is a billing issue, a bug, or feedback, when did the issue start, etc.
+
+After creation, you would have to manually keep track of information like how urgent is it. Has the ticket been closed or is it still in progress? etc. etc.
+
+You know… the boring stuff.
+
+![Ticket Modal](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yg0bvs81e953d8r4bu37.png)
+
+> Image captured during the pre-AI times (just kidding it was created using ChatGPT)
+
+---
+
+But with AI, we no longer need to take care of that stuff. Just give it a random block of text and out comes structured beauty (It’s like a dream come true for data scientists honestly).
+
+This is pretty much what Email Ticket does for now. It’s highly inspired by platforms like HelpScout (an amazing tool btw do check it out) and in the future can extend a lot more if good guys like the ones from Postmark support it :D
+
+## Demo
+
+Checkout the live link here - [https://email-ticket-automator.vercel.app](https://email-ticket-automator.vercel.app/)
+
+If your emails are stuck on processing/waiting, It’s highly likely that I ran out of the 100 free emails. So… don’t sweat too much about it 😅
+
+## Code Repository
+
+## How I Built It
+
+So most of the application is vibe-coded using Lovable. Was it because I am lazy? Probably yes. But that’s not the exact reason. In my opinion tools like Lovable, V0, Firebase Studio (god there are so many now), etc. are perfectly fine to use to get an initial MVP of your idea up and running.
+
+And in a world where AI is dominating the entire development process, not utilizing these tools is just slowing you down.
+
+So let’s talk about the 10% of coding I actually did.
+
+The first was integration with a database. Or more specifically a Backend as a Service because who codes their own backend nowadays? So naturally I went with Appwrite. Lovable refused to do this integration, but thankfully Appwrite is extremely easy to set up. I used it to implement Authentication flow, as well as Database for ticket storing and retrieval.
+
+Next was the start of the application, Postmark. Postmark made the entire process of receiving an email, parsing it into JSON, and receiving it just via an API call so easy, I forgot dealing with emails was such an annoying task.
+
+Firstly, I needed to A) Either get inbound domain forwarding setup, or B) Get my account approved to be able to send emails to the default inbound email address with no domain restrictions. I tried both techniques and luckily got my account approved in 2 days!
+
+![Postmark Email](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lid9dtnuzzd6gktuziv5.png)
+
+Not so luckily I was never able to set my inbound domain even tho I had my MX record set properly and could verify it using https://www.whatsmydns.net/ (You can check my comment here complaining about it - https://dev.to/chiragagg5k/comment/2o6hi). So something to note down @Postmark team.
+
+To utilize the API seamlessly without ever needing to touch a single line of actual backend code, I came up with this flow:
+
+1. Appwrite triggers a “create” document/ticket event.
+2. The event triggers a function that then calls the Postmark’s API for sending an inbound email.
+3. Postmark listens to the inbound email and triggers an email parsing flow.
+4. After parsing is done it returns the output to a webhook URL which is just an Appwrite function.
+5. The Appwrite function finally processes the parsed content and stores it back to the database.
+
+![Flow Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qsmi3ogtpgd07jqm5k9g.png)
+
+Finally time for structured outputs. Almost all LLMs offer a way to generate structured outputs now in their APIs. Here are some docs I found for this:
+
+1. https://docs.perplexity.ai/guides/structured-outputs
+2. https://platform.openai.com/docs/guides/structured-outputs?api-mode=responses
+3. https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/increase-consistency
+
+and on and on…
+
+(a small plug would be to check this repo I worked on which allows you to use any LLM with structured outputs and consistent syntax in PHP - https://github.com/utopia-php/agents)
+
+You can check the [repository code](https://github.com/ChiragAgg5k/email-ticket-automator/blob/main/functions/email-parsed-webhook/src/main.js) itself to see which one I picked because I might have changed it by the time you are reading it :p
+
+That’s it then. Let me know in the comments how was your experience using EmailTicket Automater. You can reach out to me on any of my social media links if you have any queries or just wanna have a casual talk. A big shoutout to Postmark for arranging this contest and letting me have fun with their platform, as well as my company Appwrite for supporting the application’s backend :D
+
+Bye!
+
+---
+
+## Automate anything - Making research analysis effortless
+
+**Slug:** automate-anything-making-research-analysis-effortless
+
+Starting with a research project can be overwhelming.
+
+There are so many data points to consider, so many hours of reading to do, and within all that chaos, the hardest piece of the puzzle to find is a **starting point**.
+
+I faced this first hand when last year I had to work on multiple papers to earn a single credit point for my engineering degree. Unfortunately why universities force this pointless system is not the spotlight of today’s discussion.
+
+Instead, we are going to discuss how you can cheat on this mundane activity using Runner H.
+
+The article will redefine how you interact with AI, helping you put together analysis, execution, summarisation and integration with a single prompt.
+
+So, let's dive in.
+
+## Researcher's Dilemma
+
+Whenever you start with a research project, the first question that comes to mind is: **"Has this been researched before?"**
+
+Answering this question is crucial for:
+
+1. Avoiding duplication of work
+2. Finding gaps in the existing study
+3. Not claiming something as noble when it has already been done before
+
+However, doing this is a very manual process, and requires hours and hours of find papers, reading them and doing accurate analysis.
+
+## Meet Runner H
+
+Ever tried using Perplexity or ChatGPT in research mode?
+
+Think of Runner H as that, but on **steroids**.
+
+Runner H is an advanced AI-powered web automation tool that lets you perform multi-step online tasks using natural language instructions. It seamlessly integrates with services like Slack, Notion, Gmail, and Excel, enabling you to create complex workflows, no coding experience required.
+
+For our purpose, we can use Runner H to:
+
+1. Quickly identify similar research papers with a Google Scholar scan.
+2. Assess similarities between them and your topic using AI.
+3. Scan the internet to find gaps between the existing work.
+4. Export the findings in a structured format.
+
+## The prompt
+
+Below, I have crafted a prompt that you can copy and paste into Runner H, replace with the topic you need to research, and voila~, see the magic unfold:
+
+_Analyse if my research idea, `{YOUR_RESEARCH_IDEA}`, has been previously explored. Search Google Scholar for similar research papers. For each, extract the title, authors, publication date, abstract, journal/conference, and similarity percentage to my idea, and note any research gaps mentioned or left open. Create an Excel file summarising all findings._
+
+Just replace `{YOUR_RESEARCH_IDEA}` with the idea you want to research on.
+
+## Demo
+
+Let's try researching on a topic:
+
+**"The impact of generative AI tools on student learning outcomes in higher education"**
+
+So Runner H after doing all the analysis and hard work for us was able to generate a structured output. Unfortunately, even though prompt specifically asks for Excel format, most of the times for me it generated a PDF format for me. Still Runner H is still in early phases and hopefully will be improved in future by the team.
+
+## So what makes Runner H different?
+
+One of the most fascinating differentiations I found in Runner H compared to other agentic tools was its ability to search, summarise and synthesize as well. Instead of just dumping in raw results, it evaluates the relevance of each paper, highlights the overlaps and gaps in the study, and presents it in an actionable format.
+
+Using Runner H has completely transformed my approach to starting a research topic. It has bridged me to the starting point where I used to struggle the most. For students, academic professionals, and anyone doing any sort of research work, Runner H is a game changer.
+
+---
+
+_Happy researching! If you have questions or want to share your own experiences with Runner H, drop a comment below._
+
+---
+
+## From student to full-time Platform Engineer at Appwrite
+
+**Slug:** from-student-to-full-time-platform-engineer-at-appwrite
+
+## TLDR
+
+For those who are not really interested in reading some random university student’s story, here is a short TLDR. I worked at Appwrite as an Engineering Intern for 6 months and just got offered a full-time position as a Platform Engineer, while still being in University for another year :D
+
+The story ahead covers how while drowning in a sea of desperation a light of hope changed everything for me, how my experience was working for a fully remote OSS company, and the challenges I faced while working in PHP, a language I had never touched before this :p
+
+---
+
+## Pre-Interview
+
+Back in September-November 2024, I was kind of at the lowest point of my engineering journey yet. I had concluded my last internship around August when the project I was working on abruptly closed, and since then I was on a constant hunt for my next one.
+
+Silence. From all the mediums I tried - LinkedIn, Upwork, AngelList, cold DMs, and what not.
+
+The thing is that once you start “working”, although it was an unpaid one, it’s pretty hard to go back to doing… nothing. “Nothing” is the wrong word I guess, I was still working on OSS, building projects, and trying to learn new things. But if someone asked what I was up to nowadays… i drew a blank.
+
+Then one day I was just hanging out on Discord and saw a notification from a bright red server I usually didn’t check much. Hey, it’s another job opening, so I applied like usual. Another month passed, silence again. But then I saw an email from Emma, our People’s person at Appwrite.
+
+“We wanna have a chat with you.”
+
+This was a very unusual email for me. Usually, companies like to give an assignment for the first round, but here it was a direct meeting scheduled… so I already knew something was different this time.
+
+## The Interview(s)
+
+Of course, I am not allowed to share the entire interview experience without getting into a call with Emma after this is published. So, I just want to share one question that has stuck with me since then,
+
+“Looking at your resume, you don’t seem to have much if any experience with PHP. And Appwrite’s entire backend is in PHP. Will you be able to handle this?” - Torsten, Product Engineer at Appwrite.
+
+Stunned. Before going to the interview I did see the codebase was written in PHP. I had never touched it before. No contributions, No issues filed. So I assumed the position I was applying for might have nothing related to this codebase… maybe a new project altogether… right? Nope.
+
+My answer? It was somewhere along the lines of “I will figure it out, trust me, bro”.
+
+Very bad answer I know. But it was the best I could come up with. After the interview, I went on a grind. Reading the codebase, running it, and understanding its architecture (in that process I even wrote an article - [Architecture Patterns for Beginners: MVC, MVP, and MVVM](https://dev.to/chiragagg5k/architecture-patterns-for-beginners-mvc-mvp-and-mvvm-2pe7)). Long story short I tried to learn as much about Appwrite’s codebase as was physically possible in that timeframe from the next interview scheduled.
+
+And Tada~ It worked. I got the offer!
+
+## Experience
+
+Working at Appwrite is unlike working in any other place. From the first day on, even though you are an Intern, you are never treated like one. I was introduced to the entire codebase in my first week and assigned to issues not from the pending log, but actual production issues that users were facing.
+
+You can message anyone. At any point.
+
+Work on any issue that you like.
+
+There is a padding issue you saw on the website? Knock yourself out and raise the PR.
+
+The beautiful thing about Appwrite being open source is that you could do this from the very start. It’s just now I could bug anyone on the team more freely if I was stuck on any issue.
+
+It’s hard to summarise how much work I did in the past 6 months, but here are some notable ones:
+
+1. 200+ PRs merged in the Appwrite organization’s repositories, including main, website, SDK, MCP, etc. repositories.
+2. Uptime monitoring for the [Appwrite Assistant](https://appwrite.io/docs/tooling/assistant).
+3. Adding a monthly limit to the number of free Phone OTPs allowed.
+4. Fixing Amazon and Slack OAuth adapters. Add Figma OAuth adapter.
+5. Making several changes to SDKs and making releases.
+6. Adding Types generation to Appwrite CLI.
+7. Worked on the DevKeys feature in the latest Appwrite release 1.7
+8. Added 2 blogs on the website - self-hosting using coolify and announcement for [DevKeys](https://appwrite.io/blog/author/chirag-aggarwal).
+9. Taking leadership on the [Synapse](https://github.com/appwrite/synapse) project, operating system gateway for remote serverless environments.
+10. Adding new phone OTP adapter - Inforu, which reduces pricing for phone OTPs for Israeli users by 11x.
+11. and… a lot more.
+
+Honestly looking back at it, I never realized I worked on so much. It feels like I had just joined Appwrite yesterday.
+
+## Thank You
+
+At last, I wanna thank the entire Appwrite team for treating me like part of the team since day one, and for giving me this opportunity. Let’s build like a team of hundreds\_
+
+---
+
+_You can check out my profile to learn more about me - https://www.chiragaggarwal.tech/_
+
+_Hit me up on any socials if you have any doubts, I am always up for a chat :D_
+
+---
+
+## JStack + Appwrite: A Match Made in Heaven for Modern Web Development
+
+**Slug:** jstack-appwrite-a-match-made-in-heaven-for-modern-web-development
+
+If I had a penny for each time a youtuber has launched his own tech stack, I would have 2 pennies, which isn't much but its weird that it happened twice.
+
+I am talking about [T3 Stack](https://create.t3.gg/) launched a while back by everyone's favourite Theo, but recently a new player has entered the market called [JStack](https://jstack.app/), by Josh who is the lead Devrel at Upstash. To be fair, its not even that recent, but as always ~~I am late to the party~~ I try to give a framework time to mature and gather feedback from community before giving it a shot.
+
+So, did I prefer JStack over T3 stack? Did it have more compatibility with Appwrite, my favourite backend provider? Can it be hosted on Appwrite Sites? Let's find out.
+
+## Getting Started
+
+Let's start with initialising the project:
+
+```bash
+bunx create-jstack-app@latest
+```
+
+Options selected:
+
+```bash
+┌   jStack CLI
+│
+◇  What will your project be called?
+│  testing-jstack-appwrite
+│
+◇  Which database ORM would you like to use?
+│  None
+│
+◇  Should we run 'bun install' for you?
+│  Yes
+
+Using: bun
+
+✔ testing-jstack-appwrite scaffolded successfully!
+```
+
+Let's just quickly run a dev server to see what we get out of the box:
+
+```bash
+cd cd testing-jstack-appwrite
+bun dev
+```
+
+![JStack landing page](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/z9c9q9ae61yzugugap9b.png)
+
+## Initialising Project
+
+On skipping the ORM option, the stack still sets up a `/src/server` folder with an example posts router. But it only mocks the DB using an array which does not persist:
+
+```tsx
+// Mocked DB
+interface Post {
+  id: number;
+  name: string;
+}
+
+const posts: Post[] = [
+  {
+    id: 1,
+    name: "Hello World",
+  },
+];
+```
+
+We skipped the ORM option because Appwrite provides built-in schema management through its SDK, eliminating the need for a separate ORM layer. To get started, let's head over to [https://cloud.appwrite.io](https://cloud.appwrite.io/) to set up our project.
+
+If you are using Appwrite for the first time, I highly recommend you check out our [Start with Web docs](https://appwrite.io/docs/quick-starts/web).
+
+Here is a quick setup guide:
+
+- Create a new project -
+
+![New project model (Appwrite)](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/z6w0nn7x3pt9x8tott78.png)
+
+- Add a new web platform and select Next.js -
+
+![New platform screen (Appwrite)](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/w2cvx6dkh8zdrntpy4js.png)
+
+- Go to project overview and grab your project's ID and region-specific endpoint:
+
+![Project ID and endpoint (Appwrite)](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jom1n3wjbri8qpko7z7a.png)
+
+- Create a new `.env` file in your project directory and paste in those values:
+
+```env
+NEXT_PUBLIC_APPWRITE_PROJECT_ID=686a271700323696d223
+NEXT_PUBLIC_APPWRITE_ENDPOINT=https://fra.cloud.appwrite.io/v1
+NEXT_PUBLIC_APP_DOMAIN=localhost # we will change it later
+```
+
+- Now, let's initialise the Appwrite SDK in the project using:
+
+```jsx
+bun add appwrite
+```
+
+This covers up on how to initialize Appwrite in normal Next.js project. Now we need to configure our Appwrite databases according to the project. For this demo, let's create a `Posts` collection to shift the mock database JStack uses as an example to Appwrite.
+
+## Defining Schema
+
+- Go to the Appwrite Console > Databases > Create Database. We will call it `main` , and keep it' ID as main as well:
+
+![Create database (Appwrite)](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rsmpij8n1yqok80pfm15.png)
+
+- Similarly, create a collection `posts` and keep its ID as `posts`.
+- Each document in Appwrite already has an unique ID attached to it, so the only attribute we need is `name` for now:
+
+![Create string attribute (Appwrite)](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/caheyx67pondngmv139t.png)
+
+- Lastly, you will need to define who can access your collection. To learn more about it, check out the docs for [Appwrite Permissions](https://appwrite.io/docs/advanced/platform/permissions). For now, we will set it to any:
+
+![Create permissions](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2m4jl1939fxqa93olacw.png)
+
+## Syncing Types
+
+That's it, we are all set with configuration on the Appwrite Console. Now let's set it up in our project. I will also take the help of the Appwrite CLI to help me set up things faster. You can learn more about how to install it by following the installation docs.
+
+Once done, run:
+
+```jsx
+testing-jstack-appwrite appwrite init project
+
+? How would you like to start? Link directory to an existing project
+? Choose your organization 67610b8ee51f147ca943
+? Choose your Appwrite project. [object Object]
+✓ Success: Project successfully linked. Details are now stored in appwrite.json file.
+Would you like to pull all resources from project you just linked? Yes
+```
+
+Once done, let's utilize the last Types Generation feature to sync our defined types:
+
+```jsx
+appwrite types src/types
+
+ℹ Info: Detected language: ts
+ℹ Info: Directory: src/types does not exist, creating...
+ℹ Info: Found 1 collections: posts
+ℹ Info: Found 1 attributes across all collections
+ℹ Info: Added types to src/types/appwrite.d.ts
+✓ Success: Generated types for all the listed collections
+```
+
+Result will look something like this:
+
+```jsx
+
+/**
+ * This file is auto-generated by the Appwrite CLI.
+ * You can regenerate it by running `appwrite types -l ts src/types`.
+ */
+
+export type Posts = Models.Document & {
+  name: string;
+}
+```
+
+Obviously pretty small for now, but a really helpful feature once the project expands and more collections are defined.
+
+## Configuring Code
+
+Final steps are to connect the Appwrite backend with our tech stack. For that let's create a simple `appwrite.ts` file in `src/lib` folder:
+
+```jsx
+
+const client = new Client()
+    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
+    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
+
+const databases = new Databases(client);
+
+export { client, databases };
+```
+
+Now, we can modify the original `post-router.ts` file to use the defined database:
+
+```jsx
+
+const DATABASE_ID = "main";
+const POSTS_COLLECTION_ID = "posts";
+
+export const postRouter = j.router({
+  recent: publicProcedure.query(async ({ c }) => {
+    const posts = await databases.listDocuments(
+      DATABASE_ID,
+      POSTS_COLLECTION_ID,
+    );
+    return c.superjson(posts.documents.at(-1) ?? null);
+  }),
+
+  create: publicProcedure
+    .input(z.object({ name: z.string().min(1) }))
+    .mutation(async ({ c, input }) => {
+      const post = await databases.createDocument(
+        DATABASE_ID,
+        POSTS_COLLECTION_ID,
+        ID.unique(),
+        {
+          name: input.name,
+        },
+      );
+
+      return c.superjson(post);
+    }),
+});
+```
+
+And done! Now your JStack application is using Appwrite as its backend provider.
+
+## Testing
+
+- Start the dev server if not already by running:
+
+```jsx
+bun run dev
+```
+
+- Your application should have started on: http://localhost:3000/
+- Create a new post.
+- You should be able to see it in recent posts:
+
+![Recent posts image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/oy9htyvp77qqct8grhzf.png)
+
+- Also, the data should be visible in your Appwrite Console:
+
+![Appwrite console showing data](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/oce30jvc16lb80e7v9qu.png)
+
+## Deploying your application
+
+Until recently, to deploy your Next.js application, you had pretty low choices. But no more [Appwrite Sites](https://appwrite.io/products/sites). Now, you can have your backend and frontend hosted on Appwrite.
+
+Check out these docs on how to get started with Sites - https://appwrite.io/docs/advanced/self-hosting/sites
+
+Let's deploy your application using Sites:
+
+- Go to Appwrite Console > Sites > Create Site.
+- You can upload a tar file directly, or connect to a GitHub repository (I prefer the GitHub option for automatic deployments).
+- Select the repository:
+
+![Selecting repository screen](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e6ww9m9mb2z7w8hc5ggk.png)
+
+- You can keep all the settings as the default ones, just make sure to upload the environment variables we defined earlier:
+
+![Add environment variables screen](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wsthkangby5vgqfnntio.png)
+
+- Depending on the domain you are assigned / plan to use, you also need to update the `APP_DOMAIN` variable we defined earlier. For me I will keep it:
+
+```jsx
+NEXT_PUBLIC_APP_DOMAIN = jstack - appwrite - template.appwrite.network;
+```
+
+- Click on deploy.
+
+And done! Your application should be live 🎉
+
+![Deployment successful screenshot](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mfxrz2dfa7nhwu26n93o.png)
+
+You can checkout the demo application here - https://jstack-appwrite-template.appwrite.network/
+
+## Conclusion
+
+Let's start by answering the question the blog began with: Do I prefer JStack over T3 Stack? I'm sorry, Theo, but I do.
+
+JStack solves the fundamental problems I have always had with Next.js:
+
+- Using [Hono](https://hono.dev/) instead of Next.js's inbuilt convention for defining API routes.
+- Using [TanStack](https://tanstack.com/) query out of the box. Trust me, you should start now if you are not using it.
+- Type safe and uses [Zod](https://zod.dev/).
+
+The most noticeable difference between T3 Stack and JStack is how light they are, mainly due to the inclusion of the TRPC protocol in T3 Stack. Most projects do not require it, and it makes the code 10x more complicated to maintain, in my opinion.
+
+So, give JStack a shot if you are starting with a new project (or want to spend a weekend migrating your existing stack to it). Huge shoutout to [Josh](https://www.youtube.com/@joshtriedcoding) for creating this wonderful stack. And lastly, give Appwrite a chance to be your next all in one cloud platform, both for your backend and frontend needs.
+
+## Sources:
+
+- JStack - https://jstack.app/
+- Appwrite Docs - https://appwrite.io/docs
+- Github repository - https://github.com/ChiragAgg5k/jstack-appwrite-template
+
+---
+

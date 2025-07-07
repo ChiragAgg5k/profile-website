@@ -1,0 +1,66 @@
+# Automate anything - Making research analysis effortless
+
+Starting with a research project can be overwhelming.
+
+There are so many data points to consider, so many hours of reading to do, and within all that chaos, the hardest piece of the puzzle to find is a **starting point**.
+
+I faced this first hand when last year I had to work on multiple papers to earn a single credit point for my engineering degree. Unfortunately why universities force this pointless system is not the spotlight of today’s discussion.
+
+Instead, we are going to discuss how you can cheat on this mundane activity using Runner H.
+
+The article will redefine how you interact with AI, helping you put together analysis, execution, summarisation and integration with a single prompt.
+
+So, let's dive in.
+
+## Researcher's Dilemma
+
+Whenever you start with a research project, the first question that comes to mind is: **"Has this been researched before?"**
+
+Answering this question is crucial for:
+
+1. Avoiding duplication of work
+2. Finding gaps in the existing study
+3. Not claiming something as noble when it has already been done before
+
+However, doing this is a very manual process, and requires hours and hours of find papers, reading them and doing accurate analysis.
+
+## Meet Runner H
+
+Ever tried using Perplexity or ChatGPT in research mode?
+
+Think of Runner H as that, but on **steroids**.
+
+Runner H is an advanced AI-powered web automation tool that lets you perform multi-step online tasks using natural language instructions. It seamlessly integrates with services like Slack, Notion, Gmail, and Excel, enabling you to create complex workflows, no coding experience required.
+
+For our purpose, we can use Runner H to:
+
+1. Quickly identify similar research papers with a Google Scholar scan.
+2. Assess similarities between them and your topic using AI.
+3. Scan the internet to find gaps between the existing work.
+4. Export the findings in a structured format.
+
+## The prompt
+
+Below, I have crafted a prompt that you can copy and paste into Runner H, replace with the topic you need to research, and voila~, see the magic unfold:
+
+_Analyse if my research idea, `{YOUR_RESEARCH_IDEA}`, has been previously explored. Search Google Scholar for similar research papers. For each, extract the title, authors, publication date, abstract, journal/conference, and similarity percentage to my idea, and note any research gaps mentioned or left open. Create an Excel file summarising all findings._
+
+Just replace `{YOUR_RESEARCH_IDEA}` with the idea you want to research on.
+
+## Demo
+
+Let's try researching on a topic:
+
+**"The impact of generative AI tools on student learning outcomes in higher education"**
+
+So Runner H after doing all the analysis and hard work for us was able to generate a structured output. Unfortunately, even though prompt specifically asks for Excel format, most of the times for me it generated a PDF format for me. Still Runner H is still in early phases and hopefully will be improved in future by the team.
+
+## So what makes Runner H different?
+
+One of the most fascinating differentiations I found in Runner H compared to other agentic tools was its ability to search, summarise and synthesize as well. Instead of just dumping in raw results, it evaluates the relevance of each paper, highlights the overlaps and gaps in the study, and presents it in an actionable format.
+
+Using Runner H has completely transformed my approach to starting a research topic. It has bridged me to the starting point where I used to struggle the most. For students, academic professionals, and anyone doing any sort of research work, Runner H is a game changer.
+
+---
+
+_Happy researching! If you have questions or want to share your own experiences with Runner H, drop a comment below._

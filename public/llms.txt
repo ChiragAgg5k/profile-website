@@ -1,0 +1,18 @@
+# Chirag Aggarwal's Blog Posts
+
+- [My Journey in Authorization with OPAL](https://chiragaggarwal.tech/blog/my-journey-in-authorization-with-opal.txt)
+- [Mastering npm: A Comprehensive Guide to Package Management](https://chiragaggarwal.tech/blog/mastering-npm-a-comprehensive-guide-to-package-management.txt)
+- [From Kubernetes Chaos to Calm: A Cyclops Adventure](https://chiragaggarwal.tech/blog/from-kubernetes-chaos-to-calm-a-cyclops-adventure.txt)
+- [Conditional Dependency Management Using Maven Profiles](https://chiragaggarwal.tech/blog/conditional-dependency-management-using-maven-profiles.txt)
+- [Neon T3 Starter Kit: Supercharging Web Development with Serverless Postgres](https://chiragaggarwal.tech/blog/neon-t3-starter-kit-supercharging-web-development-with-serverless-postgres.txt)
+- [How to Register Users in Django REST Framework?](https://chiragaggarwal.tech/blog/how-to-register-users-in-django-rest-framework.txt)
+- [My Hacktoberfest 2024 Experience with Cal Buddy, Your Smart Calendar Assistant](https://chiragaggarwal.tech/blog/my-hacktoberfest-2024-experience-with-cal-buddy-your-smart-calendar-assistant.txt)
+- [My Hackfrost Journey: Navigating Development Challenges with Daytona](https://chiragaggarwal.tech/blog/my-hackfrost-journey-navigating-development-challenges-with-daytona.txt)
+- [Architecture Patterns for Beginners: MVC, MVP, and MVVM](https://chiragaggarwal.tech/blog/architecture-patterns-for-beginners-mvc-mvp-and-mvvm.txt)
+- [Writing Event-Driven Serverless Code to Build Scalable Applications](https://chiragaggarwal.tech/blog/writing-event-driven-serverless-code-to-build-scalable-applications.txt)
+- [Debugging with Source Maps: A Comprehensive Guide](https://chiragaggarwal.tech/blog/debugging-with-source-maps-a-comprehensive-guide.txt)
+- [Focus on the product, not the tech stack](https://chiragaggarwal.tech/blog/focus-on-the-product-not-the-tech-stack.txt)
+- [Vibe coding an Email Ticket Automater using Postmark](https://chiragaggarwal.tech/blog/vibe-coding-an-email-ticket-automater-using-postmark.txt)
+- [Automate anything - Making research analysis effortless](https://chiragaggarwal.tech/blog/automate-anything-making-research-analysis-effortless.txt)
+- [From student to full-time Platform Engineer at Appwrite](https://chiragaggarwal.tech/blog/from-student-to-full-time-platform-engineer-at-appwrite.txt)
+- [JStack + Appwrite: A Match Made in Heaven for Modern Web Development](https://chiragaggarwal.tech/blog/jstack-appwrite-a-match-made-in-heaven-for-modern-web-development.txt)
