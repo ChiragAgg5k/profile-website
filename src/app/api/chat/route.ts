@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import Groq from "groq-sdk";
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
+const getGroqClient = () => {
+  if (!process.env.GROQ_API_KEY) {
+    throw new Error("GROQ_API_KEY is not configured");
+  }
+  return new Groq({ apiKey: process.env.GROQ_API_KEY });
+};
 
 // Portfolio knowledge base - comprehensive data for the AI
 const PORTFOLIO_CONTEXT = `
@@ -132,14 +135,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if API key is available
-    if (!process.env.GROQ_API_KEY) {
-      console.error("GROQ_API_KEY is not set in environment variables");
-      return NextResponse.json(
-        { error: "API key not configured. Please contact the administrator." },
-        { status: 500 }
-      );
-    }
+    // Get Groq client (validates API key)
+    const groq = getGroqClient();
 
     // Use Groq API with llama-3.1-8b-instant (fast and efficient model)
     const chatCompletion = await groq.chat.completions.create({

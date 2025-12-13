@@ -75,7 +75,7 @@ bun dev
 
 4. **Test the Chatbot**
 
-- Open http://localhost:3000
+- Open `http://localhost:3000`
 - Click the floating chat button in the bottom-right corner
 - Ask questions about Chirag's skills, projects, or experience
 
@@ -125,7 +125,7 @@ Try asking:
 
 ### Component Structure
 
-```
+```text
 src/
 ├── app/
 │   └── api/

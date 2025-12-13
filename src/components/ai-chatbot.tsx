@@ -46,6 +46,10 @@ export default function AIChatbot() {
         body: JSON.stringify({ message: userMessage }),
       });
 
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
       const data = await response.json();
       
       setMessages((prev) => [
