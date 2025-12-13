@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PostHogProvider } from "@/components/posthog-provider";
+import AIChatbot from "@/components/ai-chatbot";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/next";
@@ -81,6 +82,7 @@ export default function RootLayout({
             <TooltipProvider delayDuration={0}>
               {children}
               <Navbar />
+              <AIChatbot />
               <Analytics />
             </TooltipProvider>
             <Toaster />
