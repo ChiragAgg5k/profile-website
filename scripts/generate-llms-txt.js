@@ -5,7 +5,9 @@ const getLocalPosts = () => {
   const postsPath = path.join(__dirname, "../src/data/posts.tsx");
   const postsContent = fs.readFileSync(postsPath, "utf8");
 
-  const postsMatch = postsContent.match(/export const posts = \[([\s\S]*?)\];/);
+  const postsMatch =
+    postsContent.match(/const basePosts: BlogPost\[] = \[([\s\S]*?)\];/) ||
+    postsContent.match(/export const posts = \[([\s\S]*?)\];/);
   if (!postsMatch) {
     throw new Error("Could not parse posts.tsx");
   }

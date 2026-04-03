@@ -35,19 +35,20 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
-.next
-
 # MacOS
 .DS_Store
-
-# Vercel
-.vercel
 
 # Env
 .env.local
 
 # Output
 out
+dist
+dist-ssr
+.nitro
+.output
+.tanstack
+.vinxi
 
 # .env
 .env

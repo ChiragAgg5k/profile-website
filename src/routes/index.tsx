@@ -10,13 +10,26 @@ import { Button } from "@/components/ui/button";
 import Marquee from "@/components/ui/marquee";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { DATA } from "@/data/resume";
+import { createFileRoute } from "@tanstack/react-router";
 import { Notebook } from "lucide-react";
-import Image from "next/image";
 import Markdown from "react-markdown";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default function Page() {
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: DATA.name },
+      {
+        name: "description",
+        content: `${DATA.description} | ${DATA.summary}`,
+      },
+    ],
+  }),
+  component: HomePage,
+});
+
+function HomePage() {
   return (
     <TracingBeam className="px-6">
       <main className="flex items-center justify-center flex-col min-h-[100dvh] space-y-10">
@@ -57,7 +70,7 @@ export default function Page() {
             </Markdown>
             <div className="flex items-center justify-end mt-4">
               <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-                <Button size={`sm`} variant={`outline`}>
+                <Button size="sm" variant="outline">
                   Download Resume
                   <Notebook className="ml-2 h-4 w-4" />
                 </Button>
@@ -269,7 +282,7 @@ export default function Page() {
                   </a>{" "}
                   or{" "}
                   <a
-                    href={DATA.contact.social.X.url}
+                    href={DATA.contact.social.LinkedIn.url}
                     className="text-foreground hover:underline"
                     target="_blank"
                     rel="noopener noreferrer"

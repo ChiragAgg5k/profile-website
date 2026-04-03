@@ -9,12 +9,13 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
     // Only initialize PostHog in production with a valid key
     if (typeof window === "undefined") return;
 
-    const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
-    const isProduction = process.env.NODE_ENV === "production";
+    const key = import.meta.env.VITE_POSTHOG_KEY;
+    const isProduction = import.meta.env.PROD;
 
     if (key && isProduction) {
       posthog.init(key, {
-        api_host: "https://us.i.posthog.com",
+        api_host:
+          import.meta.env.VITE_POSTHOG_HOST || "https://us.i.posthog.com",
         ui_host: "https://us.posthog.com",
         defaults: "2025-05-24",
         capture_exceptions: true,

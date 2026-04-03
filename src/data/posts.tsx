@@ -1,4 +1,23 @@
-export const posts = [
+import type { MDXComponents } from "mdx/types";
+import type { ComponentType } from "react";
+
+type MdxPostComponent = ComponentType<{
+  components?: MDXComponents;
+}>;
+
+type BlogPost = {
+  title: string;
+  publishedAt: string;
+  slug?: string;
+  href?: string;
+};
+
+const mdxModules = import.meta.glob<{ default: MdxPostComponent }>(
+  "../app/blog/**/page.mdx",
+  { eager: true },
+);
+
+const basePosts: BlogPost[] = [
   {
     title: "My Journey in Authorization with OPAL",
     slug: "my-journey-in-authorization-with-opal",
@@ -101,3 +120,18 @@ export const posts = [
     publishedAt: "2025-07-06",
   },
 ];
+
+export const posts = basePosts.map((post) => post);
+
+export type { BlogPost };
+
+const postComponentsBySlug = Object.fromEntries(
+  Object.entries(mdxModules).map(([path, module]) => {
+    const slug = path.split("/").at(-2);
+    return [slug, module.default];
+  }),
+) as Record<string, MdxPostComponent | undefined>;
+
+export function getPostComponent(slug: string) {
+  return postComponentsBySlug[slug] ?? null;
+}

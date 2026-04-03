@@ -1,4 +1,3 @@
-"use client";
 import { posts } from "@/data/posts";
 
 export const BlogTitle = ({ slug }: { slug: string }) => {

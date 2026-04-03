@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 
-export default function NotFound() {
+export default function NotFoundPage() {
   return (
     <div className="min-h-[70vh] flex-col items-center justify-center flex">
       <h1 className="text-center text-3xl font-semibold text-primary">
@@ -11,8 +11,8 @@ export default function NotFound() {
         portfolio. <br />
         Can you please check the URL or <a href="/">go back to home</a>?
       </p>
-      <a href={"/"}>
-        <Button className="mt-4" variant={"outline"}>
+      <a href="/">
+        <Button className="mt-4" variant="outline">
           Go back home
         </Button>
       </a>

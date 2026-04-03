@@ -1,23 +1,39 @@
 import BlogPostItem from "@/components/blog-post-item";
 import BlurFade from "@/components/magicui/blur-fade";
 import { posts } from "@/data/posts";
-
-export const metadata = {
-  title: "Blogs - My Content Related Work",
-  description:
-    "Explore a curated list of my content-related work, including articles, research papers, and journals published across various platforms. Discover insights and knowledge shared through my writing.",
-  keywords:
-    "blogs, articles, research papers, content writing, journals, publications",
-  robots: "index, follow",
-};
+import { createFileRoute } from "@tanstack/react-router";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export const revalidate = 3600;
+export const Route = createFileRoute("/blog/")({
+  head: () => ({
+    meta: [
+      { title: "Blogs | Chirag Aggarwal" },
+      {
+        name: "description",
+        content:
+          "Explore a curated list of my content-related work, including articles, research papers, and journals published across various platforms.",
+      },
+      {
+        name: "keywords",
+        content:
+          "blogs, articles, research papers, content writing, journals, publications",
+      },
+      { name: "robots", content: "index, follow" },
+      { property: "og:title", content: "Blogs | Chirag Aggarwal" },
+      {
+        property: "og:description",
+        content:
+          "Explore a curated list of my content-related work, including articles, research papers, and journals published across various platforms.",
+      },
+    ],
+    links: [{ rel: "canonical", href: "https://www.chiragaggarwal.tech/blog" }],
+  }),
+  component: BlogIndexPage,
+});
 
-export default async function BlogPage() {
-  // Group posts by year
-  const postsByYear = posts
+function BlogIndexPage() {
+  const postsByYear = [...posts]
     .sort((a, b) => {
       if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
         return -1;
@@ -36,7 +52,6 @@ export default async function BlogPage() {
       {} as Record<number, typeof posts>,
     );
 
-  // Get sorted years (newest first)
   const sortedYears = Object.keys(postsByYear)
     .map(Number)
     .sort((a, b) => b - a);
