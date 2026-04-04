@@ -27,6 +27,7 @@ coverage
 build/Release
 
 # Dependency directories
+/node_modules
 node_modules
 jspm_packages
 
@@ -39,16 +40,26 @@ jspm_packages
 .DS_Store
 
 # Env
+/.env
+/.env.local
 .env.local
 
 # Output
+/out
 out
+/dist
 dist
+/dist-ssr
 dist-ssr
+/.nitro
 .nitro
+/.output
 .output
+/.tanstack
 .tanstack
+/.vinxi
 .vinxi
+/.vite
 
-# .env
-.env
+# Deployment hygiene
+/coverage
