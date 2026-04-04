@@ -31,6 +31,10 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:type", content: "article" },
+        {
+          property: "og:url",
+          content: `https://www.chiragaggarwal.tech/blog/${post?.slug ?? ""}`,
+        },
       ],
       links: post
         ? [

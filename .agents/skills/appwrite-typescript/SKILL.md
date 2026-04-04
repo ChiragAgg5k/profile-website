@@ -25,7 +25,7 @@ npm install node-appwrite
 
 ```typescript
 // Web
-import { Client, Account, TablesDB, Storage, ID, Query } from 'appwrite';
+import { Client, Account, TablesDB, Storage, ID, Query, OAuthProvider } from 'appwrite';
 
 // React Native
 import { Client, Account, TablesDB, Storage, ID, Query } from 'react-native-appwrite';
@@ -621,7 +621,6 @@ app.get('/oauth/success', async (req, res) => {
 ```
 
 > **Cookie security:** Always use `httpOnly`, `secure`, and `sameSite: 'strict'` to prevent XSS. The cookie name must be `a_session_<PROJECT_ID>`.
-
 > **Forwarding user agent:** Call `sessionClient.setForwardedUserAgent(req.headers['user-agent'])` to record the end-user's browser info for debugging and security.
 
 ## Error Handling
@@ -698,9 +697,7 @@ const file = await storage.createFile({
 ```
 
 > **When to set permissions:** Set document/file-level permissions when you need per-resource access control. If all documents in a collection share the same rules, configure permissions at the collection/bucket level and leave document permissions empty.
-
 > **Common mistakes:**
 > - **Forgetting permissions** — the resource becomes inaccessible to all users (including the creator)
 > - **`Role.any()` with `write`/`update`/`delete`** — allows any user, including unauthenticated guests, to modify or remove the resource
 > - **`Permission.read(Role.any())` on sensitive data** — makes the resource publicly readable
-

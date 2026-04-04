@@ -39,7 +39,6 @@ export const Route = createRootRoute({
       { property: "og:title", content: DATA.name },
       { property: "og:description", content: DATA.description },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: DATA.url },
       { property: "og:site_name", content: `${DATA.name}'s Portfolio` },
       { property: "og:locale", content: "en_US" },
       { property: "og:image", content: `${DATA.url}/preview.png` },
@@ -54,7 +53,6 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "canonical", href: DATA.url },
       { rel: "icon", href: "/me.png" },
       { rel: "apple-touch-icon", href: "/me.png" },
     ],

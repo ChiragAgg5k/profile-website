@@ -24,7 +24,9 @@ export const Route = createFileRoute("/")({
         name: "description",
         content: `${DATA.description} | ${DATA.summary}`,
       },
+      { property: "og:url", content: DATA.url },
     ],
+    links: [{ rel: "canonical", href: DATA.url }],
   }),
   component: HomePage,
 });

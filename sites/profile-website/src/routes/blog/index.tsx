@@ -26,6 +26,10 @@ export const Route = createFileRoute("/blog/")({
         content:
           "Explore a curated list of my content-related work, including articles, research papers, and journals published across various platforms.",
       },
+      {
+        property: "og:url",
+        content: "https://www.chiragaggarwal.tech/blog",
+      },
     ],
     links: [{ rel: "canonical", href: "https://www.chiragaggarwal.tech/blog" }],
   }),
