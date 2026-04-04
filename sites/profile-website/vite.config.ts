@@ -6,6 +6,8 @@ import react from "@vitejs/plugin-react";
 import mdx from "@mdx-js/rollup";
 import remarkGfm from "remark-gfm";
 
+const assetPathPattern = /\.[a-z0-9]+$/i;
+
 export default defineConfig({
   build: {
     chunkSizeWarningLimit: 700,
@@ -33,6 +35,7 @@ export default defineConfig({
         autoSubfolderIndex: true,
         crawlLinks: true,
         failOnError: true,
+        filter: (page) => !assetPathPattern.test(page.path),
       },
     }),
     react(),
