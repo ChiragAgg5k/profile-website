@@ -10,7 +10,7 @@ This is a profile website built with TanStack Start, Tailwind CSS, and TypeScrip
 
 Check out the live website [here](https://www.chiragaggarwal.tech/).
 
-The site application lives in [sites/profile-website](/Users/chiragaggarwal/Desktop/personal/profile-website/sites/profile-website). The repo root keeps shared wrapper files such as [appwrite.config.json](/Users/chiragaggarwal/Desktop/personal/profile-website/appwrite.config.json) and convenience scripts.
+The site application lives in [sites/profile-website](./sites/profile-website). The repo root keeps shared wrapper files such as [appwrite.config.json](./appwrite.config.json) and convenience scripts.
 
 ## Development
 

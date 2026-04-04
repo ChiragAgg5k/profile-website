@@ -2,6 +2,8 @@ import { useMDXComponents } from "@/mdx-components";
 import { getPostComponent, posts } from "@/data/posts";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 
+type BlogRoutePost = (typeof posts)[number] & { slug: string };
+
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
     const post = posts.find((entry) => entry.slug === params.slug);
@@ -11,7 +13,7 @@ export const Route = createFileRoute("/blog/$slug")({
       throw notFound();
     }
 
-    return { post };
+    return { post: post as BlogRoutePost };
   },
   head: ({ loaderData }) => {
     const post = loaderData?.post;
@@ -45,11 +47,7 @@ export const Route = createFileRoute("/blog/$slug")({
 
 function BlogPostPage() {
   const { post } = Route.useLoaderData();
-  const Content = post.slug ? getPostComponent(post.slug) : null;
-
-  if (!Content) {
-    throw notFound();
-  }
+  const Content = getPostComponent(post.slug)!;
 
   return (
     <article className="pb-16">

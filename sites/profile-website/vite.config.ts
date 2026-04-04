@@ -6,7 +6,8 @@ import react from "@vitejs/plugin-react";
 import mdx from "@mdx-js/rollup";
 import remarkGfm from "remark-gfm";
 
-const assetPathPattern = /\.[a-z0-9]+$/i;
+const assetPathPattern =
+  /\/[^/?]+\.(?:avif|css|gif|ico|jpe?g|js|json|map|pdf|png|svg|txt|webmanifest|webp|xml)$/i;
 
 export default defineConfig({
   build: {

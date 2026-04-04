@@ -34,12 +34,10 @@ export const Route = createFileRoute("/blog/")({
 
 function BlogIndexPage() {
   const postsByYear = [...posts]
-    .sort((a, b) => {
-      if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
-        return -1;
-      }
-      return 1;
-    })
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    )
     .reduce(
       (acc, post) => {
         const year = new Date(post.publishedAt).getFullYear();

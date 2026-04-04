@@ -121,16 +121,31 @@ const basePosts: BlogPost[] = [
   },
 ];
 
-export const posts = basePosts.map((post) => post);
+export const posts = [...basePosts];
 
 export type { BlogPost };
 
 const postComponentsBySlug = Object.fromEntries(
-  Object.entries(mdxModules).map(([path, module]) => {
-    const slug = path.split("/").at(-2);
-    return [slug, module.default];
+  Object.entries(mdxModules).flatMap(([path, module]) => {
+    const match = path.match(/\.\.\/app\/blog\/([^/]+)\/page\.mdx$/);
+    if (!match) {
+      return [];
+    }
+    return [[match[1], module.default] as const];
   }),
 ) as Record<string, MdxPostComponent | undefined>;
+
+if (import.meta.env.DEV) {
+  const missingSlugs = basePosts
+    .filter((post) => post.slug && !postComponentsBySlug[post.slug])
+    .map((post) => post.slug);
+
+  if (missingSlugs.length > 0) {
+    console.warn(
+      `[posts] Missing MDX components for slugs: ${missingSlugs.join(", ")}`,
+    );
+  }
+}
 
 export function getPostComponent(slug: string) {
   return postComponentsBySlug[slug] ?? null;
