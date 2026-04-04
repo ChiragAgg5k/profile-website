@@ -1,5 +1,4 @@
 import Navbar from "@/components/navbar";
-import { PostHogProvider } from "@/components/posthog-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
@@ -15,6 +14,10 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import appCss from "@/app/globals.css?url";
 
 const themeInitScript = `(function(){try{var stored=window.localStorage.getItem('theme');var mode=(stored==='light'||stored==='dark'||stored==='system')?stored:'light';var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var resolved=mode==='system'?(prefersDark?'dark':'light'):mode;var root=document.documentElement;root.classList.remove('light','dark');root.classList.add(resolved);root.style.colorScheme=resolved;}catch(e){}})();`;
+const umamiWebsiteId = import.meta.env.VITE_UMAMI_WEBSITE_ID;
+const umamiScriptSrc =
+  import.meta.env.VITE_UMAMI_SRC || "https://cloud.umami.is/script.js";
+const umamiHostUrl = import.meta.env.VITE_UMAMI_HOST_URL;
 
 export const Route = createRootRoute({
   head: () => ({
@@ -65,17 +68,23 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <ScriptOnce children={themeInitScript} />
         <HeadContent />
+        {umamiWebsiteId ? (
+          <script
+            defer
+            data-website-id={umamiWebsiteId}
+            data-host-url={umamiHostUrl || undefined}
+            src={umamiScriptSrc}
+          />
+        ) : null}
       </head>
       <body className="min-h-screen bg-background font-sans antialiased max-w-4xl mx-auto py-12 sm:py-24">
-        <PostHogProvider>
-          <ThemeProvider attribute="class" defaultTheme="light">
-            <TooltipProvider delayDuration={0}>
-              {children}
-              <Navbar />
-            </TooltipProvider>
-            <Toaster />
-          </ThemeProvider>
-        </PostHogProvider>
+        <ThemeProvider attribute="class" defaultTheme="light">
+          <TooltipProvider delayDuration={0}>
+            {children}
+            <Navbar />
+          </TooltipProvider>
+          <Toaster />
+        </ThemeProvider>
         <TanStackDevtools
           config={{ position: "bottom-right" }}
           plugins={[
