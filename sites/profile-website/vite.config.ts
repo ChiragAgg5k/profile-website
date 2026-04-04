@@ -7,6 +7,9 @@ import mdx from "@mdx-js/rollup";
 import remarkGfm from "remark-gfm";
 
 export default defineConfig({
+  build: {
+    chunkSizeWarningLimit: 700,
+  },
   resolve: {
     tsconfigPaths: true,
     alias: {
@@ -24,7 +27,14 @@ export default defineConfig({
       plugin.enforce = "pre";
       return plugin;
     })(),
-    tanstackStart(),
+    tanstackStart({
+      prerender: {
+        enabled: true,
+        autoSubfolderIndex: true,
+        crawlLinks: true,
+        failOnError: true,
+      },
+    }),
     react(),
   ],
 });
