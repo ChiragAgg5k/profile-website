@@ -43,21 +43,21 @@
         {
             "$id": "chirag-profile-website",
             "name": "Profile Website",
+            "path": "sites/profile-website",
             "framework": "tanstack-start",
-            "adapter": "static",
+            "enabled": true,
+            "logging": true,
+            "timeout": 30,
             "buildRuntime": "node-22",
+            "adapter": "static",
             "installCommand": "rm -rf node_modules dist && npm install",
             "buildCommand": "npm run build",
             "outputDirectory": "./dist/client",
             "fallbackFile": "",
+            "startCommand": "",
             "buildSpecification": "s-4vcpu-4gb",
             "runtimeSpecification": "s-4vcpu-4gb",
-            "enabled": true,
-            "timeout": 30,
-            "logging": true,
-            "ignore": null,
-            "path": "sites/profile-website",
-            "vars": {}
+            "deploymentRetention": 0
         }
     ]
 }
