@@ -63,3 +63,4 @@ dist-ssr
 
 # Deployment hygiene
 /coverage
+.vercel
