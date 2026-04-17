@@ -50,7 +50,7 @@
             "timeout": 30,
             "buildRuntime": "node-22",
             "adapter": "static",
-            "installCommand": "rm -rf node_modules dist && npm install",
+            "installCommand": "npm install",
             "buildCommand": "npm run build",
             "outputDirectory": "./dist/client",
             "fallbackFile": "",
