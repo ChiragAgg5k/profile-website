@@ -119,6 +119,11 @@ const basePosts: BlogPost[] = [
     slug: "jstack-appwrite-a-match-made-in-heaven-for-modern-web-development",
     publishedAt: "2025-07-06",
   },
+  {
+    title: "How we solved logging at Appwrite",
+    slug: "how-we-solved-logging-at-appwrite",
+    publishedAt: "2026-04-18",
+  },
 ];
 
 export const posts = [...basePosts];

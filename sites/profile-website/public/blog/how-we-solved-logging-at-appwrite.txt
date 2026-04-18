@@ -1,0 +1,144 @@
+# How we solved logging at Appwrite
+
+A few weeks back I came across a post by [@boristane](https://twitter.com/boristane) sharing a website he made, [loggingsucks.com](https://loggingsucks.com). It caught my eye because it had been shared by my favorite tech YouTuber, [@theo](https://twitter.com/theo). Like most people, I was really inspired by the article and shared it with my team. [@lukebsilver](https://twitter.com/lukebsilver), Appwrite's Engineering Lead, was also inspired by it and decided to work on a new PHP library, `utopia-php/span`, to fix logging throughout the Appwrite codebase.
+
+## What we had
+
+Before this, Appwrite used a combination of two different libraries targeting logging in two different areas:
+
+- `utopia-php/console` — a very simple wrapper library around stdout logging using functions like `Console::success()`, `Console::error()`, etc.
+- `utopia-php/logger` — an adapter-based library to push error logs to monitoring systems like Sentry, AppSignal, Raygun, etc.
+
+Combined, these libraries served their purpose for a long time, but we often ran into problems when debugging production issues, the same ones the original article discusses in detail. I'd highly recommend going through [that article](https://loggingsucks.com) first so I don't repeat it all here.
+
+## Our solution
+
+Funnily enough, the first tricky problem was deciding on a name. "Logger" was already taken, so we had to be creative. The word "Span" captured exactly what we were trying to solve: a fundamental unit of work with a named, timed operation alongside various attributes, errors, trace IDs, etc.
+
+The first step was to move away from simple log lines to **structured logging**. Span enforces this by only exposing a single primary method, `add()`, which accepts a key-value pair.
+
+Before:
+
+```php
+Console::info("Deleting project {$project->getId()} (type={$type}, region={$project->getAttribute('region')})");
+```
+
+After:
+
+```php
+Span::add('project.id', $project->getId());
+Span::add('project.type', $type);
+Span::add('project.region', $project->getAttribute('region'));
+```
+
+This massively improved the queryability of our logs — one of the things we struggled with most when going through logs in production.
+
+We also wanted the library to be extremely simple to use. Earlier, with "logger", we had to hop through various dependency injection loops just to use it:
+
+```php
+public function action(
+    Message $message,
+    Document $project,
+    Log $log, // ← has to be injected just to add a tag
+): void {
+    $log->addTag('projectId', $project->getId());
+    $log->addTag('type', $payload['type']);
+    // ...actual work...
+}
+```
+
+With Span, it's much simpler:
+
+```php
+public function action(
+    Message $message,
+    Document $project,
+): void {
+    Span::add('projectId', $project->getId());
+    Span::add('type', $payload['type']);
+    // ...actual work...
+}
+```
+
+## Why not just make the logger methods static?
+
+Because Appwrite's codebase leverages coroutines (via Swoole) for concurrency between requests, similar to goroutines in Go. A naive static implementation would leak state across concurrent requests. Span solves this by allowing you to choose the storage type:
+
+```php
+Span::setStorage(new Storage\Coroutine());
+```
+
+## Exporters
+
+To combine both logger and console capabilities, Span exposes built-in Exporters, which, as the name suggests, export the logs to not just stdout but any supported adapter. The library currently supports three:
+
+1. **Stdout**: basic usage. Dumps the output as plain JSON:
+
+```json
+{
+  "action": "worker.deletes",
+  "span.trace_id": "7a3f9c2b4e1d8f06",
+  "span.duration": 1.92,
+  "project.id": "67f3a9",
+  "project.type": "projects",
+  "project.region": "fra"
+}
+```
+
+2. **Pretty**: JSON dumps are very useful in production where you have OpenTelemetry or other monitoring set up, but locally you just want things to be readable:
+
+```plaintext
+worker.deletes · 1.92s · 7a3f9c2b
+
+  project.id      67f3a9
+  project.type    projects
+  project.region  fra
+
+  ────────────────────────────────
+```
+
+3. **Sentry**: since Sentry is primarily an error tracking system, Span also exposes a callable "sampler" that lets you filter which logs get exported to a particular exporter:
+
+```php
+Span::addExporter(
+    new Sentry(dsn: '...'),
+    // Sampler: drop noisy expected errors, keep everything else.
+    sampler: function (Span $span): bool {
+        $error = $span->getError();
+        return !($error instanceof ExecutorException) || $error->isPublishable();
+    },
+);
+```
+
+## Before and after
+
+One massive improvement we saw was with error logs. Before, we had very verbose and noisy errors that were often hard to make sense of:
+
+```plaintext
+[Error] Timestamp: 2026-04-17T10:32:16+00:00
+[Error] Type: Utopia\Database\Exception\Timeout
+[Error] Message: Query took too long
+[Error] File: /usr/src/code/src/Appwrite/Cloud/Platform/Workers/Deletes.php
+[Error] Line: 214
+Trace: #0 /usr/src/code/app/worker.php(828): ...
+```
+
+Now:
+
+```json
+{
+  "action": "worker.deletes",
+  "span.trace_id": "7a3f9c2b4e1d8f06",
+  "span.duration": 2.14,
+  "project.id": "67f3a9",
+  "error.type": "Utopia\\Database\\Exception\\Timeout",
+  "error.message": "Query took too long",
+  "error.file": "/usr/src/code/src/Appwrite/Cloud/Platform/Workers/Deletes.php",
+  "error.line": 214,
+  "error.trace": [
+    { "file": "/usr/src/code/app/worker.php", "line": 828, "function": "action" }
+  ]
+}
+```
+
+If you're writing PHP in 2026, give [utopia-php/span](https://github.com/utopia-php/span) a shot. And a massive shoutout to [@lukebsilver](https://twitter.com/lukebsilver), who actually built the library. I just learned from him and wanted to share what I picked up.

@@ -16,3 +16,4 @@
 - [Automate anything - Making research analysis effortless](https://chiragaggarwal.tech/blog/automate-anything-making-research-analysis-effortless.txt)
 - [From student to full-time Platform Engineer at Appwrite](https://chiragaggarwal.tech/blog/from-student-to-full-time-platform-engineer-at-appwrite.txt)
 - [JStack + Appwrite: A Match Made in Heaven for Modern Web Development](https://chiragaggarwal.tech/blog/jstack-appwrite-a-match-made-in-heaven-for-modern-web-development.txt)
+- [How we solved logging at Appwrite](https://chiragaggarwal.tech/blog/how-we-solved-logging-at-appwrite.txt)
