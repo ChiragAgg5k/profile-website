@@ -2,43 +2,6 @@
     "projectId": "chirag-project-prod",
     "projectName": "Main Project",
     "endpoint": "https://sgp.cloud.appwrite.io/v1",
-    "settings": {
-        "services": {
-            "account": true,
-            "avatars": true,
-            "databases": true,
-            "locale": true,
-            "health": true,
-            "storage": true,
-            "teams": true,
-            "users": true,
-            "sites": true,
-            "functions": true,
-            "graphql": true,
-            "messaging": true
-        },
-        "auth": {
-            "methods": {
-                "jwt": true,
-                "phone": true,
-                "invites": true,
-                "anonymous": true,
-                "email-otp": true,
-                "magic-url": true,
-                "email-password": true
-            },
-            "security": {
-                "duration": 31536000,
-                "limit": 0,
-                "sessionsLimit": 10,
-                "passwordHistory": 0,
-                "passwordDictionary": false,
-                "personalDataCheck": false,
-                "sessionAlerts": false,
-                "mockNumbers": []
-            }
-        }
-    },
     "sites": [
         {
             "$id": "chirag-profile-website",
@@ -48,16 +11,14 @@
             "enabled": true,
             "logging": true,
             "timeout": 30,
-            "buildRuntime": "node-22",
+            "buildRuntime": "bun-1.3",
             "adapter": "static",
-            "installCommand": "npm install",
-            "buildCommand": "npm run build",
+            "installCommand": "bun install",
+            "buildCommand": "bun run build",
             "outputDirectory": "./dist/client",
-            "fallbackFile": "",
-            "startCommand": "",
             "buildSpecification": "s-4vcpu-4gb",
             "runtimeSpecification": "s-4vcpu-4gb",
-            "deploymentRetention": 0
+            "deploymentRetention": 7
         }
     ]
 }
