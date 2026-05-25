@@ -124,6 +124,11 @@ const basePosts: BlogPost[] = [
     slug: "how-we-solved-logging-at-appwrite",
     publishedAt: "2026-04-18",
   },
+  {
+    title: "Managing multiple Docker Hub accounts using docker-use",
+    slug: "managing-multiple-docker-hub-accounts-using-docker-use",
+    publishedAt: "2026-05-25",
+  },
 ];
 
 export const posts = [...basePosts];
