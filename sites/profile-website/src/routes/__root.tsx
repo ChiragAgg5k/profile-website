@@ -27,7 +27,7 @@ export const Route = createRootRoute({
       { title: DATA.name },
       {
         name: "description",
-        content: `${DATA.description} | ${DATA.summary}`,
+        content: DATA.seoDescription,
       },
       {
         name: "keywords",
@@ -37,13 +37,20 @@ export const Route = createRootRoute({
       { name: "author", content: DATA.name },
       { name: "robots", content: "index, follow" },
       { property: "og:title", content: DATA.name },
-      { property: "og:description", content: DATA.description },
+      { property: "og:description", content: DATA.seoDescription },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: `${DATA.name}'s Portfolio` },
       { property: "og:locale", content: "en_US" },
+      { property: "og:url", content: DATA.url },
       { property: "og:image", content: `${DATA.url}/preview.png` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "676" },
+      { property: "og:image:alt", content: `${DATA.name} — ${DATA.jobTitle}` },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: DATA.twitterHandle },
+      { name: "twitter:creator", content: DATA.twitterHandle },
       { name: "twitter:title", content: DATA.name },
+      { name: "twitter:description", content: DATA.seoDescription },
       { name: "twitter:image", content: `${DATA.url}/preview.png` },
       {
         name: "googlebot",
@@ -53,8 +60,27 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/me.png" },
-      { rel: "apple-touch-icon", href: "/me.png" },
+      // NOTE: canonical is set per-route (index/blog/$slug) — TanStack flattens
+      // link tags without dedup, so a root canonical would conflict with theirs.
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon-32x32.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: "/favicon-16x16.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        sizes: "180x180",
+        href: "/apple-touch-icon.png",
+      },
+      { rel: "manifest", href: "/site.webmanifest" },
     ],
   }),
   shellComponent: RootDocument,
@@ -65,6 +91,18 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <ScriptOnce children={themeInitScript} />
+        {/* theme-color is set statically (not via head() meta) because TanStack
+            dedupes meta by name, which would collapse these two media variants. */}
+        <meta
+          name="theme-color"
+          content="#ffffff"
+          media="(prefers-color-scheme: light)"
+        />
+        <meta
+          name="theme-color"
+          content="#0a0a0a"
+          media="(prefers-color-scheme: dark)"
+        />
         <HeadContent />
         {umamiWebsiteId ? (
           <script
