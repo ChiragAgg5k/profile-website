@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000",
-    "prebuild": "node scripts/generate-llms-txt.cjs && node scripts/generate-llms-full-txt.cjs",
+    "prebuild": "node scripts/generate-llms-txt.cjs && node scripts/generate-llms-full-txt.cjs && node scripts/generate-sitemap.cjs",
     "build": "vite build",
     "preview": "vite preview --port 3000",
     "format": "prettier --write .",
     "llms-txt": "node scripts/generate-llms-txt.cjs",
-    "llms-full-txt": "node scripts/generate-llms-full-txt.cjs"
+    "llms-full-txt": "node scripts/generate-llms-full-txt.cjs",
+    "sitemap": "node scripts/generate-sitemap.cjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

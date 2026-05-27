@@ -1,0 +1,15 @@
+{
+  "name": "Chirag Aggarwal — Platform Engineer",
+  "short_name": "Chirag Aggarwal",
+  "description": "Platform Engineer at Appwrite building scalable, robust backend systems with open-source tech.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    { "src": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
+    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/me.png", "sizes": "400x400", "type": "image/png" }
+  ]
+}

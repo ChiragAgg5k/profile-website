@@ -19,12 +19,45 @@ const BLUR_FADE_DELAY = 0.04;
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: DATA.name },
+      { title: `${DATA.name} — ${DATA.jobTitle} | Open Source & Backend` },
       {
         name: "description",
-        content: `${DATA.description} | ${DATA.summary}`,
+        content: DATA.seoDescription,
       },
       { property: "og:url", content: DATA.url },
+      {
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: DATA.name,
+          url: DATA.url,
+          image: `${DATA.url}/me.png`,
+          jobTitle: DATA.jobTitle,
+          description: DATA.seoDescription,
+          worksFor: {
+            "@type": "Organization",
+            name: "Appwrite",
+            url: "https://appwrite.io",
+          },
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Delhi NCR",
+            addressCountry: "IN",
+          },
+          sameAs: Object.values(DATA.contact.social)
+            .filter((s) => !s.url.startsWith("mailto:"))
+            .map((s) => s.url),
+        },
+      },
+      {
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: `${DATA.name}'s Portfolio`,
+          url: DATA.url,
+          author: { "@type": "Person", name: DATA.name },
+        },
+      },
     ],
     links: [{ rel: "canonical", href: DATA.url }],
   }),

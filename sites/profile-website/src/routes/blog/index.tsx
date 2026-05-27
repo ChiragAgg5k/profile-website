@@ -1,19 +1,20 @@
 import BlogPostItem from "@/components/blog-post-item";
 import BlurFade from "@/components/magicui/blur-fade";
 import { posts } from "@/data/posts";
+import { DATA } from "@/data/resume";
 import { createFileRoute } from "@tanstack/react-router";
 
 const BLUR_FADE_DELAY = 0.04;
+
+const BLOG_DESCRIPTION =
+  "Explore a curated list of my content-related work, including articles, research papers, and journals published across various platforms.";
+const BLOG_URL = `${DATA.url}/blog`;
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
       { title: "Blogs | Chirag Aggarwal" },
-      {
-        name: "description",
-        content:
-          "Explore a curated list of my content-related work, including articles, research papers, and journals published across various platforms.",
-      },
+      { name: "description", content: BLOG_DESCRIPTION },
       {
         name: "keywords",
         content:
@@ -21,17 +22,40 @@ export const Route = createFileRoute("/blog/")({
       },
       { name: "robots", content: "index, follow" },
       { property: "og:title", content: "Blogs | Chirag Aggarwal" },
+      { property: "og:description", content: BLOG_DESCRIPTION },
+      { property: "og:url", content: BLOG_URL },
+      { name: "twitter:title", content: "Blogs | Chirag Aggarwal" },
+      { name: "twitter:description", content: BLOG_DESCRIPTION },
       {
-        property: "og:description",
-        content:
-          "Explore a curated list of my content-related work, including articles, research papers, and journals published across various platforms.",
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          name: `${DATA.name}'s Blog`,
+          url: BLOG_URL,
+          description: BLOG_DESCRIPTION,
+          author: { "@type": "Person", name: DATA.name, url: DATA.url },
+          blogPost: posts
+            .filter((post) => post.slug)
+            .map((post) => ({
+              "@type": "BlogPosting",
+              headline: post.title,
+              url: `${BLOG_URL}/${post.slug}`,
+              datePublished: post.publishedAt,
+            })),
+        },
       },
       {
-        property: "og:url",
-        content: "https://www.chiragaggarwal.tech/blog",
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: DATA.url },
+            { "@type": "ListItem", position: 2, name: "Blog", item: BLOG_URL },
+          ],
+        },
       },
     ],
-    links: [{ rel: "canonical", href: "https://www.chiragaggarwal.tech/blog" }],
+    links: [{ rel: "canonical", href: BLOG_URL }],
   }),
   component: BlogIndexPage,
 });

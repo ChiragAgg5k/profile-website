@@ -11,10 +11,16 @@ export const DATA = {
   location: "Delhi NCR, India",
   locationLink: "https://maps.app.goo.gl/Zbzok1mCik445h1C6",
   description:
-    "A developer building cool solutions with open source technologies.",
+    "Platform Engineer at Appwrite, building cool solutions with open source technologies.",
   summary:
     "I am Chirag Aggarwal, a fourth-year Bachelor of Technology student from India, currently studying Computer Science Engineering. Although I am primarily a **Platform Engineer**, specializing in building scalable and robust backend systems, I also do enjoy working in Frontend side of things. Additionally, I have a passion for content writing and conducting research on various topics, particularly in the fields of **Artificial Intelligence** and **System Architecture**.",
-  avatarUrl: "/me.png",
+  // Plain-text, ~155 char summary used for meta/OpenGraph descriptions.
+  // Keep it free of Markdown so it renders cleanly in search results.
+  seoDescription:
+    "Platform Engineer at Appwrite building scalable, robust backend systems with open-source tech. I also write about engineering, AI, and system architecture.",
+  jobTitle: "Platform Engineer",
+  twitterHandle: "@ChiragAgg5k",
+  avatarUrl: "/me.webp",
   skills: [
     {
       name: "Next.js",
