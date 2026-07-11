@@ -132,14 +132,11 @@ function BlogIndexPage() {
       </div>
       <BlurFade delay={BLUR_FADE_DELAY * 2 + delayIndex * 0.05}>
         <p className="text-center my-8 text-sm text-muted-foreground">
-          Follow me on{" "}
-          <a
-            className="underline text-foreground"
-            href="https://dev.to/chiragagg5k"
-          >
-            dev.to
-          </a>{" "}
-          for more content!
+          New posts are published here first. Subscribe via{" "}
+          <a className="underline text-foreground" href="/feed.xml">
+            RSS
+          </a>
+          .
         </p>
       </BlurFade>
     </section>

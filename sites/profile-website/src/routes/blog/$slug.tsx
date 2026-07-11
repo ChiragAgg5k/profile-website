@@ -1,5 +1,6 @@
 import { useMDXComponents } from "@/mdx-components";
-import { getPostComponent, posts } from "@/data/posts";
+import RelatedPosts from "@/components/related-posts";
+import { getPostComponent, getRelatedPosts, posts } from "@/data/posts";
 import { DATA } from "@/data/resume";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 
@@ -14,7 +15,7 @@ export const Route = createFileRoute("/blog/$slug")({
       throw notFound();
     }
 
-    return { post: post as BlogRoutePost };
+    return { post: post as BlogRoutePost, relatedPosts: getRelatedPosts(post.slug) };
   },
   head: ({ loaderData }) => {
     const post = loaderData?.post;
@@ -110,12 +111,15 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function BlogPostPage() {
-  const { post } = Route.useLoaderData();
+  const { post, relatedPosts } = Route.useLoaderData();
   const Content = getPostComponent(post.slug)!;
 
   return (
     <article className="pb-16">
       <Content components={useMDXComponents({})} />
+      <div className="px-6">
+        <RelatedPosts posts={relatedPosts} />
+      </div>
     </article>
   );
 }

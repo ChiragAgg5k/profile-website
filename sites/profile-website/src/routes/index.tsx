@@ -10,11 +10,14 @@ import { Button } from "@/components/ui/button";
 import Marquee from "@/components/ui/marquee";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { DATA } from "@/data/resume";
+import { getLatestPosts } from "@/data/posts";
 import { createFileRoute } from "@tanstack/react-router";
 import { Notebook } from "lucide-react";
+import { formatDate } from "@/lib/utils";
 import Markdown from "react-markdown";
 
 const BLUR_FADE_DELAY = 0.04;
+const latestPosts = getLatestPosts(3);
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -112,6 +115,44 @@ function HomePage() {
               </a>
             </div>
           </BlurFade>
+        </section>
+        <section id="writing">
+          <div className="flex min-h-0 max-w-2xl flex-col gap-y-3">
+            <BlurFade delay={BLUR_FADE_DELAY * 4.5}>
+              <h2 className="text-xl font-bold">Latest Writing</h2>
+            </BlurFade>
+            <BlurFade delay={BLUR_FADE_DELAY * 4.6}>
+              <p className="text-sm text-muted-foreground">
+                Technical articles on platform engineering, open source, and
+                backend development.{" "}
+                <a href="/blog" className="text-foreground underline">
+                  View all posts
+                </a>
+                .
+              </p>
+            </BlurFade>
+            {latestPosts.map((post, id) => (
+              <BlurFade
+                key={post.slug}
+                delay={BLUR_FADE_DELAY * 4.7 + id * 0.05}
+              >
+                <a
+                  href={`/blog/${post.slug}`}
+                  className="block rounded-lg border p-4 transition-colors hover:bg-muted/50"
+                >
+                  <h3 className="font-medium">{post.title}</h3>
+                  {post.description ? (
+                    <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                      {post.description}
+                    </p>
+                  ) : null}
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    {formatDate(post.publishedAt)}
+                  </p>
+                </a>
+              </BlurFade>
+            ))}
+          </div>
         </section>
         <section id="work">
           <div className="flex min-h-0 max-w-2xl flex-col gap-y-3">

@@ -29,7 +29,7 @@ export default function BlogPostItem({
         <a href={href ? href : `/blog/${slug}`}>
           <div className="group/title">
             <div className="flex items-center justify-start gap-4">
-              <h1>{title}</h1>
+              <h2 className="text-base font-medium tracking-tight">{title}</h2>
               {href ? (
                 <Tooltip>
                   <TooltipTrigger>

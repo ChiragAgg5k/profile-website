@@ -1,6 +1,16 @@
 const fs = require("fs");
 const path = require("path");
 
+const getSiteUrl = () => {
+  const resumePath = path.join(__dirname, "../src/data/resume.tsx");
+  const content = fs.readFileSync(resumePath, "utf8");
+  const match = content.match(/url:\s*"([^"]+)"/);
+  return (match ? match[1] : "https://www.chiragaggarwal.tech").replace(
+    /\/$/,
+    "",
+  );
+};
+
 const getLocalPosts = () => {
   const postsPath = path.join(__dirname, "../src/data/posts.tsx");
   const postsContent = fs.readFileSync(postsPath, "utf8");
@@ -59,6 +69,8 @@ const generateLlmsTxt = () => {
 
     let processedCount = 0;
 
+    const siteUrl = getSiteUrl();
+
     for (const post of posts) {
       try {
         const mdxPath = path.join(
@@ -83,7 +95,7 @@ ${cleanedContent}`;
         fs.writeFileSync(postTxtPath, postContent, "utf8");
 
         // Add entry to main llms.txt
-        llmsContent += `- [${post.title}](https://chiragaggarwal.tech/blog/${post.slug}.txt)\n`;
+        llmsContent += `- [${post.title}](${siteUrl}/blog/${post.slug}.txt)\n`;
 
         processedCount++;
       } catch (error) {

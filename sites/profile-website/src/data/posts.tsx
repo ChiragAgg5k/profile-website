@@ -200,3 +200,28 @@ if (import.meta.env.DEV) {
 export function getPostComponent(slug: string) {
   return postComponentsBySlug[slug] ?? null;
 }
+
+export function getInternalPosts() {
+  return posts.filter((post): post is BlogPost & { slug: string } =>
+    Boolean(post.slug),
+  );
+}
+
+export function getLatestPosts(limit = 3) {
+  return [...getInternalPosts()]
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    )
+    .slice(0, limit);
+}
+
+export function getRelatedPosts(currentSlug: string, limit = 3) {
+  return [...getInternalPosts()]
+    .filter((post) => post.slug !== currentSlug)
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    )
+    .slice(0, limit);
+}

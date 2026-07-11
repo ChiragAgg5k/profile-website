@@ -81,6 +81,12 @@ export const Route = createRootRoute({
         href: "/apple-touch-icon.png",
       },
       { rel: "manifest", href: "/site.webmanifest" },
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        title: "Chirag Aggarwal — Blog RSS",
+        href: "/feed.xml",
+      },
     ],
   }),
   shellComponent: RootDocument,

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chirag Aggarwal — Blog</title>
+    <link>https://www.chiragaggarwal.tech/blog</link>
+    <description>Articles on platform engineering, open source, and backend development by Chirag Aggarwal.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.chiragaggarwal.tech/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Managing multiple Docker Hub accounts using docker-use</title>
+      <link>https://www.chiragaggarwal.tech/blog/managing-multiple-docker-hub-accounts-using-docker-use</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/managing-multiple-docker-hub-accounts-using-docker-use</guid>
+      <description>Managing multiple Docker Hub accounts cleanly with docker-use, so you can switch between accounts without the usual login juggling.</description>
+      <pubDate>Mon, 25 May 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>How we solved logging at Appwrite</title>
+      <link>https://www.chiragaggarwal.tech/blog/how-we-solved-logging-at-appwrite</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/how-we-solved-logging-at-appwrite</guid>
+      <description>How we rethought and solved logging at Appwrite: the problems with traditional logging and the approach we landed on to fix them.</description>
+      <pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Introducing Type generation: Automate your type definitions with Appwrite</title>
+      <link>https://www.chiragaggarwal.tech/blog/jstack-appwrite-a-match-made-in-heaven-for-modern-web-development</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/jstack-appwrite-a-match-made-in-heaven-for-modern-web-development</guid>
+      <description>Why JStack and Appwrite are a match made in heaven for modern web development, pairing a type-safe stack with a powerful open-source backend.</description>
+      <pubDate>Sun, 06 Jul 2025 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>From student to full-time Platform Engineer at Appwrite</title>
+      <link>https://www.chiragaggarwal.tech/blog/from-student-to-full-time-platform-engineer-at-appwrite</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/from-student-to-full-time-platform-engineer-at-appwrite</guid>
+      <description>My journey from university student to full-time Platform Engineer at Appwrite: the internship, the work I owned, and the lessons along the way.</description>
+      <pubDate>Sat, 21 Jun 2025 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Automate anything - Making research analysis effortless</title>
+      <link>https://www.chiragaggarwal.tech/blog/automate-anything-making-research-analysis-effortless</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/automate-anything-making-research-analysis-effortless</guid>
+      <description>How to make research analysis effortless by automating the overwhelming parts of starting and running a research project.</description>
+      <pubDate>Sat, 14 Jun 2025 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Announcing Dev Keys: faster local development without rate limits</title>
+      <link>https://www.chiragaggarwal.tech/blog/vibe-coding-an-email-ticket-automater-using-postmark</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/vibe-coding-an-email-ticket-automater-using-postmark</guid>
+      <description>Vibe coding an email ticket automater with Postmark for the Inbox Innovators challenge, turning inbound email into actionable tickets.</description>
+      <pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Focus on the product, not the tech stack</title>
+      <link>https://www.chiragaggarwal.tech/blog/focus-on-the-product-not-the-tech-stack</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/focus-on-the-product-not-the-tech-stack</guid>
+      <description>Why obsessing over your tech stack can hold you back, and how focusing on the product you&apos;re building leads to better outcomes.</description>
+      <pubDate>Wed, 14 May 2025 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Self-hosting Appwrite with Coolify</title>
+      <link>https://www.chiragaggarwal.tech/blog/debugging-with-source-maps-a-comprehensive-guide</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/debugging-with-source-maps-a-comprehensive-guide</guid>
+      <description>A comprehensive guide to debugging production issues with source maps: how they work and how to use them to trace minified code back to source.</description>
+      <pubDate>Sun, 09 Mar 2025 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Writing Event-Driven Serverless Code to Build Scalable Applications</title>
+      <link>https://www.chiragaggarwal.tech/blog/writing-event-driven-serverless-code-to-build-scalable-applications</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/writing-event-driven-serverless-code-to-build-scalable-applications</guid>
+      <description>How event-driven, serverless code rewrites the way software scales, with patterns for building resilient and scalable applications.</description>
+      <pubDate>Sun, 26 Jan 2025 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Architecture Patterns for Beginners: MVC, MVP, and MVVM</title>
+      <link>https://www.chiragaggarwal.tech/blog/architecture-patterns-for-beginners-mvc-mvp-and-mvvm</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/architecture-patterns-for-beginners-mvc-mvp-and-mvvm</guid>
+      <description>A beginner&apos;s guide to the MVC, MVP, and MVVM architecture patterns: what they are, how they differ, and when to reach for each one.</description>
+      <pubDate>Sat, 28 Dec 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>My Hackfrost Journey: Navigating Development Challenges with Daytona</title>
+      <link>https://www.chiragaggarwal.tech/blog/my-hackfrost-journey-navigating-development-challenges-with-daytona</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/my-hackfrost-journey-navigating-development-challenges-with-daytona</guid>
+      <description>My journey through Hackfrost, the WeMakeDevs hackathon, and how Daytona&apos;s dev environments helped me navigate the development challenges.</description>
+      <pubDate>Thu, 05 Dec 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>My Hacktoberfest 2024 Experience with Cal Buddy, Your Smart Calendar Assistant</title>
+      <link>https://www.chiragaggarwal.tech/blog/my-hacktoberfest-2024-experience-with-cal-buddy-your-smart-calendar-assistant</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/my-hacktoberfest-2024-experience-with-cal-buddy-your-smart-calendar-assistant</guid>
+      <description>My Hacktoberfest 2024 experience building Cal Buddy, a smart calendar assistant, and what I learned as an open-source contributor.</description>
+      <pubDate>Fri, 01 Nov 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>How to Register Users in Django REST Framework?</title>
+      <link>https://www.chiragaggarwal.tech/blog/how-to-register-users-in-django-rest-framework</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/how-to-register-users-in-django-rest-framework</guid>
+      <description>A step-by-step guide to implementing user registration in Django REST Framework, one of the most common requirements when building web APIs.</description>
+      <pubDate>Tue, 01 Oct 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Neon T3 Starter Kit: Supercharging Web Development with Serverless Postgres</title>
+      <link>https://www.chiragaggarwal.tech/blog/neon-t3-starter-kit-supercharging-web-development-with-serverless-postgres</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/neon-t3-starter-kit-supercharging-web-development-with-serverless-postgres</guid>
+      <description>A tour of the Neon T3 Starter Kit: the open-source T3 stack paired with Neon&apos;s serverless Postgres for fast, modern full-stack development.</description>
+      <pubDate>Wed, 28 Aug 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Conditional Dependency Management Using Maven Profiles</title>
+      <link>https://www.chiragaggarwal.tech/blog/conditional-dependency-management-using-maven-profiles</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/conditional-dependency-management-using-maven-profiles</guid>
+      <description>Using Maven profiles to manage conditional dependencies so your Java builds pull exactly the right libraries for each environment.</description>
+      <pubDate>Tue, 06 Aug 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>From Kubernetes Chaos to Calm: A Cyclops Adventure</title>
+      <link>https://www.chiragaggarwal.tech/blog/from-kubernetes-chaos-to-calm-a-cyclops-adventure</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/from-kubernetes-chaos-to-calm-a-cyclops-adventure</guid>
+      <description>How Cyclops turns the chaos of managing Kubernetes clusters into a calm, UI-driven experience, with a hands-on walkthrough of the tool.</description>
+      <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Mastering npm: A Comprehensive Guide to Package Management</title>
+      <link>https://www.chiragaggarwal.tech/blog/mastering-npm-a-comprehensive-guide-to-package-management</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/mastering-npm-a-comprehensive-guide-to-package-management</guid>
+      <description>A comprehensive guide to npm for web developers: packages, scripts, semantic versioning, and the workflows that make Node&apos;s package manager click.</description>
+      <pubDate>Fri, 05 Jul 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>My Journey in Authorization with OPAL</title>
+      <link>https://www.chiragaggarwal.tech/blog/my-journey-in-authorization-with-opal</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/my-journey-in-authorization-with-opal</guid>
+      <description>A beginner-friendly walkthrough of authorization and how OPAL (Open Policy Administration Layer) manages real-time, fine-grained access control.</description>
+      <pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
