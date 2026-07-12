@@ -44,6 +44,9 @@ jspm_packages
 /.env.local
 .env.local
 
+# Cached Inter TTFs for OG image generation (downloaded on first `bun run og`)
+/scripts/fonts/*.ttf
+
 # Output
 /out
 out

@@ -28,7 +28,9 @@ export const Route = createFileRoute("/blog/$slug")({
         ? `Read ${post.title} by Chirag Aggarwal.`
         : "Read blog posts by Chirag Aggarwal.");
     const url = `${DATA.url}/blog/${post?.slug ?? ""}`;
-    const image = `${DATA.url}/preview.png`;
+    const image = post?.slug
+      ? `${DATA.url}/og/${post.slug}.png`
+      : `${DATA.url}/preview.png`;
 
     return {
       meta: [
@@ -38,8 +40,16 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:description", content: description },
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },
+        { property: "og:image", content: image },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+        {
+          property: "og:image:alt",
+          content: post ? post.title : title,
+        },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
+        { name: "twitter:image", content: image },
         ...(post
           ? [
               { property: "article:published_time", content: post.publishedAt },
