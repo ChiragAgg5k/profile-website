@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.chiragaggarwal.tech</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.chiragaggarwal.tech/blog</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -117,6 +117,12 @@
   <url>
     <loc>https://www.chiragaggarwal.tech/blog/managing-multiple-docker-hub-accounts-using-docker-use</loc>
     <lastmod>2026-05-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.chiragaggarwal.tech/blog/how-i-built-the-appwrite-mcp-server</loc>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -1,6 +1,9 @@
 import type { MDXComponents } from "mdx/types";
 import { ComponentProps } from "react";
+import { BlogFigure } from "./components/blog-figure";
 import CodeBlock from "./components/code-block";
+import { Mermaid } from "./components/mermaid-diagram";
+import { ToolSurfaceChart } from "./components/tool-surface-chart";
 import GitHub from "./components/ui/github";
 import YouTube from "./components/ui/youtube";
 
@@ -203,5 +206,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     li: ListItem,
     YouTube,
     GitHub,
+    Mermaid,
+    BlogFigure,
+    ToolSurfaceChart,
   };
 }

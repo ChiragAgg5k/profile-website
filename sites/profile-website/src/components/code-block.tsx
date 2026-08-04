@@ -39,7 +39,7 @@ const CodeBlock = (props: ComponentProps<"pre">) => {
       <Highlight theme={prismTheme} code={codeText} language={language}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
-            className={`${className} p-4 overflow-x-auto bg-background text-xs sm:text-sm md:text-base lg:text-base xl:text-base`}
+            className={`${className} py-4 overflow-x-auto bg-background text-xs sm:text-sm`}
             style={style}
           >
             {tokens
@@ -53,12 +53,19 @@ const CodeBlock = (props: ComponentProps<"pre">) => {
               )
               .map((line, i) => {
                 const lineProps = getLineProps({ line, key: i });
-                const { key: lineKey, ...restLineProps } = lineProps;
+                const {
+                  key: lineKey,
+                  className: lineClassName,
+                  ...restLineProps
+                } = lineProps;
                 return (
-                  <div key={i} {...restLineProps}>
-                    <span className="text-muted-foreground mr-4 inline-block w-6 text-right select-none">
-                      {i + 1}
-                    </span>
+                  // globals.css forces !px-0 on pre so long lines can scroll
+                  // edge to edge, so the horizontal padding lives on each line.
+                  <div
+                    key={i}
+                    className={`${lineClassName ?? ""} px-4`}
+                    {...restLineProps}
+                  >
                     {line.map((token, key) => {
                       const tokenProps = getTokenProps({ token, key });
                       const { key: tokenKey, ...restTokenProps } = tokenProps;

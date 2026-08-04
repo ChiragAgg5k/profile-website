@@ -1,0 +1,181 @@
+# How I built the Appwrite MCP server (and decided to hide most of its capabilities)
+
+When Anthropic introduced the Model Context Protocol on November 25, 2024, it got everyone's eyes on it, including Christy, who was Appwrite's Engineering Lead back then. I had just started my role as an "Engineering Intern" and had no idea what a whole new protocol meant, or why it was such a big deal.
+
+Looking at the surface, I wasn't entirely wrong. MCP is JSON-RPC with a schema and a handshake stapled on. What took us sixteen months was everything stapled around it.
+
+MCP launches"] --> B["Feb 2025stdio ships"]
+  B --> C["Mar 2025StreamableHTTP"]
+  C --> D["Apr 2026981 → 4tools"]
+  D --> E["Jun 2026hostedmerges"]
+  E --> F["Jul 2026shipped"]
+`}
+  caption="Streamable HTTP did not exist when MCP launched. It replaced HTTP+SSE in the 2025-03-26 revision."
+/>
+
+## The stdio years
+
+Christy had a working stdio server in the repo by February 26, 2025. We already had API keys, so the wiring was simple:
+
+```bash
+claude mcp add appwrite \
+  --env APPWRITE_PROJECT_ID= \
+  --env APPWRITE_API_KEY= \
+  --env APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1 \
+  -- uvx mcp-server-appwrite
+```
+
+An API key is scoped to exactly one project by design, so the ceiling was baked into the credential. Switching projects meant editing your editor config. Creating a project was impossible. So was anything at the organization level.
+
+The credential is the whole difference between the two transports, and everything hard about the hosted version follows from swapping it for a token that belongs to the user instead of the project.
+
+## Authorization ate the schedule
+
+By the spec, authorization is genuinely optional:
+
+> Authorization is OPTIONAL for MCP implementations. [...] Implementations using an HTTP-based transport SHOULD conform to this specification.
+
+For a service where one tool call can drop a database, we weren't comfortable treating it as optional. If you use Auth0 or WorkOS, this is a config screen. Appwrite keeps everything in-house, so Matej built the authorization server itself, and I built the resource server plus whatever Cloud was still missing before real clients would work.
+
+>M: POST / (no token)
+  M-->>C: 401 + WWW-Authenticate
+  C->>M: GET protected-resource metadata
+  M-->>C: authorization_servers (9728)
+  C->>A: POST /register (7591)
+  A-->>C: client_id
+  C->>A: /authorize + PKCE + resource (8707)
+  A-->>C: consent, then code
+  C->>A: /token + code_verifier
+  A-->>C: token, aud = mcp.appwrite.io
+  C->>M: POST / + Bearer
+  M->>M: verify JWKS, issuer, aud
+  M-->>C: tool result
+`}
+  caption="Steps 2 through 6 are the part that makes 'just paste this URL' work. Nothing is pre-provisioned."
+/>
+
+Three RFCs carry that flow. Protected Resource Metadata (RFC 9728) is the only real MUST in the whole authorization spec:
+
+```json
+{
+  "resource": "https://mcp.appwrite.io/",
+  "authorization_servers": ["https://cloud.appwrite.io/v1/oauth2/console"],
+  "scopes_supported": ["..."],
+  "bearer_methods_supported": ["header"]
+}
+```
+
+Resource Indicators (RFC 8707) put our canonical URI into the token's `aud`, so a token minted for another service can't be replayed against us. Dynamic Client Registration (RFC 7591) is what lets a client self-register. Add PKCE with `S256`, RFC 8414 discovery, and you have the shape of it.
+
+The RFCs are documented. What isn't documented is that every client reads them differently, and you find out in production:
+
+- **Raycast** was on the `2025-03-26` authorization spec, which looks for `/.well-known/oauth-authorization-server` instead of the protected-resource route. I only found it by putting a logging proxy in front of the server and watching what it actually asked for.
+- **Claude Code** re-authenticated every single run. It listens on an ephemeral loopback port, so the redirect URI never matched. OAuth's native-app BCP (RFC 8252 §7.3) says you must allow any port on `127.0.0.1`. We weren't.
+- **Our own scope catalog** broke the flow. All ~118 granular scopes produced a `scope` parameter of ~2,680 characters against a validator capped at 2,048. Nobody ever reached a consent screen.
+
+One warning if you're about to build this: RFC 7591 went from SHOULD to MAY in `2025-11-25` and is deprecated as of `2026-07-28`, replaced by Client ID Metadata Documents. We shipped that too. This part of the spec is still moving.
+
+## Sessions, and then no sessions
+
+The `2025-06-18` spec let a server hand out an `Mcp-Session-Id` alongside the `InitializeResult`, with `DELETE` to terminate and `Last-Event-ID` for resumability. We skipped all of it:
+
+```python
+StreamableHTTPSessionManager(app=server, json_response=False, stateless=True)
+```
+
+Every request carries a bearer token. Verify it, build a client from it, serve the call. Nothing to store, nothing to lose on restart, nothing to make sticky across replicas.
+
+That turned out to be the right bet for a reason I can take no credit for. The `2026-07-28` revision removed sessions from the protocol entirely. `Mcp-Session-Id`, the `initialize` handshake, the GET SSE stream: all gone. What we do carry is version negotiation, because you don't get to pick your clients' protocol version.
+
+## Off-topic, but why not REST?
+
+Many intellectuals like myself must have wondered why MCP exists at all. Can't this be 100x simpler with, I don't know, REST?
+
+The model only knows its training data plus whatever you hand it at runtime. If it has never seen Appwrite, it will never guess this:
+
+```http
+POST https://.cloud.appwrite.io/v1/tablesdb
+X-Appwrite-Project: 
+X-Appwrite-Key: 
+Content-Type: application/json
+
+{ "databaseId": "unique()", "name": "Production" }
+```
+
+The endpoint, the header names, the fact that `unique()` is a magic value. With MCP the same operation shows up self-describing:
+
+```json
+{
+  "name": "tables_db_create",
+  "description": "Create a database in an Appwrite project",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "databaseId": { "type": "string" },
+      "name": { "type": "string" }
+    },
+    "required": ["databaseId", "name"]
+  }
+}
+```
+
+You can be happy knowing AI needs a lot more handholding than you do (for now).
+
+## Tool choice
+
+Every MCP server I looked at ships a small, curated set. Appwrite generates one tool per SDK method, which lands at 981 methods across 38 services.
+
+There's no version of "expose them all" that works, for two unrelated reasons.
+
+**The clients won't take them.** In early 2025 Cursor documented that it "will only send the first 40 tools to the Agent" and truncated silently. Windsurf refused outright above 50.
+
+That was with per-service flags already in place, which is the part that stings. A community user opened [issue #17](https://github.com/appwrite/mcp/issues/17), "Please reduce the number of tools":
+
+> Cursor has 40 MCP tools limit to use, but Appwrite solely has 195 tools, so it cannot be used with other tools nor even all of Appwrite tools.
+
+I pointed out you could narrow it with `--databases`. The reply:
+
+> That's quite non-sense. Then do I have to edit MCP parameter settings for each time whenever I do another jobs...? And anyway, `--databases` solely has 42 tools, which already exceeds Cursor's recommended limit (40).
+
+**Quality falls off well below the caps.** The numbers converge from unrelated directions. Anthropic puts degradation at "once you exceed 30-50 available tools". OpenAI says "fewer than 20 functions at the start of a turn". Block's Goose recommends 50 or fewer. And the fix measures well: Anthropic's [advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use) work takes Opus 4 from 49% to 74% on MCP tool-use evals with a search tool enabled, and Opus 4.5 from 79.5% to 88.1%, with 85% fewer tokens on definitions. [RAG-MCP](https://arxiv.org/abs/2505.03275) more than triples selection accuracy (43.13% against 13.62%).
+
+The caveat, because it cuts against me: [MCPVerse](https://arxiv.org/abs/2508.16260) found some agentic models handle big action spaces fine. Claude-4-Sonnet scored 62.3 with an oracle tool set and 62.4 with ~220 tools. Big catalogs aren't fatal. They're a tax you're paying for nothing when the agent needs three tools out of 981.
+
+## Four tools over 981
+
+- `appwrite_get_context` answers where you are and which projects you can see
+- `appwrite_search_tools` searches the hidden catalog in natural language
+- `appwrite_call_tool` calls one of them by name
+- `appwrite_search_docs` searches the Appwrite docs semantically
+
+Search narrows at request time, which is why the per-service flags could be deleted entirely. Mutations require `confirm_write: true`, and results too large for the conversation become MCP resources instead.
+
+The scoring behind `appwrite_search_tools` is deliberately dumb: token and substring matching against the tool name, description, service and resource, a bonus when the query's inferred verb matches the tool's, a penalty when it doesn't. No embeddings, no index to rebuild, no inference call in the hot path.
+
+Here's what a client sees:
+
+What made me stop second-guessing the design is that we weren't alone. Stripe put its whole API behind `stripe_api_search`. Sentry exposes 9 of 46 through `search_sentry_tools`. GitHub removed its dynamic toolset tools and looks to be building a search replacement. Three companies with no reason to coordinate landed on search-then-execute in the same window.
+
+## Where it landed
+
+```bash
+claude mcp add --transport http appwrite https://mcp.appwrite.io/
+```
+
+No API key, no project ID, no config editing to switch projects. Projects and organizations are parameters on the call now instead of properties of the credential.
+
+stdio didn't go away. I removed it in the hosted refactor and put it back two days later, because self-hosted users need it. It runs on a project API key and gets 647 of the 981 methods, since a project key can't reach console-level operations anyway.
+
+Behind that URL there's also OpenTelemetry, Sentry, Grafana dashboards, and region routing so a project in another Cloud region doesn't return `general_access_forbidden`. You end up operating a service, not publishing a package. That's the part I underestimated most.
+
+## What I'd tell anyone building one
+
+The transport is not where the time goes. The authorization spec and everything it pulls in is where the months disappear.
+
+Test against real clients early and expect them to disagree. A logging proxy in front of your server was worth more to me than another pass through the docs.
+
+Assume the spec moves under you. Between starting and shipping, sessions were removed, RFC 7591 was deprecated, and a stateless revision landed. Anthropic donated MCP to the Agentic AI Foundation in December 2025, so it isn't even one vendor's project anymore.
+
+And don't hand your API surface over as your tool surface. The architecture this server has today came out of a bug report from a user who was annoyed with us, which I think is the correct way for this to have gone.
+
+The server is open source at [github.com/appwrite/mcp](https://github.com/appwrite/mcp), and the hosted one is at `https://mcp.appwrite.io/`.

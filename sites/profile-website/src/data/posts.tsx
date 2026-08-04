@@ -169,6 +169,14 @@ const basePosts: BlogPost[] = [
     description:
       "Managing multiple Docker Hub accounts cleanly with docker-use, so you can switch between accounts without the usual login juggling.",
   },
+  {
+    title:
+      "How I built the Appwrite MCP server (and decided to hide most of its capabilities)",
+    slug: "how-i-built-the-appwrite-mcp-server",
+    publishedAt: "2026-08-04",
+    description:
+      "Building Appwrite's hosted MCP server: the OAuth 2.1 RFCs it took, why we went stateless, and why the client only ever sees four tools out of 981.",
+  },
 ];
 
 export const posts = [...basePosts];
