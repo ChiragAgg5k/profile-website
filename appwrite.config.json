@@ -1,4 +1,5 @@
 {
+    "organizationId": "67610b8ee51f147ca943",
     "projectId": "chirag-project-prod",
     "projectName": "Main Project",
     "endpoint": "https://sgp.cloud.appwrite.io/v1",
