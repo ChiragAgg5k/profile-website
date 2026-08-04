@@ -59,7 +59,12 @@ const downloadFile = (url, dest) =>
     const file = fs.createWriteStream(dest);
     https
       .get(url, (res) => {
-        if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        if (
+          res.statusCode &&
+          res.statusCode >= 300 &&
+          res.statusCode < 400 &&
+          res.headers.location
+        ) {
           file.close();
           fs.unlinkSync(dest);
           downloadFile(res.headers.location, dest).then(resolve).catch(reject);
@@ -68,7 +73,9 @@ const downloadFile = (url, dest) =>
         if (res.statusCode !== 200) {
           file.close();
           fs.unlinkSync(dest);
-          reject(new Error(`Failed to download ${url}: HTTP ${res.statusCode}`));
+          reject(
+            new Error(`Failed to download ${url}: HTTP ${res.statusCode}`),
+          );
           return;
         }
         res.pipe(file);

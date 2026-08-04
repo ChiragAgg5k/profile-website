@@ -22,7 +22,9 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
               href={`/blog/${post.slug}`}
               className="group block rounded-lg border p-4 transition-colors hover:bg-muted/50"
             >
-              <h3 className="font-medium group-hover:underline">{post.title}</h3>
+              <h3 className="font-medium group-hover:underline">
+                {post.title}
+              </h3>
               {post.description ? (
                 <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
                   {post.description}

@@ -59,8 +59,7 @@ const generateRss = () => {
       .map((post) => {
         const link = `${siteUrl}/blog/${post.slug}`;
         const description =
-          post.description ||
-          `Read ${post.title} by Chirag Aggarwal.`;
+          post.description || `Read ${post.title} by Chirag Aggarwal.`;
 
         return `    <item>
       <title>${escapeXml(post.title)}</title>

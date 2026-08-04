@@ -15,7 +15,10 @@ export const Route = createFileRoute("/blog/$slug")({
       throw notFound();
     }
 
-    return { post: post as BlogRoutePost, relatedPosts: getRelatedPosts(post.slug) };
+    return {
+      post: post as BlogRoutePost,
+      relatedPosts: getRelatedPosts(post.slug),
+    };
   },
   head: ({ loaderData }) => {
     const post = loaderData?.post;
