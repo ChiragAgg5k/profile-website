@@ -1,7 +1,38 @@
 "use client";
 import { useTheme } from "next-themes";
-import { Highlight, themes, type Language } from "prism-react-renderer";
+import { Highlight, Prism, themes, type Language } from "prism-react-renderer";
 import { ComponentProps, useState, useEffect } from "react";
+
+// prism-react-renderer ships its own Prism with a fixed language set that
+// leaves out most of what this blog writes in — bash above all, then php.
+// Without a grammar a block renders as one flat token, so pull the missing
+// ones from prismjs. The components are scripts that attach to a global
+// `Prism`, hence the assignment before the imports, and php needs
+// markup-templating in place first.
+const aliases: Record<string, string> = {
+  sh: "bash",
+  shell: "bash",
+  env: "bash",
+  dockerfile: "docker",
+};
+
+let grammars: Promise<void> | null = null;
+
+const loadGrammars = (): Promise<void> => {
+  grammars ??= (async () => {
+    (globalThis as { Prism?: unknown }).Prism = Prism;
+    await import("prismjs/components/prism-markup-templating");
+    await Promise.all([
+      import("prismjs/components/prism-php"),
+      import("prismjs/components/prism-bash"),
+      import("prismjs/components/prism-java"),
+      import("prismjs/components/prism-http"),
+      import("prismjs/components/prism-docker"),
+    ]);
+  })();
+
+  return grammars;
+};
 
 const CodeBlock = (props: ComponentProps<"pre">) => {
   const [copied, setCopied] = useState(false);
@@ -9,13 +40,26 @@ const CodeBlock = (props: ComponentProps<"pre">) => {
   const { theme, resolvedTheme } = useTheme();
 
   useEffect(() => {
-    setMounted(true);
+    let cancelled = false;
+
+    // Highlight once the extra grammars are in, so a php block doesn't paint
+    // itself flat on first render and then restyle.
+    loadGrammars()
+      .catch(() => undefined)
+      .finally(() => {
+        if (!cancelled) setMounted(true);
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const codeElement = props.children as React.ReactElement;
   const codeText = codeElement?.props?.children || "";
-  const language = (codeElement?.props?.className?.replace(/language-/, "") ||
-    "typescript") as Language;
+  const declared =
+    codeElement?.props?.className?.replace(/language-/, "") || "typescript";
+  const language = (aliases[declared] ?? declared) as Language;
 
   // Choose theme based on current theme
   const prismTheme =

@@ -5,8 +5,15 @@
     <link>https://www.chiragaggarwal.tech/blog</link>
     <description>Articles on platform engineering, open source, and backend development by Chirag Aggarwal.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 04 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.chiragaggarwal.tech/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>How utopia-php/client keeps fixing our memory leaks</title>
+      <link>https://www.chiragaggarwal.tech/blog/how-utopia-php-client-keeps-fixing-our-memory-leaks</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/how-utopia-php-client-keeps-fixing-our-memory-leaks</guid>
+      <description>The same leak kept OOMKilling our PHP workers: an HTTP client per call. What utopia-php/client implements, and the four design rules that made it the standard fix.</description>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>How I built the Appwrite MCP server (and decided to hide most of its capabilities)</title>
       <link>https://www.chiragaggarwal.tech/blog/how-i-built-the-appwrite-mcp-server</link>

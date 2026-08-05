@@ -2452,7 +2452,11 @@ Now:
   "error.file": "/usr/src/code/src/Appwrite/Cloud/Platform/Workers/Deletes.php",
   "error.line": 214,
   "error.trace": [
-    { "file": "/usr/src/code/app/worker.php", "line": 828, "function": "action" }
+    {
+      "file": "/usr/src/code/app/worker.php",
+      "line": 828,
+      "function": "action"
+    }
   ]
 }
 ```
@@ -2731,6 +2735,275 @@ Assume the spec moves under you. Between starting and shipping, sessions were re
 And don't hand your API surface over as your tool surface. The architecture this server has today came out of a bug report from a user who was annoyed with us, which I think is the correct way for this to have gone.
 
 The server is open source at [github.com/appwrite/mcp](https://github.com/appwrite/mcp), and the hosted one is at `https://mcp.appwrite.io/`.
+
+---
+
+## How utopia-php/client keeps fixing our memory leaks
+
+**Slug:** how-utopia-php-client-keeps-fixing-our-memory-leaks
+
+One of our billing workers kept dying.
+
+It would sit flat for hours, then climb into its memory limit in about four minutes and get killed. Kubernetes restarted it, and later the same day it happened again. Six times a day, every day.
+
+The obvious first move is to look at what PHP is holding on to, and that's where it got strange. When PHP runs out of memory it tells you: a fatal error, a stack trace, the allocation that tipped it over. We had none of that. `memory_get_usage()` reported a flat 6 MB the entire time, right up to the moment the process vanished.
+
+Those two facts together are the whole puzzle. Something was eating memory, and it wasn't the PHP heap. It was cURL, two sockets at a time, and the cause turned out to be a missing keyword.
+
+We've chased this same shape in more than one Appwrite service now, and the fix has been the same every time: stop building a new HTTP client for every call, and move the library onto `utopia-php/client`.
+
+## What was actually leaking
+
+The worker idles at ~330 MB against a 512Mi limit, which is the flat stretch below. Once a day the newly-due invoice batch runs, about a thousand invoices with several Stripe calls each, and it goes from comfortable to dead in roughly four minutes.
+
+Luke traced it, and the code turned out to be completely unremarkable. `Pay\Adapter::call()` built a `new Utopia\Fetch\Client` for every request. In a one-shot FPM request that's fine; the process exits and the OS reclaims everything. In a long-lived worker it's a slow bleed, and the reason is a reference cycle that has nothing to do with the PHP heap.
+
+`curl_setopt` stores your write callback on the `CurlHandle`. A closure declared inside an instance method captures `$this`. So the handle holds the closure, the closure holds the adapter, and the adapter holds the handle. Nothing can be freed by refcounting, and `__destruct`, with its `curl_close`, only runs when PHP's cycle collector fires. By default that means after 10,000 cycle roots have piled up. Until then every request strands an open keep-alive connection.
+
+Reduced down, that's this:
+
+```php
+final class Curl
+{
+    private ?CurlHandle $handle = null;   // the adapter holds the handle
+
+    public function send(Request $request): Response
+    {
+        $body = '';
+
+        // Nothing in here mentions $this. Declaring a closure inside an
+        // instance method binds it anyway, and curl_setopt parks the
+        // closure on the handle: adapter -> handle -> closure -> adapter.
+        curl_setopt(
+            $this->handle,
+            CURLOPT_WRITEFUNCTION,
+            function ($ch, string $chunk) use (&$body): int {
+                $body .= $chunk;
+
+                return strlen($chunk);
+            },
+        );
+
+        // ...
+    }
+}
+```
+
+The fix is one keyword:
+
+```php
+static function ($ch, string $chunk) use (&$body): int {
+```
+
+A `static` closure gets no `$this`, so the last edge never forms and refcounting frees the handle as soon as the adapter goes out of scope. Neither callback used `$this` in the first place, which is what makes the change safe and also what makes it so easy to miss.
+
+Two file descriptors and roughly a megabyte of native TLS buffers per request, none of it visible to `memory_get_usage()`. Descriptors are capped per process too, so whichever ceiling you reach first decides how the thing dies: the kernel OOMKills you, or you start refusing connections with `Too many open files`. I've written that exact closure before, probably more than once, and it would never have occurred to me that `static` was load-bearing. Adding it to both callbacks in `utopia-php/fetch` took 150 sequential requests from 309 fds and 183 MB RSS to 9 fds and 31 MB, flat.
+
+We shipped that and moved on, which was the wrong instinct. It fixed the symptom in one library and left three others still hand-rolling their own transport, each free to reinvent the same bug.
+
+## What the library is
+
+`utopia-php/client` is a PSR-18 HTTP client for PHP 8.5. It's about 2,400 lines including both transports, and it doesn't try to be clever:
+
+Psr\\Http\\Client\\ClientInterface"] --> B["Utopia\\Clientbase URI · default headers · auth · traceparent"]
+  B --> C["Decorator — Retry, or your own"]
+  C --> D["Adapter"]
+  D --> E["cURL"]
+  D --> F["Swoole coroutine"]
+`}
+  caption="Every layer implements the same Adapter interface, so they stack in any order and a caller can replace any of them with a stub."
+/>
+
+`Utopia\Client` itself does almost nothing at request time. It resolves the URI against a base, fills in default headers, optionally stamps a `traceparent`, and hands the request to an adapter. Connection lifetime, TLS, timeouts and error classification all live in the adapter. Anything policy-shaped lives in a decorator.
+
+```php
+$client = new Client(new CurlAdapter())
+    ->withBaseUri('https://api.stripe.com/v1')
+    ->withBearerAuth($secret)
+    ->withConnectionReuse()
+    ->withTimeout(30);
+
+$response = $client->sendRequest(
+    new Request\Factory()->form(Method::POST, 'customers', ['email' => $email]),
+);
+```
+
+## Which specs it holds itself to
+
+Writing your own HTTP transport in five places means reading the specs badly in five places. Here's what the shared one is on the hook for.
+
+| Spec                          | What it decides                                                  |
+| ----------------------------- | ---------------------------------------------------------------- |
+| PSR-18                        | `4xx`/`5xx` are responses; the two-branch exception contract     |
+| PSR-7 / PSR-17                | Immutable messages and the factories that build them             |
+| RFC 9110                      | Idempotency, `Retry-After`, `Authorization`, content negotiation |
+| RFC 9112                      | HTTP/1.1 framing, chunked bodies, status-line parsing            |
+| RFC 9113                      | HTTP/2, which APNs requires and HTTP/1.1 can't satisfy           |
+| RFC 3986                      | Base-URI resolution and dot-segment removal                      |
+| RFC 6750 / 7617               | `Bearer` and `Basic` credential formats                          |
+| RFC 7578 / 2046 / 2183        | `multipart/form-data`, boundaries, `Content-Disposition`         |
+| RFC 1951 / 1952 / 7932 / 8878 | deflate, gzip, br, zstd content codings                          |
+| RFC 8446                      | TLS 1.3, and the floor you can pin below it                      |
+| W3C Trace Context             | `traceparent` propagation                                        |
+
+### PSR-18 decides what counts as an error
+
+The sentence that does the most work:
+
+> A Client MUST NOT treat a well-formed HTTP request or HTTP response as an error condition. For example, response status codes in the 400 and 500 range MUST NOT cause an exception and MUST be returned to the Calling Library as normal.
+
+A `429` is not a failure, it's an answer. So `sendRequest()` returns it, and only genuine "there is no response" conditions throw. PSR-18 splits those into two branches: `RequestExceptionInterface` for a malformed request or response, `NetworkExceptionInterface` for a transport that failed. The type answers one question, which is the only one you have at the catch site. Would trying again help?
+
+The library's own hierarchy keeps that property all the way down.
+
+```text
+ClientExceptionInterface
+├── NetworkExceptionInterface — retrying may help
+│   └── NetworkException
+│       ├── DnsException, TimeoutException, ProtocolException, ProxyException
+│       └── ConnectionException
+│           └── TlsException
+└── RequestExceptionInterface — retrying is pointless
+    └── RequestException
+        ├── InvalidUriException, InvalidResponseException
+        └── AdapterPreconditionException, AdapterInitializationException
+```
+
+Each adapter maps its native error codes into that tree. The cURL adapter matches on `CURLE_*` constants, guarded by `defined()` so a libcurl build without HTTP/3 doesn't fatal at load.
+
+Another line from the spec you can find in the code almost verbatim:
+
+> If a Client chooses to decompress the message body then it MUST also remove the `Content-Encoding` header and adjust the `Content-Length` header.
+
+Both adapters negotiate compression for you: the request advertises whatever codecs the transport can decode, and the response arrives as plaintext. Which means the `Content-Encoding: gzip` and `Content-Length` the server sent are now lies about the body you're holding, so the adapter drops both. Set your own `Accept-Encoding` and it gets out of the way entirely.
+
+### Retrying, and why only some requests get to
+
+`Retry` is a decorator, and its default `Backoff` strategy reads almost directly off RFC 9110. Only idempotent methods (§9.2.2) are retried, so a lost response can't turn into a double charge. Only transient outcomes are retried: a `NetworkExceptionInterface`, or a `429` / `502` / `503` / `504`. A numeric `Retry-After` (§10.2.3) beats the computed delay, because the server knows things the client doesn't.
+
+With no `Retry-After`, the wait is exponential with full jitter: a value drawn uniformly from `[0, ceiling)` rather than the ceiling itself.
+
+Our workers run as a fleet. A fleet that backs off deterministically comes back at a struggling upstream in lockstep and keeps it struggling.
+
+Every one of those decisions lives behind a single method, so a library with different rules writes its own:
+
+```php
+interface Strategy
+{
+    public function delay(
+        RequestInterface $request,
+        int $attempt,
+        ?ResponseInterface $response,
+        ?ClientExceptionInterface $error,
+    ): ?float;
+}
+```
+
+`utopia-php/storage` does exactly that. S3 signals throttling in an XML body as often as in a status code, so `S3\RetryStrategy` parses the body first and retries `SlowDown`, `ServiceUnavailable`, `Throttling` and `RequestThrottled`. It also refuses to retry a `503` whose body parses cleanly into some other error code, which is the case a status-code-only rule gets wrong.
+
+### `withBaseUri()` is not string concatenation
+
+It looks like a convenience until you send `../v2/users` and find out which one your client implements. This one does dot-segment removal, and only applies the base when the request URI is actually relative. An absolute URI passes through untouched.
+
+### Everything else is a header you'd otherwise hand-roll
+
+`withBasicAuth()` is RFC 7617's `base64(user:pass)`. `withBearerAuth()` is RFC 6750's `Bearer `. `Part::file()` builds an RFC 7578 part with its RFC 2183 `Content-Disposition`. `withMinTlsVersion(Tls::V1_2)` is an enum each adapter maps to `CURLOPT_SSLVERSION` or Swoole's `ssl_protocols`. `withTracePropagation()` forwards the active `utopia-php/span` trace as a `traceparent`, and refuses to overwrite one that's already on the request.
+
+None of these are hard. They're just wrong in slightly different ways in every library that rolls its own.
+
+## The four rules underneath
+
+### Reuse over recreate
+
+`withConnectionReuse()` keeps one connection alive per client and reuses it for every request to the same origin. `curl_reset()` clears per-request options while preserving the handle's connection cache; the Swoole adapter keeps a kept-alive coroutine client keyed by origin. It's opt-in, on the theory that a client built for one call shouldn't sit on a socket. Any long-lived service wants it on.
+
+For Pay, that one change was the entire fix. Four hundred requests against a local echo server, before and after:
+
+|                   | fds      | RSS        |
+| ----------------- | -------- | ---------- |
+| client per call   | **+800** | **+21 MB** |
+| reused connection | **+0**   | **+48 kB** |
+
+When you need concurrency rather than sequence, `Client\Pool` borrows a client from a `utopia-php/pools` pool per request and reclaims it afterwards, so N coroutines share a bounded set of connections instead of opening N of their own.
+
+### Every `with*()` returns a clone
+
+In Swoole that's not a style preference. A shared client you can mutate is a cross-request bleed waiting to happen, and cloning means there's no way to reconfigure someone else's client from inside a request handler.
+
+A default is also only ever a default. `withHeaders()` fills in a header the request doesn't already carry and nothing more, so a per-request `Content-Type` beats the client-wide one.
+
+### Policy lives in decorators
+
+`Retry` implements the same `Adapter` interface it wraps, forwards every configuration helper inward, and overrides only `sendRequest()` and `stream()`. So retries, pooling and whatever you add stack in any order, and none of them turn into constructor flags on the transport.
+
+The `stream()` override is my favorite detail in the library. It counts bytes handed to the sink, and once a single byte has been delivered it stops retrying, because replaying would duplicate data the caller already processed.
+
+### Bounded memory by default
+
+`stream()` hands each chunk to a sink as it arrives, so SSE and LLM token streams cost the same memory as a ping. Uploads go the same way: cURL pulls the body through a read callback, `Part::file()` reads lazily, and Swoole sends files with zero-copy `sendfile()`. A seekable body gets rewound before each attempt, which is what makes a streamed upload safe to retry at all.
+
+## Where it ended up
+
+| Package                | Before                        | Now                                                         |
+| ---------------------- | ----------------------------- | ----------------------------------------------------------- |
+| `utopia-php/pay`       | `new Fetch\Client` per call   | one injected client, `Adapter::call()` deleted              |
+| `utopia-php/messaging` | raw `curl_*` and `curl_multi` | PSR-18, plus a Swoole pool for batched FCM/APNs             |
+| `utopia-php/storage`   | ad-hoc HTTP in the S3 devices | default client with a stall watchdog and `S3\RetryStrategy` |
+| `utopia-php/fastly`    | —                             | built on it from day one                                    |
+| `appwrite/appwrite`    | per-service HTTP wiring       | `jobs` and `screenshots` clients in the DI container        |
+
+The Pay migration was net **-55 lines**. `Adapter::call()`, `handleError()`, and nine `METHOD_*` constants went with it — seven of the nine had no caller. A PSR-18 client and a PSR-17 factory already mean "build a request, send it"; the indirection was only ever a second vocabulary for HTTP.
+
+Messaging is the one worth reading if you're doing this yourself. It kept every adapter's public API identical while swapping `curl_multi` for Swoole coroutines over a bounded pool, and added a `Closure(): ClientInterface` factory so a caller can inject retries, a proxy, or a stub. The one constraint it documents loudly: your factory must produce a client that can negotiate HTTP/2, because APNs rejects HTTP/1.1 outright.
+
+## What we grep for now
+
+- Climbing RSS with a flat PHP heap. Count fds, not `memory_get_usage()`. `ls /proc//fd | wc -l` in a loop finds this in five minutes.
+- `new Client()` or `curl_init` inside a request path. In a long-lived process a client is a resource with a lifetime, not a local variable.
+- Non-static closures handed to `curl_setopt`. If it doesn't touch `$this`, make it `static`. Costs nothing, and it's the whole bug.
+- Any utopia library still carrying its own private HTTP stack. That's the rest of the work list.
+
+Repo: [utopia-php/client](https://github.com/utopia-php/client), though development happens in the [monorepo](https://github.com/utopia-php/monorepo/tree/main/packages/client). [@lukebsilver](https://twitter.com/lukebsilver) wrote it and did the Pay migration. I did messaging, which is how I ended up with opinions about APNs.
+
+fetch(...) per Stripe API call, with a paste showing rss=63212kB fds=7 at start and rss=64696kB fds=47 at i=40, exactly +1 fd per fetch, RSS monotonic, PHP heap flat at 6.0MB throughout. Solution is to migrate to utopia-php/client. Reply: the astronaut meme, wait, solution is migrate to utopia-php/client? always has been."
+  caption="Internal consensus, after the third identical incident. The paste is the diagnostic: fds climb one per call, RSS follows, the PHP heap never moves."
+/>
+
+## Reference
+
+| Term                 | What it means here                                                                                                                                             |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| file descriptor (fd) | The integer the kernel gives a process to refer to something it has open. Every live socket holds at least one, and each process has a cap (`ulimit -n`).      |
+| RSS                  | Resident set size: the physical memory a process actually occupies, native allocations included. This is what the kernel measures when it decides to kill you. |
+| OOMKilled            | The kernel terminating a process for exceeding its memory limit. It happens outside PHP, so there's no fatal error and nothing in the logs.                    |
+| PHP heap             | The pool the Zend allocator manages, which is what `memory_get_usage()` reports and `memory_limit` caps. cURL and OpenSSL allocate outside it.                 |
+| reference cycle      | Objects holding each other so no refcount ever reaches zero. Only PHP's cycle collector can free them, and it runs on its own schedule.                        |
+| idempotent method    | A request that can be sent more than once without changing the outcome. `GET`, `HEAD`, `PUT`, `DELETE`, `OPTIONS`, `TRACE` qualify; `POST` doesn't.            |
+| full jitter          | Backoff where the wait is drawn uniformly from `[0, ceiling)` instead of being the ceiling, so a fleet retrying together spreads out.                          |
+| coroutine            | Swoole's userland concurrency. One worker process interleaves many in-flight requests, which is why connection lifetime matters so much.                       |
+| sink                 | The callback `stream()` hands each response chunk to as it arrives, instead of buffering the whole body.                                                       |
+| APNs / FCM           | Apple and Google's push notification services. APNs is the one that rejects HTTP/1.1.                                                                          |
+
+### The specs
+
+- HTTP semantics in [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110), message framing in [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112), HTTP/2 in [RFC 9113](https://www.rfc-editor.org/rfc/rfc9113), and `429` in [RFC 6585](https://www.rfc-editor.org/rfc/rfc6585)
+- PHP-FIG: [PSR-18](https://www.php-fig.org/psr/psr-18/) for clients, [PSR-7](https://www.php-fig.org/psr/psr-7/) for messages, [PSR-17](https://www.php-fig.org/psr/psr-17/) for factories
+- URIs in [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986); credentials in [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750) and [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617)
+- Multipart in [RFC 7578](https://www.rfc-editor.org/rfc/rfc7578), building on [RFC 2046](https://www.rfc-editor.org/rfc/rfc2046) and [RFC 2183](https://www.rfc-editor.org/rfc/rfc2183)
+- Content codings: [deflate](https://www.rfc-editor.org/rfc/rfc1951), [gzip](https://www.rfc-editor.org/rfc/rfc1952), [br](https://www.rfc-editor.org/rfc/rfc7932), [zstd](https://www.rfc-editor.org/rfc/rfc8878)
+- [TLS 1.3](https://www.rfc-editor.org/rfc/rfc8446) and [W3C Trace Context](https://www.w3.org/TR/trace-context/)
+
+### The code
+
+- [utopia-php/client](https://github.com/utopia-php/client), developed in [the monorepo package](https://github.com/utopia-php/monorepo/tree/main/packages/client), on top of [utopia-php/psr7](https://github.com/utopia-php/psr7) and [utopia-php/pools](https://github.com/utopia-php/pools)
+- [fetch#22](https://github.com/utopia-php/fetch/issues/22) — the reference cycle, with the fd and RSS measurements
+- [pay#32](https://github.com/utopia-php/pay/pull/32) — the migration that fixed the OOMKills, and the before/after numbers
+- [messaging#137](https://github.com/utopia-php/messaging/pull/137) — `curl_multi` swapped for Swoole coroutines over a pool
+
+### Background
+
+- AWS, [Exponential Backoff and Jitter](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/), which is where the full-jitter formula comes from
+- PHP manual, [Collecting Cycles](https://www.php.net/manual/en/features.gc.collecting-cycles.php), on when the collector actually runs
 
 ---
 

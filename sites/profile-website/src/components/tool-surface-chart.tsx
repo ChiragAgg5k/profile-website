@@ -12,7 +12,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Caption } from "@/components/mermaid-diagram";
+import { Caption, Mono } from "@/components/mermaid-diagram";
 
 // "exposed" is what the model sees in tools/list. "catalog" is how many
 // operations sit behind that surface, where the two differ.
@@ -67,7 +67,7 @@ export const ToolSurfaceChart = () => {
   return (
     <figure className="my-10">
       <p className="mb-4 text-sm font-medium text-black dark:text-gray-200">
-        Tools the model actually sees in <code>tools/list</code>
+        Tools the model actually sees in <Mono>tools/list</Mono>
       </p>
 
       <div className="h-[260px] w-full" aria-hidden="true">

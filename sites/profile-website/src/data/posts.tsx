@@ -177,6 +177,13 @@ const basePosts: BlogPost[] = [
     description:
       "Building Appwrite's hosted MCP server: the OAuth 2.1 RFCs it took, why we went stateless, and why the client only ever sees four tools out of 981.",
   },
+  {
+    title: "How utopia-php/client keeps fixing our memory leaks",
+    slug: "how-utopia-php-client-keeps-fixing-our-memory-leaks",
+    publishedAt: "2026-08-05",
+    description:
+      "The same leak kept OOMKilling our PHP workers: an HTTP client per call. What utopia-php/client implements, and the four design rules that made it the standard fix.",
+  },
 ];
 
 export const posts = [...basePosts];

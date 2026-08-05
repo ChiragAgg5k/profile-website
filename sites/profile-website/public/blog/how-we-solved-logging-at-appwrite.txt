@@ -136,7 +136,11 @@ Now:
   "error.file": "/usr/src/code/src/Appwrite/Cloud/Platform/Workers/Deletes.php",
   "error.line": 214,
   "error.trace": [
-    { "file": "/usr/src/code/app/worker.php", "line": 828, "function": "action" }
+    {
+      "file": "/usr/src/code/app/worker.php",
+      "line": 828,
+      "function": "action"
+    }
   ]
 }
 ```

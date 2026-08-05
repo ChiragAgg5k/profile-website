@@ -169,3 +169,12 @@ export const Caption = ({ children }: { children: React.ReactNode }) => (
     {children}
   </figcaption>
 );
+
+// Figure text is authored in JSX, so it never passes through the MDX `code`
+// mapping. Without this a bare <code> falls back to the UA default and renders
+// larger than the small text around it.
+export const Mono = ({ children }: { children: React.ReactNode }) => (
+  <code className="rounded bg-gray-100 px-1 py-px text-[0.9em] text-black dark:bg-neutral-800 dark:text-gray-200">
+    {children}
+  </code>
+);

@@ -1,8 +1,11 @@
 import type { MDXComponents } from "mdx/types";
 import { ComponentProps } from "react";
+import { BackoffJitter } from "./components/backoff-jitter";
 import { BlogFigure } from "./components/blog-figure";
 import CodeBlock from "./components/code-block";
+import { ConnectionReuse } from "./components/connection-reuse";
 import { Mermaid } from "./components/mermaid-diagram";
+import { ReferenceCycle } from "./components/reference-cycle";
 import { ToolSurfaceChart } from "./components/tool-surface-chart";
 import GitHub from "./components/ui/github";
 import YouTube from "./components/ui/youtube";
@@ -107,14 +110,14 @@ const Pre = (props: ComponentProps<"pre">) => {
 
 const Code = (props: ComponentProps<"code">) => (
   <code
-    className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-xs sm:text-sm"
+    className="rounded bg-gray-100 px-1 py-0.5 text-[0.85em] text-black dark:bg-neutral-800 dark:text-gray-200"
     {...props}
   />
 );
 
 const InlineCode = (props: ComponentProps<"code">) => (
   <code
-    className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-xs sm:text-sm"
+    className="rounded bg-gray-100 px-1 py-0.5 text-[0.85em] text-black dark:bg-neutral-800 dark:text-gray-200"
     {...props}
   />
 );
@@ -135,22 +138,29 @@ const Blockquote = (props: ComponentProps<"blockquote">) => (
 
 const Hr = () => <hr className="my-8 border-gray-200" />;
 
+// Rules only, no grid: vertical borders on a near-black surface read as a cage,
+// and a package name shouldn't wrap mid-token just because a cell is narrow.
+// Width is content-driven, with a phone-sized floor so prose columns scroll
+// rather than collapse to three words a line.
 const Table = (props: ComponentProps<"table">) => (
-  <div className="overflow-x-auto my-6">
-    <table className="w-full border-collapse" {...props} />
+  <div className="my-8 overflow-x-auto">
+    <table
+      className="border-collapse text-left max-sm:min-w-[34rem] [&_code]:whitespace-nowrap [&_tbody_tr:hover]:bg-gray-50 [&_tbody_tr:last-child_td]:border-0 [&_tbody_tr]:transition-colors dark:[&_tbody_tr:hover]:bg-neutral-900/60"
+      {...props}
+    />
   </div>
 );
 
 const Th = (props: ComponentProps<"th">) => (
   <th
-    className="border border-gray-300 px-4 py-2 text-left font-bold text-sm sm:text-base"
+    className="border-b border-gray-300 pb-2 pr-6 align-bottom text-xs font-semibold uppercase tracking-wider text-gray-500 last:pr-0 dark:border-neutral-700 dark:text-gray-400"
     {...props}
   />
 );
 
 const Td = (props: ComponentProps<"td">) => (
   <td
-    className="border border-gray-300 px-4 py-2 text-sm sm:text-base"
+    className="border-b border-gray-200 py-3 pr-6 align-top text-sm leading-6 text-black last:pr-0 dark:border-neutral-800 dark:text-gray-300"
     {...props}
   />
 );
@@ -209,5 +219,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Mermaid,
     BlogFigure,
     ToolSurfaceChart,
+    ReferenceCycle,
+    ConnectionReuse,
+    BackoffJitter,
   };
 }
