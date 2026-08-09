@@ -1,5 +1,6 @@
 import ContactMeForm from "@/components/contact-me-form";
 import { HackathonCard } from "@/components/hackathon-card";
+import { HandwrittenNote } from "@/components/handwritten-note";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { ProjectCard } from "@/components/project-card";
@@ -72,7 +73,16 @@ function HomePage() {
     <TracingBeam className="px-6">
       <main className="flex items-center justify-center flex-col min-h-[100dvh] space-y-10">
         <section id="hero">
-          <div className="mx-auto w-full max-w-2xl space-y-8">
+          <div className="relative mx-auto w-full max-w-2xl space-y-8">
+            <HandwrittenNote
+              orientation="horizontal"
+              direction="left"
+              arrowPlacement="start"
+              className="absolute -right-32 top-14 hidden xl:flex"
+              arrowClassName="size-9"
+            >
+              that&apos;s me
+            </HandwrittenNote>
             <div className="gap-2 flex justify-between">
               <div className="flex-col flex flex-1 space-y-1.5">
                 <h1>
@@ -106,7 +116,15 @@ function HomePage() {
             <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
               {DATA.summary}
             </Markdown>
-            <div className="flex items-center justify-end mt-4">
+            <div className="flex items-center justify-end gap-2 mt-4">
+              <HandwrittenNote
+                orientation="horizontal"
+                direction="right"
+                className="hidden sm:flex"
+                arrowClassName="size-9"
+              >
+                maybe up to date
+              </HandwrittenNote>
               <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
                 <Button size="sm" variant="outline">
                   Download Resume
@@ -205,7 +223,18 @@ function HomePage() {
         <section id="skills">
           <div className="flex min-h-0 flex-col gap-y-3">
             <BlurFade delay={BLUR_FADE_DELAY * 9}>
-              <h2 className="text-xl font-bold">Skills</h2>
+              <div className="flex items-end justify-between gap-4">
+                <h2 className="text-xl font-bold">Skills</h2>
+                <HandwrittenNote
+                  orientation="horizontal"
+                  direction="down-right"
+                  arrowPlacement="end"
+                  className="hidden lg:flex -mb-1"
+                  arrowClassName="size-9"
+                >
+                  hover the Appwrite one
+                </HandwrittenNote>
+              </div>
             </BlurFade>
             <div className="flex flex-wrap gap-1 items-center justify-center">
               {DATA.skills.map((skill, id) => (

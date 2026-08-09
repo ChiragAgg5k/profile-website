@@ -1,7 +1,7 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon, Play } from "lucide-react";
+import { HomeIcon, NotebookIcon } from "lucide-react";
 import { DiPostgresql } from "react-icons/di";
-import { FaDocker, FaNodeJs, FaPython } from "react-icons/fa";
+import { FaDocker, FaNodeJs, FaPhp, FaPython } from "react-icons/fa";
 import { SiAppwrite, SiKubernetes } from "react-icons/si";
 
 export const DATA = {
@@ -23,8 +23,8 @@ export const DATA = {
   avatarUrl: "/me.webp",
   skills: [
     {
-      name: "Next.js",
-      icon: <Icons.nextjs className="size-3" />,
+      name: "PHP",
+      icon: <FaPhp className="size-3" />,
     },
     {
       name: "Typescript",
@@ -105,18 +105,24 @@ export const DATA = {
       start: "December 2024",
       end: "Present",
       description: [
-        "- Joined Appwrite as a **full-time** Platform Engineer in June, 2025.",
+        "- Build and run **Appwrite Cloud** — PHP/Swoole services on Kubernetes, plus the edge.",
+        "- Rewrote the **Appwrite CLI in Go**, and maintain the SDKs for **11+ languages**.",
+        "- Built Appwrite's hosted **MCP server** — OAuth 2.1, four tools over 981 endpoints.",
+        "- Took **observability and synthetic monitoring** in-house on Grafana and OpenTelemetry.",
+        "- **2,000+ merged PRs** across Appwrite's open-source and internal repos.",
         "---",
-        "- Started working with Appwrite as an **Engineering Intern**.",
-        "- Took ownership of the project **Synapse**, an SDK for remote serverless operating systems.",
-        "- Worked on over **200+ PRs** in the OSS repo, along with many other in private repos.",
-        "- Worked on Major features like Figma OAuth, Image Transformations, Types generation in CLI etc.",
+        "- Started as an **intern** in Dec 2024, full-time since June 2025.",
       ],
       links: [
         {
           type: "Website",
           href: "https://appwrite.io/",
           icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "GitHub",
+          href: "https://github.com/appwrite/appwrite",
+          icon: <Icons.github className="size-3" />,
         },
       ],
     },
@@ -247,11 +253,6 @@ export const DATA = {
       technologies: ["Java", "XML", "Firebase", "Android Studio"],
       links: [
         {
-          type: "Play Store",
-          href: "https://play.google.com/store/apps/details?id=com.chiragagg5k.bu_news_android",
-          icon: <Play className="size-3" />,
-        },
-        {
           type: "Source",
           href: "https://github.com/ChiragAgg5k/bu-news-android",
           icon: <Icons.github className="size-3" />,
@@ -348,6 +349,12 @@ export const DATA = {
     },
   ],
   achievements: [
+    {
+      title: "Meetup at The Big Chill Cakery",
+      dates: "August 2026",
+      location: "Delhi NCR",
+      image: "/achievements/big-chill-meetup.jpeg",
+    },
     {
       title: "Summer Immersion in Vietnam",
       dates: "July 2024",

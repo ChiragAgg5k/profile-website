@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Caveat:wght@400..700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -7,6 +7,7 @@
 @layer base {
   :root {
     --font-sans: "Inter";
+    --font-handwriting: "Caveat";
     --background: 0 0% 100%;
     --foreground: 210 11.1% 3.53%;
 
