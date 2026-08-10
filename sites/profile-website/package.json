@@ -13,7 +13,8 @@
     "llms-full-txt": "node scripts/generate-llms-full-txt.cjs",
     "sitemap": "node scripts/generate-sitemap.cjs",
     "rss": "node scripts/generate-rss.cjs",
-    "og": "node scripts/generate-og-images.cjs"
+    "og": "node scripts/generate-og-images.cjs",
+    "share-card": "node scripts/generate-share-card.cjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
