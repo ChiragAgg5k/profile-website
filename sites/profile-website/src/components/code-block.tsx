@@ -9,7 +9,7 @@ import { ComponentProps, useState, useEffect } from "react";
 // ones from prismjs. The components are scripts that attach to a global
 // `Prism`, hence the assignment before the imports, and php needs
 // markup-templating in place first.
-const aliases: Record<string, string> = {
+export const aliases: Record<string, string> = {
   sh: "bash",
   shell: "bash",
   env: "bash",
@@ -18,7 +18,7 @@ const aliases: Record<string, string> = {
 
 let grammars: Promise<void> | null = null;
 
-const loadGrammars = (): Promise<void> => {
+export const loadGrammars = (): Promise<void> => {
   grammars ??= (async () => {
     (globalThis as { Prism?: unknown }).Prism = Prism;
     await import("prismjs/components/prism-markup-templating");

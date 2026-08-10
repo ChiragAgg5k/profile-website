@@ -1,0 +1,148 @@
+import { BlogTitle } from "@/components/blog-title";
+
+<BlogTitle slug="mcp-2-0-the-release-that-deleted-the-handshake" />
+
+MCP versions are dates. `2024-11-05`, `2025-03-26`, `2025-06-18`, `2025-11-25`, and since two weeks ago, `2026-07-28`. From the outside they all look like the same kind of event.
+
+The last one isn't. The working group called the release candidate "the largest revision of the protocol since launch," which usually means a long changelog. Here it means the connection model is gone. No `initialize`. No session id. No held-open stream. If you'd asked me a year ago to describe MCP in one sentence, that sentence would be wrong now.
+
+Nothing you have deployed today stops working, which is exactly why it's easy to skim past.
+
+## The handshake era
+
+Every MCP revision up to and including `2025-11-25` opened the same way. The client sends `initialize` with its protocol version, its capabilities and its `clientInfo`. The server answers with the version it picked, its own capabilities and its `serverInfo`. The client sends `notifications/initialized`. Only then is the connection allowed to carry anything useful.
+
+That exchange establishes a session, and everything after it is defined relative to that session. Over Streamable HTTP the server could mint an `Mcp-Session-Id`, which the client then echoed on every request; `DELETE` ended it, `Last-Event-ID` resumed a dropped SSE stream.
+
+The design makes complete sense if you remember where MCP started. In November 2024 it was a thing you ran as a subprocess of your editor over stdio. One client, one server, one pipe, and the pipe's lifetime _is_ the session. Negotiating capabilities once at the start costs nothing when there is exactly one of everything.
+
+Streamable HTTP arrived in `2025-03-26` and carried that model onto the network, where "the connection has a memory" stops being free.
+
+<SessionAffinity />
+
+So you pick one: sticky routing, or a shared session store. Same problem, different bill. Every deploy drops live sessions. A crashed replica takes conversations with it. And since the session id tells a gateway nothing about what the request wants, the gateway has to open the JSON body to find out whether it's metering a `tools/list` or a database drop.
+
+<Mermaid
+  chart={`
+flowchart LR
+  A["2024-11-05<br/>stdio, one<br/>subprocess"] --> B["2025-03-26<br/>Streamable HTTP<br/>+ OAuth"]
+  B --> C["2025-06-18<br/>elicitation,<br/>structured output"]
+  C --> D["2025-11-25<br/>tasks, icons,<br/>CIMD"]
+  D --> E["2026-07-28<br/>no session,<br/>no handshake"]
+`}
+  caption="Four revisions of adding things to a connection, then one that removed the connection."
+/>
+
+## What 2026-07-28 actually does
+
+**The handshake is gone.** No `initialize`, no `initialized`, no `Mcp-Session-Id`. Everything that used to be negotiated once now travels on every request, in `_meta`. The same tool call, before and after:
+
+<HandshakeWire />
+
+The second one is cold. That client has never spoken to this server, nothing was set up first, and nothing is kept afterward. The three new headers are there so a gateway can route and meter it without opening the body.
+
+Version negotiation stopped being a phase and became a field. The server accepts or rejects each request on its own, and if it can't speak the version it answers `UnsupportedProtocolVersionError` listing the versions it can, so the client retries. There's a `server/discover` method that returns supported versions and capabilities in one call, which servers **MUST** implement and clients don't have to call. Discovery is a convenience now, not a precondition.
+
+**Server-to-client calls stopped needing an open pipe.** That was the load-bearing dependency on sessions. A tool that needs to ask the user something used to do it over a stream held open for the length of the call, which pins the call to one process.
+
+<RoundTrip />
+
+Under SEP-2322 the server returns an `InputRequiredResult` and hangs up. The client answers later with `inputResponses` and the `requestState` it was handed, and any instance can take it from there. SEP-2260 tightens things further: a server may only start a request while it's actively processing one from the client. Between them they replace `elicitation/create` and `sampling/createMessage`.
+
+State moved into the open. The spec is blunt about where it went:
+
+> Servers that need to carry state across calls can do what HTTP APIs have always done: mint an explicit handle (a `basket_id`, a `browser_id`) from a tool and have the model pass it back as an ordinary argument on later calls.
+
+The spec's own phrasing is that this "makes the state visible to the model rather than hidden away." A session was state the model never saw and could not recover once it was gone.
+
+**Infrastructure can read the traffic without parsing it.**
+
+| SEP  | What it adds                                        | What it buys                                                        |
+| ---- | --------------------------------------------------- | ------------------------------------------------------------------- |
+| 2243 | `Mcp-Method` and `Mcp-Name` request headers         | Routing, metering and WAF rules with no body inspection             |
+| 2549 | `ttlMs` and `cacheScope` on list and read           | Clients know how long a tool list is good for, and who may share it |
+| 414  | `traceparent` / `tracestate` / `baggage` in `_meta` | One trace across client, gateway and server, into any OTel backend  |
+
+A server rejects any request where the headers and the body disagree, which is what makes the headers safe to trust for anything that never looks inside.
+
+## Why this is 2.0 and not 1.4
+
+The protocol changes are the part you notice. The governance changes are the part that decides whether any of it survives the next revision, and there are three.
+
+Extensions became first class. They get reverse-DNS identifiers, negotiate through an `extensions` map, version independently of the spec, and live in their own `ext-*` repositories with their own maintainers. Tasks graduated out of the core and into `io.modelcontextprotocol/tasks`. MCP Apps, which is server-rendered HTML in a sandboxed iframe talking back over the same JSON-RPC, ships as one too. The core stays small and the interesting parts move at their own speed.
+
+Features now have a lifecycle: Active, Deprecated, Removed, with a documented migration path and twelve months minimum before anything deprecated is eligible for removal. Three features entered it immediately.
+
+| Deprecated | Use instead                                              |
+| ---------- | -------------------------------------------------------- |
+| Roots      | Tool parameters, resource URIs, or server configuration  |
+| Sampling   | Your LLM provider's API, directly                        |
+| Logging    | `stderr` on stdio, OpenTelemetry for anything structured |
+
+All three still work. That's the point of writing the policy down.
+
+Conformance became a gate. A Standards Track SEP can't reach Final until matching scenarios land in the conformance suite, and official SDKs are scored against that suite under a tier system. All four Tier 1 SDKs (TypeScript, Python, Go, C#) shipped `2026-07-28` support the day the spec did, with Rust in beta.
+
+The remaining breaking changes are small but worth knowing. Tool schemas moved to full JSON Schema 2020-12, so `oneOf`, `$ref` and conditionals are legal now, and the spec says out loud that you must not auto-dereference external `$ref` URIs. `structuredContent` takes any JSON value instead of only objects. The missing-resource error went from MCP's custom `-32002` to the standard `-32602`, which breaks anyone matching on that literal. Every `2025-11-25` Tasks implementation needs migrating.
+
+## We had already bet on this
+
+I spent sixteen months building [Appwrite's MCP server](https://github.com/appwrite/mcp), and [most of that time went to authorization](/blog/how-i-built-the-appwrite-mcp-server). When I got to the transport, the hosted server went out with one flag set:
+
+```python
+StreamableHTTPSessionManager(app=server, json_response=False, stateless=True)
+```
+
+No sessions. Every request carries a bearer token; verify it, build a client from it, serve the call, forget everything. I'd love to claim foresight here. The real reason is duller: OAuth had already made session state pointless, because the token identifies the user on every request, and I didn't want to run a Redis to hold something I had no use for.
+
+The spec shipped on July 28. We merged `2026-07-28` support on July 29, in [PR #89](https://github.com/appwrite/mcp/pull/89), by moving from MCP Python SDK v1.28 to v2.0.0. The HTTP and OAuth surface didn't move at all. What made it a day rather than a quarter is that v2's session manager routes on the protocol version header, so one deployment serves both eras:
+
+```python
+def _is_modern_request(scope: Scope) -> bool:
+    """Match the SDK's era-routing predicate: a present ``MCP-Protocol-Version``
+    that is not a handshake-era revision goes to the modern path."""
+    version = _header(scope, b"mcp-protocol-version")
+    return version is not None and version not in HANDSHAKE_PROTOCOL_VERSIONS
+```
+
+Handshake versions, `2024-11-05` through `2025-11-25`, take the legacy path. Anything else takes the per-request one. Nobody's client broke.
+
+Three things did cost real work:
+
+- **Tool errors.** v1 wrapped a raised exception into `CallToolResult(isError=true)`. v2 turns an uncaught exception into a sanitized `-32603`, so the model never learns why the call failed. Our `confirm_write` refusals are only worth anything if the model can read them, so every handler now returns `is_error=True` explicitly.
+- **CORS.** `Mcp-Method` and `Mcp-Name` ride on every modern request. If your allow-list doesn't name them, browser-based clients fail before they ever reach your auth code.
+- **Metrics.** Modern clients never send `initialize`, so our handshake counter would have quietly flatlined exactly as clients migrated, which is the worst possible time to lose a graph. It's keyed off activity windows now, so the timeseries stays comparable through the transition.
+
+None of that is protocol work. It's the ordinary cost of a dependency changing shape under you, and it only took a day because a decision made eighteen months earlier, for completely unrelated reasons, happened to line up.
+
+## The good kind of boring
+
+A `2026-07-28` MCP server takes an HTTP request, reads some headers, and returns a response. That's the whole shape of it. You can put it behind a CDN, cache its list endpoints, and restart it in the middle of someone's conversation without telling anyone.
+
+It's a less interesting protocol than the one that launched in 2024. I think that's the point. The bidirectional stateful version was more fun to read about and considerably worse to operate, and operating it is what most of us actually do.
+
+## Reference
+
+| Term              | What it means here                                                                                                                   |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| handshake era     | Every MCP revision through `2025-11-25`, where a connection began with `initialize` and carried a session from then on.              |
+| `Mcp-Session-Id`  | The header that identified that session. Removed in `2026-07-28`.                                                                    |
+| `_meta`           | A metadata object on every request. Now carries protocol version, client info and capabilities, one copy per request.                |
+| `server/discover` | A single call returning supported versions, capabilities and identity. Mandatory for servers, optional for clients.                  |
+| sticky routing    | Making a load balancer send every request from one client to the same backend. The price of server-side session state.               |
+| `requestState`    | The opaque blob a server hands back with an `InputRequiredResult` so the follow-up can be processed by any instance.                 |
+| SEP               | Specification Enhancement Proposal, MCP's change process. Standards Track SEPs now need conformance scenarios before reaching Final. |
+| Streamable HTTP   | The HTTP transport introduced in `2025-03-26`, replacing the original HTTP+SSE one.                                                  |
+| CIMD              | Client ID Metadata Documents, the replacement for Dynamic Client Registration in OAuth flows.                                        |
+
+### The spec
+
+- The [release candidate announcement](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/) and the [release itself](https://blog.modelcontextprotocol.io/posts/2026-07-28/)
+- [`2026-07-28`](https://modelcontextprotocol.io/specification/2026-07-28/), [versioning and negotiation](https://modelcontextprotocol.io/specification/versioning), and [`server/discover`](https://modelcontextprotocol.io/specification/2026-07-28/server/discover)
+- The [feature lifecycle policy](https://modelcontextprotocol.io/community/feature-lifecycle) and the [deprecated features registry](https://modelcontextprotocol.io/specification/2026-07-28/deprecated)
+- The [`2025-11-25` changelog](https://modelcontextprotocol.io/specification/2025-11-25/changelog), for what the last handshake-era revision was still adding
+
+### The code
+
+- [appwrite/mcp](https://github.com/appwrite/mcp), and [PR #89](https://github.com/appwrite/mcp/pull/89) — the dual-era migration
+- The hosted server is at `https://mcp.appwrite.io/`, or `claude mcp add --transport http appwrite https://mcp.appwrite.io/`

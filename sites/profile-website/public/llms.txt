@@ -20,3 +20,4 @@
 - [Managing multiple Docker Hub accounts using docker-use](https://www.chiragaggarwal.tech/blog/managing-multiple-docker-hub-accounts-using-docker-use.txt)
 - [How I built the Appwrite MCP server (and decided to hide most of its capabilities)](https://www.chiragaggarwal.tech/blog/how-i-built-the-appwrite-mcp-server.txt)
 - [How utopia-php/client keeps fixing our memory leaks](https://www.chiragaggarwal.tech/blog/how-utopia-php-client-keeps-fixing-our-memory-leaks.txt)
+- [MCP 2.0: the release that deleted the handshake](https://www.chiragaggarwal.tech/blog/mcp-2-0-the-release-that-deleted-the-handshake.txt)

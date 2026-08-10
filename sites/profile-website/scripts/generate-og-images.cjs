@@ -261,6 +261,285 @@ const buildMarkup = (title) => ({
   },
 });
 
+// A request pill for the handshake card. `struck` draws the rule through it and
+// drops it back to the paper; the live one keeps the accent.
+const requestPill = (method, label, struck) => ({
+  type: "div",
+  props: {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      position: "relative",
+      width: 420,
+      height: 62,
+      paddingLeft: 22,
+      paddingRight: 22,
+      borderRadius: 10,
+      border: `2px solid ${struck ? "#D6D6CE" : ACCENT}`,
+      backgroundColor: struck ? "transparent" : "rgba(16,185,129,0.10)",
+    },
+    children: [
+      {
+        type: "div",
+        props: {
+          style: {
+            display: "flex",
+            fontSize: 22,
+            fontWeight: 700,
+            letterSpacing: "0.02em",
+            color: struck ? "#B5B5AC" : INK,
+          },
+          children: method,
+        },
+      },
+      {
+        type: "div",
+        props: {
+          style: {
+            display: "flex",
+            marginLeft: 14,
+            fontSize: 22,
+            fontWeight: 400,
+            color: struck ? "#B5B5AC" : MARK,
+          },
+          children: label,
+        },
+      },
+      ...(struck
+        ? [
+            {
+              type: "div",
+              props: {
+                style: {
+                  position: "absolute",
+                  display: "flex",
+                  left: 18,
+                  top: 30,
+                  width: 384,
+                  height: 3,
+                  backgroundColor: "#C4C4BA",
+                },
+              },
+            },
+          ]
+        : []),
+    ],
+  },
+});
+
+// Bespoke card for the 2026-07-28 post: two requests struck out, one left
+// standing. Falls back to nothing else — every other slug uses buildMarkup.
+const buildHandshakeMarkup = () => ({
+  type: "div",
+  props: {
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      backgroundColor: BG,
+      position: "relative",
+      overflow: "hidden",
+    },
+    children: [
+      {
+        type: "div",
+        props: {
+          style: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            display: "flex",
+            backgroundImage:
+              "linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          },
+        },
+      },
+      {
+        type: "div",
+        props: {
+          style: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 8,
+            height: "100%",
+            backgroundColor: ACCENT,
+            display: "flex",
+          },
+        },
+      },
+      {
+        type: "div",
+        props: {
+          style: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            flexGrow: 1,
+            padding: "56px 64px 52px 80px",
+            position: "relative",
+          },
+          children: [
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  fontSize: 22,
+                  fontWeight: 700,
+                  letterSpacing: "0.28em",
+                  color: MARK,
+                  textTransform: "uppercase",
+                },
+                children: "CHIRAGAGGARWAL.TECH",
+              },
+            },
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                },
+                children: [
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        display: "flex",
+                        flexDirection: "column",
+                        width: 540,
+                      },
+                      children: [
+                        {
+                          type: "div",
+                          props: {
+                            style: {
+                              display: "flex",
+                              fontSize: 60,
+                              fontWeight: 700,
+                              lineHeight: 1.12,
+                              color: INK,
+                              letterSpacing: "-0.02em",
+                            },
+                            children: "MCP 2.0",
+                          },
+                        },
+                        {
+                          type: "div",
+                          props: {
+                            style: {
+                              display: "flex",
+                              marginTop: 14,
+                              fontSize: 40,
+                              fontWeight: 400,
+                              lineHeight: 1.2,
+                              color: MARK,
+                              letterSpacing: "-0.01em",
+                            },
+                            children: "the release that deleted the handshake",
+                          },
+                        },
+                        {
+                          type: "div",
+                          props: {
+                            style: {
+                              display: "flex",
+                              marginTop: 26,
+                              width: 460,
+                              height: 2,
+                              backgroundColor: HAIRLINE,
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 16,
+                      },
+                      children: [
+                        {
+                          type: "div",
+                          props: {
+                            style: {
+                              display: "flex",
+                              fontSize: 19,
+                              fontWeight: 400,
+                              letterSpacing: "0.12em",
+                              color: MUTED,
+                              textTransform: "uppercase",
+                            },
+                            children: "ONE TOOL CALL • 2026-07-28",
+                          },
+                        },
+                        requestPill("POST /mcp", "initialize", true),
+                        requestPill("POST /mcp", "Mcp-Session-Id", true),
+                        requestPill("POST /mcp", "tools/call", false),
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: 26,
+                  letterSpacing: "0.01em",
+                },
+                children: [
+                  {
+                    type: "span",
+                    props: {
+                      style: {
+                        display: "flex",
+                        fontWeight: 700,
+                        color: INK,
+                      },
+                      children: "Chirag Aggarwal",
+                    },
+                  },
+                  {
+                    type: "span",
+                    props: {
+                      style: {
+                        display: "flex",
+                        fontWeight: 400,
+                        color: MUTED,
+                        marginLeft: 10,
+                      },
+                      children: "• Platform Engineer",
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+});
+
+// Slugs that get their own card instead of the title template.
+const CUSTOM_MARKUP = {
+  "mcp-2-0-the-release-that-deleted-the-handshake": buildHandshakeMarkup,
+};
+
 const generateOgImages = async () => {
   try {
     console.log("🚀 Starting OG image generation…");
@@ -278,7 +557,10 @@ const generateOgImages = async () => {
 
     let written = 0;
     for (const post of posts) {
-      const svg = await satori(buildMarkup(post.title), {
+      const markup = CUSTOM_MARKUP[post.slug]
+        ? CUSTOM_MARKUP[post.slug]()
+        : buildMarkup(post.title);
+      const svg = await satori(markup, {
         width: WIDTH,
         height: HEIGHT,
         fonts: [

@@ -184,6 +184,13 @@ const basePosts: BlogPost[] = [
     description:
       "The same leak kept OOMKilling our PHP workers: an HTTP client per call. What utopia-php/client implements, and the four design rules that made it the standard fix.",
   },
+  {
+    title: "MCP 2.0: the release that deleted the handshake",
+    slug: "mcp-2-0-the-release-that-deleted-the-handshake",
+    publishedAt: "2026-08-10",
+    description:
+      "MCP's 2026-07-28 revision removed sessions, the initialize handshake and held-open streams. What the handshake era cost, what replaced it, and why Appwrite's MCP server shipped it in a day.",
+  },
 ];
 
 export const posts = [...basePosts];
