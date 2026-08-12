@@ -61,7 +61,6 @@ export const DATA = {
   ],
   contact: {
     email: "chiragaggarwal5k@gmail.com",
-    tel: "+91 9667685415",
     social: {
       GitHub: {
         name: "GitHub",
