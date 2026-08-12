@@ -53,3 +53,6 @@ dist-ssr
 # .env
 .env
 .vercel
+
+# Playwright MCP session artifacts (console logs, page snapshots)
+.playwright-mcp
