@@ -74,8 +74,17 @@ const CodeBlock = (props: ComponentProps<"pre">) => {
     });
   };
 
+  // Plain markup until the grammars land — returning null here dropped every
+  // block from the prerendered HTML.
   if (!mounted) {
-    return null;
+    return (
+      <div className="relative group rounded-lg overflow-hidden my-6 border border-border">
+        <pre className="py-4 overflow-x-auto bg-background text-xs sm:text-sm">
+          {/* globals.css forces !px-0 on pre, so pad the inner element. */}
+          <code className={`language-${language} block px-4`}>{codeText}</code>
+        </pre>
+      </div>
+    );
   }
 
   return (
