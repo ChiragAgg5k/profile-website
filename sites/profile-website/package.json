@@ -14,7 +14,8 @@
     "sitemap": "node scripts/generate-sitemap.cjs",
     "rss": "node scripts/generate-rss.cjs",
     "og": "node scripts/generate-og-images.cjs",
-    "share-card": "node scripts/generate-share-card.cjs"
+    "share-card": "node scripts/generate-share-card.cjs",
+    "usage": "node scripts/collect-usage.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

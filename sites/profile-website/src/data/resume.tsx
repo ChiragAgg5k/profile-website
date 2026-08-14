@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon } from "lucide-react";
+import { HomeIcon, NotebookIcon, TrendingUp } from "lucide-react";
 import { DiPostgresql } from "react-icons/di";
 import { FaDocker, FaNodeJs, FaPhp, FaPython } from "react-icons/fa";
 import { SiAppwrite, SiKubernetes } from "react-icons/si";
@@ -58,6 +58,7 @@ export const DATA = {
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    { href: "/trends", icon: TrendingUp, label: "Trends" },
   ],
   contact: {
     email: "chiragaggarwal5k@gmail.com",
@@ -68,6 +69,13 @@ export const DATA = {
         icon: Icons.github,
 
         navbar: true,
+      },
+      Cursor: {
+        name: "Cursor",
+        url: "https://cursor.com/@chiragagg5k",
+        icon: Icons.cursor,
+
+        navbar: false,
       },
       LinkedIn: {
         name: "LinkedIn",

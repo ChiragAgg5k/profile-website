@@ -96,12 +96,43 @@ const config = {
             transform: "translateY(calc(-100% - var(--gap)))",
           },
         },
+        "chart-in": {
+          from: {
+            opacity: "0.2",
+            clipPath: "inset(0 100% 0 0)",
+          },
+          to: {
+            opacity: "1",
+            clipPath: "inset(0 0 0 0)",
+          },
+        },
+        "fade-up": {
+          from: {
+            opacity: "0",
+            transform: "translateY(10px)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+        "bar-in": {
+          from: {
+            transform: "scaleX(0)",
+          },
+          to: {
+            transform: "scaleX(1)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         marquee: "marquee var(--duration) infinite linear",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+        "chart-in": "chart-in 900ms cubic-bezier(0.16, 1, 0.3, 1) both",
+        "fade-up": "fade-up 700ms cubic-bezier(0.16, 1, 0.3, 1) both",
+        "bar-in": "bar-in 900ms cubic-bezier(0.16, 1, 0.3, 1) both",
       },
     },
   },
