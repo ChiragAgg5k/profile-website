@@ -191,6 +191,13 @@ const basePosts: BlogPost[] = [
     description:
       "MCP's 2026-07-28 revision removed sessions, the initialize handshake and held-open streams. What the handshake era cost, what replaced it, and why Appwrite's MCP server shipped it in a day.",
   },
+  {
+    title: "Seven months of coding agents: what $28,335 actually bought",
+    slug: "seven-months-of-coding-agents",
+    publishedAt: "2026-08-16",
+    description:
+      "201,473 tool calls across five agent harnesses, and 0.7% of them ran while I slept. What the spend, the interrupts and the 15-actions-per-turn leash say about staying in the loop.",
+  },
 ];
 
 export const posts = [...basePosts];

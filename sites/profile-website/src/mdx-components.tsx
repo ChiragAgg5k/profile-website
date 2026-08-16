@@ -1,5 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 import { ComponentProps } from "react";
+import { AgentClock } from "./components/agent-clock";
 import { BackoffJitter } from "./components/backoff-jitter";
 import { BlogFigure } from "./components/blog-figure";
 import CodeBlock from "./components/code-block";
@@ -9,6 +10,8 @@ import { Mermaid } from "./components/mermaid-diagram";
 import { ReferenceCycle } from "./components/reference-cycle";
 import { RoundTrip } from "./components/round-trip";
 import { SessionAffinity } from "./components/session-affinity";
+import { SpendRamp } from "./components/spend-ramp";
+import { SteeringTable } from "./components/steering-table";
 import { ToolSurfaceChart } from "./components/tool-surface-chart";
 import GitHub from "./components/ui/github";
 import YouTube from "./components/ui/youtube";
@@ -228,5 +231,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SessionAffinity,
     RoundTrip,
     HandshakeWire,
+    AgentClock,
+    SpendRamp,
+    SteeringTable,
   };
 }

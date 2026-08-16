@@ -1,0 +1,67 @@
+import { BlogTitle } from "@/components/blog-title";
+
+<BlogTitle slug="seven-months-of-coding-agents" />
+
+Seven months, $28,335, across five agent harnesses. For a lot of people running agents right now that's a heavy week.
+
+I publish that number on [/trends](/trends) and it updates itself, so I've had a while to look at it. What I expected to find was a story about cost. What's actually in the data is a story about scheduling, and the number that tells it is this one: **0.7% of my agent's tool calls happened between midnight and six in the morning.**
+
+Claude Code and Codex arrive at 0.7% independently. Different vendors, different session formats, 1,432 sessions between them, and I only noticed the match because I ran the same script twice and thought I'd double-counted.
+
+## The shape of the bill
+
+<AgentClock />
+
+That's 201,473 tool calls bucketed by the hour I was awake for them. It looks like a workday because it is one. The peak is 16:00. The trough is 03:00, and the trough is empty.
+
+An agent that runs unattended doesn't produce this shape. If you leave loops running, your histogram flattens — the overnight band fills in, because that's the entire point of leaving them running. Mine has a hole in it, and the hole is where I was asleep.
+
+The weekly view says the same thing. Weekdays average $176 a day; weekends average $67. The spend tracks my calendar, not a scheduler's.
+
+## What the spend actually bought
+
+<SpendRamp />
+
+The curve is boring until April, where it goes up 7.4× in one month and then stays there. That's not a pricing change and it isn't a new model. April is when I stopped running one conversation at a time and started running agents in parallel git worktrees, which is the single largest change in how much I spend and the single largest change in how much lands.
+
+Underneath it: 9,350 commits across 145 repositories since January, concentrated in `sdk-generator`, `cloud` and `appwrite`.
+
+I want to be careful with that number, because it's the one most likely to be wrong in my favour. `sdk-generator` emits bulk generated output, so its 1,933 commits are not 1,933 units of thought. And only 205 commits carry a `Co-authored-by` trailer for an agent, which is not a measure of anything except how inconsistently I remember to keep the trailer. Take 9,350 as a statement of scale and nothing finer.
+
+## The leash is fifteen actions long
+
+The interesting ratio isn't dollars per commit. It's how much rope the agent gets before I say something.
+
+<SteeringTable />
+
+Fifteen actions, then I say something. That is the whole working relationship in one number, and it has stayed roughly constant while the spend went up 300×. What April changed was how many leashes I hold at once, not how long any one of them is.
+
+The interrupt count is the part I didn't expect. 2,047 times I stopped a run in progress — a little over ten times per active day. I'd have guessed a tenth of that. Interrupting is so cheap that it stopped registering as an event, which is a strange thing to learn about your own habits from a log file.
+
+296 of 1,432 sessions were single-turn: ask, receive, done. That's 21%. The other 79% are conversations. The median session is four to seven human turns over sixteen to thirty-four minutes, which is not automation. It's pairing, with a partner who types faster than me and needs checking.
+
+## The part that argues against me
+
+I have around 130 skills installed. Across all my Claude Code transcripts, they've been invoked 52 times.
+
+Twenty-six of those are one skill, `release-sdk`, which is a genuine repetitive chore. After that: `artifact-design` six times, `dataviz` four, `sentry-cli` three, and then a tail of skills fired exactly once.
+
+The infrastructure behind those 130 is not casual. There's a harness-neutral root at `~/.agents/skills` with a lock file that pins each skill to a GitHub commit, symlinked outward into Claude Code, Codex and Pi, with a config listing fifteen harnesses it knows how to install into. `~/.codex/AGENTS.md`, `~/.gemini/GEMINI.md` and `~/.config/opencode/AGENTS.md` are byte-identical, all three md5 `295f62fc`. I built a distribution system for my own instructions.
+
+And then I mostly don't invoke the things it distributes. I type instead.
+
+There are two readings. The generous one is that skills are a library, and a library you consult four times a year is still worth having. The honest one is that I enjoy building the workshop more than I use the tools in it, and that 130-installed-52-fired is a tooling habit rather than a workflow.
+
+Both are probably true. What neither reading supports is the idea that any of this productivity came from automation running without me.
+
+## The choice, and what it costs
+
+Here's the objection I can't fully answer: is 0.7% restraint, or just circumstance?
+
+Right now the marginal cost of running agents overnight is about as low as it will ever be. Everything is subsidised. I have the budget, five harnesses configured, worktree isolation already working, and a skills system that can install into fifteen agent runtimes. Every ingredient for a 24/7 loop is sitting on this machine, and the histogram still has a hole in it.
+
+So it's a choice, and it's worth being clear about what I'm buying with it. Fifteen tool calls is roughly how much work I can hold in my head and still meaningfully review. Past that I'm not reviewing, I'm accepting. The 2,047 interrupts are the mechanism: they only happen because I'm watching, and I'm only watching because the run is short enough to watch.
+
+The cost is real. There's work I could have shipped overnight and didn't. The trade is that I can still explain every one of those 9,350 commits, which matters more to me in a codebase I'll be on call for.
+
+$28,335 over seven months is a modest bill by current standards. I don't think that's because I was careful with money. I think it's because a leash fifteen actions long is inherently cheap, and the thing it's actually buying is that I never stopped being the one holding it.
