@@ -6,6 +6,7 @@ import { BlogFigure } from "./components/blog-figure";
 import CodeBlock from "./components/code-block";
 import { ConnectionReuse } from "./components/connection-reuse";
 import { HandshakeWire } from "./components/handshake-wire";
+import { InterfaceAdoptionChart } from "./components/interface-adoption-chart";
 import { Mermaid } from "./components/mermaid-diagram";
 import { ReferenceCycle } from "./components/reference-cycle";
 import { RoundTrip } from "./components/round-trip";
@@ -13,6 +14,7 @@ import { SessionAffinity } from "./components/session-affinity";
 import { SpendRamp } from "./components/spend-ramp";
 import { SteeringTable } from "./components/steering-table";
 import { ToolSurfaceChart } from "./components/tool-surface-chart";
+import { UploadPathComparison } from "./components/upload-path-comparison";
 import GitHub from "./components/ui/github";
 import YouTube from "./components/ui/youtube";
 
@@ -234,5 +236,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     AgentClock,
     SpendRamp,
     SteeringTable,
+    InterfaceAdoptionChart,
+    UploadPathComparison,
   };
 }

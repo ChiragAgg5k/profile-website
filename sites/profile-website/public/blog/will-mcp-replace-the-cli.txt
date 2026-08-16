@@ -1,0 +1,67 @@
+# Will MCP replace the CLI?
+
+Every developer tool now seems to need an MCP server. The growth is real: monthly downloads of the MCP TypeScript SDK went from 1.9 million in March 2025 to 191.9 million in July 2026.
+
+But the command line is not collapsing underneath it. Downloads of Commander, a widely used Node.js CLI framework, grew from 787 million to 1.93 billion over the same period.
+
+The numbers are imperfect because npm downloads include CI and transitive installs. Still, they look less like a replacement and more like a new layer being added.
+
+## MCP is not the GUI for agents
+
+A GUI and CLI are interfaces for humans. MCP is a contract between a model host and software. The host discovers tools, gives their schemas to the model, validates arguments, and sends the call.
+
+An agent can already use a CLI. It can run `--help`, execute a command, inspect stdout, and retry. MCP makes that operation typed, discoverable, and easier for the host to police.
+
+That difference is enough to split the market:
+
+| MCP wins when…                         | CLI wins when…                      |
+| -------------------------------------- | ----------------------------------- |
+| The product is remote                  | The work is local                   |
+| OAuth should happen in the client      | Credentials already exist           |
+| Actions need a rendered confirmation   | Commands need to run unattended     |
+| The agent must discover capabilities   | The workflow must be reproducible   |
+| Structured output matters more than UX | Pipes, files, and exit codes matter |
+
+For a SaaS product, MCP is a much better front door. One URL and an OAuth flow can replace installing a package, setting environment variables, and teaching the model a command tree.
+
+ O["OAuth"]
+  O --> D["Discover tools"]
+  D --> C["Confirm call"]
+`}
+  caption="MCP turns installation, authentication, discovery, and approval into one client workflow."
+/>
+
+For repository work, the calculation reverses. `git diff`, `bun test`, and `docker compose logs` are already available, inspectable, and easy for a human to rerun. Wrapping each in a tool server often adds schema without adding a useful boundary.
+
+## The MCP trend nobody advertises
+
+Early MCP servers tried to expose everything. Clients and models pushed back. Cursor once sent only the first 40 tools to the agent; Windsurf refused servers that crossed its limit.
+
+The current direction is smaller surfaces with search behind them. Appwrite went from 981 methods to four visible tools. Stripe and Sentry also put larger catalogs behind search; GitHub groups its tools into sets.
+
+That is a real drawback, not an implementation detail. MCP tools consume context merely by existing. A CLI can have hundreds of subcommands without pasting every help page into the conversation.
+
+Uploads expose another mismatch. A hosted MCP server cannot read a path on the user's machine. Appwrite prefers a public URL, but also accepts a small image or deployment ZIP as Base64 inside the JSON tool call. Decoded inline content is capped at 10 MB, and Base64 makes the payload roughly one-third larger.
+
+The Base64 path works, but it is a hack around the transport. The CLI can open `./site.zip` and upload its bytes directly without making the artifact public or passing it through the model's context.
+
+MCP also gives you another service to operate: authorization, deployment, observability, client compatibility, schema versioning, and a security policy for every mutation. OAuth proves who the user is. It does not prove the model understood what the user wanted before calling `delete_project`.
+
+The CLI's problems are older and easier to see: prose output, shell quoting, broad environment access, platform differences, and weak capability discovery. It is a worse interface for a model, surrounded by a better ecosystem for debugging and automation.
+
+## My prediction
+
+ CLI
+  A["Agent host"] --> MCP
+  A -. "sandboxed shell" .-> CLI
+  CLI --> API
+  MCP --> API
+`}
+  caption="MCP does not need to replace the CLI to win. It only needs to become the agent-facing adapter."
+/>
+
+MCP will become the default way an agent first meets a remote product. The CLI will remain the deterministic path for local work, scripts, CI, and the moment an abstraction leaks.
+
+So I do not expect a replay of “GUI beats terminal.” That verdict never happened. Most people chose GUIs; developers kept terminals for the work where precision and composition mattered.
+
+MCP can win distribution without winning everything. The durable stack is likely an API underneath, a CLI for operators, and a narrow MCP surface for agents.

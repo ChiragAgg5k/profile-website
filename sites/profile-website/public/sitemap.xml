@@ -150,4 +150,10 @@
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.chiragaggarwal.tech/blog/will-mcp-replace-the-cli</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

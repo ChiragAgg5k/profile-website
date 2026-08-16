@@ -198,6 +198,13 @@ const basePosts: BlogPost[] = [
     description:
       "201,473 tool calls across five agent harnesses, and 0.7% of them ran while I slept. What the spend, the interrupts and the 15-actions-per-turn leash say about staying in the loop.",
   },
+  {
+    title: "Will MCP replace the CLI?",
+    slug: "will-mcp-replace-the-cli",
+    publishedAt: "2026-08-16",
+    description:
+      "MCP gives agents typed, discoverable tools, but the CLI remains reproducible and composable. Where each interface wins and why both will survive.",
+  },
 ];
 
 export const posts = [...basePosts];
