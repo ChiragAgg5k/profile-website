@@ -150,11 +150,7 @@ export function DailyUsageChart({
           data={data}
           margin={{ top: 8, right: 12, left: 4, bottom: 0 }}
         >
-          <CartesianGrid
-            vertical={false}
-            stroke={grid}
-            strokeDasharray="0"
-          />
+          <CartesianGrid vertical={false} stroke={grid} strokeDasharray="0" />
           <XAxis
             dataKey="date"
             ticks={ticks}
@@ -180,9 +176,7 @@ export function DailyUsageChart({
           />
           <Tooltip
             cursor={{ fill: cursorFill }}
-            content={
-              <ChartTooltip metric={metric} dark={dark} />
-            }
+            content={<ChartTooltip metric={metric} dark={dark} />}
           />
           {agentIds.map((id) => {
             const color = agentColor(id, dark);
@@ -193,7 +187,9 @@ export function DailyUsageChart({
                 dataKey={id}
                 stroke={color}
                 fill={color}
-                fillOpacity={id === "claude" ? 0.28 : id === "codex" ? 0.12 : 0.06}
+                fillOpacity={
+                  id === "claude" ? 0.28 : id === "codex" ? 0.12 : 0.06
+                }
                 strokeWidth={id === "claude" || id === "codex" ? 1.75 : 1.25}
                 dot={false}
                 activeDot={{ r: 3.5, strokeWidth: 0 }}

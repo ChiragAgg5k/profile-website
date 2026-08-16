@@ -30,7 +30,9 @@ function useCountUp(target: number, duration = 1000) {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (reduced) {
       setValue(target);
       return;
@@ -139,7 +141,9 @@ const prettyModelName = (raw: string) => {
       .replace(/-/g, " ")
       .replace(/\b\w/g, (letter) => letter.toUpperCase());
   }
-  return name.replace(/-/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+  return name
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
 };
 
 function Pill({
@@ -262,9 +266,7 @@ export function UsageDashboard() {
           <span className="invisible" aria-hidden="true">
             {formatMoney(cost)}
           </span>
-          <span className="absolute inset-0">
-            {formatMoney(animatedCost)}
-          </span>
+          <span className="absolute inset-0">{formatMoney(animatedCost)}</span>
         </p>
         <p className="mt-2 text-xs text-muted-foreground">
           raw token api costs
@@ -359,7 +361,8 @@ export function UsageDashboard() {
                       <span
                         className={cn(
                           "size-2 rounded-[2px]",
-                          agentBarClassName[agent.id] ?? agentBarClassName.other,
+                          agentBarClassName[agent.id] ??
+                            agentBarClassName.other,
                         )}
                       />
                       {agent.label}

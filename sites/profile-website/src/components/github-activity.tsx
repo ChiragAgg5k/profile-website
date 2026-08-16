@@ -52,11 +52,13 @@ export function GitHubActivity({
         if (!response.ok) throw new Error(String(response.status));
         return response.json();
       })
-      .then((payload: { total?: { lastYear?: number }; contributions?: Day[] }) => {
-        if (cancelled) return;
-        setDays(payload.contributions ?? []);
-        setTotal(payload.total?.lastYear ?? 0);
-      })
+      .then(
+        (payload: { total?: { lastYear?: number }; contributions?: Day[] }) => {
+          if (cancelled) return;
+          setDays(payload.contributions ?? []);
+          setTotal(payload.total?.lastYear ?? 0);
+        },
+      )
       .catch(() => {
         if (!cancelled) setDays([]);
       });
@@ -85,7 +87,10 @@ export function GitHubActivity({
   if (days && days.length === 0) return null;
 
   return (
-    <section className="mt-10 pb-4 motion-safe:animate-fade-up" style={{ animationDelay: "640ms" }}>
+    <section
+      className="mt-10 pb-4 motion-safe:animate-fade-up"
+      style={{ animationDelay: "640ms" }}
+    >
       <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
         <h2 className="text-sm font-medium">GitHub</h2>
         <a
@@ -106,32 +111,35 @@ export function GitHubActivity({
               <span
                 key={`${month.label}-${month.index}`}
                 className="absolute top-0 text-[10px] uppercase tracking-wide text-muted-foreground"
-                style={{ left: `${(month.index / Math.max(weeks.length, 1)) * 100}%` }}
+                style={{
+                  left: `${(month.index / Math.max(weeks.length, 1)) * 100}%`,
+                }}
               >
                 {month.label}
               </span>
             ))}
           </div>
           <div className="flex w-full justify-between">
-            {(weeks.length ? weeks : Array.from({ length: 53 }, () => Array(7).fill(null))).map(
-              (week, weekIndex) => (
-                <div key={weekIndex} className="flex flex-col gap-[3px]">
-                  {week.map((day, dayIndex) => (
-                    <div
-                      key={day?.date ?? `${weekIndex}-${dayIndex}`}
-                      className={cn(
-                        "size-[11px] rounded-[2px]",
-                        day
-                          ? LEVEL[Math.min(day.level, 4)]
-                          : days
-                            ? "bg-transparent"
-                            : LEVEL[0],
-                      )}
-                    />
-                  ))}
-                </div>
-              ),
-            )}
+            {(weeks.length
+              ? weeks
+              : Array.from({ length: 53 }, () => Array(7).fill(null))
+            ).map((week, weekIndex) => (
+              <div key={weekIndex} className="flex flex-col gap-[3px]">
+                {week.map((day, dayIndex) => (
+                  <div
+                    key={day?.date ?? `${weekIndex}-${dayIndex}`}
+                    className={cn(
+                      "size-[11px] rounded-[2px]",
+                      day
+                        ? LEVEL[Math.min(day.level, 4)]
+                        : days
+                          ? "bg-transparent"
+                          : LEVEL[0],
+                    )}
+                  />
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>

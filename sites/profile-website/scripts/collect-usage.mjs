@@ -74,7 +74,11 @@ const inferAgent = (modelName, fallback) => {
   if (fallback && fallback !== "all") return fallback;
   if (name.includes("claude")) return "claude";
   if (name.includes("gemini")) return "gemini";
-  if (name.includes("cursor") || name.includes("composer") || name.includes("grok")) {
+  if (
+    name.includes("cursor") ||
+    name.includes("composer") ||
+    name.includes("grok")
+  ) {
     return "cursor";
   }
   if (
@@ -85,7 +89,12 @@ const inferAgent = (modelName, fallback) => {
   ) {
     return "opencode";
   }
-  if (name.includes("gpt") || name.includes("codex") || name.includes("o1") || name.includes("o3")) {
+  if (
+    name.includes("gpt") ||
+    name.includes("codex") ||
+    name.includes("o1") ||
+    name.includes("o3")
+  ) {
     return "codex";
   }
   return fallback || "other";
@@ -157,7 +166,10 @@ const readCursorToken = () => {
   try {
     const raw = execFileSync(
       "sqlite3",
-      [dbPath, "SELECT value FROM ItemTable WHERE key = 'cursorAuth/accessToken';"],
+      [
+        dbPath,
+        "SELECT value FROM ItemTable WHERE key = 'cursorAuth/accessToken';",
+      ],
       { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
     ).trim();
     if (!raw) return null;
@@ -180,12 +192,15 @@ const dayStartMs = (isoDate) => Date.parse(`${isoDate}T00:00:00+05:30`);
 const mapPool = async (items, limit, fn) => {
   const out = new Array(items.length);
   let next = 0;
-  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
-    while (next < items.length) {
-      const index = next++;
-      out[index] = await fn(items[index], index);
-    }
-  });
+  const workers = Array.from(
+    { length: Math.min(limit, items.length) },
+    async () => {
+      while (next < items.length) {
+        const index = next++;
+        out[index] = await fn(items[index], index);
+      }
+    },
+  );
   await Promise.all(workers);
   return out;
 };
@@ -244,7 +259,10 @@ const fetchCursorCycle = async () => {
     });
 
     const models = cursorModelsFromAggregated(aggregated);
-    const totals = models.reduce((acc, row) => addTokens(acc, row), emptyTokens());
+    const totals = models.reduce(
+      (acc, row) => addTokens(acc, row),
+      emptyTokens(),
+    );
     totals.cost = num(aggregated.totalCostCents) / 100 || totals.cost;
 
     const firstDate = dateInTz(start);
@@ -365,7 +383,9 @@ const buildSnapshot = (ccusage, cursor) => {
       }
     }
 
-    if ((day.agents || []).every((agentRow) => !agentRow.modelBreakdowns?.length)) {
+    if (
+      (day.agents || []).every((agentRow) => !agentRow.modelBreakdowns?.length)
+    ) {
       for (const modelRow of day.modelBreakdowns || []) {
         const name = displayModel(modelRow.modelName);
         if (!name || name === "<synthetic>") continue;
@@ -447,7 +467,9 @@ const buildSnapshot = (ccusage, cursor) => {
   }
 
   const totals = daily.reduce((acc, day) => addTokens(acc, day), emptyTokens());
-  const activeDays = daily.filter((day) => day.tokens > 0 || day.cost > 0).length;
+  const activeDays = daily.filter(
+    (day) => day.tokens > 0 || day.cost > 0,
+  ).length;
 
   return {
     generatedAt: new Date().toISOString(),

@@ -9,7 +9,14 @@ export type TokenTotals = {
   cacheRead: number;
 };
 
-export type AgentId = "claude" | "codex" | "pi" | "opencode" | "gemini" | "cursor" | "other";
+export type AgentId =
+  | "claude"
+  | "codex"
+  | "pi"
+  | "opencode"
+  | "gemini"
+  | "cursor"
+  | "other";
 
 export type AgentTotals = TokenTotals & {
   id: string;
@@ -163,7 +170,9 @@ export const summarizeDays = (days: DailyUsage[]) => {
     }
   }
 
-  const activeDays = days.filter((day) => day.cost > 0 || day.tokens > 0).length;
+  const activeDays = days.filter(
+    (day) => day.cost > 0 || day.tokens > 0,
+  ).length;
   const observedInput = totals.input + totals.cacheWrite + totals.cacheRead;
   let cacheSavings = 0;
   for (const model of models.values()) {
@@ -187,12 +196,15 @@ export const summarizeDays = (days: DailyUsage[]) => {
   };
 };
 
-const estimateCacheSavings = (row: TokenTotals & { name?: string; agent?: string }) => {
+const estimateCacheSavings = (
+  row: TokenTotals & { name?: string; agent?: string },
+) => {
   if (row.cost <= 0) return 0;
-  const family =
-    `${row.agent ?? ""} ${row.name ?? ""}`.toLowerCase().includes("claude")
-      ? { cacheRead: 0.1, cacheWrite: 1.25, output: 5 }
-      : { cacheRead: 0.5, cacheWrite: 1, output: 4 };
+  const family = `${row.agent ?? ""} ${row.name ?? ""}`
+    .toLowerCase()
+    .includes("claude")
+    ? { cacheRead: 0.1, cacheWrite: 1.25, output: 5 }
+    : { cacheRead: 0.5, cacheWrite: 1, output: 4 };
   const denom =
     row.input +
     row.cacheWrite * family.cacheWrite +
@@ -217,7 +229,8 @@ export const formatMoney = (value: number, digits = 2) =>
 export const formatCompact = (value: number) => {
   const abs = Math.abs(value);
   const trim = (n: number) => {
-    const formatted = n >= 10 ? n.toFixed(0) : n >= 1 ? n.toFixed(1) : n.toFixed(2);
+    const formatted =
+      n >= 10 ? n.toFixed(0) : n >= 1 ? n.toFixed(1) : n.toFixed(2);
     return formatted.replace(/\.0+$/, "").replace(/(\.\d*[1-9])0+$/, "$1");
   };
   if (abs >= 1e9) return `${trim(value / 1e9)}B`;
@@ -226,8 +239,7 @@ export const formatCompact = (value: number) => {
   return new Intl.NumberFormat("en-US").format(Math.round(value));
 };
 
-export const formatPercent = (value: number) =>
-  `${(value * 100).toFixed(1)}%`;
+export const formatPercent = (value: number) => `${(value * 100).toFixed(1)}%`;
 
 export const formatRangeLabel = (start: string, end: string) => {
   const a = new Date(`${start}T00:00:00`);
@@ -247,10 +259,12 @@ export const formatRangeLabel = (start: string, end: string) => {
 };
 
 export const formatAxisDate = (iso: string) =>
-  new Date(`${iso}T00:00:00`).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  }).toUpperCase();
+  new Date(`${iso}T00:00:00`)
+    .toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    })
+    .toUpperCase();
 
 export const formatUpdatedAt = (iso: string) =>
   new Date(iso).toLocaleDateString("en-US", {
