@@ -205,6 +205,13 @@ const basePosts: BlogPost[] = [
     description:
       "MCP gives agents typed, discoverable tools, but the CLI remains reproducible and composable. Where each interface wins and why both will survive.",
   },
+  {
+    title: "Appwrite MCP vs Vercel MCP: I benchmarked both",
+    slug: "appwrite-mcp-vs-vercel-mcp",
+    publishedAt: "2026-08-19",
+    description:
+      "I benchmarked Appwrite MCP against Vercel MCP across 12 tests covering deployment speed, latency, logs, rollback, and write safety. Here is what each server won.",
+  },
 ];
 
 export const posts = [...basePosts];

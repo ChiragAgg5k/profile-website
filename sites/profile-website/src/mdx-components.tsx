@@ -7,6 +7,12 @@ import CodeBlock from "./components/code-block";
 import { ConnectionReuse } from "./components/connection-reuse";
 import { HandshakeWire } from "./components/handshake-wire";
 import { InterfaceAdoptionChart } from "./components/interface-adoption-chart";
+import { McpCoverageTable } from "./components/mcp-coverage-table";
+import { McpLatencyChart } from "./components/mcp-latency-chart";
+import { McpRunSheet } from "./components/mcp-run-sheet";
+import { McpTaskScores } from "./components/mcp-task-scores";
+import { McpTestConditions } from "./components/mcp-test-conditions";
+import { McpToolReach } from "./components/mcp-tool-reach";
 import { Mermaid } from "./components/mermaid-diagram";
 import { ReferenceCycle } from "./components/reference-cycle";
 import { RoundTrip } from "./components/round-trip";
@@ -238,5 +244,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SteeringTable,
     InterfaceAdoptionChart,
     UploadPathComparison,
+    McpCoverageTable,
+    McpLatencyChart,
+    McpTaskScores,
+    McpTestConditions,
+    McpRunSheet,
+    McpToolReach,
   };
 }

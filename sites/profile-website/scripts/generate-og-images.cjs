@@ -536,6 +536,14 @@ const buildHandshakeMarkup = () => ({
 });
 
 // Slugs that get their own card instead of the title template.
+// Posts whose OG card is a hand-made image rather than generated type. The
+// file is copied through as-is, so it must already be WIDTH x HEIGHT.
+const STATIC_OG = {
+  "appwrite-mcp-vs-vercel-mcp": "appwrite-mcp-vs-vercel-mcp.png",
+};
+
+const STATIC_OG_DIR = path.join(__dirname, "og-static");
+
 const CUSTOM_MARKUP = {
   "mcp-2-0-the-release-that-deleted-the-handshake": buildHandshakeMarkup,
 };
@@ -557,6 +565,18 @@ const generateOgImages = async () => {
 
     let written = 0;
     for (const post of posts) {
+      const outPath = path.join(OUT_DIR, `${post.slug}.png`);
+
+      if (STATIC_OG[post.slug]) {
+        fs.copyFileSync(
+          path.join(STATIC_OG_DIR, STATIC_OG[post.slug]),
+          outPath,
+        );
+        written += 1;
+        console.log(`  ✓ ${post.slug}.png (static)`);
+        continue;
+      }
+
       const markup = CUSTOM_MARKUP[post.slug]
         ? CUSTOM_MARKUP[post.slug]()
         : buildMarkup(post.title);
@@ -583,7 +603,6 @@ const generateOgImages = async () => {
         fitTo: { mode: "width", value: WIDTH },
       });
       const png = resvg.render().asPng();
-      const outPath = path.join(OUT_DIR, `${post.slug}.png`);
       fs.writeFileSync(outPath, png);
       written += 1;
       console.log(`  ✓ ${post.slug}.png`);

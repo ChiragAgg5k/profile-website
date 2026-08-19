@@ -5,8 +5,15 @@
     <link>https://www.chiragaggarwal.tech/blog</link>
     <description>Articles on platform engineering, open source, and backend development by Chirag Aggarwal.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.chiragaggarwal.tech/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Appwrite MCP vs Vercel MCP: I benchmarked both</title>
+      <link>https://www.chiragaggarwal.tech/blog/appwrite-mcp-vs-vercel-mcp</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/appwrite-mcp-vs-vercel-mcp</guid>
+      <description>I benchmarked Appwrite MCP against Vercel MCP across 12 tests covering deployment speed, latency, logs, rollback, and write safety. Here is what each server won.</description>
+      <pubDate>Wed, 19 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Seven months of coding agents: what $28,335 actually bought</title>
       <link>https://www.chiragaggarwal.tech/blog/seven-months-of-coding-agents</link>
