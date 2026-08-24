@@ -5,6 +5,7 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
 import mdx from "@mdx-js/rollup";
 import remarkGfm from "remark-gfm";
+import { agentMarkdownPlugin } from "./vite-plugins/agent-markdown";
 
 const assetPathPattern =
   /\/[^/?]+\.(?:avif|css|gif|ico|jpe?g|js|json|map|pdf|png|svg|txt|webmanifest|webp|xml)$/i;
@@ -20,6 +21,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    agentMarkdownPlugin(),
     devtools(),
     (() => {
       const plugin = mdx({

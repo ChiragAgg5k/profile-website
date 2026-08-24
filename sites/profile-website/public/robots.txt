@@ -1,8 +1,62 @@
-User-Agent: *
+# Named AI agents (RFC 9309: first matching User-agent group applies).
+# Do not prepend a managed robots.txt that Disallows these names.
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Google-CloudVertexBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: DeepSeekBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: ora-agent
+Allow: /
+
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 Disallow: /private/
-Disallow: /llms.txt
-Disallow: /llms-full.txt
-Disallow: /blog/*.txt
 
 Sitemap: https://www.chiragaggarwal.tech/sitemap.xml

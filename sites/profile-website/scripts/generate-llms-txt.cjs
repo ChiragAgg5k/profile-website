@@ -56,20 +56,35 @@ const generateLlmsTxt = () => {
     const posts = getLocalPosts();
     console.log(`📄 Found ${posts.length} local blog posts`);
 
+    const siteUrl = getSiteUrl();
+
     // Create llms directory in public/
     const llmsDir = path.join(__dirname, "../public/blog");
     if (!fs.existsSync(llmsDir)) {
       fs.mkdirSync(llmsDir, { recursive: true });
     }
 
-    // Start building the main llms.txt content
-    let llmsContent = `# Chirag Aggarwal's Blog Posts
+    // llmstxt.org: H1, optional blockquote, then named sections with links.
+    let llmsContent = `# Chirag Aggarwal
+
+> Personal site of Chirag Aggarwal, Platform Engineer at Appwrite. Writing, projects, and developer resources for chiragaggarwal.tech.
+
+This is the machine-readable index of ${siteUrl}. Prefer these files over scraping HTML.
+
+## Developer resources
+
+- [Chirag Aggarwal developer resources](${siteUrl}/developers): Machine-readable files, MCP and Appwrite writing, and how agents should read chiragaggarwal.tech
+- [llms-full.txt](${siteUrl}/llms-full.txt): Full-text markdown of every blog post
+- [Sitemap](${siteUrl}/sitemap.xml): Canonical URL list
+- [RSS feed](${siteUrl}/feed.xml): Blog feed
+- [Homepage markdown](${siteUrl}/index.md): Short site summary
+- [GitHub](https://github.com/ChiragAgg5k): Source and open-source work
+
+## Blog posts
 
 `;
 
     let processedCount = 0;
-
-    const siteUrl = getSiteUrl();
 
     for (const post of posts) {
       try {

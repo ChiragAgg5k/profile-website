@@ -31,7 +31,14 @@ export const Route = createFileRoute("/trends")({
         },
       },
     ],
-    links: [{ rel: "canonical", href: TRENDS_URL }],
+    links: [
+      { rel: "canonical", href: TRENDS_URL },
+      {
+        rel: "alternate",
+        type: "text/markdown",
+        href: `${DATA.url}/trends.md`,
+      },
+    ],
   }),
   component: TrendsPage,
 });

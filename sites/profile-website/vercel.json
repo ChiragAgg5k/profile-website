@@ -3,7 +3,122 @@
   "outputDirectory": "dist/client",
   "framework": null,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "text/markdown"
+        }
+      ],
+      "destination": "/index.md"
+    },
+    {
+      "source": "/blog",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "text/markdown"
+        }
+      ],
+      "destination": "/blog.md"
+    },
+    {
+      "source": "/developers",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "text/markdown"
+        }
+      ],
+      "destination": "/developers.md"
+    },
+    {
+      "source": "/trends",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "text/markdown"
+        }
+      ],
+      "destination": "/trends.md"
+    },
+    {
+      "source": "/blog/:slug",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "text/markdown"
+        }
+      ],
+      "destination": "/blog/:slug.txt"
+    }
+  ],
   "headers": [
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Vary",
+          "value": "Accept, Accept-Encoding"
+        }
+      ]
+    },
+    {
+      "source": "/blog",
+      "headers": [
+        {
+          "key": "Vary",
+          "value": "Accept, Accept-Encoding"
+        }
+      ]
+    },
+    {
+      "source": "/blog/:slug",
+      "headers": [
+        {
+          "key": "Vary",
+          "value": "Accept, Accept-Encoding"
+        }
+      ]
+    },
+    {
+      "source": "/developers",
+      "headers": [
+        {
+          "key": "Vary",
+          "value": "Accept, Accept-Encoding"
+        }
+      ]
+    },
+    {
+      "source": "/trends",
+      "headers": [
+        {
+          "key": "Vary",
+          "value": "Accept, Accept-Encoding"
+        }
+      ]
+    },
+    {
+      "source": "/:path*.md",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "Vary",
+          "value": "Accept, Accept-Encoding"
+        }
+      ]
+    },
     {
       "source": "/feed.xml",
       "headers": [

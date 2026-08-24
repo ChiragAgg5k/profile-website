@@ -63,7 +63,10 @@ export const Route = createFileRoute("/")({
         },
       },
     ],
-    links: [{ rel: "canonical", href: DATA.url }],
+    links: [
+      { rel: "canonical", href: DATA.url },
+      { rel: "alternate", type: "text/markdown", href: `${DATA.url}/index.md` },
+    ],
   }),
   component: HomePage,
 });

@@ -118,6 +118,11 @@ export const Route = createFileRoute("/blog/$slug")({
               rel: "canonical",
               href: url,
             },
+            {
+              rel: "alternate",
+              type: "text/markdown",
+              href: `${DATA.url}/blog/${post.slug}.txt`,
+            },
           ]
         : [],
     };

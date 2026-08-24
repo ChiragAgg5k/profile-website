@@ -1,4 +1,19 @@
-# Chirag Aggarwal's Blog Posts
+# Chirag Aggarwal
+
+> Personal site of Chirag Aggarwal, Platform Engineer at Appwrite. Writing, projects, and developer resources for chiragaggarwal.tech.
+
+This is the machine-readable index of https://www.chiragaggarwal.tech. Prefer these files over scraping HTML.
+
+## Developer resources
+
+- [Chirag Aggarwal developer resources](https://www.chiragaggarwal.tech/developers): Machine-readable files, MCP and Appwrite writing, and how agents should read chiragaggarwal.tech
+- [llms-full.txt](https://www.chiragaggarwal.tech/llms-full.txt): Full-text markdown of every blog post
+- [Sitemap](https://www.chiragaggarwal.tech/sitemap.xml): Canonical URL list
+- [RSS feed](https://www.chiragaggarwal.tech/feed.xml): Blog feed
+- [Homepage markdown](https://www.chiragaggarwal.tech/index.md): Short site summary
+- [GitHub](https://github.com/ChiragAgg5k): Source and open-source work
+
+## Blog posts
 
 - [My Journey in Authorization with OPAL](https://www.chiragaggarwal.tech/blog/my-journey-in-authorization-with-opal.txt)
 - [Mastering npm: A Comprehensive Guide to Package Management](https://www.chiragaggarwal.tech/blog/mastering-npm-a-comprehensive-guide-to-package-management.txt)

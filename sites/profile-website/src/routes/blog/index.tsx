@@ -55,7 +55,10 @@ export const Route = createFileRoute("/blog/")({
         },
       },
     ],
-    links: [{ rel: "canonical", href: BLOG_URL }],
+    links: [
+      { rel: "canonical", href: BLOG_URL },
+      { rel: "alternate", type: "text/markdown", href: `${DATA.url}/blog.md` },
+    ],
   }),
   component: BlogIndexPage,
 });
