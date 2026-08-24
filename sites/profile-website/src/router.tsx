@@ -5,6 +5,7 @@ import NotFoundPage from "./components/not-found-page";
 export function getRouter() {
   const router = createTanStackRouter({
     routeTree,
+    trailingSlash: "never",
     defaultPreload: "intent",
     defaultPreloadStaleTime: 0,
     scrollRestoration: true,

@@ -1,5 +1,44 @@
 {
   "buildCommand": "bun run build",
   "outputDirectory": "dist/client",
-  "framework": null
+  "framework": null,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/feed.xml",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/llms-full.txt",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/blog/:slug.txt",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    }
+  ]
 }

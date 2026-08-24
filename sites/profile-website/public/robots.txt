@@ -1,5 +1,8 @@
 User-Agent: *
 Allow: /
 Disallow: /private/
+Disallow: /llms.txt
+Disallow: /llms-full.txt
+Disallow: /blog/*.txt
 
 Sitemap: https://www.chiragaggarwal.tech/sitemap.xml
