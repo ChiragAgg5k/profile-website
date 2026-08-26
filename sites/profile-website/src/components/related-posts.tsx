@@ -41,6 +41,10 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
         <a href="/blog" className="underline text-foreground">
           View all posts
         </a>
+        {" · "}
+        <a href="/developers" className="underline text-foreground">
+          Developer resources
+        </a>
       </p>
     </aside>
   );

@@ -1,5 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 import type { ComponentType } from "react";
+import { rankRelatedPosts } from "@/lib/related-posts";
 
 type MdxPostComponent = ComponentType<{
   components?: MDXComponents;
@@ -260,11 +261,5 @@ export function getLatestPosts(limit = 3) {
 }
 
 export function getRelatedPosts(currentSlug: string, limit = 3) {
-  return [...getInternalPosts()]
-    .filter((post) => post.slug !== currentSlug)
-    .sort(
-      (a, b) =>
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-    )
-    .slice(0, limit);
+  return rankRelatedPosts(getInternalPosts(), currentSlug, limit);
 }

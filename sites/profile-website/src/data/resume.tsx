@@ -13,7 +13,7 @@ export const DATA = {
   description:
     "Platform Engineer at Appwrite, building cool solutions with open source technologies.",
   summary:
-    "I am Chirag Aggarwal, a **Platform Engineer** at Appwrite based in Delhi NCR, India. I build scalable, robust backend systems with open-source technologies and also enjoy working on the frontend when a project calls for it. I write about platform engineering, system architecture, and the tools I use day to day — you'll find my latest articles on the [blog](/blog).",
+    "I am Chirag Aggarwal, a **Platform Engineer** at Appwrite based in Delhi NCR, India. I build scalable, robust backend systems with open-source technologies and also enjoy working on the frontend when a project calls for it. I write about platform engineering, system architecture, and the tools I use day to day — latest articles on the [blog](/blog), usage data on [trends](/trends), and [developer resources](/developers) for agents.",
   // Plain-text, ~155 char summary used for meta/OpenGraph descriptions.
   // Keep it free of Markdown so it renders cleanly in search results.
   seoDescription:

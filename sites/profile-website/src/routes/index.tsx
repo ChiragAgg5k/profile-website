@@ -18,7 +18,7 @@ import { formatDate } from "@/lib/utils";
 import Markdown from "react-markdown";
 
 const BLUR_FADE_DELAY = 0.04;
-const latestPosts = getLatestPosts(3);
+const latestPosts = getLatestPosts(4);
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -148,6 +148,14 @@ function HomePage() {
                 backend development.{" "}
                 <a href="/blog" className="text-foreground underline">
                   View all posts
+                </a>
+                . Agent usage is on{" "}
+                <a href="/trends" className="text-foreground underline">
+                  trends
+                </a>
+                ; MCP, Appwrite, and machine-readable files are on{" "}
+                <a href="/developers" className="text-foreground underline">
+                  developer resources
                 </a>
                 .
               </p>

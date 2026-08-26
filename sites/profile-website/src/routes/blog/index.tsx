@@ -96,7 +96,12 @@ function BlogIndexPage() {
         <p className="mb-8 text-muted-foreground text-sm">
           So... I not only like to read long and boring documentations, research
           papers and journals, I also like to write them! Here you can find some
-          of my favourite content related work published on various sites.
+          of my favourite content related work published on various sites. MCP,
+          Appwrite, and machine-readable files also live on{" "}
+          <a href="/developers" className="text-foreground underline">
+            developer resources
+          </a>
+          .
         </p>
       </BlurFade>
       <div className="flex flex-col gap-6">
