@@ -58,6 +58,10 @@ export const Route = createFileRoute("/blog/$slug")({
         ...(post
           ? [
               { property: "article:published_time", content: post.publishedAt },
+              {
+                property: "article:modified_time",
+                content: post.updatedAt ?? post.publishedAt,
+              },
               { property: "article:author", content: DATA.name },
               { property: "article:section", content: "Technology" },
               {
@@ -70,7 +74,7 @@ export const Route = createFileRoute("/blog/$slug")({
                   url,
                   mainEntityOfPage: { "@type": "WebPage", "@id": url },
                   datePublished: post.publishedAt,
-                  dateModified: post.publishedAt,
+                  dateModified: post.updatedAt ?? post.publishedAt,
                   author: {
                     "@type": "Person",
                     name: DATA.name,

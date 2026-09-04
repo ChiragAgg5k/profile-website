@@ -71,6 +71,9 @@ describe("machine-readable discovery files", () => {
     const sitemap = read("public/sitemap.xml");
     expect(sitemap).toContain("https://www.chiragaggarwal.tech/developers");
     expect(sitemap).toContain("https://www.chiragaggarwal.tech/resume");
+    expect(sitemap).toMatch(
+      /architecture-patterns-for-beginners-mvc-mvp-and-mvvm<\/loc>\s*<lastmod>2026-09-04<\/lastmod>/,
+    );
   });
 
   test("404.html and 404.md include recovery links", () => {

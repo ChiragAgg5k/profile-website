@@ -24,8 +24,16 @@ export const Route = createFileRoute("/resume")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESCRIPTION },
       { property: "og:url", content: PAGE_URL },
+      { property: "og:image", content: `${DATA.url}/og/resume.png` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content: "Chirag Aggarwal — Platform Engineer Resume",
+      },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESCRIPTION },
+      { name: "twitter:image", content: `${DATA.url}/og/resume.png` },
       {
         "script:ld+json": {
           "@context": "https://schema.org",

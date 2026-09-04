@@ -3,12 +3,28 @@ import { OriginalPost } from "@/components/original-post";
 
 <BlogTitle slug="conditional-dependency-management-using-maven-profiles" />
 
-Maven is an efficient build tool and project management tool mainly known for effectively building projects in Java. It is one of the most useful features in Maven, to effectively manage the consumers and producers of dependencies in a project.
+Maven profiles let you include dependencies only when a particular environment, platform, or build condition is active. Put the conditional dependency inside a `<profile>`, give the profile an ID, and select it with `mvn package -P<profile-id>`.
 
-In complex projects, you might need different dependencies or configurations based on various conditions such as the development environment, target platform, or specific build requirements. This is where Maven Profiles come into play.
-Maven Profiles
+For example, this activates a production-only dependency:
 
-Maven Profiles is a set of parameters that can be adapted to set or alter the default parameters of Maven build. They enable you to define the application construction process according to specific contexts like development, testing, or production.
+```xml
+<profile>
+    <id>production</id>
+    <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.6</version>
+        </dependency>
+    </dependencies>
+</profile>
+```
+
+Run it with `mvn clean package -Pproduction`. The rest of this guide builds a complete project and covers command-line, settings, environment, and operating-system activation.
+
+## How Maven profiles manage conditional dependencies
+
+A Maven profile is a set of parameters that alters the default build. Profiles let you define different dependencies and configuration for development, testing, production, target platforms, or other build requirements.
 
 **Key Concepts:**
 

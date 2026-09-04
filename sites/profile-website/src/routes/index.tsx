@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
           "@type": "Person",
           name: DATA.name,
           url: DATA.url,
-          image: `${DATA.url}/me.png`,
+          image: `${DATA.url}${DATA.avatarUrl}`,
           jobTitle: DATA.jobTitle,
           description: DATA.seoDescription,
           worksFor: {
@@ -104,7 +104,12 @@ function HomePage() {
               </div>
               <BlurFade delay={BLUR_FADE_DELAY}>
                 <Avatar className="size-28 border hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 ease-in-out">
-                  <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+                  <AvatarImage
+                    alt={DATA.name}
+                    src={DATA.avatarUrl}
+                    width={112}
+                    height={112}
+                  />
                   <AvatarFallback>{DATA.initials}</AvatarFallback>
                 </Avatar>
               </BlurFade>
@@ -130,7 +135,7 @@ function HomePage() {
               </HandwrittenNote>
               <a href="/resume">
                 <Button size="sm" variant="outline">
-                  View Resume
+                  View Platform Engineer Resume
                   <Notebook className="ml-2 h-4 w-4" />
                 </Button>
               </a>
@@ -357,7 +362,7 @@ function HomePage() {
               </div>
             </BlurFade>
             <BlurFade delay={BLUR_FADE_DELAY * 14}>
-              <Marquee>
+              <Marquee repeat={2}>
                 {DATA.achievements.map((achievement, id) => (
                   <div key={achievement.title + id}>
                     <div>
@@ -367,6 +372,8 @@ function HomePage() {
                         alt={achievement.title}
                         width={400}
                         height={400}
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                   </div>

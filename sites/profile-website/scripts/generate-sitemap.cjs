@@ -19,11 +19,16 @@ const getInternalPosts = () => {
   const postsPath = path.join(__dirname, "../src/data/posts.tsx");
   const content = fs.readFileSync(postsPath, "utf8");
 
-  const re = /slug:\s*"([^"]+)"[\s\S]*?publishedAt:\s*"([^"]+)"/g;
+  const re =
+    /slug:\s*"([^"]+)"[\s\S]*?publishedAt:\s*"([^"]+)"(?:,\s*updatedAt:\s*"([^"]+)")?/g;
   const posts = [];
   let match;
   while ((match = re.exec(content)) !== null) {
-    posts.push({ slug: match[1], publishedAt: normalizeDate(match[2]) });
+    posts.push({
+      slug: match[1],
+      publishedAt: normalizeDate(match[2]),
+      updatedAt: match[3] ? normalizeDate(match[3]) : undefined,
+    });
   }
   return posts;
 };
@@ -95,7 +100,7 @@ const generateSitemap = () => {
       ...posts.map((post) =>
         urlEntry({
           loc: `${siteUrl}/blog/${post.slug}`,
-          lastmod: post.publishedAt,
+          lastmod: post.updatedAt ?? post.publishedAt,
           changefreq: "yearly",
           priority: "0.7",
         }),

@@ -9,6 +9,7 @@ type MdxPostComponent = ComponentType<{
 type BlogPost = {
   title: string;
   publishedAt: string;
+  updatedAt?: string;
   slug?: string;
   href?: string;
   // Plain-text excerpt (~155 chars) used for meta/OG/Twitter descriptions and
@@ -45,11 +46,12 @@ const basePosts: BlogPost[] = [
       "How Cyclops turns the chaos of managing Kubernetes clusters into a calm, UI-driven experience, with a hands-on walkthrough of the tool.",
   },
   {
-    title: "Conditional Dependency Management Using Maven Profiles",
+    title: "Maven Conditional Dependencies with Profiles",
     slug: "conditional-dependency-management-using-maven-profiles",
     publishedAt: "2024-08-06",
+    updatedAt: "2026-09-04",
     description:
-      "Using Maven profiles to manage conditional dependencies so your Java builds pull exactly the right libraries for each environment.",
+      "Learn how to use Maven profiles for conditional dependencies, activate profiles from the command line, and configure environment-specific Java builds.",
   },
   {
     title:
@@ -83,11 +85,12 @@ const basePosts: BlogPost[] = [
       "My journey through Hackfrost, the WeMakeDevs hackathon, and how Daytona's dev environments helped me navigate the development challenges.",
   },
   {
-    title: "Architecture Patterns for Beginners: MVC, MVP, and MVVM",
+    title: "MVC vs MVP vs MVVM: Key Differences",
     slug: "architecture-patterns-for-beginners-mvc-mvp-and-mvvm",
     publishedAt: "2024-12-28",
+    updatedAt: "2026-09-04",
     description:
-      "A beginner's guide to the MVC, MVP, and MVVM architecture patterns: what they are, how they differ, and when to reach for each one.",
+      "Compare MVC, MVP, and MVVM architecture patterns, including data flow, testability, coupling, and when to choose each approach for your application.",
   },
   {
     title:

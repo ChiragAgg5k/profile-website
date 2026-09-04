@@ -17,6 +17,7 @@ export const ModeToggle = React.forwardRef<
       variant="ghost"
       type="button"
       size="icon"
+      aria-label="Toggle color theme"
       className="px-2"
       {...props}
       onClick={(event) => {

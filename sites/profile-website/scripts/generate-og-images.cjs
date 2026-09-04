@@ -557,14 +557,23 @@ const generateOgImages = async () => {
 
     const fonts = await ensureFonts();
     const posts = getInternalPosts();
-    console.log(`📄 Found ${posts.length} internal blog posts`);
+    const cards = [
+      ...posts,
+      {
+        title: "Platform Engineer Resume",
+        slug: "resume",
+      },
+    ];
+    console.log(
+      `📄 Found ${posts.length} internal blog posts and 1 resume page`,
+    );
 
     if (!fs.existsSync(OUT_DIR)) {
       fs.mkdirSync(OUT_DIR, { recursive: true });
     }
 
     let written = 0;
-    for (const post of posts) {
+    for (const post of cards) {
       const outPath = path.join(OUT_DIR, `${post.slug}.png`);
 
       if (STATIC_OG[post.slug]) {
