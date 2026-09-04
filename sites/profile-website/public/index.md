@@ -7,6 +7,7 @@ I build backend systems with open-source technologies and write about platform e
 ## Pages
 
 - [Chirag Aggarwal developer resources](https://www.chiragaggarwal.tech/developers)
+- [Resume](https://www.chiragaggarwal.tech/resume)
 - [Blog](https://www.chiragaggarwal.tech/blog)
 - [Trends](https://www.chiragaggarwal.tech/trends)
 - [llms.txt](https://www.chiragaggarwal.tech/llms.txt)

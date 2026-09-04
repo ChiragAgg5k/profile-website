@@ -81,6 +81,12 @@ const generateSitemap = () => {
         priority: "0.8",
       }),
       urlEntry({
+        loc: `${siteUrl}/resume`,
+        lastmod: today,
+        changefreq: "monthly",
+        priority: "0.8",
+      }),
+      urlEntry({
         loc: `${siteUrl}/trends`,
         lastmod: today,
         changefreq: "weekly",
@@ -106,7 +112,7 @@ ${entries.join("\n")}
     fs.writeFileSync(outputPath, xml, "utf8");
 
     console.log(
-      `✅ Generated sitemap.xml with ${entries.length} URLs (1 home, 1 blog index, 1 developers, 1 usage, ${posts.length} posts)`,
+      `✅ Generated sitemap.xml with ${entries.length} URLs (1 home, 1 blog index, 1 developers, 1 resume, 1 trends, ${posts.length} posts)`,
     );
     console.log(`📍 Location: ${outputPath}\n`);
   } catch (error) {

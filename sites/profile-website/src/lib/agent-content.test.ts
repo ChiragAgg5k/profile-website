@@ -13,10 +13,11 @@ describe("markdownAssetPath", () => {
     expect(markdownAssetPath("/blog")).toBe("/blog.md");
     expect(markdownAssetPath("/blog/")).toBe("/blog.md");
     expect(markdownAssetPath("/developers")).toBe("/developers.md");
+    expect(markdownAssetPath("/resume")).toBe("/resume.md");
     expect(markdownAssetPath("/trends")).toBe("/trends.md");
-    expect(markdownAssetPath("/blog/mcp-2-0-the-release-that-deleted-the-handshake")).toBe(
-      "/blog/mcp-2-0-the-release-that-deleted-the-handshake.txt",
-    );
+    expect(
+      markdownAssetPath("/blog/mcp-2-0-the-release-that-deleted-the-handshake"),
+    ).toBe("/blog/mcp-2-0-the-release-that-deleted-the-handshake.txt");
   });
 
   test("returns null for unknown paths", () => {

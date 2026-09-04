@@ -21,6 +21,7 @@ const PAGE_MARKDOWN_ASSETS: Record<string, string> = {
   "/": "/index.md",
   "/blog": "/blog.md",
   "/developers": "/developers.md",
+  "/resume": "/resume.md",
   "/trends": "/trends.md",
 };
 

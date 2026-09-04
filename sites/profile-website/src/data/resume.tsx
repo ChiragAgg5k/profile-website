@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon, TrendingUp } from "lucide-react";
+import { FileText, HomeIcon, NotebookIcon, TrendingUp } from "lucide-react";
 import { DiPostgresql } from "react-icons/di";
 import { FaDocker, FaNodeJs, FaPhp, FaPython } from "react-icons/fa";
 import { SiAppwrite, SiKubernetes } from "react-icons/si";
@@ -58,6 +58,7 @@ export const DATA = {
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    { href: "/resume", icon: FileText, label: "Resume" },
     { href: "/trends", icon: TrendingUp, label: "Trends" },
   ],
   contact: {

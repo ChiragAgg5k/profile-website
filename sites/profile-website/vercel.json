@@ -38,6 +38,17 @@
       "destination": "/developers.md"
     },
     {
+      "source": "/resume",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "text/markdown"
+        }
+      ],
+      "destination": "/resume.md"
+    },
+    {
       "source": "/trends",
       "has": [
         {
@@ -98,6 +109,15 @@
       ]
     },
     {
+      "source": "/resume",
+      "headers": [
+        {
+          "key": "Vary",
+          "value": "Accept, Accept-Encoding"
+        }
+      ]
+    },
+    {
       "source": "/trends",
       "headers": [
         {
@@ -116,6 +136,15 @@
         {
           "key": "Vary",
           "value": "Accept, Accept-Encoding"
+        }
+      ]
+    },
+    {
+      "source": "/resume.pdf",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
         }
       ]
     },

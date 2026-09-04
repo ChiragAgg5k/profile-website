@@ -128,9 +128,9 @@ function HomePage() {
               >
                 maybe up to date
               </HandwrittenNote>
-              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="/resume">
                 <Button size="sm" variant="outline">
-                  Download Resume
+                  View Resume
                   <Notebook className="ml-2 h-4 w-4" />
                 </Button>
               </a>

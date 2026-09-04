@@ -43,7 +43,9 @@ describe("robots.txt", () => {
   test("explicitly allows major agent User-Agents", () => {
     for (const agent of requiredAgents) {
       expect(robots).toContain(`User-agent: ${agent}`);
-      const block = robots.split(`User-agent: ${agent}`)[1]?.split("User-agent:")[0];
+      const block = robots
+        .split(`User-agent: ${agent}`)[1]
+        ?.split("User-agent:")[0];
       expect(block).toContain("Allow: /");
       expect(block).not.toContain("Disallow: /");
     }
@@ -65,10 +67,10 @@ describe("machine-readable discovery files", () => {
     expect(llms).toContain("/developers");
   });
 
-  test("sitemap includes /developers", () => {
-    expect(read("public/sitemap.xml")).toContain(
-      "https://www.chiragaggarwal.tech/developers",
-    );
+  test("sitemap includes key indexable pages", () => {
+    const sitemap = read("public/sitemap.xml");
+    expect(sitemap).toContain("https://www.chiragaggarwal.tech/developers");
+    expect(sitemap).toContain("https://www.chiragaggarwal.tech/resume");
   });
 
   test("404.html and 404.md include recovery links", () => {
@@ -86,6 +88,9 @@ describe("machine-readable discovery files", () => {
     expect(read("public/developers.md")).toContain(
       "Chirag Aggarwal developer resources",
     );
+    expect(read("public/resume.md")).toContain(
+      "Chirag Aggarwal — Platform Engineer",
+    );
     expect(read("public/blog.md")).toContain("Blog");
   });
 });
@@ -98,8 +103,7 @@ describe("vercel.json", () => {
     const varySources = config.headers
       .filter((entry) =>
         entry.headers.some(
-          (header) =>
-            header.key === "Vary" && header.value.includes("Accept"),
+          (header) => header.key === "Vary" && header.value.includes("Accept"),
         ),
       )
       .map((entry) => entry.source);
@@ -107,18 +111,42 @@ describe("vercel.json", () => {
     expect(varySources).toContain("/");
     expect(varySources).toContain("/blog/:slug");
     expect(varySources).toContain("/developers");
+    expect(varySources).toContain("/resume");
+  });
+
+  test("serves the PDF resume with a noindex header", () => {
+    const config = JSON.parse(read("vercel.json")) as {
+      headers: { source: string; headers: { key: string; value: string }[] }[];
+    };
+    const resumeHeaders = config.headers.find(
+      (entry) => entry.source === "/resume.pdf",
+    )?.headers;
+
+    expect(resumeHeaders).toContainEqual({
+      key: "X-Robots-Tag",
+      value: "noindex, follow",
+    });
   });
 
   test("rewrites markdown Accept to sibling files", () => {
     const config = JSON.parse(read("vercel.json")) as {
-      rewrites?: { source: string; destination: string; has?: { value: string }[] }[];
+      rewrites?: {
+        source: string;
+        destination: string;
+        has?: { value: string }[];
+      }[];
     };
-    const destinations = (config.rewrites ?? []).map((entry) => entry.destination);
+    const destinations = (config.rewrites ?? []).map(
+      (entry) => entry.destination,
+    );
     expect(destinations).toContain("/index.md");
     expect(destinations).toContain("/developers.md");
+    expect(destinations).toContain("/resume.md");
     expect(
       (config.rewrites ?? []).every((entry) =>
-        entry.has?.some((condition) => condition.value.includes("text/markdown")),
+        entry.has?.some((condition) =>
+          condition.value.includes("text/markdown"),
+        ),
       ),
     ).toBe(true);
   });
