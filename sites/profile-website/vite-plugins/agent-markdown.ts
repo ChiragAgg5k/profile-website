@@ -47,6 +47,13 @@ function agentMiddleware(root: string) {
     const url = new URL(req.url ?? "/", "http://localhost");
     const pathname = url.pathname;
 
+    // Vite's extensionless runtime URLs (notably /@react-refresh) must
+    // reach its own middleware, or the client cannot hydrate the page.
+    if (pathname.startsWith("/@")) {
+      next();
+      return;
+    }
+
     res.setHeader("Vary", AGENT_VARY);
 
     if (hasFileExtension(pathname)) {

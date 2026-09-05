@@ -22,7 +22,8 @@ export default defineConfig({
   },
   plugins: [
     agentMarkdownPlugin(),
-    devtools(),
+    // Vite 8 already forwards console output; two bridges create a log loop.
+    devtools({ consolePiping: { enabled: false } }),
     (() => {
       const plugin = mdx({
         providerImportSource: "@mdx-js/react",

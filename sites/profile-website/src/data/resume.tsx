@@ -189,6 +189,14 @@ export const DATA = {
   ],
   education: [
     {
+      school: "University of Limerick",
+      href: "https://www.ul.ie/",
+      degree: "Master of Science in Software Engineering",
+      logoUrl: "/university-of-limerick.png",
+      start: "Sep 2026",
+      end: "Present",
+    },
+    {
       school: "Bennett University",
       href: "https://bennett.edu.in/",
       degree:
