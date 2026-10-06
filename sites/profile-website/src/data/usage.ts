@@ -30,7 +30,7 @@ export type ModelTotals = TokenTotals & {
 
 export type DailyUsage = TokenTotals & {
   date: string;
-  agents: Record<string, TokenTotals>;
+  agents: Partial<Record<string, TokenTotals>>;
   models?: ModelTotals[];
 };
 
