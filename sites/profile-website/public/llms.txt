@@ -39,3 +39,4 @@ This is the machine-readable index of https://www.chiragaggarwal.tech. Prefer th
 - [Seven months of coding agents: what $28,335 actually bought](https://www.chiragaggarwal.tech/blog/seven-months-of-coding-agents.txt)
 - [Will MCP replace the CLI?](https://www.chiragaggarwal.tech/blog/will-mcp-replace-the-cli.txt)
 - [Appwrite MCP vs Vercel MCP: I benchmarked both](https://www.chiragaggarwal.tech/blog/appwrite-mcp-vs-vercel-mcp.txt)
+- [A Master's in Ireland While Building Appwrite](https://www.chiragaggarwal.tech/blog/a-masters-in-ireland-while-building-appwrite.txt)

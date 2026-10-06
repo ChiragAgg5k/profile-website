@@ -535,6 +535,261 @@ const buildHandshakeMarkup = () => ({
   },
 });
 
+const IRELAND_PHOTOS_DIR = path.join(
+  __dirname,
+  "../public/images/blog/a-masters-in-ireland-while-building-appwrite",
+);
+
+const photoUri = (file) =>
+  `data:image/jpeg;base64,${fs
+    .readFileSync(path.join(IRELAND_PHOTOS_DIR, file))
+    .toString("base64")}`;
+
+// A tilted print with a white border and a handwritten-style label strip.
+const polaroid = ({ file, label, width, height, left, top, rotate }) => ({
+  type: "div",
+  props: {
+    style: {
+      position: "absolute",
+      left,
+      top,
+      display: "flex",
+      flexDirection: "column",
+      padding: "12px 12px 0 12px",
+      backgroundColor: "#ffffff",
+      borderRadius: 4,
+      boxShadow: "0 10px 28px rgba(0,0,0,0.18)",
+      transform: `rotate(${rotate}deg)`,
+    },
+    children: [
+      {
+        type: "img",
+        props: {
+          src: photoUri(file),
+          width,
+          height,
+          style: { objectFit: "cover", borderRadius: 2 },
+        },
+      },
+      {
+        type: "div",
+        props: {
+          style: {
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: 42,
+            fontSize: 18,
+            fontWeight: 400,
+            color: MARK,
+            letterSpacing: "0.02em",
+          },
+          children: label,
+        },
+      },
+    ],
+  },
+});
+
+// Bespoke card for the Ireland post: title on the left, a stack of prints from
+// the post on the right.
+const buildIrelandMarkup = () => ({
+  type: "div",
+  props: {
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      backgroundColor: BG,
+      position: "relative",
+      overflow: "hidden",
+    },
+    children: [
+      {
+        type: "div",
+        props: {
+          style: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            display: "flex",
+            backgroundImage:
+              "linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          },
+        },
+      },
+      {
+        type: "div",
+        props: {
+          style: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 8,
+            height: "100%",
+            backgroundColor: ACCENT,
+            display: "flex",
+          },
+        },
+      },
+      {
+        type: "div",
+        props: {
+          style: {
+            position: "absolute",
+            top: 0,
+            left: 600,
+            width: 600,
+            height: HEIGHT,
+            display: "flex",
+          },
+          children: [
+            polaroid({
+              file: "hackathon.jpg",
+              label: "Dublin AI Week",
+              width: 300,
+              height: 225,
+              left: 230,
+              top: 26,
+              rotate: 5,
+            }),
+            polaroid({
+              file: "cliffs-of-moher.jpg",
+              label: "Cliffs of Moher",
+              width: 180,
+              height: 240,
+              left: 372,
+              top: 318,
+              rotate: 4,
+            }),
+            polaroid({
+              file: "ul-campus.jpg",
+              label: "Limerick",
+              width: 216,
+              height: 288,
+              left: 80,
+              top: 196,
+              rotate: -6,
+            }),
+          ],
+        },
+      },
+      {
+        type: "div",
+        props: {
+          style: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            flexGrow: 1,
+            padding: "64px 72px 56px 80px",
+            position: "relative",
+          },
+          children: [
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  flexDirection: "column",
+                  width: 560,
+                  marginTop: "auto",
+                  marginBottom: "auto",
+                },
+                children: [
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        display: "flex",
+                        fontSize: 19,
+                        fontWeight: 400,
+                        letterSpacing: "0.12em",
+                        color: ACCENT,
+                      },
+                      children: "MSc · University of Limerick",
+                    },
+                  },
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        display: "flex",
+                        marginTop: 18,
+                        fontSize: 66,
+                        fontWeight: 700,
+                        lineHeight: 1.08,
+                        color: INK,
+                        letterSpacing: "-0.02em",
+                      },
+                      children: "A Master's in Ireland",
+                    },
+                  },
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        display: "flex",
+                        marginTop: 14,
+                        fontSize: 40,
+                        fontWeight: 400,
+                        lineHeight: 1.2,
+                        color: MARK,
+                        letterSpacing: "-0.01em",
+                      },
+                      children: "while building Appwrite",
+                    },
+                  },
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        display: "flex",
+                        marginTop: 28,
+                        width: 420,
+                        height: 2,
+                        backgroundColor: HAIRLINE,
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: 26,
+                  letterSpacing: "0.01em",
+                },
+                children: [
+                  {
+                    type: "span",
+                    props: {
+                      style: {
+                        display: "flex",
+                        fontWeight: 700,
+                        color: INK,
+                      },
+                      children: "Chirag Aggarwal",
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+});
+
 // Slugs that get their own card instead of the title template.
 // Posts whose OG card is a hand-made image rather than generated type. The
 // file is copied through as-is, so it must already be WIDTH x HEIGHT.
@@ -546,6 +801,7 @@ const STATIC_OG_DIR = path.join(__dirname, "og-static");
 
 const CUSTOM_MARKUP = {
   "mcp-2-0-the-release-that-deleted-the-handshake": buildHandshakeMarkup,
+  "a-masters-in-ireland-while-building-appwrite": buildIrelandMarkup,
 };
 
 const generateOgImages = async () => {

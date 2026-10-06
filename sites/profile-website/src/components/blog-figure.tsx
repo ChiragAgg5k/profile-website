@@ -10,6 +10,8 @@ type BlogFigureProps = {
   caption?: string;
   /** Renders on a bordered card. Use for UI screenshots. */
   framed?: boolean;
+  /** Caps the rendered width in pixels and centers the figure. */
+  width?: number;
 };
 
 export const BlogFigure = ({
@@ -17,12 +19,17 @@ export const BlogFigure = ({
   alt,
   caption,
   framed = true,
+  width,
 }: BlogFigureProps) => {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <figure className="my-10" ref={ref}>
+    <figure
+      className="my-10 mx-auto"
+      style={width ? { maxWidth: width } : undefined}
+      ref={ref}
+    >
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}

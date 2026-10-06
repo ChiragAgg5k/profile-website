@@ -26,5 +26,6 @@ Writing from chiragaggarwal.tech on platform engineering, MCP, Appwrite, and the
 - [Seven months of coding agents: what $28,335 actually bought](https://www.chiragaggarwal.tech/blog/seven-months-of-coding-agents)
 - [Will MCP replace the CLI?](https://www.chiragaggarwal.tech/blog/will-mcp-replace-the-cli)
 - [Appwrite MCP vs Vercel MCP: I benchmarked both](https://www.chiragaggarwal.tech/blog/appwrite-mcp-vs-vercel-mcp)
+- [A Master's in Ireland While Building Appwrite](https://www.chiragaggarwal.tech/blog/a-masters-in-ireland-while-building-appwrite)
 
 Also available as [llms.txt](https://www.chiragaggarwal.tech/llms.txt) and [RSS](https://www.chiragaggarwal.tech/feed.xml).

@@ -216,6 +216,13 @@ const basePosts: BlogPost[] = [
     description:
       "I benchmarked Appwrite MCP against Vercel MCP across 12 tests covering deployment speed, latency, logs, rollback, and write safety. Here is what each server won.",
   },
+  {
+    title: "A Master's in Ireland While Building Appwrite",
+    slug: "a-masters-in-ireland-while-building-appwrite",
+    publishedAt: "2026-10-06",
+    description:
+      "Moving to Ireland for an MSc in Software Engineering at the University of Limerick while staying on as a Platform Engineer at Appwrite.",
+  },
 ];
 
 export const posts = [...basePosts];

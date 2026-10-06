@@ -22,6 +22,7 @@ Developer resources for [chiragaggarwal.tech](https://www.chiragaggarwal.tech). 
 - [MCP 2.0: the release that deleted the handshake](https://www.chiragaggarwal.tech/blog/mcp-2-0-the-release-that-deleted-the-handshake)
 - [Will MCP replace the CLI?](https://www.chiragaggarwal.tech/blog/will-mcp-replace-the-cli)
 - [Appwrite MCP vs Vercel MCP: I benchmarked both](https://www.chiragaggarwal.tech/blog/appwrite-mcp-vs-vercel-mcp)
+- [A Master's in Ireland While Building Appwrite](https://www.chiragaggarwal.tech/blog/a-masters-in-ireland-while-building-appwrite)
 
 ## Elsewhere
 

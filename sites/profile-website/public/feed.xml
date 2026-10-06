@@ -5,8 +5,15 @@
     <link>https://www.chiragaggarwal.tech/blog</link>
     <description>Articles on platform engineering, open source, and backend development by Chirag Aggarwal.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Sep 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.chiragaggarwal.tech/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>A Master&apos;s in Ireland While Building Appwrite</title>
+      <link>https://www.chiragaggarwal.tech/blog/a-masters-in-ireland-while-building-appwrite</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/a-masters-in-ireland-while-building-appwrite</guid>
+      <description>Moving to Ireland for an MSc in Software Engineering at the University of Limerick while staying on as a Platform Engineer at Appwrite.</description>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Appwrite MCP vs Vercel MCP: I benchmarked both</title>
       <link>https://www.chiragaggarwal.tech/blog/appwrite-mcp-vs-vercel-mcp</link>
