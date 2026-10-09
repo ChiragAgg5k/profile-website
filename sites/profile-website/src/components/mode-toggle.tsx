@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { track, TrackingEvent } from "@/lib/tracking";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import * as React from "react";
@@ -23,7 +24,9 @@ export const ModeToggle = React.forwardRef<
       onClick={(event) => {
         onClick?.(event);
         if (event.defaultPrevented) return;
-        setTheme(theme === "dark" ? "light" : "dark");
+        const next = theme === "dark" ? "light" : "dark";
+        setTheme(next);
+        track(TrackingEvent.ThemeChanged, { theme: next });
       }}
     >
       <SunIcon className="h-[1.2rem] w-[1.2rem] text-neutral-800 dark:hidden dark:text-neutral-200" />

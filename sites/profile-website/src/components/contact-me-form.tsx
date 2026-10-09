@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { track, TrackingEvent } from "@/lib/tracking";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -30,6 +31,7 @@ export default function ContactMeForm() {
   });
 
   const onSubmit = () => {
+    track(TrackingEvent.ContactFormSubmitted);
     const formElement = document.querySelector("form") as HTMLFormElement;
     formElement?.submit();
   };

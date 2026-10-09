@@ -2,6 +2,7 @@
 import { useTheme } from "next-themes";
 import { Highlight, Prism, themes, type Language } from "prism-react-renderer";
 import { ComponentProps, useState, useEffect } from "react";
+import { track, TrackingEvent } from "@/lib/tracking";
 
 // prism-react-renderer ships its own Prism with a fixed language set that
 // leaves out most of what this blog writes in — bash above all, then php.
@@ -70,6 +71,7 @@ const CodeBlock = (props: ComponentProps<"pre">) => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(codeText).then(() => {
       setCopied(true);
+      track(TrackingEvent.CodeCopied, { language });
       setTimeout(() => setCopied(false), 2000);
     });
   };
