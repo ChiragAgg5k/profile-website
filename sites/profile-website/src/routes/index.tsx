@@ -45,8 +45,8 @@ export const Route = createFileRoute("/")({
           },
           address: {
             "@type": "PostalAddress",
-            addressLocality: "Delhi NCR",
-            addressCountry: "IN",
+            addressLocality: "Limerick",
+            addressCountry: "IE",
           },
           sameAs: Object.values(DATA.contact.social)
             .filter((s) => !s.url.startsWith("mailto:"))

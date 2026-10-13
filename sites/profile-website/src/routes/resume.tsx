@@ -50,8 +50,8 @@ export const Route = createFileRoute("/resume")({
             email: `mailto:${DATA.contact.email}`,
             address: {
               "@type": "PostalAddress",
-              addressLocality: "Delhi NCR",
-              addressCountry: "IN",
+              addressLocality: "Limerick",
+              addressCountry: "IE",
             },
             worksFor: {
               "@type": "Organization",
@@ -170,9 +170,10 @@ function ResumePage() {
             Summary
           </h2>
           <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
-            Platform Engineer building and operating Appwrite Cloud. I work
-            across backend services, Kubernetes infrastructure, SDKs,
-            observability, developer tooling, and open-source systems.
+            Platform Engineer building and operating Appwrite Cloud, currently
+            pursuing an MSc in Software Engineering at the University of
+            Limerick. I work across backend services, Kubernetes infrastructure,
+            SDKs, observability, developer tooling, and open-source systems.
           </p>
         </section>
 

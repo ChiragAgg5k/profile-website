@@ -112,7 +112,7 @@ ${developerPosts.map((post) => `- [${post.title}](${siteUrl}/blog/${post.slug})`
     "public/resume.md",
     `# Chirag Aggarwal — Platform Engineer
 
-Platform Engineer at Appwrite based in Delhi NCR, India.
+Platform Engineer at Appwrite and MSc Software Engineering student at the University of Limerick, based in Limerick, Ireland.
 
 ## Experience
 
@@ -125,6 +125,7 @@ December 2024–Present
 - Built Appwrite's hosted MCP server with OAuth 2.1 and four tools over 981 endpoints.
 - Work on observability and synthetic monitoring with Grafana and OpenTelemetry.
 - More than 2,000 merged pull requests across open-source and internal repositories.
+- Started as an intern in December 2024, full-time since June 2025.
 
 ### Skillarena — Backend Developer
 
@@ -140,7 +141,8 @@ PHP, TypeScript, Node.js, Python, Postgres, Docker, Kubernetes, Appwrite, and Go
 
 ## Education
 
-B.Tech in Computer Science Engineering, Bennett University (2022–2026), 9.71 CGPA.
+- MSc in Software Engineering, University of Limerick (September 2026–present).
+- B.Tech in Computer Science Engineering (AI), Bennett University (2022–2026), 9.71 CGPA.
 
 ## Links
 
