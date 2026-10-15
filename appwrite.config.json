@@ -27,5 +27,17 @@
             "runtimeSpecification": "s-4vcpu-4gb",
             "deploymentRetention": 7
         }
+    ],
+    "analytics": [
+        {
+            "$id": "6ac8de220001e9d5753e",
+            "name": "Profile Website",
+            "domain": "www.chiragaggarwal.tech",
+            "enabled": true,
+            "allowedOrigins": [
+                "https://www.chiragaggarwal.tech",
+                "https://chirag.appwrite.network"
+            ]
+        }
     ]
 }

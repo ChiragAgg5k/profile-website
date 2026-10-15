@@ -40,6 +40,14 @@ appwrite push site --site-id chirag-profile-website --force
 
 After the build is `ready`, the Appwrite Network domain updates automatically. Preview URLs (`*.appwrite.network` deployment hosts) are not the public site.
 
+## Appwrite Analytics
+
+Property `6ac8de220001e9d5753e` tracks both hosts and is configured under `analytics` in `appwrite.config.json` (domain, allowed origins). Change it there, then:
+
+```bash
+appwrite push analytics --all --force
+```
+
 ## After a dual deploy
 
 1. Push `master` (Vercel).
