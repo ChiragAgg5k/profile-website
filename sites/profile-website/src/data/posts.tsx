@@ -223,6 +223,13 @@ const basePosts: BlogPost[] = [
     description:
       "Moving to Ireland for an MSc in Software Engineering at the University of Limerick while staying on as a Platform Engineer at Appwrite.",
   },
+  {
+    title: "My agent has two Playwrights",
+    slug: "my-agent-has-two-playwrights",
+    publishedAt: "2026-10-18",
+    description:
+      "1,929 Playwright MCP calls in a month and almost none were tests. How I use the browser as my agent's eyes, and why every PR now ships with screenshots.",
+  },
 ];
 
 export const posts = [...basePosts];

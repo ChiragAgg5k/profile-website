@@ -14,6 +14,7 @@ import { McpTaskScores } from "./components/mcp-task-scores";
 import { McpTestConditions } from "./components/mcp-test-conditions";
 import { McpToolReach } from "./components/mcp-tool-reach";
 import { Mermaid } from "./components/mermaid-diagram";
+import { PlaywrightToolChart } from "./components/playwright-tool-chart";
 import { ReferenceCycle } from "./components/reference-cycle";
 import { RoundTrip } from "./components/round-trip";
 import { SessionAffinity } from "./components/session-affinity";
@@ -250,5 +251,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     McpTestConditions,
     McpRunSheet,
     McpToolReach,
+    PlaywrightToolChart,
   };
 }

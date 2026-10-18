@@ -27,5 +27,6 @@ Writing from chiragaggarwal.tech on platform engineering, MCP, Appwrite, and the
 - [Will MCP replace the CLI?](https://www.chiragaggarwal.tech/blog/will-mcp-replace-the-cli)
 - [Appwrite MCP vs Vercel MCP: I benchmarked both](https://www.chiragaggarwal.tech/blog/appwrite-mcp-vs-vercel-mcp)
 - [A Master's in Ireland While Building Appwrite](https://www.chiragaggarwal.tech/blog/a-masters-in-ireland-while-building-appwrite)
+- [My agent has two Playwrights](https://www.chiragaggarwal.tech/blog/my-agent-has-two-playwrights)
 
 Also available as [llms.txt](https://www.chiragaggarwal.tech/llms.txt) and [RSS](https://www.chiragaggarwal.tech/feed.xml).

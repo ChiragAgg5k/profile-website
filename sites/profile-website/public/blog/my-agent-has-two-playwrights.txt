@@ -1,0 +1,112 @@
+# My agent has two Playwrights
+
+My agent made 1,929 browser calls through Playwright MCP last month, and almost none of them were tests.
+
+That surprised me, because I do have tests. The Appwrite console has a `playwright.config.ts`, CI runs four Console E2E jobs on every pull request, and I spent part of the month fixing flakes in them. None of the 1,929 calls, spread over 62 sessions in my Claude Code transcripts between 17 September and 17 October, ran that suite. They used the browser for something else.
+
+So my agent has two Playwrights, and I've stopped treating them as one tool.
+
+## Two jobs
+
+The test suite answers one question: did something that used to work stop working? It runs headless in CI, it's mostly deterministic, and it doesn't care what anything looks like.
+
+Playwright MCP answers a different one: does the thing I just built look right? Nobody has written an assertion for that, because an hour ago the thing didn't exist. The agent opens a real browser, goes to the page, clicks through it, reads it back and takes a picture.
+
+Screenshots are the second most common call overall. In the sessions where the agent was checking its own work, they're the most common: 281 screenshots against 226 navigations, and 209 of those navigations went to `localhost` or a local file. It isn't browsing the web. It's looking at what it just made.
+
+`browser_evaluate` is mostly reading, not poking. Of its 304 calls plus 188 `run_code_unsafe` calls, 175 use `querySelectorAll` and 151 read `innerText`. A handful flip the `dark` class on `` so the next screenshot shows the other theme.
+
+This is what one of those pictures looks like. When Appwrite added function intervals as an alternative to cron, the agent built the console picker, then opened it in the browser and screenshotted every state before the PR went up.
+
+## Where the calls went
+
+| What the session was for              | Sessions | Calls |
+| ------------------------------------- | -------- | ----- |
+| Checking a UI, docs or release change | 34       | 1,209 |
+| Chores in logged-in web apps          | 23       | 553   |
+| Research                              | 5        | 167   |
+
+Nearly two thirds is verification. The rest is a different story, which I'll come back to.
+
+## Three sessions
+
+### "The logo looks off"
+
+I pasted a screenshot of the Appwrite CLI's device sign-in screen and typed four words: "the logo looks off, debug why". The logo was a black mark sitting on a near-black card.
+
+The asset was fine. Every official app logo in that storage bucket is black on transparent, on purpose. The marketplace already knew this: its logo component puts the image on a muted tile and inverts it in dark mode. The OAuth consent screens just didn't use that component.
+
+The fix was to move it into a shared `AppLogo` and use it in both places. The part I care about came after. I asked the agent to check the other OAuth clients too, and it used the console's debug preview route to render the consent and result screens for Claude Code, Cursor, Codex, Claude Desktop and Gemini CLI in dark mode, then did one pass in light mode. That took 19 Playwright calls, with no errors, and produced eight screenshots.
+
+No test in the suite would have caught this, because no test checks that a logo is visible against its background. If I wrote one now, it would only protect against the last bug.
+
+### The OG image X wouldn't show
+
+The passkeys announcement showed a grey placeholder when shared on X. The agent found the cause quickly: the cover image was AVIF, and X only renders JPG, PNG, WEBP and GIF for cards. Every blog and changelog cover in the repo is AVIF, all 538 of them.
+
+The fix was a route that converts the cover to JPEG for `og:image` and `twitter:image` only. Then I asked for "pure reproduction and fix verification screenshots in pr desc". The agent built two small pages showing the share card before and after, resized the browser to the card's size and took a screenshot of each. Its first attempt failed because Playwright MCP blocks `file://` URLs, so it served the pages over local HTTP instead.
+
+Then the suite took over. The review bot flagged two problems, a type-baseline check broke because of the new route, and the four Console E2E jobs ran. Once all 20 checks were green, [#14622](https://github.com/appwrite/appwrite/pull/14622) was ready. Both Playwrights were in that PR: one showed the reviewer what changed, the other showed that nothing else did.
+
+### Release QA for 2.3.0
+
+The biggest session of the month used 183 Playwright calls. I'd asked the agent to "do end to end testing of release notes, especially frontend side" before shipping Appwrite 2.3.0.
+
+It built the 2.3.0 image locally, installed 2.2.0 in a separate Docker Compose project so my dev data stayed safe, seeded it, and upgraded. `migrate` failed: projects that already existed never got the new `pushLedger` collection. After fixing that it found a second gap: existing topics were missing the new `qos`, `expiry` and `sequence` fields. Both fixes shipped with regression tests and went into the release branch before anyone upgraded.
+
+To be fair, the browser didn't find the migration bug. `migrate` exiting with code 1 did. What Playwright did was walk the console against the upgraded install and check each claim in the release notes, one screen at a time. Still, nothing in the test suite runs an upgrade. Release QA used to be manual QA. Now it's manual QA I hand to an agent.
+
+Where the browser does earn its keep is reproducing what users report. After 2.4.0, someone in the community said the upgrade wizard ignored their custom ports. I pasted the feedback and asked the agent to confirm each issue before fixing anything. It installed a stack on ports 8080 and 8443 with HTTPS on, opened the upgrade wizard, and screenshotted it offering 80, 443 and HTTPS off. Then it fixed the bug and took the same screenshot again. Nobody writes a test for this kind of bug until it bites someone.
+
+## Every PR gets a picture
+
+This is the habit I care most about. A reviewer can't run your branch, but they can look at it.
+
+The loop has four steps:
+
+1. The agent checks the change with Playwright MCP.
+2. It saves each screenshot under a name that says what it shows: `passkeys-off.png`, `passkeys-on.png`, `cli-device-light.png`. 317 of the month's 332 screenshots had a name like that.
+3. It writes the PR description with relative image links like `![Before](./before.png)` and runs `gh pr create --attach` or `gh pr edit --attach`. Recent versions of `gh` upload each file to GitHub and rewrite the link to point at the upload.
+4. It deletes `.playwright-mcp/` and any loose PNGs so none of it gets committed.
+
+A good pair needs no explanation. When self-hosted consoles stopped offering OAuth and passkey sign-in, the PR showed the page before and after, and the reviewer could see the change in a second:
+
+Dark mode gets its own screenshot, because that's where things like the invisible logo hide:
+
+I didn't start with `--attach`. Over the month, screenshots reached my PRs three ways: committed to an orphan branch on my fork and linked through `raw.githubusercontent.com`, committed to a repo as docs assets, and attached. A reviewer caught the problem with the first one: _"Screenshot evidence disappears after merge. Screenshots reference an assets branch that the instructions then delete."_ If the screenshots live on a branch you delete, the evidence goes with it. Attachments stay. 32 of the 53 PRs with screenshots now use them.
+
+And 53 out of 904 is the honest number. The rate depends on the repo. In the two public Appwrite repos where most of my UI work lands:
+
+| Repo                | PRs | With screenshots |
+| ------------------- | --- | ---------------- |
+| `appwrite/vibes`    | 39  | 11 (28%)         |
+| `appwrite/appwrite` | 224 | 25 (11%)         |
+
+Backend-heavy repos sit far lower, which is partly fair, since there's often nothing to look at. But there's a less flattering reason too: I asked for screenshots by hand about 30 times this month ("add screenshots in pr desc", "before and after screenshot in pr desc", "show screenshots of ur testing in pr desc"). The habit only happened when I remembered to type it.
+
+So I made it a rule. This is now in my global `CLAUDE.md`:
+
+> If a PR changes anything a reviewer can see (UI, rendered docs, emails, OG cards, dashboards), verify it with Playwright MCP and put screenshots in the PR description without being asked: before and after for fixes, light and dark for UI. Name each file for what it shows, reference it as `![alt](./name.png)` in the body, and upload with `gh pr create --attach` / `gh pr edit --attach`. Never host screenshots on a branch that gets deleted, and never commit `.playwright-mcp/` or stray PNGs.
+
+## The other 553 calls
+
+These had nothing to do with UI work. Help Scout, the university's Brightspace, the Google Cloud and AWS consoles, an SMS provider's dashboard. These are tools I use daily that either have no API or none I have access to.
+
+The pattern is always the same: "use playwright to login to helpscout, i want you to check some tickets". I log in myself in the browser window, and the agent reads. The browser becomes an API for software that doesn't offer one. That's a different post, but it's why the server stays installed even in weeks when I'm not building UI.
+
+## Where it falls short
+
+- **About 10% of calls fail.** 195 of 1,929 returned an error. The biggest causes were boring: the browser or tab had already closed (36), scripts trying to read files outside the sandbox (25), and timeouts waiting for a page or element (around 30). Four were "Browser is already in use", which usually means two parallel worktree sessions wanted the same browser profile.
+- **Phones barely exist.** There were 45 resizes this month and exactly one was a phone viewport, 390 by 844. Everything else was desktop. That's a blind spot, not a policy.
+- **`file://` is blocked.** Any quick HTML mockup has to be served over HTTP first.
+- **Screenshots land in the repo.** By default they go into `.playwright-mcp/` at the repository root. Several sessions ended with the agent cleaning up after itself, and in at least one session the screenshots ended up in the main checkout instead of the worktree.
+
+## What I'd tell someone starting
+
+- Keep the test suite for anything that must never break. A screenshot is evidence, not a regression test.
+- Use the MCP browser for the question the suite can't ask: does this look right?
+- Name every screenshot and check both themes.
+- Put before and after in the PR as attachments, not links to a branch.
+- Write the rule down, so it doesn't depend on you remembering to type it.
+
+The suite catches what broke. The screenshots show the reviewer what's new.
