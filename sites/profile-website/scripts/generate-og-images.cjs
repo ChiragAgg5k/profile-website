@@ -535,6 +535,314 @@ const buildHandshakeMarkup = () => ({
   },
 });
 
+// Dark palette for the agent ticket card, which breaks from the paper style on
+// purpose: a session transcript fading out behind a ticket that stays sharp.
+const NIGHT = "#0B0B0D";
+const NIGHT_INK = "#FAFAFA";
+const NIGHT_MUTED = "#8A8A93";
+const NIGHT_LINE = "#26262B";
+const NIGHT_CARD = "#141417";
+
+// Transcript lines behind the ticket, oldest first. Each fades further, the
+// way early context drops out of a long session.
+const TRANSCRIPT_LINES = [
+  { width: 300, opacity: 0.02 },
+  { width: 380, opacity: 0.04 },
+  { width: 240, opacity: 0.06 },
+  { width: 400, opacity: 0.09 },
+  { width: 320, opacity: 0.13 },
+  { width: 360, opacity: 0.18 },
+  { width: 280, opacity: 0.24 },
+  { width: 390, opacity: 0.32 },
+];
+
+const transcriptLine = ({ width, opacity }) => ({
+  type: "div",
+  props: {
+    style: {
+      display: "flex",
+      width,
+      height: 12,
+      borderRadius: 6,
+      backgroundColor: `rgba(255,255,255,${opacity})`,
+    },
+  },
+});
+
+// A sub-issue row on the ticket. `state` is done, active or found: done rows
+// fade, the active one carries the accent, and found rows are dashed for work
+// the agent turned up along the way.
+const subIssue = (state, label) => ({
+  type: "div",
+  props: {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      height: 46,
+      paddingLeft: 16,
+      paddingRight: 16,
+      borderRadius: 8,
+      border:
+        state === "found"
+          ? `2px dashed ${ACCENT}`
+          : `2px solid ${state === "active" ? ACCENT : NIGHT_LINE}`,
+      backgroundColor:
+        state === "active" ? "rgba(16,185,129,0.14)" : "transparent",
+    },
+    children: [
+      {
+        type: "div",
+        props: {
+          style: {
+            display: "flex",
+            width: 14,
+            height: 14,
+            borderRadius: 7,
+            border: `2px solid ${state === "done" ? "#4A4A52" : ACCENT}`,
+            backgroundColor:
+              state === "done"
+                ? "#4A4A52"
+                : state === "active"
+                  ? ACCENT
+                  : "transparent",
+          },
+        },
+      },
+      {
+        type: "div",
+        props: {
+          style: {
+            display: "flex",
+            marginLeft: 12,
+            fontSize: 19,
+            fontWeight: state === "done" ? 400 : 700,
+            color: state === "done" ? "#5C5C66" : NIGHT_INK,
+            textDecoration: state === "done" ? "line-through" : "none",
+          },
+          children: label,
+        },
+      },
+      ...(state === "found"
+        ? [
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  marginLeft: "auto",
+                  fontSize: 14,
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  color: ACCENT,
+                },
+                children: "NEW",
+              },
+            },
+          ]
+        : []),
+    ],
+  },
+});
+
+// Bespoke card for the agent ticket post.
+const buildTicketMarkup = () => ({
+  type: "div",
+  props: {
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      backgroundColor: NIGHT,
+      position: "relative",
+      overflow: "hidden",
+      padding: "64px 72px",
+    },
+    children: [
+      // Emerald glow behind the ticket
+      {
+        type: "div",
+        props: {
+          style: {
+            position: "absolute",
+            right: -160,
+            top: 40,
+            width: 760,
+            height: 560,
+            display: "flex",
+            backgroundImage:
+              "radial-gradient(circle at center, rgba(16,185,129,0.18), rgba(16,185,129,0) 65%)",
+          },
+        },
+      },
+      // Headline column
+      {
+        type: "div",
+        props: {
+          style: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            width: 560,
+            height: "100%",
+          },
+          children: [
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  flexDirection: "column",
+                },
+                children: [
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        display: "flex",
+                        fontSize: 58,
+                        fontWeight: 700,
+                        lineHeight: 1.08,
+                        color: NIGHT_INK,
+                        letterSpacing: "-0.03em",
+                        width: 360,
+                      },
+                      children: "The agent will forget.",
+                    },
+                  },
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        display: "flex",
+                        marginTop: 8,
+                        fontSize: 58,
+                        fontWeight: 700,
+                        lineHeight: 1.08,
+                        color: ACCENT,
+                        letterSpacing: "-0.03em",
+                      },
+                      children: "The ticket won't.",
+                    },
+                  },
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        display: "flex",
+                        marginTop: 28,
+                        fontSize: 28,
+                        fontWeight: 400,
+                        color: NIGHT_MUTED,
+                      },
+                      children: "Keeping track of your agent's work",
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      // Fading transcript with the ticket over it
+      {
+        type: "div",
+        props: {
+          style: {
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1,
+            marginLeft: 48,
+            justifyContent: "center",
+            position: "relative",
+          },
+          children: [
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 18,
+                  position: "absolute",
+                  top: 10,
+                  left: 0,
+                },
+                children: TRANSCRIPT_LINES.map(transcriptLine),
+              },
+            },
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  flexDirection: "column",
+                  marginTop: 150,
+                  marginLeft: 40,
+                  padding: 22,
+                  gap: 10,
+                  borderRadius: 14,
+                  border: `1px solid ${NIGHT_LINE}`,
+                  backgroundColor: NIGHT_CARD,
+                  boxShadow: "0 24px 60px rgba(0,0,0,0.6)",
+                },
+                children: [
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        display: "flex",
+                        alignItems: "center",
+                        marginBottom: 6,
+                      },
+                      children: [
+                        {
+                          type: "div",
+                          props: {
+                            style: {
+                              display: "flex",
+                              paddingLeft: 10,
+                              paddingRight: 10,
+                              height: 26,
+                              alignItems: "center",
+                              borderRadius: 13,
+                              backgroundColor: "rgba(16,185,129,0.16)",
+                              color: ACCENT,
+                              fontSize: 14,
+                              fontWeight: 700,
+                              letterSpacing: "0.1em",
+                            },
+                            children: "OPEN",
+                          },
+                        },
+                        {
+                          type: "div",
+                          props: {
+                            style: {
+                              display: "flex",
+                              marginLeft: 12,
+                              fontSize: 20,
+                              fontWeight: 700,
+                              color: NIGHT_INK,
+                            },
+                            children: "Absorb libraries into packages/",
+                          },
+                        },
+                      ],
+                    },
+                  },
+                  subIssue("done", "Waves 1–5 shipped"),
+                  subIssue("active", "Wave 6: paused, branch saved"),
+                  subIssue("found", "500s on long attributes"),
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+});
+
 const IRELAND_PHOTOS_DIR = path.join(
   __dirname,
   "../public/images/blog/a-masters-in-ireland-while-building-appwrite",
@@ -750,7 +1058,7 @@ const buildIrelandMarkup = () => ({
                       style: {
                         display: "flex",
                         marginTop: 28,
-                        width: 420,
+                        width: 360,
                         height: 2,
                         backgroundColor: HAIRLINE,
                       },
@@ -802,6 +1110,7 @@ const STATIC_OG_DIR = path.join(__dirname, "og-static");
 const CUSTOM_MARKUP = {
   "mcp-2-0-the-release-that-deleted-the-handshake": buildHandshakeMarkup,
   "a-masters-in-ireland-while-building-appwrite": buildIrelandMarkup,
+  "keeping-track-of-your-agents-work": buildTicketMarkup,
 };
 
 const generateOgImages = async () => {

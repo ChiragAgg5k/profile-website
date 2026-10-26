@@ -230,6 +230,13 @@ const basePosts: BlogPost[] = [
     description:
       "1,929 Playwright MCP calls in a month and almost none were tests. How I use the browser as my agent's eyes, and why every PR now ships with screenshots.",
   },
+  {
+    title: "Keeping track of your agent's work",
+    slug: "keeping-track-of-your-agents-work",
+    publishedAt: "2026-10-26",
+    description:
+      "Long-running agents lose context, and so do you. Why every feature or fix I work on with an agent gets a ticket the agent keeps up to date.",
+  },
 ];
 
 export const posts = [...basePosts];

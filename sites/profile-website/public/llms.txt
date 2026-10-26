@@ -41,3 +41,4 @@ This is the machine-readable index of https://www.chiragaggarwal.tech. Prefer th
 - [Appwrite MCP vs Vercel MCP: I benchmarked both](https://www.chiragaggarwal.tech/blog/appwrite-mcp-vs-vercel-mcp.txt)
 - [A Master's in Ireland While Building Appwrite](https://www.chiragaggarwal.tech/blog/a-masters-in-ireland-while-building-appwrite.txt)
 - [My agent has two Playwrights](https://www.chiragaggarwal.tech/blog/my-agent-has-two-playwrights.txt)
+- [Keeping track of your agent's work](https://www.chiragaggarwal.tech/blog/keeping-track-of-your-agents-work.txt)

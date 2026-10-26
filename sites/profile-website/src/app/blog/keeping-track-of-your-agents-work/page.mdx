@@ -1,0 +1,84 @@
+import { BlogFigure } from "@/components/blog-figure";
+import { BlogTitle } from "@/components/blog-title";
+
+<BlogTitle slug="keeping-track-of-your-agents-work" />
+
+Agents are long-running LLMs, and long-running LLMs lose context. Not sometimes. Eventually, almost always.
+
+The agent doesn't tell you when it happens. It compacts, summarises, or starts a new session, and whatever didn't make the cut is gone. The worse part is that you lose context too, and you usually don't notice either.
+
+## How the context goes missing
+
+Three things keep happening to me.
+
+**The agent finds something important and mentions it once.** Halfway through a task it notices a second bug, a migration that will break existing data, or a flag that does something nobody expected. It writes one line about it, carries on with what you asked for, and never brings it up again. After the next compaction it doesn't know either.
+
+**You can't see what it forgot.** When I lose track of my own work, I at least know I've lost it. With an agent the context is invisible. I don't know what's in its window, what got summarised away, or which decision from two hours ago is still being honoured.
+
+**It writes more than you can read.** An agent can produce pages of output, plans, and reasoning in the time it takes me to read one paragraph. Most of it is fine. Some of it matters. Finding the part that matters takes longer than the agent took to write all of it, so I skim, and skimming is how the one important line gets missed.
+
+Put those together and the important stuff ends up nowhere: not in the agent's context, not in your head, and buried somewhere in a transcript nobody will read again.
+
+## Give every piece of work a ticket
+
+The fix I've settled on is boring: an issue tracker. One place for each feature or fix I'm working on, where the state of that work lives outside both the agent and me.
+
+A few rules make it work.
+
+**Scope it however you like.** A ticket can be as broad as "ship passkeys" or as narrow as "fix the logo on the consent screen". When something gets big, split it into sub-issues instead of growing one giant description. The parent says what we're doing and why. The children say what's left.
+
+**It has to make sense to you.** This is the whole point. If the ticket reads like the agent's scratchpad, you've just moved the gibberish somewhere else. Decisions, open questions, things that were found along the way, what's done, what isn't. Short enough that I can read it in a minute and know where things stand.
+
+**The agent keeps it up to date, always.** Not at the end. Every time it finds something, decides something, or finishes a step, it goes in the ticket. That one-line mention of a second bug becomes a sub-issue instead of a sentence that disappears after the next compaction.
+
+## The side benefit: anyone can pick it back up
+
+Once the state lives in the ticket, the session stops mattering.
+
+If I hit a usage limit mid-task, or a session dies, or I just close the laptop and come back a day later, a fresh agent can read the ticket and carry on. It doesn't need the old transcript or me re-explaining everything. The same goes for a different agent, or a teammate, or me in a week when I've forgotten all of it.
+
+## Examples
+
+All of these are from the last month of my own sessions.
+
+**Mentioned once, then gone.** While fixing text responses in the SDK generator ([#1944](https://github.com/appwrite/sdk-generator/pull/1944)), the agent noticed Dart models type nullable fields as non-null and offered to leave it out of the PR. I never replied. It never came up again, and the template still only checks whether a field is required.
+
+<BlogFigure
+  src="/images/blog/keeping-track-of-your-agents-work/dart-template.webp"
+  alt="Line 12 of the Dart model template on main, adding a question mark only when a property is not required"
+  caption="Still on main a month later (model.dart.twig)"
+/>
+
+**A ticket that reads like a status page.** [#13828](https://github.com/appwrite/appwrite/issues/13828) tracked moving our libraries into the monorepo in waves. The agent rewrote the top of it after each wave, so "where we are" was always one glance away.
+
+<BlogFigure
+  src="/images/blog/keeping-track-of-your-agents-work/living-ticket.webp"
+  alt="GitHub issue 13828 with a Where we are section: waves 1 to 5 done, 46 packages live"
+  caption="#13828, kept current by the agent"
+/>
+
+**A finding becomes its own issue.** While researching something else, an agent found endpoints returning a 500 for values too long for their column. It filed [#14293](https://github.com/appwrite/appwrite/issues/14293) instead of mentioning it in passing, so I could hand it to the database team. It's closed now.
+
+<BlogFigure
+  src="/images/blog/keeping-track-of-your-agents-work/finding-issue.webp"
+  alt="GitHub issue 14293 summary: several endpoints return 500 general_unknown instead of 400"
+  caption="#14293, filed by the agent"
+/>
+
+**Parked work anyone can resume.** When we deferred the last wave, it got its own issue, [#14255](https://github.com/appwrite/appwrite/issues/14255), with the branch, the commit and exactly what to do next. Any session, or person, can start from here.
+
+<BlogFigure
+  src="/images/blog/keeping-track-of-your-agents-work/parked-wave.webp"
+  alt="GitHub issue 14255: the work is done on branch chore/absorb-database at head 9f26684; reopen the PR, merge main and re-run CI"
+  caption="#14255, the handoff for wave 6"
+/>
+
+## What I'd tell someone starting
+
+- Assume your agent will lose context. Plan for it instead of hoping it won't.
+- Give every feature or fix a ticket. Split big ones into sub-issues.
+- Write tickets for a human. If you can't read it in a minute, it's not doing its job.
+- Make the agent update the ticket as it goes, not at the end.
+- Treat the ticket as the handoff. Any session should be able to start from it.
+
+The agent will forget. The ticket won't.
