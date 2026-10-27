@@ -9,7 +9,7 @@ Platform Engineer at Appwrite and MSc Software Engineering student at the Univer
 December 2024–Present
 
 - Build and run Appwrite Cloud using PHP, Swoole, Kubernetes, and edge infrastructure.
-- Rewrote the Appwrite CLI in Go and maintain SDKs for more than 11 languages.
+- Rewrote the Appwrite CLI in Go (startup 207.6 ms → 11.1 ms, install 209 MB → 13 MB) and maintain SDKs for more than 11 languages.
 - Built Appwrite's hosted MCP server with OAuth 2.1 and four tools over 981 endpoints.
 - Work on observability and synthetic monitoring with Grafana and OpenTelemetry.
 - More than 2,000 merged pull requests across open-source and internal repositories.
@@ -30,7 +30,7 @@ PHP, TypeScript, Node.js, Python, Postgres, Docker, Kubernetes, Appwrite, and Go
 ## Education
 
 - MSc in Software Engineering, University of Limerick (September 2026–present).
-- B.Tech in Computer Science Engineering (AI), Bennett University (2022–2026), 9.71 CGPA.
+- B.Tech in Computer Science Engineering (AI), Bennett University (2022–2026), 9.57 CGPA.
 
 ## Links
 

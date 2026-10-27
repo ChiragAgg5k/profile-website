@@ -2,7 +2,7 @@ import { Icons } from "@/components/icons";
 import { FileText, HomeIcon, NotebookIcon, TrendingUp } from "lucide-react";
 import { DiPostgresql } from "react-icons/di";
 import { FaDocker, FaNodeJs, FaPhp, FaPython } from "react-icons/fa";
-import { SiAppwrite, SiKubernetes } from "react-icons/si";
+import { SiAppwrite, SiGo, SiKubernetes } from "react-icons/si";
 
 export const DATA = {
   name: "Chirag Aggarwal",
@@ -25,6 +25,10 @@ export const DATA = {
     {
       name: "PHP",
       icon: <FaPhp className="size-3" />,
+    },
+    {
+      name: "Go",
+      icon: <SiGo className="size-3" />,
     },
     {
       name: "Typescript",
@@ -200,7 +204,7 @@ export const DATA = {
       school: "Bennett University",
       href: "https://bennett.edu.in/",
       degree:
-        "Bachelor of Technology in Computer Science Engineering (AI) | 9.71 CGPA",
+        "Bachelor of Technology in Computer Science Engineering (AI) | 9.57 CGPA",
       logoUrl: "/bennett.png",
       start: "2022",
       end: "May 2026",
@@ -262,7 +266,7 @@ export const DATA = {
     {
       title: "BU News",
       href: "https://github.com/ChiragAgg5k/bu-news-android",
-      dates: "April 2023 - March 2023",
+      dates: "February 2023 - September 2024",
       active: true,
       description:
         "A news sharing platform targeting university students in particular, aiming to reduce spread of misinformation.",
@@ -300,7 +304,7 @@ export const DATA = {
       dates: "July 2024 - Present",
       location: "GeeksForGeeks",
       description:
-        "I like to write technical articles for GeeksForGeeks in my past time. Let's me be updated with various kinds of technologies.",
+        "I write technical articles for GeeksforGeeks in my spare time. It keeps me up to date with a wide range of technologies.",
       image: "/gfg.png",
       links: [
         {
@@ -314,7 +318,7 @@ export const DATA = {
       dates: "July 2024",
       location: "FPT University, Da Nang, Vietnam",
       description:
-        "Participated in a 10-day fully funded Summer Immersion Programme in Vietnam hosted by FPT University, providing rich insights into Vietnamese culture from a entrepreneurship and technological point of view.",
+        "Participated in a 10-day fully funded Summer Immersion Programme in Vietnam hosted by FPT University, providing rich insights into Vietnamese culture from an entrepreneurial and technological point of view.",
       image:
         "https://upload.wikimedia.org/wikipedia/commons/2/2f/Logo_fpt_university.jpg",
       links: [
@@ -349,11 +353,11 @@ export const DATA = {
       ],
     },
     {
-      title: "Rearch Content Management",
+      title: "Research Content Management",
       dates: "September 2022 - May 2023",
       location: "Bennett Undergraduate Research Society (BURS)",
       description:
-        "The research society peaked my interest in the field of research, allowing me to be guided by seniors to work on various research related projects as well as organizing events like Rescon.",
+        "The research society piqued my interest in the field of research, allowing me to be guided by seniors to work on various research related projects as well as organizing events like Rescon.",
       image: "/burs.png",
       links: [
         { title: "Website", href: "https://www.burs.bennett.edu.in/" },
