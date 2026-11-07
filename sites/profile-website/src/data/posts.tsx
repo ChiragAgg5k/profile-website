@@ -237,6 +237,13 @@ const basePosts: BlogPost[] = [
     description:
       "Long-running agents lose context, and so do you. Why every feature or fix I work on with an agent gets a ticket the agent keeps up to date.",
   },
+  {
+    title: "A software factory is a circle",
+    slug: "a-software-factory-is-a-circle",
+    publishedAt: "2026-11-07",
+    description:
+      "Everyone says software factory now, and most mean an agent in a loop. A look at the word's 58-year history, and why I think a factory is a circle, not a line.",
+  },
 ];
 
 export const posts = [...basePosts];

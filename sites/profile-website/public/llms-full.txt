@@ -3630,3 +3630,97 @@ The agent will forget. The ticket won't.
 
 ---
 
+## A software factory is a circle
+
+**Slug:** a-software-factory-is-a-circle
+
+Every second post on my timeline this year has the words "software factory" in it. Somebody has a factory. Somebody's factory shipped 400 PRs last week. Somebody is hiring a "factory engineer", whatever that is.
+
+I got curious and went down the rabbit hole. This post is what I found, and where I landed. Short version: I think most people say "software factory" when they mean "an agent running in a loop", and I think that undersells the idea quite a bit.
+
+## The word is old
+
+The first fun thing I learned is that none of this is new. Not even close.
+
+In 1968 a guy at General Electric called Bob Bemer suggested GE build a "software factory": standard tools, a shared history of past projects, and programmers working like a production line. GE left the computer business two years later, so that went nowhere. The same year, at a NATO conference, Doug McIlroy from Bell Labs pitched [mass produced software components](https://www.cs.dartmouth.edu/~doug/components.txt), which is basically the dream every package registry is still chasing.
+
+Then Japan actually did it. Hitachi opened a software factory in 1969, and Toshiba, NEC and Fujitsu followed in the mid-70s. These were real buildings full of real programmers, with strict processes, reuse targets and quality numbers. Michael Cusumano wrote [a whole book about them](https://academic.oup.com/book/52424) in 1991, and his honest take was that they worked great for repetitive work and much less great for anything new.
+
+Microsoft had a go in 2004. Two of their architects, Jack Greenfield and Keith Short, wrote a book literally called [*Software Factories*](https://softwarefactories.com/TheBook.html), about generating apps from models and domain-specific languages. It shipped some tools, a lot of people downloaded them, and then it quietly faded out.
+
+And then around 2017 the US military started calling its DevOps teams software factories. Kessel Run, Platform One, that kind of thing. Hardened pipelines, approved containers, ship continuously. Funny enough, Kessel Run's own commander pushed back on the label, saying it was ["more than a software factory"](https://govciomedia.com/dods-new-software-modernization-strategy-comes-as-kessel-run-prepares-for-major-milestone/) and really a DevSecOps unit. People were already tired of the word.
+
+So every 15 years or so someone dusts it off. Each time it means something slightly different, but each time the human ends up a bit further away from the actual code. First you write it, then you follow a process, then you draw a model, then a pipeline ships it. Now an agent writes it.
+
+## Why it's everywhere right now
+
+A few things happened this year, mostly back to back.
+
+In January Dan Shapiro put out [five levels for AI coding](https://www.danshapiro.com/blog/2026/01/the-five-levels-from-spicy-autocomplete-to-the-software-factory/), modelled on self-driving car levels. Level 0 is spicy autocomplete. Level 5 is the "dark factory", a black box that turns specs into software, where no human writes or reads the code. The name comes from Fanuc's robot factory, which runs dark because no humans are inside who'd need the lights on.
+
+A couple of weeks later [Simon Willison wrote about StrongDM's factory](https://simonwillison.net/2026/Feb/7/software-factory/), whose actual rules are "code must not be written by humans" and "code must not be reviewed by humans". They test with scenarios the coding agents aren't allowed to see, and their rule of thumb is that if you haven't spent at least $1,000 on tokens today per engineer, your factory has room for improvement. I'm not going to lie, I read that twice.
+
+After that the vendors showed up, consulting firms wrote reports with 3 to 5x numbers in them, and now everyone has a factory.
+
+## What other people mean by it
+
+From what I read, people fall roughly into three groups.
+
+**The "turn the lights off" people.** [StrongDM](https://factory.strongdm.ai), Shapiro. If your tests are good enough, a human reading the diff is just slowing things down.
+
+**The "lights mostly off" people.** Addy Osmani calls this a [light factory](https://addyosmani.com/blog/software-factories/): same pipeline, but humans stay at the spots where judgment actually matters. Simon Willison sees it as one possible future but is pretty uneasy about nobody reviewing code an LLM wrote. PostHog had [a really good post](https://posthog.com/newsletter/software-factories) saying factories mostly fail because they split "deciding what to build" from "building it", and real product work doesn't split like that.
+
+**The "this doesn't work" people.** Dex Horthy from HumanLayer wrote a viral series called [*Why Software Factories Fail*](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/wsff.md). His argument is that this is a model training problem. Models get rewarded for passing tests, not for writing code you can live with for years, so no amount of tooling around them fixes that. A [Stanford law blog](https://law.stanford.edu/2026/02/08/built-by-agents-tested-by-agents-trusted-by-whom/) asked the obvious question too: if the same kind of model writes the code and decides whether it works, who's actually checking?
+
+All three groups make fair points. But I noticed something in almost every definition: the factory is a pipeline. Spec in, software out. Start, end. And I don't think that's the interesting part.
+
+## What I think a software factory is
+
+My definition is pretty simple:
+
+> A software factory is a system that builds software, any kind of software, with as little human involvement as possible.
+
+The key word for me is *system*. A workflow goes from start to end. You give it a task, it does the task, it stops. A factory doesn't stop. What comes out of it feeds back into it, and it goes around again.
+
+I'm avoiding the word "loop" on purpose. Every time I say loop, people think of the `/loop` command in Claude Code, a prompt on a timer. That's a workflow that runs on a schedule. A factory is a workflow whose end connects back to its start, so it keeps finding its own next job. It's a circle, not a line.
+
+## An example: a security factory
+
+Here's the one I keep thinking about.
+
+Imagine something that keeps poking at your product looking for security issues. It finds one. It opens a PR with a fix. A review bot reads the PR and leaves comments. An agent picks those up and fixes them. The review bot looks again. Tests run, the fix is verified against the original issue, and it ships. Then the scanner goes back to poking at the new version of the product, which now has that fix in it, and it finds the next thing.
+
+Nobody had to give it a task. It finds its own work, does it, checks it, ships it, and then looks for more. That's the circle.
+
+Does it need a human at all? Probably one, for now. I'd still want a person to hit the merge button after a final look, especially for security fixes. That's fine. That's still a factory, just with one light on.
+
+Bits of this already exist. Google's [CodeMender](https://cloud.google.com/security/codemender) finds vulnerabilities, checks them and opens patch PRs. OpenAI's [Aardvark](https://openai.com/index/introducing-aardvark/), now called Codex Security, does something similar and tries the exploit in a sandbox first. [XBOW](https://xbow.com/) runs pentests on its own and retests after you fix things. As far as I can tell nobody has the whole circle closed yet, and humans still review the patches before they go anywhere. But you can see the pieces lining up.
+
+## Dark stores have people in them
+
+This is the part that made it click for me.
+
+If you're from India you've used Blinkit or Zepto. Groceries in ten minutes, from a "dark store" somewhere nearby. The term is older than these apps ([Tesco used it in the UK](https://en.wikipedia.org/wiki/Dark_store) back in 2009), but this is where most of us learned it.
+
+Here's the thing though: dark stores are not empty. There are people in there picking your order, packing it, and handing it to a rider. "Dark" doesn't mean there are no humans. It means you, the customer, can't see them. The app hides them.
+
+I think dark factories work the same way. The question isn't "are there humans or not". There almost always are, somewhere. Someone wrote the spec, someone set up the review bot, someone gets paged when it breaks. The real questions are how much of the human work is left, and how much of it is actually automated versus just hidden behind a nice dashboard.
+
+Those are very different things. A store where robots pick your groceries and a store where underpaid people pick your groceries look exactly the same from the app. A factory where agents verify each other properly and a factory where one tired engineer rubber-stamps 200 PRs a day also look exactly the same from the outside. Only one of them is actually dark.
+
+## So where does this go
+
+My guess is that most real factories stay mostly dark, not fully dark, for a while. The humans move to the edges: deciding what the factory should care about, and pressing merge on the things that matter. Everything in between goes around the circle on its own.
+
+And how good a factory is will mostly come down to how good its checking is. The scanner, the review bot, the tests, the verification. The agents writing code will keep getting better on their own. The checks are the part you actually have to build.
+
+I'm somewhere in the middle of this myself. My factory is a very light one: a swarm of Claude agents running side by side in Zed, one group per repo, driven by system prompts and skills I keep in git. Those prompts are what make them go around in cycles: plan, write, open a PR, wait for CI and the review bot, fix, and go again.
+
+And yes, before anyone asks, they all run with `--dangerously-skip-permissions`. It's November 2026. I'm not clicking "allow" 400 times a day.
+
+It's a decent circle for the work inside a PR. It isn't a full one yet, because I'm still the one deciding what goes in at the start.
+
+Which is probably the real test for whether you have a factory: does it find its own work, or are you still feeding it?
+
+---
+

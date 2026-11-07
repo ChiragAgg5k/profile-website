@@ -1103,6 +1103,7 @@ const buildIrelandMarkup = () => ({
 // file is copied through as-is, so it must already be WIDTH x HEIGHT.
 const STATIC_OG = {
   "appwrite-mcp-vs-vercel-mcp": "appwrite-mcp-vs-vercel-mcp.png",
+  "a-software-factory-is-a-circle": "a-software-factory-is-a-circle.png",
 };
 
 const STATIC_OG_DIR = path.join(__dirname, "og-static");

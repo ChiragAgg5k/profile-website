@@ -5,8 +5,15 @@
     <link>https://www.chiragaggarwal.tech/blog</link>
     <description>Articles on platform engineering, open source, and backend development by Chirag Aggarwal.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 26 Oct 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.chiragaggarwal.tech/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>A software factory is a circle</title>
+      <link>https://www.chiragaggarwal.tech/blog/a-software-factory-is-a-circle</link>
+      <guid isPermaLink="true">https://www.chiragaggarwal.tech/blog/a-software-factory-is-a-circle</guid>
+      <description>Everyone says software factory now, and most mean an agent in a loop. A look at the word&apos;s 58-year history, and why I think a factory is a circle, not a line.</description>
+      <pubDate>Sat, 07 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Keeping track of your agent&apos;s work</title>
       <link>https://www.chiragaggarwal.tech/blog/keeping-track-of-your-agents-work</link>
