@@ -39,85 +39,85 @@
 
 <h2>Experience</h2>
 <div class="entry">
-  <div class="row"><b>Platform Engineer</b><span>Dec 2024 – Present</span></div>
+  <div class="row"><b>Platform Engineer</b><span>Jun 2025 – Present</span></div>
   <div class="row sub"><span>Appwrite</span><span>Remote</span></div>
   <ul>
-    <li>Build and run Appwrite Cloud: PHP/Swoole services on Kubernetes, plus the edge network.</li>
+    <li>Build and run Appwrite Cloud (PHP/Swoole on Kubernetes, 6 public regions); on call for production incidents.</li>
     <li>Rewrote the Appwrite CLI in Go (startup 207.6 ms → 11.1 ms, install 209 MB → 13 MB), and maintain the SDKs for 11+ languages.</li>
     <li>Built Appwrite's hosted MCP server with OAuth 2.1, exposing 981 API endpoints through four tools.</li>
-    <li>Took observability and synthetic monitoring in-house on Grafana and OpenTelemetry.</li>
+    <li>Took observability and synthetic monitoring in-house on Prometheus, Grafana, Loki and OpenTelemetry.</li>
     <li>2,000+ merged PRs across Appwrite's open-source and internal repositories.</li>
-    <li>Joined as an Engineering Intern in Dec 2024; full-time since June 2025.</li>
+    <li>Part-time (20 hours a week) during term while studying for my MSc.</li>
   </ul>
+  <div class="row"><b>Engineering Intern</b><span>Dec 2024 – May 2025</span></div>
+  <div class="row sub"><span>Appwrite</span><span>Remote</span></div>
 </div>
 <div class="entry">
   <div class="row"><b>Backend Developer Intern</b><span>Jul 2024 – Sep 2024</span></div>
   <div class="row sub"><span>Skillarena</span><span>Remote</span></div>
   <ul>
-    <li>Led backend development using Node.js and Express.js, implementing a microservices architecture.</li>
-    <li>Engineered a real-time messaging system using WebSockets and FastAPI, handling concurrent connections efficiently.</li>
-    <li>Implemented comprehensive API documentation and testing protocols.</li>
+    <li>Built backend services in Node.js and Express.js.</li>
+    <li>Built a real-time chat backend with WebSockets and FastAPI.</li>
+    <li>Wrote API documentation and tests for the services.</li>
   </ul>
 </div>
 <div class="entry">
   <div class="row"><b>Full Stack Developer Intern</b><span>Oct 2023 – Dec 2023</span></div>
   <div class="row sub"><span>Clearmind AI</span><span>Remote</span></div>
   <ul>
-    <li>Developed key features using Next.js and TypeScript.</li>
-    <li>Architected the Stripe payment integration, enabling user payments on the platform.</li>
-    <li>Built an automated testing suite that reduced QA time.</li>
+    <li>Built product features in Next.js and TypeScript.</li>
+    <li>Integrated Stripe payments so users could pay on the platform.</li>
+    <li>Built an automated test suite for the web app.</li>
   </ul>
 </div>
 
 <h2>Education</h2>
 <div class="entry">
-  <div class="row"><b>Master of Science in Software Engineering</b><span>Sep 2026 – Present</span></div>
+  <div class="row"><b>Master of Science in Software Engineering</b><span>Sep 2026 – Aug 2027 (expected)</span></div>
   <div class="row sub"><span>University of Limerick, Ireland</span><span></span></div>
 </div>
 <div class="entry">
   <div class="row"><b>Bachelor of Technology in Computer Science and Engineering (Artificial Intelligence)</b><span>2022 – 2026</span></div>
-  <div class="row sub"><span>Bennett University, Greater Noida, India</span><span>CGPA: 9.57</span></div>
+  <div class="row sub"><span>Bennett University, Greater Noida, India</span><span>CGPA: 9.57 / 10</span></div>
 </div>
 
-<h2>Personal Projects</h2>
+<h2>Projects and Writing</h2>
 <div class="entry">
-  <div class="row"><b>Cal Buddy – AI Calendar Assistant</b><span><a href="https://cal-buddy.vercel.app/">Live Demo</a> | <a href="https://github.com/ChiragAgg5k/cal-buddy">GitHub</a></span></div>
-  <div class="row sub"><span>TypeScript, Next.js, CopilotKit, Llama 3.2</span><span></span></div>
+  <div class="row"><b>synthetics-operator – Kubernetes operator for synthetic monitoring</b><span><a href="https://github.com/loks0n/synthetics-operator">GitHub</a></span></div>
+  <div class="row sub"><span>Go, Kubernetes, Prometheus, Playwright, k6</span><span>Apr 2026 – Nov 2026</span></div>
   <ul>
-    <li>Built a calendar application serving 100+ daily active users with real-time updates.</li>
-    <li>Integrated Llama 3.2 for smart scheduling, reducing meeting planning time.</li>
+    <li>HTTP/DNS/TCP probes, Playwright flows and k6 load tests as CRDs, exported as Prometheus metrics.</li>
   </ul>
 </div>
 <div class="entry">
-  <div class="row"><b>Suraksha AI – Intelligent Surveillance System</b><span><a href="https://github.com/ChiragAgg5k/suraksha-ai">GitHub</a></span></div>
-  <div class="row sub"><span>Python, Flask, Firebase, YOLOv11</span><span></span></div>
+  <div class="row"><b>layby – disposable sandbox environments</b><span><a href="https://github.com/ChiragAgg5k/layby">GitHub</a></span></div>
+  <div class="row sub"><span>Go, Docker, DigitalOcean</span><span>Jul 2026</span></div>
   <ul>
-    <li>Developed an ML-powered security system achieving 95% accuracy in threat detection.</li>
-    <li>Built a real-time video processing pipeline handling 30+ FPS with edge computing.</li>
+    <li>CLI that provisions a sandbox from a repo's mise.toml and destroys it on a timer (Docker, DigitalOcean).</li>
   </ul>
 </div>
 <div class="entry">
-  <div class="row"><b>Asclepius – Healthcare Management System</b><span><a href="https://github.com/ChiragAgg5k/asclepius">GitHub</a></span></div>
-  <div class="row sub"><span>Python, SQLite, CustomTkinter</span><span></span></div>
+  <div class="row"><b>Writing: tracking a memory leak no profiler could see</b><span><a href="https://www.chiragaggarwal.tech/blog">Blog</a></span></div>
+  <div class="row sub"><span>PHP, Swoole, cURL, Kubernetes</span><span></span></div>
   <ul>
-    <li>Desktop application with role-based access control and medicine inventory management.</li>
+    <li>Traced a daily OOM to a closure cycle holding cURL handles; a one-word fix (static closures) cut 309 fds / 183 MB RSS to 9 fds / 31 MB.</li>
   </ul>
 </div>
 
 <h2>Technical Skills</h2>
 <div class="skills">
-  <p><b>Languages:</b> PHP, Go, TypeScript/JavaScript, Python, Rust, C++, Java</p>
-  <p><b>Backend:</b> Swoole, Node.js, Express.js, FastAPI, Django, REST, GraphQL, WebSocket</p>
-  <p><b>Frontend:</b> React.js, Next.js, Svelte, Vue.js, Tailwind</p>
-  <p><b>Databases:</b> PostgreSQL, MariaDB, MongoDB, Redis, Firebase</p>
-  <p><b>Infrastructure:</b> Kubernetes, Docker, Grafana, OpenTelemetry, GitHub Actions, AWS</p>
+  <p><b>Languages:</b> Go, PHP, Python, TypeScript/JavaScript, SQL, Bash</p>
+  <p><b>Backend and web:</b> Swoole, Node.js, FastAPI, REST, GraphQL, WebSocket, React, Next.js</p>
+  <p><b>Databases:</b> PostgreSQL, MariaDB, Redis, ClickHouse, MongoDB</p>
+  <p><b>Infrastructure:</b> Kubernetes, Docker, Terraform, Helm, ArgoCD, GitHub Actions, AWS, GCP</p>
+  <p><b>Observability:</b> Prometheus, Grafana, Loki, OpenTelemetry</p>
 </div>
 
-<h2>Achievements &amp; Certifications</h2>
+<h2>Achievements</h2>
 <div class="awards">
-  <p><b>Awards:</b> Dean's List (9.86 SGPA), DevFest'24 winner (Global OS Hackathon)</p>
+  <p><b>Awards:</b> Dean's List (9.86 SGPA), DevFest'24 winner (Global OS Hackathon); Cisco Cybersecurity certificate</p>
+  <p><b>Writing:</b> 10+ technical posts in 2026 at <a href="https://www.chiragaggarwal.tech/blog">chiragaggarwal.tech/blog</a></p>
   <p><b>Publication:</b> <a href="https://ieeexplore.ieee.org/document/11413391/">NETRA: An AI-Powered Cybercrime Reporting and Analysis System</a> (IEEE)</p>
-  <p><b>Certifications:</b> Google IT Support, Cisco Cybersecurity, Postman API Expert, FPT University Summer Immersion Participant</p>
 </div>
 </body>
 </html>

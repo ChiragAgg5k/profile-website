@@ -125,14 +125,6 @@ function HomePage() {
               {DATA.summary}
             </Markdown>
             <div className="flex items-center justify-end gap-2 mt-4">
-              <HandwrittenNote
-                orientation="horizontal"
-                direction="right"
-                className="hidden sm:flex"
-                arrowClassName="size-9"
-              >
-                maybe up to date
-              </HandwrittenNote>
               <a href="/resume">
                 <Button size="sm" variant="outline">
                   View Platform Engineer Resume
@@ -241,15 +233,6 @@ function HomePage() {
             <BlurFade delay={BLUR_FADE_DELAY * 9}>
               <div className="flex items-end justify-between gap-4">
                 <h2 className="text-xl font-bold">Skills</h2>
-                <HandwrittenNote
-                  orientation="horizontal"
-                  direction="down-right"
-                  arrowPlacement="end"
-                  className="hidden lg:flex -mb-1"
-                  arrowClassName="size-9"
-                >
-                  hover the Appwrite one
-                </HandwrittenNote>
               </div>
             </BlurFade>
             <div className="flex flex-wrap gap-1 items-center justify-center">
