@@ -300,10 +300,10 @@ export const DATA = {
   positions: [
     {
       title: "Content Writer",
-      dates: "July 2024 - Present",
+      dates: "July 2024 - October 2024",
       location: "GeeksForGeeks",
       description:
-        "I write technical articles for GeeksforGeeks in my spare time. It keeps me up to date with a wide range of technologies.",
+        "Wrote technical articles for GeeksforGeeks on Java, Django, Selenium and Firebase.",
       image: "/gfg.png",
       links: [
         {
